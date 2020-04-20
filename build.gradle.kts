@@ -1,8 +1,8 @@
 
 buildscript {
 	extra["appVersionCode"] = 1
-	extra["appVersion"] = "1.0.0"
-	extra["applicationId"] = "com.lyeeedar.template"
+	extra["appVersion"] = "0.0.1"
+	extra["applicationId"] = "com.lyeeedar.portalclosers"
 
 	rootProject.apply(from = rootProject.file("engine/versions.gradle.kts"))
 
