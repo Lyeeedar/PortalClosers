@@ -1,0 +1,216 @@
+<Definitions Colour="201,200,153" Icon="Sprites/Icons/map.png" xmlns:meta="Editor">
+	<Definition Name="MapGenerator" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" meta:RefKey="GraphStruct">
+		<Data Name="BaseSize" Type="Int" NumComponents="2" SkipIfDefault="True" Default="0, 0" meta:RefKey="Vector" />
+		<Data Name="Root" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="AbstractMapGenerationAction" Nullable="False" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractMapGenerationActionDefs" Keys="ChambersGeneratorAction,ConditionAction,ConnectRoomsAction,DatascopeAction,DeferAction,DefineVariableAction,DivideAction,FillAction,FilterAction,FindRoomsAction,FlipAction,NodeAction,PerPointAction,RepeatAction,RotateAction,ScaleAction,SelectNamedAreaAction,SetNamedAreaAction,SplitAction,SquidlibDenseRoomGeneratorAction,SquidlibDungeonGeneratorAction,SquidlibFlowingCaveGeneratorAction,SquidlibLanesMapGeneratorAction,SquidlibOrganicMapGeneratorAction,SquidlibSectionGeneratorAction,SquidlibSerpentMapGeneratorAction,SquidlibSymmetryGeneratorAction,SymbolAction,TakeAction,TranslateAction" meta:RefKey="ReferenceDef" />
+	<Definition Name="ChambersGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">ChambersGenerator</Const>
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Condition" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="ConditionAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Condition</Const>
+		<Data Name="Conditions" Keys="Condition" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="ConnectRoomsAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">ConnectRooms</Const>
+		<Data Name="PathStyle" EnumValues="STRAIGHT,WANDERING" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="RoomName" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Central" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Side" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="CorridorFeature" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="PlacementMode" EnumValues="BOTH,TOP,BOTTOM,ALTERNATE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Interval" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Char" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+	</Definition>
+	<Definition Name="DatascopeAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Datascope</Const>
+		<Data Name="ScopeVariables" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="ScopeSymbols" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="ScopeArea" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="DeferAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Defer</Const>
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="DefineVariableAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">DefineVariable</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="ValueExp" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="DivideAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Divide</Const>
+		<Data Name="Divisions" Keys="Division" meta:RefKey="Collection" />
+		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Division" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Child" Keys="MapGeneratorNode" UseParentDescription="True" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="FillAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Fill</Const>
+		<Data Name="Char" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="FilterAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Filter</Const>
+		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Char" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="CenterDist" Type="Int" Default="2" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+		<Data Name="Remainder" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="FindRoomsAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">FindRooms</Const>
+		<Data Name="RoomName" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="CorridorName" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="FlipAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Flip</Const>
+		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="MapGeneratorNode" Nullable="False" meta:RefKey="GraphStructDef">
+		<Data Name="Actions" DefKey="AbstractMapGenerationActionDefs" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="NodeAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Node</Const>
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="PerPointAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">PerPoint</Const>
+		<Data Name="Node" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="RepeatAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Repeat</Const>
+		<Data Name="RemainderMode" EnumValues="NODE,PAD,EXPAND" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+		<Data Name="Remainder" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="RotateAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Rotate</Const>
+		<Data Name="Degrees" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="ScaleAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Scale</Const>
+		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="XEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="YEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Snap" EnumValues="CENTER,NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST" SkipIfDefault="False" meta:RefKey="Enum" />
+	</Definition>
+	<Definition Name="SelectNamedAreaAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SelectNamedArea</Const>
+		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="CountExp" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+		<Data Name="Remainder" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="SetNamedAreaAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SetNamedArea</Const>
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Split" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Side" EnumValues="NORTH,SOUTH,EAST,WEST,EDGE,REMAINDER" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Child" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="SplitAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Split</Const>
+		<Data Name="Splits" Keys="Split" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="SquidlibDenseRoomGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibDenseRoomGenerator</Const>
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibDungeonGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibDungeonGenerator</Const>
+		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Water" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Grass" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Traps" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Doors" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="StartChar" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="EndChar" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibFlowingCaveGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibFlowingCaveGenerator</Const>
+		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="RoomChance" Type="Float" Default="0.0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibLanesMapGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibLanesMapGenerator</Const>
+		<Data Name="NumLanes" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumCaveCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumBoxRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumWalledBoxRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumRoundRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumWalledRoundRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibOrganicMapGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibOrganicMapGenerator</Const>
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibSectionGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibSectionGenerator</Const>
+		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Water" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Lake" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Maze" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Traps" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Doors" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="StartChar" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="EndChar" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibSerpentMapGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibSerpentMapGenerator</Const>
+		<Data Name="BranchingChance" Type="Float" Default="0.0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Symmetrical" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="NumCaveCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumBoxRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumWalledBoxRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumRoundRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="NumWalledRoundRoomCarvers" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SquidlibSymmetryGeneratorAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">SquidlibSymmetryGenerator</Const>
+		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Symbol" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Extends" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="Char" SkipIfDefault="True" Default=' ' meta:RefKey="String" />
+		<Data Name="Content" Keys="Entity" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="SymbolAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Symbol</Const>
+		<Data Name="SymbolDef" Keys="Symbol" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="TakeAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Take</Const>
+		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="CountExp" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+		<Data Name="Remainder" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="TranslateAction" Nullable="False" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
+		<Const Name="classID">Translate</Const>
+		<Data Name="XEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="YEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+	</Definition>
+</Definitions>

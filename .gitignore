@@ -21,3 +21,7 @@ Thumbs.db
 game/caches
 game/assets/CompressedData
 game/assetsraw/ProcessedPaths.xml
+game/assetsraw/Backups
+game/assetsraw/error.log
+game/assetsraw/Layout.xml
+game/assetsraw/Settings.xml

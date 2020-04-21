@@ -1,0 +1,46 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbstractComponentData" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AdditionalRenderableComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">AdditionalRenderable</Const>
+		<Data Name="Below" meta:RefKey="Collection">
+			<Data Name="Renderable" Keys="Renderable" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Above" meta:RefKey="Collection">
+			<Data Name="Renderable" Keys="Renderable" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+	</Definition>
+	<Definition Name="DirectionalSpriteComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">DirectionalSprite</Const>
+		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="RenderableComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Renderable</Const>
+		<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="NameComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Name</Const>
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Title" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="DialogueComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Dialogue</Const>
+		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="EmptyComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Empty</Const>
+	</Definition>
+	<Definition Name="PositionComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Position</Const>
+		<Data Name="Slot" EnumValues="FLOOR,FLOORDETAIL,WALL,WALLDETAIL,BELOWENTITY,ENTITY,ABOVEENTITY,EFFECT,LIGHT" Default="ENTITY" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="MetaRegionComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">MetaRegion</Const>
+		<Data Name="Keys" meta:RefKey="Collection">
+			<Data Name="Key" meta:RefKey="String"/>
+		</Data>
+	</Definition>
+	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderableComponentData,DialogueComponentData,DirectionalSpriteComponentData,EmptyComponentData,MetaRegionComponentData,NameComponentData,PositionComponentData,RenderableComponentData" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>

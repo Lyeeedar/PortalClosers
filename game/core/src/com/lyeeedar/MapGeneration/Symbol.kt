@@ -1,15 +1,22 @@
 package com.lyeeedar.MapGeneration
 
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Components.EntityData
 import com.lyeeedar.Pathfinding.IPathfindingTile
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.XmlDataClass
 
-class Symbol(var char: Char) : IPathfindingTile
+class Symbol: XmlDataClass(), IPathfindingTile
 {
-	var content: XmlData? = null
+	var extends: Char = ' '
+	var char: Char = ' '
+	var content: EntityData? = null
+
+	//region non-data
 	var placerHashCode: Int = -1
 	var locked = false
+	//endregion
 
 	fun write(data: Symbol, overwrite: Boolean = false)
 	{
@@ -19,7 +26,8 @@ class Symbol(var char: Char) : IPathfindingTile
 
 	fun copy(): Symbol
 	{
-		val symbol = Symbol(char)
+		val symbol = Symbol()
+		symbol.char = char
 		symbol.write(this)
 		return symbol
 	}
@@ -34,19 +42,17 @@ class Symbol(var char: Char) : IPathfindingTile
 		return 0
 	}
 
-	companion object
+	//region generated
+	override fun load(xmlData: XmlData)
 	{
-		fun load(xmlData: XmlData, symbolTable: ObjectMap<Char, Symbol>) : Symbol
+		extends = xmlData.get("Extends", " ")!![0]
+		char = xmlData.get("Char", " ")!![0]
+		val contentEl = xmlData.getChildByName("Content")
+		if (contentEl != null)
 		{
-			val char = xmlData.get("Character")[0]
-			val extends = xmlData.get("Extends", "")?.firstOrNull()
-
-			val symbol = if (extends != null) symbolTable[extends].copy() else Symbol(char)
-			symbol.char = char
-
-			symbol.content = xmlData.getChildByName("Content") ?: symbol.content
-
-			return symbol
+			content = EntityData()
+			content!!.load(contentEl)
 		}
 	}
+	//endregion
 }
