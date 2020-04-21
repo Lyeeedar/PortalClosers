@@ -1,99 +1,71 @@
 package com.lyeeedar.Util
 
-import com.lyeeedar.MapGeneration.Nodes.ChambersGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.DefineVariableAction
-import com.lyeeedar.Components.AdditionalRenderableComponentData
-import com.lyeeedar.MapGeneration.Nodes.ConditionAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibSymmetryGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.ScaleAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibLanesMapGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.NodeAction
-import com.lyeeedar.MapGeneration.Nodes.FilterAction
-import com.lyeeedar.Components.RenderableComponentData
-import com.lyeeedar.Components.DirectionalSpriteComponentData
-import com.lyeeedar.MapGeneration.Nodes.DivideAction
-import com.lyeeedar.MapGeneration.Nodes.SplitAction
-import com.lyeeedar.MapGeneration.Nodes.FillAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibSerpentMapGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.PerPointAction
-import com.lyeeedar.MapGeneration.Nodes.FindRoomsAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibFlowingCaveGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.SymbolAction
-import com.lyeeedar.MapGeneration.Nodes.TakeAction
-import com.lyeeedar.Components.PositionComponentData
-import com.lyeeedar.MapGeneration.Nodes.TranslateAction
-import com.lyeeedar.MapGeneration.Nodes.ConnectRoomsAction
-import com.lyeeedar.MapGeneration.Nodes.RepeatAction
-import com.lyeeedar.Components.MetaRegionComponentData
-import com.lyeeedar.MapGeneration.Nodes.SelectNamedAreaAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibOrganicMapGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.DatascopeAction
-import com.lyeeedar.Components.NameComponentData
-import com.lyeeedar.MapGeneration.Nodes.RotateAction
-import com.lyeeedar.MapGeneration.Nodes.FlipAction
-import com.lyeeedar.Components.AbstractComponentData
-import com.lyeeedar.Components.DialogueComponentData
-import com.lyeeedar.MapGeneration.Nodes.SetNamedAreaAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibSectionGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.AbstractMapGenerationAction
-import com.lyeeedar.Components.EmptyComponentData
-import com.lyeeedar.MapGeneration.Nodes.SquidlibDenseRoomGeneratorAction
-import com.lyeeedar.MapGeneration.Nodes.DeferAction
-import com.lyeeedar.MapGeneration.Nodes.SquidlibDungeonGeneratorAction
 
 class XmlDataClassLoader
 {
 	companion object
 	{
-		fun loadAbstractComponentData(classID: String): AbstractComponentData
+		fun loadAbstractActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractActionSequenceAction
 		{
 			return when (classID)
 			{
-				"AdditionalRenderable" -> AdditionalRenderableComponentData()
-				"DirectionalSprite" -> DirectionalSpriteComponentData()
-				"Renderable" -> RenderableComponentData()
-				"Name" -> NameComponentData()
-				"Dialogue" -> DialogueComponentData()
-				"Empty" -> EmptyComponentData()
-				"Position" -> PositionComponentData()
-				"MetaRegion" -> MetaRegionComponentData()
+				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
+				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
+				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
+				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
+				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
+			}
+		}
+		fun loadAbstractComponentData(classID: String): com.lyeeedar.Components.AbstractComponentData
+		{
+			return when (classID)
+			{
+				"AdditionalRenderable" -> com.lyeeedar.Components.AdditionalRenderableComponentData()
+				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
+				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
+				"Name" -> com.lyeeedar.Components.NameComponentData()
+				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
+				"Empty" -> com.lyeeedar.Components.EmptyComponentData()
+				"Position" -> com.lyeeedar.Components.PositionComponentData()
+				"MetaRegion" -> com.lyeeedar.Components.MetaRegionComponentData()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComponentData!")
 			}
 		}
-		fun loadAbstractMapGenerationAction(classID: String): AbstractMapGenerationAction
+		fun loadAbstractMapGenerationAction(classID: String): com.lyeeedar.MapGeneration.Nodes.AbstractMapGenerationAction
 		{
 			return when (classID)
 			{
-				"ChambersGenerator" -> ChambersGeneratorAction()
-				"Condition" -> ConditionAction()
-				"DefineVariable" -> DefineVariableAction()
-				"Fill" -> FillAction()
-				"Filter" -> FilterAction()
-				"FindRooms" -> FindRoomsAction()
-				"Flip" -> FlipAction()
-				"PerPoint" -> PerPointAction()
-				"Repeat" -> RepeatAction()
-				"Scale" -> ScaleAction()
-				"SelectNamedArea" -> SelectNamedAreaAction()
-				"Split" -> SplitAction()
-				"SquidlibDungeonGenerator" -> SquidlibDungeonGeneratorAction()
-				"SquidlibLanesMapGenerator" -> SquidlibLanesMapGeneratorAction()
-				"SquidlibOrganicMapGenerator" -> SquidlibOrganicMapGeneratorAction()
-				"SquidlibSerpentMapGenerator" -> SquidlibSerpentMapGeneratorAction()
-				"SquidlibSymmetryGenerator" -> SquidlibSymmetryGeneratorAction()
-				"Symbol" -> SymbolAction()
-				"Translate" -> TranslateAction()
-				"SquidlibDenseRoomGenerator" -> SquidlibDenseRoomGeneratorAction()
-				"Node" -> NodeAction()
-				"Divide" -> DivideAction()
-				"ConnectRooms" -> ConnectRoomsAction()
-				"Defer" -> DeferAction()
-				"SquidlibFlowingCaveGenerator" -> SquidlibFlowingCaveGeneratorAction()
-				"Take" -> TakeAction()
-				"Datascope" -> DatascopeAction()
-				"Rotate" -> RotateAction()
-				"SetNamedArea" -> SetNamedAreaAction()
-				"SquidlibSectionGenerator" -> SquidlibSectionGeneratorAction()
+				"ChambersGenerator" -> com.lyeeedar.MapGeneration.Nodes.ChambersGeneratorAction()
+				"Condition" -> com.lyeeedar.MapGeneration.Nodes.ConditionAction()
+				"DefineVariable" -> com.lyeeedar.MapGeneration.Nodes.DefineVariableAction()
+				"Fill" -> com.lyeeedar.MapGeneration.Nodes.FillAction()
+				"Filter" -> com.lyeeedar.MapGeneration.Nodes.FilterAction()
+				"FindRooms" -> com.lyeeedar.MapGeneration.Nodes.FindRoomsAction()
+				"Flip" -> com.lyeeedar.MapGeneration.Nodes.FlipAction()
+				"PerPoint" -> com.lyeeedar.MapGeneration.Nodes.PerPointAction()
+				"Repeat" -> com.lyeeedar.MapGeneration.Nodes.RepeatAction()
+				"Scale" -> com.lyeeedar.MapGeneration.Nodes.ScaleAction()
+				"SelectNamedArea" -> com.lyeeedar.MapGeneration.Nodes.SelectNamedAreaAction()
+				"Split" -> com.lyeeedar.MapGeneration.Nodes.SplitAction()
+				"SquidlibDungeonGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibDungeonGeneratorAction()
+				"SquidlibLanesMapGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibLanesMapGeneratorAction()
+				"SquidlibOrganicMapGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibOrganicMapGeneratorAction()
+				"SquidlibSerpentMapGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibSerpentMapGeneratorAction()
+				"SquidlibSymmetryGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibSymmetryGeneratorAction()
+				"Symbol" -> com.lyeeedar.MapGeneration.Nodes.SymbolAction()
+				"Translate" -> com.lyeeedar.MapGeneration.Nodes.TranslateAction()
+				"SquidlibDenseRoomGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibDenseRoomGeneratorAction()
+				"Node" -> com.lyeeedar.MapGeneration.Nodes.NodeAction()
+				"Divide" -> com.lyeeedar.MapGeneration.Nodes.DivideAction()
+				"ConnectRooms" -> com.lyeeedar.MapGeneration.Nodes.ConnectRoomsAction()
+				"Defer" -> com.lyeeedar.MapGeneration.Nodes.DeferAction()
+				"SquidlibFlowingCaveGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibFlowingCaveGeneratorAction()
+				"Take" -> com.lyeeedar.MapGeneration.Nodes.TakeAction()
+				"Datascope" -> com.lyeeedar.MapGeneration.Nodes.DatascopeAction()
+				"Rotate" -> com.lyeeedar.MapGeneration.Nodes.RotateAction()
+				"SetNamedArea" -> com.lyeeedar.MapGeneration.Nodes.SetNamedAreaAction()
+				"SquidlibSectionGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibSectionGeneratorAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractMapGenerationAction!")
 			}
 		}

@@ -1,0 +1,33 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="ActionSequence" Nullable="False" meta:RefKey="Struct">
+		<Data Name="Actions" DefKey="AbstractActionSequenceActionDefs" meta:RefKey="Collection" />
+		<Data Name="Obtained" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="AbstractActionSequenceAction" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Time" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Duration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="End" Type="Float" Default="" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(BlockTurnAction,RestoreTargetsAction,StoreTargetsAction),Meta(RepeatAction),Permute(PermuteAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="BlockTurnAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">BlockTurn</Const>
+		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="PermuteAction" Nullable="False" TextColour="247,176,78,47" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Permute</Const>
+		<Data Name="AppendTargets" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="HitPoints" Default="#" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString">
+	</Definition>
+	<Definition Name="RepeatAction" Nullable="False" TextColour="255,0,0,255" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Repeat</Const>
+		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="RestoreTargetsAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">RestoreTargets</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="StoreTargetsAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">StoreTargets</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+</Definitions>
