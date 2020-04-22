@@ -1,6 +1,6 @@
 <Definitions Colour="84,186,214" Icon="Sprites/player_1.png" xmlns:meta="Editor">
-	<Definition Name="Entity" Nullable="False" meta:RefKey="Struct">
+	<Definition Name="Entity" Nullable="False" TextColour="12,252,12" meta:RefKey="Struct">
 		<Data Name="Extends" StripExtension="True" ResourceType="Entity" SkipIfDefault="True" Default="" meta:RefKey="File" />
-		<Data Name="Components" DefKey="AbstractComponentDataDefs" meta:RefKey="Collection" />
+		<Data Name="Components" ChildrenAreUnique="True" DefKey="AbstractComponentDataDefs" meta:RefKey="Collection" />
 	</Definition>
 </Definitions>

@@ -1,7 +1,7 @@
 <Definitions xmlns:meta="Editor">
-	<Definition Name="AbstractComponentData" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" IsGlobal="True" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AdditionalRenderableComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="AdditionalRenderableComponentData" Nullable="False" TextColour="204,136,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
 			<Data Name="Renderable" Keys="Renderable" Nullable="False" meta:RefKey="Reference" />
@@ -10,38 +10,57 @@
 			<Data Name="Renderable" Keys="Renderable" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
-	<Definition Name="DirectionalSpriteComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="DirectionalSpriteComponentData" Nullable="False" TextColour="51,204,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>
 		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="RenderableComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="RenderableComponentData" Nullable="False" TextColour="232,27,27" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Renderable</Const>
 		<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="StatisticsComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="StatisticsComponentData" Nullable="False" TextColour="204,56,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Statistics</Const>
-		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+			<!--Base-->
+			<Data Name="Maxhp" TextColour="122,188,122" meta:RefKey="Number"/>
+			<!--Offense-->
+			<Data Name="Power" TextColour="102,102,90" meta:RefKey="Number"/>
+			<Data Name="Critchance" TextColour="232,78,232" meta:RefKey="Number"/>
+			<Data Name="Critdamage" TextColour="136,136,207" meta:RefKey="Number"/>
+			<!--Defense-->
+			<Data Name="Regeneration" TextColour="30,171,171" meta:RefKey="Number"/>
+			<Data Name="Lifesteal" TextColour="241,32,32" meta:RefKey="Number"/>
+			<Data Name="Aegis" TextColour="201,201,71" meta:RefKey="Number"/>
+			<!--Buff-->
+			<Data Name="Haste" TextColour="218,8,218" meta:RefKey="Number"/>
+			<Data Name="Fleetfoot" TextColour="211,54,54" meta:RefKey="Number"/>
+			<Data Name="Dervish" TextColour="90,192,90" meta:RefKey="Number"/>
+			<!--Negative-->
+			<Data Name="Root" TextColour="168,168,90" meta:RefKey="Number"/>
+			<Data Name="Fumble" TextColour="205,4,4" meta:RefKey="Number"/>
+			<Data Name="Distraction" TextColour="220,220,252" meta:RefKey="Number"/>
+		</Data>
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
 	</Definition>
-	<Definition Name="NameComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="NameComponentData" Nullable="False" TextColour="71,253,71" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Name</Const>
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Title" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
-	<Definition Name="DialogueComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="DialogueComponentData" Nullable="False" TextColour="10,204,10" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
 		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
 	</Definition>
-	<Definition Name="EmptyComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="EmptyComponentData" Nullable="False" TextColour="52,227,52" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Empty</Const>
 	</Definition>
-	<Definition Name="PositionComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="PositionComponentData" Nullable="False" TextColour="2,204,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Position</Const>
 		<Data Name="Slot" EnumValues="FLOOR,FLOORDETAIL,WALL,WALLDETAIL,BELOWENTITY,ENTITY,ABOVEENTITY,EFFECT,LIGHT" Default="ENTITY" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="MetaRegionComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="MetaRegionComponentData" Nullable="False" TextColour="31,204,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">MetaRegion</Const>
 		<Data Name="Keys" meta:RefKey="Collection">
 			<Data Name="Key" meta:RefKey="String"/>

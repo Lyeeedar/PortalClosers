@@ -1,19 +1,19 @@
 <Definitions Colour="228,78,255" Icon="Sprites/EffectSprites/Explosion/Explosion_2.png" xmlns:meta="Editor">
-	<Definition Name="ActionSequence" Nullable="False" meta:RefKey="Struct">
+	<Definition Name="ActionSequence" Nullable="False" TextColour="234,34,34" meta:RefKey="Struct">
 		<Data Name="Actions" meta:RefKey="Collection">
 			<Data Name="Timeline" DefKey="AbstractActionSequenceActionDefs" meta:RefKey="Timeline" />
 		</Data>
 	</Definition>
-	<Definition Name="AbstractActionSequenceAction" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractActionSequenceActionDefs" Keys="Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction)" meta:RefKey="ReferenceDef" />
-	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractDuration</Const>
 		<Data Name="Duration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="RepeatAction" meta:RefKey="ReferenceDef" />
-	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractOneShot</Const>
 	</Definition>
 	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="Meta(BlockTurnAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction)" meta:RefKey="ReferenceDef" />

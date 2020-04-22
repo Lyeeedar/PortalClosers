@@ -10,20 +10,26 @@ import com.lyeeedar.Util.*
 // ----------------------------------------------------------------------
 enum class Statistic private constructor(val min: Float, val max: Float, val modifiersAreAdded: Boolean)
 {
+	// Base
 	MAXHP(1f, Float.MAX_VALUE, false),
+
+	// Offense
 	POWER(1f, Float.MAX_VALUE, false),
 	CRITCHANCE(0f, 1f, true),
 	CRITDAMAGE(1f, Float.MAX_VALUE, true),
 
+	// Defense
 	DR(-Float.MAX_VALUE, 0.8f, true),
 	REGENERATION(-1f, 1f, true),
 	LIFESTEAL(-Float.MAX_VALUE, Float.MAX_VALUE, true),
 	AEGIS(0f, 0.8f, true),
 
+	// Buff
 	HASTE(-1f, 1f, true),
 	FLEETFOOT(-1f, 1f, true),
 	DERVISH(-1f, 1f, true),
 
+	// Negative
 	ROOT(0f, 1f, true),
 	FUMBLE(0f, 1f, true),
 	DISTRACTION(0f, 1f, true);

@@ -1,16 +1,16 @@
 <Definitions Colour="201,200,153" Icon="Sprites/Icons/map.png" xmlns:meta="Editor">
-	<Definition Name="MapGenerator" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" meta:RefKey="GraphStruct">
+	<Definition Name="MapGenerator" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="229,117,229" meta:RefKey="GraphStruct">
 		<Data Name="BaseSize" Type="Int" NumComponents="2" SkipIfDefault="True" Default="0, 0" meta:RefKey="Vector" />
 		<Data Name="Root" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
 	</Definition>
-	<Definition Name="AbstractMapGenerationAction" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="AbstractMapGenerationAction" Nullable="False" TextColour="204,204,199" meta:RefKey="StructDef">
 	</Definition>
 	<Definition Name="AbstractMapGenerationActionDefs" Keys="Area(DivideAction,FlipAction,RepeatAction,RotateAction,ScaleAction,SplitAction,TranslateAction),Generators(ChambersGeneratorAction),Other(Child,ConditionAction,DatascopeAction,DeferAction),Point(FilterAction,PerPointAction,TakeAction),Rooms(ConnectRoomsAction,FindRoomsAction,SelectNamedAreaAction,SetNamedAreaAction),Setup(DefineVariableAction,SymbolAction),Squidlib(SquidlibDenseRoomGeneratorAction,SquidlibDungeonGeneratorAction,SquidlibFlowingCaveGeneratorAction,SquidlibLanesMapGeneratorAction,SquidlibOrganicMapGeneratorAction,SquidlibSectionGeneratorAction,SquidlibSerpentMapGeneratorAction,SquidlibSymmetryGeneratorAction),Write(FillAction)" meta:RefKey="ReferenceDef" />
 	<Definition Name="ChambersGeneratorAction" Nullable="False" TextColour="47,222,209" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">ChambersGenerator</Const>
 		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Condition" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="Condition" Nullable="False" TextColour="29,204,204" meta:RefKey="StructDef">
 		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
 	</Definition>
@@ -25,7 +25,7 @@
 		<Data Name="Central" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 		<Data Name="Side" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="CorridorFeature" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="CorridorFeature" Nullable="False" TextColour="149,149,204" meta:RefKey="StructDef">
 		<Data Name="PlacementMode" EnumValues="BOTH,TOP,BOTTOM,ALTERNATE" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Interval" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
@@ -51,7 +51,7 @@
 		<Data Name="Divisions" Keys="Division" meta:RefKey="Collection" />
 		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Division" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="Division" Nullable="False" TextColour="204,87,87" meta:RefKey="StructDef">
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" UseParentDescription="True" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
 	</Definition>
@@ -119,7 +119,7 @@
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Overwrite" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Split" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="Split" Nullable="False" TextColour="8,226,226" meta:RefKey="StructDef">
 		<Data Name="Side" EnumValues="NORTH,SOUTH,EAST,WEST,EDGE,REMAINDER" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
@@ -190,7 +190,7 @@
 		<Const Name="classID">SquidlibSymmetryGenerator</Const>
 		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Symbol" Nullable="False" meta:RefKey="StructDef">
+	<Definition Name="Symbol" Nullable="False" TextColour="70,70,236" meta:RefKey="StructDef">
 		<Data Name="Extends" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
 		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
 		<Data Name="Content" Keys="Entity" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
