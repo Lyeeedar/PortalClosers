@@ -1,4 +1,33 @@
 <Localisation xmlns:meta="Editor">
     <Text ID="title">Portal Closers</Text>
     <Text ID="languageselector.isautotranslated">Automatically translated</Text>
+
+    <Text ID="statistic.health">Health</Text>
+    <Text ID="statistic.health.description">The amount of damage you can take before dieing.</Text>
+    <Text ID="statistic.power">Power</Text>
+    <Text ID="statistic.power.description">The damage of your attacks and the effectiveness of your abilities.</Text>
+    <Text ID="statistic.critchance">Critical Chance</Text>
+    <Text ID="statistic.critchance.description">The chance to deal a critical hit anytime you deal damage.</Text>
+    <Text ID="statistic.critdamage">Critical Damage</Text>
+    <Text ID="statistic.critdamage.description">The multiplier to your damage when you deal a critical hit.</Text>
+    <Text ID="statistic.dr">Damage Resistance</Text>
+    <Text ID="statistic.dr.description">Your resistance to damage.</Text>
+    <Text ID="statistic.regen">Regeneration</Text>
+    <Text ID="statistic.regen.description">The percentage of your max health you heal each turn.</Text>
+    <Text ID="statistic.lifesteal">Life Steal</Text>
+    <Text ID="statistic.lifesteal.description">The portion of the damage you deal you absorb as life.</Text>
+    <Text ID="statistic.aegis">Aegis</Text>
+    <Text ID="statistic.aegis.description">The chance to completely block damage when hit.</Text>
+    <Text ID="statistic.haste">Haste</Text>
+    <Text ID="statistic.haste.description">How fast you act.</Text>
+    <Text ID="statistic.fleetfoot">Fleet Foot</Text>
+    <Text ID="statistic.fleetfoot.description">How fast you move.</Text>
+    <Text ID="statistic.dervish">Dervish</Text>
+    <Text ID="statistic.dervish.description">How fast you attack.</Text>
+    <Text ID="statistic.root">Root</Text>
+    <Text ID="statistic.root.description">The chance to fail to move, anytime you move.</Text>
+    <Text ID="statistic.fumble">Fumble</Text>
+    <Text ID="statistic.fumble.description">The chance to fail to attack, anytime you attack.</Text>
+    <Text ID="statistic.distraction">Distraction</Text>
+    <Text ID="statistic.distraction.description">The chance to fail to use an ability, anytime you use an ability.</Text>
 </Localisation>

@@ -20,6 +20,8 @@
 	</Definition>
 	<Definition Name="StatisticsComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Statistics</Const>
+		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="NameComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Name</Const>
