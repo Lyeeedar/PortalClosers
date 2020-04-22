@@ -17,6 +17,25 @@ class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
 		}
+		fun loadAbstractOneShotActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractOneShotActionSequenceAction
+		{
+			return when (classID)
+			{
+				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
+				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
+				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
+				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractOneShotActionSequenceAction!")
+			}
+		}
+		fun loadAbstractDurationActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractDurationActionSequenceAction
+		{
+			return when (classID)
+			{
+				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
+			}
+		}
 		fun loadAbstractComponentData(classID: String): com.lyeeedar.Components.AbstractComponentData
 		{
 			return when (classID)
