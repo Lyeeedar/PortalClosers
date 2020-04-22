@@ -18,6 +18,9 @@
 		<Const Name="classID">Renderable</Const>
 		<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
+	<Definition Name="StatisticsComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Statistics</Const>
+	</Definition>
 	<Definition Name="NameComponentData" Nullable="False" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Name</Const>
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
@@ -42,5 +45,5 @@
 			<Data Name="Key" meta:RefKey="String"/>
 		</Data>
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderableComponentData,DialogueComponentData,DirectionalSpriteComponentData,EmptyComponentData,MetaRegionComponentData,NameComponentData,PositionComponentData,RenderableComponentData" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderableComponentData,DialogueComponentData,DirectionalSpriteComponentData,EmptyComponentData,MetaRegionComponentData,NameComponentData,PositionComponentData,RenderableComponentData,StatisticsComponentData" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

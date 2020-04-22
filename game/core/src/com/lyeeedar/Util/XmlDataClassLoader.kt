@@ -11,9 +11,13 @@ class XmlDataClassLoader
 			{
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
+				"SelectTiles" -> com.lyeeedar.ActionSequence.Actions.SelectTilesAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
+				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
+				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
+				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
 		}
@@ -22,9 +26,13 @@ class XmlDataClassLoader
 			return when (classID)
 			{
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
+				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
+				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
+				"SelectTiles" -> com.lyeeedar.ActionSequence.Actions.SelectTilesAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
+				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractOneShotActionSequenceAction!")
 			}
 		}
@@ -43,6 +51,7 @@ class XmlDataClassLoader
 				"AdditionalRenderable" -> com.lyeeedar.Components.AdditionalRenderableComponentData()
 				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
+				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
 				"Empty" -> com.lyeeedar.Components.EmptyComponentData()

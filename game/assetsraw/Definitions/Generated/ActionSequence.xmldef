@@ -7,7 +7,7 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" meta:RefKey="StructDef">
 		<Data Name="Time" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(BlockTurnAction,RestoreTargetsAction,StoreTargetsAction),Meta(RepeatAction),Permute(PermuteAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractDuration</Const>
 		<Data Name="Duration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
@@ -16,12 +16,15 @@
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractOneShot</Const>
 	</Definition>
-	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(BlockTurnAction,RestoreTargetsAction,StoreTargetsAction),Permute(PermuteAction)" meta:RefKey="ReferenceDef" />
-	<Definition Name="BlockTurnAction" Nullable="False" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="Meta(BlockTurnAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="BlockTurnAction" Nullable="False" TextColour="199,18,117" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">BlockTurn</Const>
 		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="PermuteAction" Nullable="False" TextColour="247,176,78,47" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="LockEntityTargetsAction" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">LockEntityTargets</Const>
+	</Definition>
+	<Definition Name="PermuteAction" Nullable="False" TextColour="247,176,78" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Permute</Const>
 		<Data Name="AppendTargets" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="HitPoints" Default="#" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString"/>
@@ -30,11 +33,30 @@
 		<Const Name="classID">Repeat</Const>
 		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="RestoreTargetsAction" Nullable="False" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="RestoreTargetsAction" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">RestoreTargets</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
-	<Definition Name="StoreTargetsAction" Nullable="False" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="SelectEntitiesAction" Nullable="False" TextColour="212,176,126" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">SelectEntities</Const>
+		<Data Name="Mode" EnumValues="Allies,Enemies,Any" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Count" SkipIfDefault="False" Default="count" Tooltip="Known variables: count" meta:RefKey="String" />
+		<Data Name="Condition" SkipIfDefault="False" Default="random" Tooltip="Known variables: random,dist,hp" meta:RefKey="String" />
+		<Data Name="Radius" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Minimum" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="AllowSelf" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="AllowCurrent" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SelectSelfAction" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">SelectSelf</Const>
+	</Definition>
+	<Definition Name="SelectTilesAction" Nullable="False" TextColour="242,154,33" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">SelectTiles</Const>
+		<Data Name="Coverage" SkipIfDefault="False" Default="count" Tooltip="Known variables: count" meta:RefKey="String" />
+		<Data Name="Radius" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="EmptyOnly" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="StoreTargetsAction" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">StoreTargets</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
