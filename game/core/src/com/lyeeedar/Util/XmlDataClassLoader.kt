@@ -15,6 +15,7 @@ class XmlDataClassLoader
 				"SelectTiles" -> com.lyeeedar.ActionSequence.Actions.SelectTilesAction()
 				"SpawnOneShotParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
+				"Animation" -> com.lyeeedar.ActionSequence.Actions.AnimationAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
@@ -22,6 +23,7 @@ class XmlDataClassLoader
 				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
+				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
 				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
@@ -46,10 +48,12 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"Animation" -> com.lyeeedar.ActionSequence.Actions.AnimationAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
 				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
 				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
 				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
+				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
 				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
 			}

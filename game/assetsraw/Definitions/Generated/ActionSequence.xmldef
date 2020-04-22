@@ -7,16 +7,27 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction),Renderable(AttachParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnOneShotParticleAction,SpawnTrackedParticleAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction),Renderable(AnimationAction,AttachParticleAction,FlightParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnOneShotParticleAction,SpawnTrackedParticleAction)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractDuration</Const>
 		<Data Name="Duration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="Meta(RepeatAction),Renderable(AttachParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnTrackedParticleAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="Meta(RepeatAction),Renderable(AnimationAction,AttachParticleAction,FlightParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnTrackedParticleAction)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AbstractOneShot</Const>
 	</Definition>
 	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="Meta(BlockTurnAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction),Renderable(SpawnOneShotParticleAction)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AnimationAction" Nullable="False" TextColour="35,35,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Animation</Const>
+		<Data Name="Anim" EnumValues="EXPAND,SPIN,FADE,FLASH" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="StartSize" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == EXPAND" meta:RefKey="Number" />
+		<Data Name="EndSize" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == EXPAND" meta:RefKey="Number" />
+		<Data Name="OneWay" SkipIfDefault="True" Default="true" VisibleIf="anim == EXPAND" meta:RefKey="Boolean" />
+		<Data Name="StartFade" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == FADE" meta:RefKey="Number" />
+		<Data Name="EndFade" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == FADE" meta:RefKey="Number" />
+		<Data Name="SpinAngle" Type="Float" Default="0" SkipIfDefault="True" VisibleIf="anim == SPIN" meta:RefKey="Number" />
+		<Data Name="TargetColour" SkipIfDefault="false" Default="255,0,0" VisibleIf="anim == FLASH" meta:RefKey="Colour" />
+	</Definition>
 	<Definition Name="AttachParticleAction" Nullable="False" TextColour="154,227,227" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">AttachParticle</Const>
 		<Data Name="Particle" Keys="ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
@@ -27,6 +38,13 @@
 	<Definition Name="BlockTurnAction" Nullable="False" TextColour="199,18,117" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">BlockTurn</Const>
 		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="FlightParticleAction" Nullable="False" TextColour="230,9,230" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">FlightParticle</Const>
+		<Data Name="Particle" Keys="ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="UseLeap" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="AlignToVector" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="SpawnDuration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="LockEntityTargetsAction" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
