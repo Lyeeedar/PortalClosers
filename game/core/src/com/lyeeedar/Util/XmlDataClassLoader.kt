@@ -11,13 +11,18 @@ class XmlDataClassLoader
 			{
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
+				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
 				"SelectTiles" -> com.lyeeedar.ActionSequence.Actions.SelectTilesAction()
+				"SpawnOneShotParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
+				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
+				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
+				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
 		}
@@ -29,6 +34,7 @@ class XmlDataClassLoader
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
 				"SelectTiles" -> com.lyeeedar.ActionSequence.Actions.SelectTilesAction()
+				"SpawnOneShotParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
@@ -41,6 +47,10 @@ class XmlDataClassLoader
 			return when (classID)
 			{
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
+				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
+				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
+				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
+				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
 			}
 		}
