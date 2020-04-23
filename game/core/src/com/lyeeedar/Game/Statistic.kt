@@ -87,6 +87,11 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	companion object
 	{
 		val Values = Statistic.values()
+		val BaseValues = arrayOf(MAXHP, POWER)
+		val CoreValues = arrayOf(MAXHP, POWER, DR, CRITCHANCE, CRITDAMAGE)
+		val DefenseValues = arrayOf(DR, REGENERATION, LIFESTEAL, AEGIS)
+		val SpeedValues = arrayOf(HASTE, FLEETFOOT, DERVISH)
+		val NegativeValues = arrayOf(ROOT, FUMBLE, DISTRACTION)
 
 		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Float>)
 		{
