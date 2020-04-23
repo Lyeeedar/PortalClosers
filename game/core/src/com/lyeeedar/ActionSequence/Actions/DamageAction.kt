@@ -28,6 +28,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	{
 		val rng = Random.obtainTS(state.seed++)
 
+		val eventSystem = state.world.systems.filterIsInstance <EventSystem>().firstOrNull() ?: return ActionState.Completed
+
 		hitEntities.clear()
 		for (point in state.targets)
 		{
@@ -51,12 +53,12 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 					var attackDam = sourceStats.getAttackDam(rng, damModifier, bonusCritChance, bonusCritDamage)
 
-					if (targetstats.checkAegis())
+					if (targetstats.checkAegis(rng))
 					{
 						if (EventSystem.isEventRegistered(EventType.BLOCK, entity))
 						{
 							val eventData = EventData.obtain().set(EventType.BLOCK, entity, state.source, mapOf(Pair("damage", attackDam.first)))
-							Global.engine.event().addEvent(eventData)
+							eventSystem.addEvent(eventData)
 						}
 
 						attackDam = Pair(0f, attackDam.second)
@@ -71,7 +73,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 					if (sourceStats.summoner != null)
 					{
-						sourceStats.summoner!!.stats().abilityDamageDealt += finalDam
+						sourceStats.summoner!!.stats()!!.abilityDamageDealt += finalDam
 					}
 
 					BloodSplatter.splatter(state.source.pos()!!.position, entity.pos()!!.position, 1f, state.world)
@@ -87,7 +89,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 						if (EventSystem.isEventRegistered(EventType.HEALED, state.source))
 						{
 							val healEventData = EventData.obtain().set(EventType.HEALED, state.source, state.source, mapOf(Pair("damage", stolenLife)))
-							Global.engine.event().addEvent(healEventData)
+							eventSystem.addEvent(healEventData)
 						}
 					}
 					else if (stolenLife < 0f)
@@ -105,7 +107,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 							val dealEventData = EventData.obtain().set(EventType.CRIT, state.source, entity, mapOf(
 								Pair("damage", finalDam),
 								Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-							Global.engine.event().addEvent(dealEventData)
+							eventSystem.addEvent(dealEventData)
 						}
 					}
 
@@ -115,7 +117,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 						val dealEventData = EventData.obtain().set(EventType.DEALDAMAGE, state.source, entity, mapOf(
 							Pair("damage", finalDam),
 							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-						Global.engine.event().addEvent(dealEventData)
+						eventSystem.addEvent(dealEventData)
 					}
 
 					// take damage
@@ -124,13 +126,15 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 						val takeEventData = EventData.obtain().set(EventType.TAKEDAMAGE, entity, state.source, mapOf(
 							Pair("damage", finalDam),
 							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-						Global.engine.event().addEvent(takeEventData)
+						eventSystem.addEvent(takeEventData)
 					}
 				}
 			}
 		}
 
 		rng.freeTS()
+
+		return ActionState.Completed
 	}
 
 	//region generated

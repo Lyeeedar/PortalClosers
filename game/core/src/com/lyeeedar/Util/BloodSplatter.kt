@@ -24,18 +24,18 @@ class BloodSplatter
 			vector.nor()
 
 			val angle = 45f
-			vector = vector.rotate(Random.random(-angle, angle))
+			vector = vector.rotate(Random.random(Random.sharedRandom, -angle, angle))
 
-			val dist = Random.randomWeighted() * emitDist
+			val dist = Random.randomWeighted(Random.sharedRandom) * emitDist
 			vector = vector.scl(dist)
 
 			val chosen = splatters.textures.random()
 
 			val sprite = Sprite(chosen)
-			sprite.baseScale[0] = 0.3f + Random.random(0.3f)
+			sprite.baseScale[0] = 0.3f + Random.random(Random.sharedRandom, 0.3f)
 			sprite.baseScale[1] = sprite.baseScale[0]
-			sprite.rotation = Random.random(180f)
-			sprite.colour = Colour(1f, 0.6f + Random.random(0.2f), 0.6f + Random.random(0.2f), 0.4f + Random.random(0.2f))
+			sprite.rotation = Random.random(Random.sharedRandom, 180f)
+			sprite.colour = Colour(1f, 0.6f + Random.random(Random.sharedRandom, 0.2f), 0.6f + Random.random(Random.sharedRandom, 0.2f), 0.4f + Random.random(Random.sharedRandom, 0.2f))
 			sprite.animationBlocksUpdate = false
 
 			val entity = bloodArchetype.build()
