@@ -112,18 +112,18 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					}
 
 					// deal damage
-					if (EventSystem.isEventRegistered(EventType.DEALDAMAGE, state.source))
+					if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, state.source))
 					{
-						val dealEventData = EventData.obtain().set(EventType.DEALDAMAGE, state.source, entity, mapOf(
+						val dealEventData = EventData.obtain().set(EventType.DEAL_DAMAGE, state.source, entity, mapOf(
 							Pair("damage", finalDam),
 							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
 						eventSystem.addEvent(dealEventData)
 					}
 
 					// take damage
-					if (EventSystem.isEventRegistered(EventType.TAKEDAMAGE, entity))
+					if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, entity))
 					{
-						val takeEventData = EventData.obtain().set(EventType.TAKEDAMAGE, entity, state.source, mapOf(
+						val takeEventData = EventData.obtain().set(EventType.TAKE_DAMAGE, entity, state.source, mapOf(
 							Pair("damage", finalDam),
 							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
 						eventSystem.addEvent(takeEventData)

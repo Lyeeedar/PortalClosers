@@ -22,42 +22,43 @@
 		<Const Name="classID">Statistics</Const>
 		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->
-			<Data Name="Maxhp" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Maxhp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Offense-->
-			<Data Name="Power" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Critchance" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Critdamage" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Critchance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Critdamage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Defense-->
-			<Data Name="Regeneration" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Lifesteal" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Aegis" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Regeneration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Lifesteal" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Aegis" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Buff-->
-			<Data Name="Haste" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Fleetfoot" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Dervish" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Haste" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Fleetfoot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Dervish" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Negative-->
-			<Data Name="Root" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Fumble" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Distraction" Type="Float" Default="FastEnumMap(Statistic::class.java)" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Root" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Fumble" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Distraction" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		</Data>
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="EventHandlerComponentData" Nullable="False" TextColour="79,251,251" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">EventHandler</Const>
 		<Data Name="Handlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
-		<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Useability" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Dealdamage" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Takedamage" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Allydeath" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Enemydeath" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Anydeath" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Healed" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Crit" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
-		<Data Name="Onturn" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--Actions-->
+			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Use_ability" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--Self events-->
+			<Data Name="Deal_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Take_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Healed" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Crit" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--General events-->
+			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
 		</Data>
 	</Definition>
 	<Definition Name="NameComponentData" Nullable="False" TextColour="71,253,71" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
@@ -68,6 +69,7 @@
 	<Definition Name="DialogueComponentData" Nullable="False" TextColour="10,204,10" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
 		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="TurnsToShow" Type="Int" Default="-1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="EmptyComponentData" Nullable="False" TextColour="52,227,52" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Empty</Const>
@@ -81,7 +83,7 @@
 	<Definition Name="MetaRegionComponentData" Nullable="False" TextColour="31,204,204" IsGlobal="True" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">MetaRegion</Const>
 		<Data Name="Keys" meta:RefKey="Collection">
-			<Data Name="Key" SkipIfDefault="True" Default=Array<String>() meta:RefKey="String" />
+			<Data Name="Key" SkipIfDefault="True" Default="" meta:RefKey="String" />
 		</Data>
 	</Definition>
 	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderableComponentData,DialogueComponentData,DirectionalSpriteComponentData,EmptyComponentData,EventHandlerComponentData,MetaRegionComponentData,NameComponentData,PositionComponentData,RenderableComponentData,StatisticsComponentData" IsGlobal="True" meta:RefKey="ReferenceDef" />
