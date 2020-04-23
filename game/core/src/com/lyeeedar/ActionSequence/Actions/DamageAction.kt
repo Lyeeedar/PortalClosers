@@ -9,8 +9,8 @@ import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Systems.EventData
 import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
-import com.lyeeedar.Util.BloodSplatter
-import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.*
+import com.lyeeedar.Util.XmlData
 
 class DamageAction : AbstractOneShotActionSequenceAction()
 {
@@ -26,6 +26,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
+		val rng = Random.obtainTS(state.seed++)
+
 		hitEntities.clear()
 		for (point in state.targets)
 		{
@@ -47,7 +49,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					var damModifier = damage.evaluate(map)
 					//damModifier += damModifier * sourceStats.getStat(Statistic.ABILITYPOWER)
 
-					var attackDam = sourceStats.getAttackDam(damModifier, bonusCritChance, bonusCritDamage)
+					var attackDam = sourceStats.getAttackDam(rng, damModifier, bonusCritChance, bonusCritDamage)
 
 					if (targetstats.checkAegis())
 					{
@@ -127,5 +129,19 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 				}
 			}
 		}
+
+		rng.freeTS()
 	}
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		super.load(xmlData)
+		damage = CompiledExpression(xmlData.get("Damage"))
+		bonusLifesteal = xmlData.getFloat("BonusLifesteal", 0f)
+		bonusCritChance = xmlData.getFloat("BonusCritChance", 0f)
+		bonusCritDamage = xmlData.getFloat("BonusCritDamage", 0f)
+	}
+	override val classID: String = "Damage"
+	//endregion
 }

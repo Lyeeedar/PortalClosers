@@ -7,6 +7,10 @@ import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
+import com.lyeeedar.Util.XmlData
+import java.util.*
+import squidpony.squidmath.LightRNG
 
 class StatisticsComponentData : AbstractComponentData()
 {
@@ -17,7 +21,15 @@ class StatisticsComponentData : AbstractComponentData()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		Statistic.parse(xmlData.getChildByName("Statistics")!!, statistics)
+		val statisticsEl = xmlData.getChildByName("Statistics")
+		if (statisticsEl != null)
+		{
+			for (el in statisticsEl.children)
+			{
+				val enumVal = Statistic.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				statistics[enumVal] = el.float()
+			}
+		}
 		faction = xmlData.get("Faction", "")!!
 	}
 	override val classID: String = "Statistics"
@@ -125,10 +137,10 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		tookDamage = false
 	}
 
-	fun checkAegis(): Boolean
+	fun checkAegis(random: LightRNG): Boolean
 	{
 		val aegisChance = getStat(Statistic.AEGIS)
-		if (aegisChance > 0f && Random.random() < aegisChance)
+		if (aegisChance > 0f && random.nextFloat() < aegisChance)
 		{
 			return true
 		}
@@ -229,10 +241,10 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		return MathUtils.clamp(value, statistic.min, statistic.max)
 	}
 
-	fun getCritMultiplier(extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
+	fun getCritMultiplier(random: LightRNG, extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
 	{
 		val critChance = getStat(Statistic.CRITCHANCE) + extraCritChance
-		if (Random.random() <= critChance)
+		if (random.nextFloat() <= critChance)
 		{
 			val mult = getStat(Statistic.CRITDAMAGE) + extraCritDam
 			return Pair(mult, true)
@@ -241,18 +253,18 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		return Pair(1f, false)
 	}
 
-	fun getAttackDam(multiplier: Float, extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
+	fun getAttackDam(random: LightRNG, multiplier: Float, extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
 	{
 		val baseAttack = getStat(Statistic.POWER)
 
-		var modifier = Random.random()
+		var modifier = random.nextFloat()
 		modifier *= modifier
 		modifier *= 0.2f // 20% range
-		modifier *= Random.sign()
+		modifier *= random.sign()
 
 		val attack = baseAttack + baseAttack * modifier
 
-		val critMult = getCritMultiplier(extraCritChance, extraCritDam)
+		val critMult = getCritMultiplier(random, extraCritChance, extraCritDam)
 
 		return Pair(attack * critMult.first * multiplier, critMult.second)
 	}
@@ -339,7 +351,7 @@ class MessageData()
 			}
 		}
 
-		@JvmStatic fun obtain(): MessageData
+		fun obtain(): MessageData
 		{
 			val obj = pool.obtain()
 
