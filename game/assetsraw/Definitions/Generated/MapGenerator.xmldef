@@ -78,7 +78,7 @@
 		<Const Name="classID">Flip</Const>
 		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="MapGeneratorNode" DefKey="AbstractMapGenerationActionDefs" TextColour="209,209,143" meta:RefKey="GraphCollectionDef">
+	<Definition Name="MapGeneratorNode" DefKey="AbstractMapGenerationActionDefs" Background="209,209,143" meta:RefKey="GraphCollectionDef">
 	</Definition>
 	<Definition Name="Child" Nullable="False" TextColour="196,159,173" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Node</Const>

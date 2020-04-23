@@ -62,73 +62,24 @@ class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
 			}
 		}
-		fun loadAbstractNodeContainer(classID: String): com.lyeeedar.AI.BehaviourTree.AbstractNodeContainer
+		fun loadAbstractBehaviourAction(classID: String): com.lyeeedar.AI.BehaviourTree.Actions.AbstractBehaviourAction
 		{
 			return when (classID)
 			{
-				"Any" -> com.lyeeedar.AI.BehaviourTree.Selectors.AnySelector()
-				"DataScope" -> com.lyeeedar.AI.BehaviourTree.Decorators.DataScopeDecorator()
-				"Import" -> com.lyeeedar.AI.BehaviourTree.Decorators.ImportDecorator()
-				"Priority" -> com.lyeeedar.AI.BehaviourTree.Selectors.PrioritySelector()
-				"Random" -> com.lyeeedar.AI.BehaviourTree.Selectors.RandomSelector()
-				"Repeat" -> com.lyeeedar.AI.BehaviourTree.Decorators.RepeatDecorator()
-				"Sequence" -> com.lyeeedar.AI.BehaviourTree.Selectors.SequenceSelector()
-				"SetState" -> com.lyeeedar.AI.BehaviourTree.Decorators.SetStateDecorator()
-				"Until" -> com.lyeeedar.AI.BehaviourTree.Selectors.UntilSelector()
-				"Invert" -> com.lyeeedar.AI.BehaviourTree.Decorators.InvertDecorator()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractNodeContainer!")
+				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
+				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourAction!")
 			}
 		}
-		fun loadAbstractTreeNode(classID: String): com.lyeeedar.AI.BehaviourTree.AbstractTreeNode
+		fun loadAbstractBehaviourNode(classID: String): com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 		{
 			return when (classID)
 			{
-				"Any" -> com.lyeeedar.AI.BehaviourTree.Selectors.AnySelector()
-				"CheckValue" -> com.lyeeedar.AI.BehaviourTree.Action.CheckValueAction()
-				"DataScope" -> com.lyeeedar.AI.BehaviourTree.Decorators.DataScopeDecorator()
-				"Priority" -> com.lyeeedar.AI.BehaviourTree.Selectors.PrioritySelector()
-				"Random" -> com.lyeeedar.AI.BehaviourTree.Selectors.RandomSelector()
-				"Repeat" -> com.lyeeedar.AI.BehaviourTree.Decorators.RepeatDecorator()
-				"Sequence" -> com.lyeeedar.AI.BehaviourTree.Selectors.SequenceSelector()
-				"SetState" -> com.lyeeedar.AI.BehaviourTree.Decorators.SetStateDecorator()
-				"Until" -> com.lyeeedar.AI.BehaviourTree.Selectors.UntilSelector()
-				"Import" -> com.lyeeedar.AI.BehaviourTree.Decorators.ImportDecorator()
-				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Action.ClearValueAction()
-				"Invert" -> com.lyeeedar.AI.BehaviourTree.Decorators.InvertDecorator()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractTreeNode!")
-			}
-		}
-		fun loadAbstractAction(classID: String): com.lyeeedar.AI.BehaviourTree.Action.AbstractAction
-		{
-			return when (classID)
-			{
-				"CheckValue" -> com.lyeeedar.AI.BehaviourTree.Action.CheckValueAction()
-				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Action.ClearValueAction()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAction!")
-			}
-		}
-		fun loadAbstractDecorator(classID: String): com.lyeeedar.AI.BehaviourTree.Decorators.AbstractDecorator
-		{
-			return when (classID)
-			{
-				"DataScope" -> com.lyeeedar.AI.BehaviourTree.Decorators.DataScopeDecorator()
-				"Import" -> com.lyeeedar.AI.BehaviourTree.Decorators.ImportDecorator()
-				"Repeat" -> com.lyeeedar.AI.BehaviourTree.Decorators.RepeatDecorator()
-				"SetState" -> com.lyeeedar.AI.BehaviourTree.Decorators.SetStateDecorator()
-				"Invert" -> com.lyeeedar.AI.BehaviourTree.Decorators.InvertDecorator()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDecorator!")
-			}
-		}
-		fun loadAbstractSelector(classID: String): com.lyeeedar.AI.BehaviourTree.Selectors.AbstractSelector
-		{
-			return when (classID)
-			{
-				"Any" -> com.lyeeedar.AI.BehaviourTree.Selectors.AnySelector()
-				"Priority" -> com.lyeeedar.AI.BehaviourTree.Selectors.PrioritySelector()
-				"Random" -> com.lyeeedar.AI.BehaviourTree.Selectors.RandomSelector()
-				"Sequence" -> com.lyeeedar.AI.BehaviourTree.Selectors.SequenceSelector()
-				"Until" -> com.lyeeedar.AI.BehaviourTree.Selectors.UntilSelector()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractSelector!")
+				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
+				"RunUntilState" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilStateBehaviourNode()
+				"RunAll" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunAllBehaviourNode()
+				"RunUntilNotCompleted" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotCompletedBehaviourNode()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourNode!")
 			}
 		}
 		fun loadAbstractComponentData(classID: String): com.lyeeedar.Components.AbstractComponentData
