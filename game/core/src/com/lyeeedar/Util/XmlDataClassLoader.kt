@@ -66,8 +66,11 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
+				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
+				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourAction!")
 			}
 		}

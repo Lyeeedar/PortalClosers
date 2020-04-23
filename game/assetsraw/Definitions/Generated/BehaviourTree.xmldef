@@ -4,11 +4,27 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="Datascope,Node" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="Branch,ClearValue,Datascope,Import,Node" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
+	<Definition Name="Branch" Nullable="False" TextColour="238,94,94" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Branch</Const>
+		<Data Name="Branches" Keys="ConditionAndNode" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="ClearValue" Nullable="False" TextColour="250,250,39" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">ClearValue</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="ConditionAndNode" Nullable="False" TextColour="204,204,4" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Node" DefKey="AbstractBehaviourNodeDefs" UseParentDescription="True" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
 	<Definition Name="Datascope" Nullable="False" TextColour="241,17,17" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Datascope</Const>
 		<Data Name="Node" DefKey="AbstractBehaviourNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="Import" Nullable="False" TextColour="244,117,244" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Import</Const>
+		<Data Name="Path" StripExtension="True" ResourceType="BehaviourTree" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
 	<Definition Name="Node" Nullable="False" TextColour="26,204,204" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Node</Const>
