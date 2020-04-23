@@ -3,4 +3,96 @@
 		<Data Name="Extends" StripExtension="True" ResourceType="Entity" SkipIfDefault="True" Default="" meta:RefKey="File" />
 		<Data Name="Components" ChildrenAreUnique="True" DefKey="AbstractComponentDataDefs" meta:RefKey="Collection" />
 	</Definition>
+	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderable,Dialogue,DirectionalSprite,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
+	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">AdditionalRenderable</Const>
+		<Data Name="Below" meta:RefKey="Collection">
+			<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Above" meta:RefKey="Collection">
+			<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		</Data>
+	</Definition>
+	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Dialogue</Const>
+		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="TurnsToShow" Type="Int" Default="-1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="DirectionalSprite" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">DirectionalSprite</Const>
+		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="Empty" Nullable="False" TextColour="52,227,52" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Empty</Const>
+	</Definition>
+	<Definition Name="EventAndCondition" Nullable="False" TextColour="208,113,113" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Sequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="EventHandler" Nullable="False" TextColour="79,251,251" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">EventHandler</Const>
+		<Data Name="Handlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+			<!--Actions-->
+			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Use_ability" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--Self events-->
+			<Data Name="Deal_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Take_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Healed" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Crit" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--General events-->
+			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
+		</Data>
+	</Definition>
+	<Definition Name="MetaRegion" Nullable="False" TextColour="31,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">MetaRegion</Const>
+		<Data Name="Keys" meta:RefKey="Collection">
+			<Data Name="Key" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		</Data>
+	</Definition>
+	<Definition Name="Name" Nullable="False" TextColour="71,253,71" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Name</Const>
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Title" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Position" Nullable="False" TextColour="2,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Position</Const>
+		<Data Name="Slot" EnumValues="FLOOR,FLOORDETAIL,WALL,WALLDETAIL,BELOWENTITY,ENTITY,ABOVEENTITY,EFFECT,LIGHT" Default="ENTITY" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Renderable" Nullable="False" TextColour="232,27,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Renderable</Const>
+		<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="Statistics" Nullable="False" TextColour="204,56,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Statistics</Const>
+		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+			<!--Base-->
+			<Data Name="Maxhp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<!--Offense-->
+			<Data Name="Power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Critchance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Critdamage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<!--Defense-->
+			<Data Name="Regeneration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Lifesteal" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Aegis" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<!--Buff-->
+			<Data Name="Haste" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Fleetfoot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Dervish" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<!--Negative-->
+			<Data Name="Root" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Fumble" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Distraction" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		</Data>
+		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
+	</Definition>
 </Definitions>
