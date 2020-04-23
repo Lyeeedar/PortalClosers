@@ -1,0 +1,75 @@
+<Definitions Colour="121,252,218" Icon="Sprites/Icons/CardIcon.png" xmlns:meta="Editor">
+	<Definition Name="BehaviourTree" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="14,204,14" meta:RefKey="GraphStruct">
+		<Data Name="Root" DefKey="AbstractNodeContainerDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="AbstractAction" Nullable="False" TextColour="87,87,204" Extends="AbstractTreeNode" meta:RefKey="StructDef">
+		<Const Name="classID">Abstract</Const>
+	</Definition>
+	<Definition Name="AbstractActionDefs" Keys="CheckValueAction,ClearValueAction" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractDecorator" Nullable="False" TextColour="204,145,204" Extends="AbstractNodeContainer" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Abstract</Const>
+		<Data Name="Node" DefKey="AbstractNodeContainerDefs" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="AbstractDecoratorDefs" Keys="DataScopeDecorator,ImportDecorator,InvertDecorator,RepeatDecorator,SetStateDecorator" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractNodeContainer" Nullable="False" TextColour="204,204,138" Extends="AbstractTreeNode" meta:RefKey="StructDef">
+		<Const Name="classID">AbstractNode</Const>
+	</Definition>
+	<Definition Name="AbstractNodeContainerDefs" Keys="AnySelector,DataScopeDecorator,ImportDecorator,InvertDecorator,PrioritySelector,RandomSelector,RepeatDecorator,SequenceSelector,SetStateDecorator,UntilSelector" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractSelector" Nullable="False" TextColour="211,79,79" Extends="AbstractNodeContainer" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Abstract</Const>
+		<Data Name="Children" DefKey="AbstractTreeNodeDefs" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="AbstractSelectorDefs" Keys="AnySelector,PrioritySelector,RandomSelector,SequenceSelector,UntilSelector" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractTreeNode" Nullable="False" TextColour="107,107,204" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractTreeNodeDefs" Keys="AnySelector,CheckValueAction,ClearValueAction,DataScopeDecorator,ImportDecorator,InvertDecorator,PrioritySelector,RandomSelector,RepeatDecorator,SequenceSelector,SetStateDecorator,UntilSelector" meta:RefKey="ReferenceDef" />
+	<Definition Name="AnySelector" Nullable="False" TextColour="236,44,44" Extends="AbstractSelector" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Any</Const>
+		<Data Name="Reset" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="CheckValueAction" Nullable="False" TextColour="223,114,223" Extends="AbstractAction" meta:RefKey="StructDef">
+		<Const Name="classID">CheckValue</Const>
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Succeed" EnumValues="NONE,RUNNING,COMPLETED,FAILED" Default="COMPLETED" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Fail" EnumValues="NONE,RUNNING,COMPLETED,FAILED" Default="FAILED" SkipIfDefault="False" meta:RefKey="Enum" />
+	</Definition>
+	<Definition Name="ClearValueAction" Nullable="False" TextColour="112,204,204" Extends="AbstractAction" meta:RefKey="StructDef">
+		<Const Name="classID">ClearValue</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="DataScopeDecorator" Nullable="False" TextColour="10,237,237" Extends="AbstractDecorator" meta:RefKey="GraphStructDef">
+		<Const Name="classID">DataScope</Const>
+	</Definition>
+	<Definition Name="ImportDecorator" Nullable="False" TextColour="170,170,244" Extends="AbstractDecorator" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Import</Const>
+		<Data Name="Path" StripExtension="True" ResourceType="BehaviourTree" SkipIfDefault="False" Default="" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="InvertDecorator" Nullable="False" TextColour="204,73,73" Extends="AbstractDecorator" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Invert</Const>
+	</Definition>
+	<Definition Name="PrioritySelector" Nullable="False" TextColour="204,204,136" Extends="AbstractSelector" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Priority</Const>
+	</Definition>
+	<Definition Name="RandomSelector" Nullable="False" TextColour="204,204,82" Extends="AbstractSelector" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Random</Const>
+	</Definition>
+	<Definition Name="RepeatDecorator" Nullable="False" TextColour="204,0,0" Extends="AbstractDecorator" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Repeat</Const>
+		<Data Name="Until" EnumValues="NONE,RUNNING,COMPLETED,FAILED" SkipIfDefault="True" meta:RefKey="Enum" />
+		<Data Name="Repeats" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="SequenceSelector" Nullable="False" TextColour="25,204,204" Extends="AbstractSelector" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Sequence</Const>
+		<Data Name="Reset" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SetStateDecorator" Nullable="False" TextColour="223,71,71" Extends="AbstractDecorator" meta:RefKey="GraphStructDef">
+		<Const Name="classID">SetState</Const>
+		<Data Name="Completed" EnumValues="NONE,RUNNING,COMPLETED,FAILED" Default="COMPLETED" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Failed" EnumValues="NONE,RUNNING,COMPLETED,FAILED" Default="FAILED" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Running" EnumValues="NONE,RUNNING,COMPLETED,FAILED" Default="RUNNING" SkipIfDefault="False" meta:RefKey="Enum" />
+	</Definition>
+	<Definition Name="UntilSelector" Nullable="False" TextColour="101,243,101" Extends="AbstractSelector" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Until</Const>
+		<Data Name="Until" EnumValues="NONE,RUNNING,COMPLETED,FAILED" SkipIfDefault="False" meta:RefKey="Enum" />
+	</Definition>
+</Definitions>

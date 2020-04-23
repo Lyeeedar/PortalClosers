@@ -3,7 +3,7 @@
     <Text ID="languageselector.isautotranslated">Automatically translated</Text>
 
     <Text ID="statistic.health">Health</Text>
-    <Text ID="statistic.health.description">The amount of damage you can take before dieing.</Text>
+    <Text ID="statistic.health.description">The amount of damage you can take before death.</Text>
     <Text ID="statistic.power">Power</Text>
     <Text ID="statistic.power.description">The damage of your attacks and the effectiveness of your abilities.</Text>
     <Text ID="statistic.critchance">Critical Chance</Text>

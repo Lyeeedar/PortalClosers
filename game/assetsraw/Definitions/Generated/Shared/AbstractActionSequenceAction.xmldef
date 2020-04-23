@@ -90,6 +90,10 @@
 		<Const Name="classID">RestoreTargets</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
+	<Definition Name="HealAction" Nullable="False" TextColour="151,151,211" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Heal</Const>
+		<Data Name="Amount" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="LockEntityTargetsAction" Nullable="False" TextColour="252,102,9" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
 	</Definition>
@@ -107,5 +111,5 @@
 		<Data Name="Above" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="KillOnEnd" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(DamageAction),Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction),Renderable(AnimationAction,AttachParticleAction,FlightParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnOneShotParticleAction,SpawnTrackedParticleAction)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(DamageAction,HealAction),Meta(BlockTurnAction,RepeatAction),Permute(LockEntityTargetsAction,PermuteAction,RestoreTargetsAction,SelectEntitiesAction,SelectSelfAction,SelectTilesAction,StoreTargetsAction),Renderable(AnimationAction,AttachParticleAction,FlightParticleAction,ReplaceSourceRenderableAction,ScreenShakeAction,SpawnOneShotParticleAction,SpawnTrackedParticleAction)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>
