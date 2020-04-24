@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.DamageEquations
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Systems.EventData
 import com.lyeeedar.Systems.EventSystem
@@ -29,8 +30,6 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	{
 		val rng = Random.obtainTS(state.seed++)
 
-		val eventSystem = state.world.eventSystem() ?: return ActionState.Completed
-
 		hitEntities.clear()
 		for (point in state.targets)
 		{
@@ -50,85 +49,10 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 
 					var damModifier = damage.evaluate(map)
-					//damModifier += damModifier * sourceStats.getStat(Statistic.ABILITYPOWER)
+					damModifier += damModifier * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					var attackDam = sourceStats.getAttackDam(rng, damModifier, bonusCritChance, bonusCritDamage)
-
-					if (targetstats.checkAegis(rng))
-					{
-						if (EventSystem.isEventRegistered(EventType.BLOCK, entity))
-						{
-							val eventData = EventData.obtain().set(EventType.BLOCK, entity, state.source, mapOf(Pair("damage", attackDam.first)))
-							eventSystem.addEvent(eventData)
-						}
-
-						attackDam = Pair(0f, attackDam.second)
-						targetstats.blockedDamage = true
-
-						targetstats.messagesToShow.add(MessageData.obtain().set("Blocked!", Colour.CYAN, 0.4f))
-					}
-
-					val finalDam = targetstats.dealDamage(attackDam.first, attackDam.second)
-
-					sourceStats.abilityDamageDealt += finalDam
-
-					if (sourceStats.summoner != null)
-					{
-						sourceStats.summoner!!.stats()!!.abilityDamageDealt += finalDam
-					}
-
-					BloodSplatter.splatter(state.source.pos()!!.position, entity.pos()!!.position, 1f, state.world)
-					targetstats.lastHitSource = state.source.pos()!!.position
-
-					val lifeSteal = sourceStats.getStat(Statistic.LIFESTEAL) + bonusLifesteal
-					val stolenLife = finalDam * lifeSteal
-					if (stolenLife > 0f)
-					{
-						sourceStats.heal(stolenLife)
-						sourceStats.healing += stolenLife
-
-						if (EventSystem.isEventRegistered(EventType.HEALED, state.source))
-						{
-							val healEventData = EventData.obtain().set(EventType.HEALED, state.source, state.source, mapOf(Pair("damage", stolenLife)))
-							eventSystem.addEvent(healEventData)
-						}
-					}
-					else if (stolenLife < 0f)
-					{
-						sourceStats.dealDamage(stolenLife, false)
-					}
-
-					// do damage events
-
-					// crit
-					if (attackDam.second)
-					{
-						if (EventSystem.isEventRegistered(EventType.CRIT, state.source))
-						{
-							val dealEventData = EventData.obtain().set(EventType.CRIT, state.source, entity, mapOf(
-								Pair("damage", finalDam),
-								Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-							eventSystem.addEvent(dealEventData)
-						}
-					}
-
-					// deal damage
-					if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, state.source))
-					{
-						val dealEventData = EventData.obtain().set(EventType.DEAL_DAMAGE, state.source, entity, mapOf(
-							Pair("damage", finalDam),
-							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-						eventSystem.addEvent(dealEventData)
-					}
-
-					// take damage
-					if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, entity))
-					{
-						val takeEventData = EventData.obtain().set(EventType.TAKE_DAMAGE, entity, state.source, mapOf(
-							Pair("damage", finalDam),
-							Pair("dist", state.source.pos()!!.position.dist(entity.pos()!!.position).toFloat())))
-						eventSystem.addEvent(takeEventData)
-					}
+					val attackDam = DamageEquations.getAttackDam(rng, state.source.stats()!!, damModifier, bonusCritChance, bonusCritDamage)
+					DamageEquations.doAttack(rng, state.source, entity, attackDam, state.world)
 				}
 			}
 		}

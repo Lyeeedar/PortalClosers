@@ -29,7 +29,7 @@ class TaskInterrupt : AbstractTask()
 
 		val message = if (interrupted) "Interrupted!" else "Stunned!"
 
-		e.stats()?.messagesToShow?.add(MessageData.obtain().set(message, Colour.YELLOW, 0.4f))
+		e.stats()?.addMessage(message, Colour.YELLOW, 0.4f)
 	}
 
 	var obtained: Boolean = false

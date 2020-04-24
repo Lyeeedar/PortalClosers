@@ -15,6 +15,12 @@
 			<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
+	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
+		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
 	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
 		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
@@ -94,5 +100,6 @@
 			<Data Name="Distraction" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		</Data>
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="AttackDefinition" Keys="AttackDefinition" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

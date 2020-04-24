@@ -6,7 +6,9 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
+import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
 import java.util.*
@@ -16,6 +18,7 @@ class StatisticsComponentData : AbstractComponentData()
 {
 	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 	var faction: String = ""
+	lateinit var attackDefinition: AttackDefinition
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -31,6 +34,9 @@ class StatisticsComponentData : AbstractComponentData()
 			}
 		}
 		faction = xmlData.get("Faction", "")!!
+		val attackDefinitionEl = xmlData.getChildByName("AttackDefinition")!!
+		attackDefinition = AttackDefinition()
+		attackDefinition.load(attackDefinitionEl)
 	}
 	override val classID: String = "Statistics"
 	//endregion
@@ -47,7 +53,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		{
 			if (value == field) return
 
-			var v = Math.min(value, getStat(Statistic.MAXHP))
+			var v = Math.min(value, getStat(Statistic.MAX_HP))
 
 			var diff = v - hp
 			if (diff < 0)
@@ -130,59 +136,43 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 	fun resetHP()
 	{
-		hp = getStat(Statistic.MAXHP)
+		hp = getStat(Statistic.MAX_HP)
 		lostHp = 0f
 		maxLostHp = 0f
 		totalHpLost = 0f
 		tookDamage = false
 	}
 
-	fun checkAegis(random: LightRNG): Boolean
+	fun damage(damage: Float, wasCrit: Boolean)
 	{
-		val aegisChance = getStat(Statistic.AEGIS)
-		if (aegisChance > 0f && random.nextFloat() < aegisChance)
+		if (damage == 0f) return
+
+		hp -= damage
+
+		val maxHP = getStat(Statistic.MAX_HP)
+		val alpha = damage / maxHP
+		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
+
+		var message = damage.ciel().toString()
+
+		if (wasCrit)
 		{
-			return true
+			message += "!!"
 		}
 
-		return false
-	}
-
-	fun dealDamage(amount: Float, wasCrit: Boolean): Float
-	{
-		val baseDam = amount
-		val dr = getStat(Statistic.DR)
-
-		val dam = baseDam - dr * baseDam
-		hp -= dam
-
-		if (dam > 0)
-		{
-			val maxHP = getStat(Statistic.MAXHP)
-			val alpha = dam / maxHP
-			val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
-
-			var message = dam.ciel().toString()
-
-			if (wasCrit)
-			{
-				message += "!!"
-			}
-
-			messagesToShow.add(MessageData.obtain().set(message, Colour.RED, size))
-		}
-
-		return dam
+		addMessage(message, Colour.RED, size)
 	}
 
 	fun heal(amount: Float)
 	{
+		if (amount == 0f) return
+
 		hp += amount
 
-		val maxHP = getStat(Statistic.MAXHP)
+		val maxHP = getStat(Statistic.MAX_HP)
 		val alpha = amount / maxHP
 		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
-		messagesToShow.add(MessageData.obtain().set(amount.ciel().toString(), Colour.GREEN, size))
+		addMessage(amount.ciel().toString(), Colour.GREEN, size)
 	}
 
 	fun regenerate(amount: Float)
@@ -191,6 +181,11 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 	}
 
 	val messagesToShow = Array<MessageData>(1)
+
+	fun addMessage(message: String, colour: Colour, size: Float)
+	{
+		messagesToShow.add(MessageData.obtain().set(message, colour, size))
+	}
 
 	fun get(key: String): Float
 	{
@@ -215,15 +210,10 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 	{
 		var value = data.statistics[statistic] ?: 0f
 
-		// apply level / rarity, but only to the base stats
+		// apply stat modifier, but only to the base stats
 		if (Statistic.BaseValues.contains(statistic))
 		{
-			value = value.applyLevel(level)
 			value += value * statModifier
-		}
-		else
-		{
-			value *= 1f + level.toFloat() / 100f
 		}
 
 		// apply buffs and equipment
@@ -239,34 +229,6 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		}
 
 		return MathUtils.clamp(value, statistic.min, statistic.max)
-	}
-
-	fun getCritMultiplier(random: LightRNG, extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
-	{
-		val critChance = getStat(Statistic.CRITCHANCE) + extraCritChance
-		if (random.nextFloat() <= critChance)
-		{
-			val mult = getStat(Statistic.CRITDAMAGE) + extraCritDam
-			return Pair(mult, true)
-		}
-
-		return Pair(1f, false)
-	}
-
-	fun getAttackDam(random: LightRNG, multiplier: Float, extraCritChance: Float = 0f, extraCritDam: Float = 0f): Pair<Float, Boolean>
-	{
-		val baseAttack = getStat(Statistic.POWER)
-
-		var modifier = random.nextFloat()
-		modifier *= modifier
-		modifier *= 0.2f // 20% range
-		modifier *= random.sign()
-
-		val attack = baseAttack + baseAttack * modifier
-
-		val critMult = getCritMultiplier(random, extraCritChance, extraCritDam)
-
-		return Pair(attack * critMult.first * multiplier, critMult.second)
 	}
 
 	val map = ObjectFloatMap<String>()
@@ -309,6 +271,11 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 			return variableMap
 		}
 	}
+}
+
+class AttackDamage(val damage: Float, val wasCrit: Boolean)
+{
+
 }
 
 fun Entity.isAllies(other: Entity): Boolean
@@ -364,30 +331,20 @@ class MessageData()
 	fun free() { if (obtained) { pool.free(this); obtained = false } }
 }
 
-class AttackDefinition
+class AttackDefinition : XmlDataClass()
 {
 	var damage: Float = 1f
 	var range: Int = 1
 	var hitEffect: ParticleEffectDescription? = null
 	var flightEffect: ParticleEffectDescription? = null
 
-	fun parse(xml: XmlData)
+	//region generated
+	override fun load(xmlData: XmlData)
 	{
-		damage = xml.getFloat("Damage", 1f)
-		range = xml.getInt("Range", 1)
-
-		val hitEffectEl = xml.getChildByName("HitEffect")
-		if (hitEffectEl != null) hitEffect = AssetManager.loadParticleEffect(hitEffectEl)
-
-		val flightEffectEl = xml.getChildByName("FlightEffect")
-		if (flightEffectEl != null) flightEffect = AssetManager.loadParticleEffect(flightEffectEl)
+		damage = xmlData.getFloat("Damage", 1f)
+		range = xmlData.getInt("Range", 1)
+		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
+		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))
 	}
-}
-
-fun Float.applyLevel(level: Int): Float
-{
-	var value = this
-	value *= Math.pow(1.05, level.toDouble()).toFloat() // 5% per level
-
-	return value
+	//endregion
 }

@@ -2,7 +2,7 @@
 	<Definition Name="BehaviourTree" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="14,204,14" meta:RefKey="GraphStruct">
 		<Data Name="Root" DefKey="AbstractBehaviourNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
 	</Definition>
-	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" meta:RefKey="StructDef">
+	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
 	<Definition Name="AbstractBehaviourActionDefs" Keys="Branch,ClearValue,Datascope,Import,Node" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />

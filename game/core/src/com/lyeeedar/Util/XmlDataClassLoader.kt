@@ -62,6 +62,22 @@ class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
 			}
 		}
+		fun loadAbstractBehaviourTreeItem(classID: String): com.lyeeedar.AI.BehaviourTree.AbstractBehaviourTreeItem
+		{
+			return when (classID)
+			{
+				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
+				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
+				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
+				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
+				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
+				"RunUntilState" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilStateBehaviourNode()
+				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
+				"RunAll" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunAllBehaviourNode()
+				"RunUntilNotCompleted" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotCompletedBehaviourNode()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourTreeItem!")
+			}
+		}
 		fun loadAbstractBehaviourAction(classID: String): com.lyeeedar.AI.BehaviourTree.Actions.AbstractBehaviourAction
 		{
 			return when (classID)

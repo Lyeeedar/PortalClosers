@@ -39,7 +39,7 @@ class TaskMove : AbstractTask()
 				val stunParticle = AssetManager.loadParticleEffect("Stunned").getParticleEffect()
 				stunParticle.addToWorld(world, e.pos()!!.position, Vector2(0f, 0.8f))
 
-				stats.messagesToShow.add(MessageData.obtain().set("Rooted!", Colour.YELLOW, 0.4f))
+				stats.addMessage("Rooted!", Colour.YELLOW, 0.4f)
 
 				return
 			}

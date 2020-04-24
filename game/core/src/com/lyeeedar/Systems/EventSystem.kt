@@ -30,7 +30,7 @@ enum class EventType
 }
 
 fun World.eventSystem() = systems.filterIsInstance <EventSystem>().firstOrNull()
-class EventSystem(world: World) : AbstractEntitySystem(world, EntitySignature().all(ComponentType.EventHandler))
+class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.EventHandler).get())
 {
 	private val queuedEvents = Array<EventData>()
 	private val executingArray = Array<EventData>()

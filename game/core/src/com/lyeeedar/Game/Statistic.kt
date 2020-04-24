@@ -11,22 +11,25 @@ import com.lyeeedar.Util.*
 enum class Statistic private constructor(val min: Float, val max: Float, val modifiersAreAdded: Boolean)
 {
 	// Base
-	MAXHP(1f, Float.MAX_VALUE, false),
+	MAX_HP(1f, Float.MAX_VALUE, false),
 
 	// Offense
-	POWER(1f, Float.MAX_VALUE, false),
-	CRITCHANCE(0f, 1f, true),
-	CRITDAMAGE(1f, Float.MAX_VALUE, true),
+	ATK_POWER(1f, Float.MAX_VALUE, false),
+	ABILITY_POWER(0f, Float.MAX_VALUE, true),
+	STATUS_CHANCE(0f, 1f, true),
+	CRIT_CHANCE(0f, 1f, true),
+	CRIT_DAMAGE(1f, Float.MAX_VALUE, true),
 
 	// Defense
-	DR(-Float.MAX_VALUE, 0.8f, true),
+	ARMOUR(0f, Float.MAX_VALUE, false),
+	DR(0f, 0.8f, true),
 	REGENERATION(-1f, 1f, true),
 	LIFESTEAL(-Float.MAX_VALUE, Float.MAX_VALUE, true),
 	AEGIS(0f, 0.8f, true),
 
 	// Buff
 	HASTE(-1f, 1f, true),
-	FLEETFOOT(-1f, 1f, true),
+	FLEET_FOOT(-1f, 1f, true),
 	DERVISH(-1f, 1f, true),
 
 	// Negative
@@ -39,18 +42,22 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 		{
 			return when(this)
 			{
-				MAXHP -> Localisation.getText("statistic.health", "UI")
-				POWER -> Localisation.getText("statistic.power", "UI")
-				CRITCHANCE -> Localisation.getText("statistic.critchance", "UI")
-				CRITDAMAGE -> Localisation.getText("statistic.critdamage", "UI")
+				MAX_HP -> Localisation.getText("statistic.health", "UI")
 
+				ATK_POWER -> Localisation.getText("statistic.attackpower", "UI")
+				ABILITY_POWER -> Localisation.getText("statistic.abilitypower", "UI")
+				STATUS_CHANCE -> Localisation.getText("statistic.statuschance", "UI")
+				CRIT_CHANCE -> Localisation.getText("statistic.critchance", "UI")
+				CRIT_DAMAGE -> Localisation.getText("statistic.critdamage", "UI")
+
+				ARMOUR -> Localisation.getText("statistic.armour", "UI")
 				DR -> Localisation.getText("statistic.dr", "UI")
 				REGENERATION -> Localisation.getText("statistic.regen", "UI")
 				LIFESTEAL -> Localisation.getText("statistic.lifesteal", "UI")
 				AEGIS -> Localisation.getText("statistic.aegis", "UI")
 
 				HASTE -> Localisation.getText("statistic.haste", "UI")
-				FLEETFOOT -> Localisation.getText("statistic.fleetfoot", "UI")
+				FLEET_FOOT -> Localisation.getText("statistic.fleetfoot", "UI")
 				DERVISH -> Localisation.getText("statistic.dervish", "UI")
 
 				ROOT -> Localisation.getText("statistic.root", "UI")
@@ -64,18 +71,22 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 		{
 			return when(this)
 			{
-				MAXHP -> Localisation.getText("statistic.health.description", "UI")
-				POWER -> Localisation.getText("statistic.power.description", "UI")
-				CRITCHANCE -> Localisation.getText("statistic.critchance.description", "UI")
-				CRITDAMAGE -> Localisation.getText("statistic.critdamage.description", "UI")
+				MAX_HP -> Localisation.getText("statistic.health.description", "UI")
 
+				ATK_POWER -> Localisation.getText("statistic.attackpower.description", "UI")
+				ABILITY_POWER -> Localisation.getText("statistic.abilitypower.description", "UI")
+				STATUS_CHANCE -> Localisation.getText("statistic.statuschance.description", "UI")
+				CRIT_CHANCE -> Localisation.getText("statistic.critchance.description", "UI")
+				CRIT_DAMAGE -> Localisation.getText("statistic.critdamage.description", "UI")
+
+				ARMOUR -> Localisation.getText("statistic.armour.description", "UI")
 				DR -> Localisation.getText("statistic.dr.description", "UI")
 				REGENERATION -> Localisation.getText("statistic.regen.description", "UI")
 				LIFESTEAL -> Localisation.getText("statistic.lifesteal.description", "UI")
 				AEGIS -> Localisation.getText("statistic.aegis.description", "UI")
 
 				HASTE -> Localisation.getText("statistic.haste.description", "UI")
-				FLEETFOOT -> Localisation.getText("statistic.fleetfoot.description", "UI")
+				FLEET_FOOT -> Localisation.getText("statistic.fleetfoot.description", "UI")
 				DERVISH -> Localisation.getText("statistic.dervish.description", "UI")
 
 				ROOT -> Localisation.getText("statistic.root.description", "UI")
@@ -87,10 +98,11 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	companion object
 	{
 		val Values = Statistic.values()
-		val BaseValues = arrayOf(MAXHP, POWER)
-		val CoreValues = arrayOf(MAXHP, POWER, DR, CRITCHANCE, CRITDAMAGE)
-		val DefenseValues = arrayOf(DR, REGENERATION, LIFESTEAL, AEGIS)
-		val SpeedValues = arrayOf(HASTE, FLEETFOOT, DERVISH)
+		val BaseValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER)
+		val CoreValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE, CRIT_DAMAGE, STATUS_CHANCE)
+		val AttackValues = arrayOf(ATK_POWER, ABILITY_POWER, CRIT_CHANCE, CRIT_DAMAGE, STATUS_CHANCE)
+		val DefenseValues = arrayOf(ARMOUR, DR, REGENERATION, LIFESTEAL, AEGIS)
+		val SpeedValues = arrayOf(HASTE, FLEET_FOOT, DERVISH)
 		val NegativeValues = arrayOf(ROOT, FUMBLE, DISTRACTION)
 
 		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Float>)
