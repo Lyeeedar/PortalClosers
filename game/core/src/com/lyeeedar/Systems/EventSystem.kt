@@ -29,6 +29,7 @@ enum class EventType
 	ON_TURN;
 }
 
+fun World.eventSystem() = systems.filterIsInstance <EventSystem>().firstOrNull()
 class EventSystem(world: World) : AbstractEntitySystem(world, EntitySignature().all(ComponentType.EventHandler))
 {
 	private val queuedEvents = Array<EventData>()

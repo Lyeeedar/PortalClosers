@@ -11,6 +11,7 @@ import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Systems.EventData
 import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
+import com.lyeeedar.Systems.eventSystem
 import com.lyeeedar.Util.XmlData
 
 class HealAction : AbstractOneShotActionSequenceAction()
@@ -24,7 +25,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
-		val eventSystem = state.world.systems.filterIsInstance <EventSystem>().firstOrNull() ?: return ActionState.Completed
+		val eventSystem = state.world.eventSystem() ?: return ActionState.Completed
 
 		hitEntities.clear()
 		for (point in state.targets)

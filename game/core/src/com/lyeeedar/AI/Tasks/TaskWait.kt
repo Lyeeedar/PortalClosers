@@ -4,10 +4,11 @@ import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.directionalSprite
 import com.lyeeedar.Systems.World
+import squidpony.squidmath.LightRNG
 
 class TaskWait(): AbstractTask()
 {
-	override fun execute(e: Entity, world: World)
+	override fun execute(e: Entity, world: World, rng: LightRNG)
 	{
 		e.directionalSprite()?.currentAnim = "wait"
 	}

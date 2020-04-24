@@ -4,11 +4,14 @@ import com.lyeeedar.Components.Entity
 import com.lyeeedar.Pathfinding.IPathfindingTile
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.Point
 
 class Tile(x: Int, y: Int) : Point(x, y), IPathfindingTile
 {
+	lateinit var world: World
+
 	lateinit var floor: SpriteWrapper
 	var wall: SpriteWrapper? = null
 	val contents: FastEnumMap<SpaceSlot, Entity> = FastEnumMap(SpaceSlot::class.java)

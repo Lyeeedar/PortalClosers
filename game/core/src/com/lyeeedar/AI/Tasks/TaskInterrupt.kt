@@ -6,10 +6,11 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import squidpony.squidmath.LightRNG
 
 class TaskInterrupt : AbstractTask()
 {
-	override fun execute(e: Entity, world: World)
+	override fun execute(e: Entity, world: World, rng: LightRNG)
 	{
 		//e.task().ai.cancel(e)
 
