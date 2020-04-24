@@ -54,8 +54,10 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 		executingArray.addAll(queuedEvents)
 		queuedEvents.clear()
 
-		for (event in executingArray)
+		for (i in 0 until executingArray.size)
 		{
+			val event = executingArray[i]
+
 			if (event.source.isMarkedForDeletion())
 			{
 				event.free()
@@ -65,7 +67,11 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 			val stats = event.source.stats()
 			if (stats != null)
 			{
-
+				for (i in 0 until stats.buffs.size)
+				{
+					val buff = stats.buffs[i]
+					checkHandlers(event, buff.eventHandlers)
+				}
 			}
 
 			val eventHandler = event.source.eventHandler()
@@ -127,7 +133,14 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 			val stats = entity.stats()
 			if (stats != null)
 			{
-
+				for (i in 0 until stats.buffs.size)
+				{
+					val buff = stats.buffs[i]
+					if ((buff.eventHandlers[type]?.size ?: 0) > 0)
+					{
+						return true
+					}
+				}
 			}
 
 			val eventHandler = entity.eventHandler()

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Systems.*
@@ -47,6 +48,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 {
 	override val type: ComponentType = ComponentType.Statistics
 
+	//region hp and damage
 	var hp: Float = 0f
 		get() = field
 		private set(value)
@@ -102,17 +104,22 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 	var tookDamage = false
 	var blockedDamage = false
 	var blockBroken = false
+	//endregion
 
+	//region level buffs and equipment
 	var level: Int = 1
 	var statModifier = 0f
+	val buffs = Array<Buff>(false, 4)
+	//endregion
 
+	//region state tracking
 	var lastHitSource = Point()
-
 	var summoner: Entity? = null
 	var attackDamageDealt = 0f
 	var abilityDamageDealt = 0f
 	val damageDealt: Float
 		get() = attackDamageDealt + abilityDamageDealt
+	//endregion
 
 	override fun reset()
 	{
@@ -132,6 +139,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		messagesToShow.clear()
 		totalHpLost = 0f
 		healing = 0f
+		buffs.clear()
 	}
 
 	fun resetHP()
@@ -218,6 +226,11 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 		// apply buffs and equipment
 		var modifier = 0f
+		for (i in 0 until buffs.size)
+		{
+			val buff = buffs[i]
+			modifier += buff.statistics[statistic] ?: 0f
+		}
 
 		if (statistic.modifiersAreAdded)
 		{
@@ -271,11 +284,6 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 			return variableMap
 		}
 	}
-}
-
-class AttackDamage(val damage: Float, val wasCrit: Boolean)
-{
-
 }
 
 fun Entity.isAllies(other: Entity): Boolean

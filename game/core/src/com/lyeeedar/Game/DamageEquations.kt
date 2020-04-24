@@ -17,10 +17,10 @@ class DamageEquations
 			if (rng.nextFloat() <= critChance)
 			{
 				val mult = 1f + attackerStats.getStat(Statistic.CRIT_DAMAGE) + extraCritDam
-				return AttackDamage(mult, true)
+				return AttackDamage(mult, DamageType.NONE, true)
 			}
 
-			return AttackDamage(1f, false)
+			return AttackDamage(1f, DamageType.NONE, false)
 		}
 
 		// AttackDam = BaseAtk * 20%Modifier * CritMult
@@ -34,7 +34,7 @@ class DamageEquations
 
 			val critMult = getCritMultiplier(rng, attackerStats, extraCritChance, extraCritDam)
 
-			return AttackDamage(attack * critMult.damage * multiplier, critMult.wasCrit)
+			return AttackDamage(attack * critMult.damage * multiplier, DamageType.NONE, critMult.wasCrit)
 		}
 
 		// ArmourMitigation = Damage / (Damage + Armour)
@@ -66,18 +66,30 @@ class DamageEquations
 		}
 
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
-		fun calculateFinalDamage(attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage): Float
+		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage): Float
 		{
-			val armourMitigation = calculateArmourMitigation(defenderStats, damage)
+			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
+			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats))
+			{
+				armourMitigation = 1f
+			}
+
 			val levelSuppression = calculateLevelSuppression(attackerStats, defenderStats)
 			val dr = defenderStats.getStat(Statistic.DR)
 
 			return damage.damage * armourMitigation * (1f - dr) * levelSuppression
 		}
 
-		fun checkAegis(rng: LightRNG, stats: StatisticsComponent): Boolean
+		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent): Boolean
 		{
-			val aegisChance = stats.getStat(Statistic.AEGIS)
+			val statusChance = attackerStats.getStat(Statistic.STATUS_CHANCE)
+
+			return rng.nextFloat() < statusChance
+		}
+
+		fun checkAegis(rng: LightRNG, defenderStats: StatisticsComponent): Boolean
+		{
+			val aegisChance = defenderStats.getStat(Statistic.AEGIS)
 			if (aegisChance > 0f && rng.nextFloat() < aegisChance)
 			{
 				return true
@@ -112,10 +124,15 @@ class DamageEquations
 			}
 
 			// apply modified dam
-			val finalDam = calculateFinalDamage(attackerStats, defenderStats, damage)
+			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage)
 			defenderStats.damage(finalDam, damage.wasCrit)
 
 			// add final dam to stuff
+			if (shouldApplyStatus(rng, attackerStats))
+			{
+				damage.type.applyStatus(rng, attacker, defender, finalDam, world)
+			}
+
 			attackerStats.attackDamageDealt += finalDam
 			if (attackerStats.summoner != null)
 			{
@@ -179,4 +196,9 @@ class DamageEquations
 			}
 		}
 	}
+}
+
+class AttackDamage(val damage: Float, var type: DamageType, val wasCrit: Boolean)
+{
+
 }
