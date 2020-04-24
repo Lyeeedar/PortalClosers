@@ -12,7 +12,10 @@ import java.util.*
 @DataFile(icon = "Sprites/GUI/Buff.png")
 class Buff : XmlDataClass()
 {
+	@DataNeedsLocalisation(file = "Buffs")
 	lateinit var name: String
+
+	@DataNeedsLocalisation(file = "Buffs")
 	lateinit var description: String
 	var icon: Sprite? = null
 

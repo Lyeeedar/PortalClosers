@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "162436256258",
-    "firebase_url": "https://templategame-515f9.firebaseio.com",
-    "project_id": "templategame-515f9",
-    "storage_bucket": "templategame-515f9.appspot.com"
+    "project_number": "586936110412",
+    "firebase_url": "https://portalclosers.firebaseio.com",
+    "project_id": "portalclosers",
+    "storage_bucket": "portalclosers.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:162436256258:android:72fb7d9997a2e4fee60d1b",
+        "mobilesdk_app_id": "1:586936110412:android:ea484d1d9de87a709213e9",
         "android_client_info": {
-          "package_name": "com.lyeeedar.template"
+          "package_name": "com.lyeeedar.portalclosers"
         }
       },
       "oauth_client": [
         {
-          "client_id": "162436256258-95vkghbtuc3q5mp5epqdu0vrtv4cvi63.apps.googleusercontent.com",
+          "client_id": "586936110412-3reu267ck7snmhr7nj95gsshem31omg9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBpLsEZ8eRG82ZvubpjwRqRG1dQb3ADsZw"
+          "current_key": "AIzaSyAZBmn64Z-pXfs3NPt6v0_UZ2j2LRQHEbc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "162436256258-95vkghbtuc3q5mp5epqdu0vrtv4cvi63.apps.googleusercontent.com",
+              "client_id": "586936110412-3reu267ck7snmhr7nj95gsshem31omg9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
