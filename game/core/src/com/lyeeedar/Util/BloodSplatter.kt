@@ -36,7 +36,6 @@ class BloodSplatter
 			sprite.baseScale[1] = sprite.baseScale[0]
 			sprite.rotation = Random.random(Random.sharedRandom, 180f)
 			sprite.colour = Colour(1f, 0.6f + Random.random(Random.sharedRandom, 0.2f), 0.6f + Random.random(Random.sharedRandom, 0.2f), 0.4f + Random.random(Random.sharedRandom, 0.2f))
-			sprite.animationBlocksUpdate = false
 
 			val entity = bloodArchetype.build()
 
@@ -49,6 +48,7 @@ class BloodSplatter
 
 			val animDur = 0.1f + 0.15f * dist
 			sprite.animation = LeapAnimation.obtain().set(animDur, arrayOf(vector * -1f, Vector2()), 0.1f + 0.1f * dist)
+			sprite.animation!!.isBlocking = false
 
 			world.addEntity(entity)
 		}

@@ -16,6 +16,7 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	Name({ NameComponent(NameComponentData()) }),
 	Position({ PositionComponent(PositionComponentData()) }),
 	Renderable({ RenderableComponent(RenderableComponentData()) }),
+	Task({ TaskComponent() }),
 	Transient({ TransientComponent() }),
 
 	// Game
