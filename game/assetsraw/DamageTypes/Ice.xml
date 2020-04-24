@@ -1,0 +1,27 @@
+<ActionSequence xmlns:meta="Editor">
+	<Actions>
+		<Timeline>
+			<AttachParticle>
+				<Duration LockDuration="False">0.297869027</Duration>
+				<classID>AttachParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>IceShard</Name>
+				</Particle>
+				<Key>ice</Key>
+				<KillOnEnd>true</KillOnEnd>
+			</AttachParticle>
+		</Timeline>
+		<Timeline>
+			<Stun>
+				<Time>0.09368583</Time>
+				<classID>Stun</classID>
+				<Count>2</Count>
+			</Stun>
+			<BlockTurn>
+				<Time>0.148076922</Time>
+				<classID>BlockTurn</classID>
+				<Turns>2</Turns>
+			</BlockTurn>
+		</Timeline>
+	</Actions>
+</ActionSequence>

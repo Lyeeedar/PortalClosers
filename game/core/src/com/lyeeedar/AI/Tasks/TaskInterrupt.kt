@@ -12,8 +12,6 @@ class TaskInterrupt : AbstractTask()
 {
 	override fun execute(e: Entity, world: World, rng: LightRNG)
 	{
-		//e.task().ai.cancel(e)
-
 		var interrupted = false
 		val activeAbility = e.actionSequence()
 		if (activeAbility != null && activeAbility.actionSequence!!.cancellable)

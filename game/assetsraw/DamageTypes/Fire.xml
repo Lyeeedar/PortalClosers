@@ -1,0 +1,34 @@
+<ActionSequence xmlns:meta="Editor">
+	<Actions>
+		<Timeline>
+			<AttachParticle>
+				<Duration LockDuration="False">0.233333334</Duration>
+				<classID>AttachParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>Fire</Name>
+				</Particle>
+				<Key>fire</Key>
+			</AttachParticle>
+		</Timeline>
+		<Timeline>
+			<Repeat>
+				<Time>0.0333333351</Time>
+				<Duration LockDuration="False">0.15</Duration>
+				<classID>Repeat</classID>
+				<Count>5</Count>
+			</Repeat>
+		</Timeline>
+		<Timeline>
+			<Damage>
+				<Time>0.109669842</Time>
+				<classID>Damage</classID>
+				<Damage>source.damage * 0.3</Damage>
+				<Type>None</Type>
+			</Damage>
+			<BlockTurn>
+				<Time>0.08094021</Time>
+				<classID>BlockTurn</classID>
+			</BlockTurn>
+		</Timeline>
+	</Actions>
+</ActionSequence>

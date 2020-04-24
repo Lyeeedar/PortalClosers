@@ -21,13 +21,13 @@
 	</Definition>
 	<Definition Name="ConnectRooms" Nullable="False" TextColour="212,140,22" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">ConnectRooms</Const>
-		<Data Name="PathStyle" EnumValues="STRAIGHT,WANDERING" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="PathStyle" EnumValues="Straight,Wandering" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="RoomName" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Central" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 		<Data Name="Side" Keys="CorridorFeature" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="CorridorFeature" Nullable="False" TextColour="149,149,204" meta:RefKey="StructDef">
-		<Data Name="PlacementMode" EnumValues="BOTH,TOP,BOTTOM,ALTERNATE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="PlacementMode" EnumValues="Both,Top,Bottom,Alternate" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Interval" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
 	</Definition>
@@ -63,7 +63,7 @@
 	</Definition>
 	<Definition Name="Filter" Nullable="False" TextColour="193,49,199" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Filter</Const>
-		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Mode" EnumValues="Relative,Absolute" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
 		<Data Name="CenterDist" Type="Int" Default="2" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
@@ -90,7 +90,7 @@
 	</Definition>
 	<Definition Name="Repeat" Nullable="False" TextColour="81,154,245" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Repeat</Const>
-		<Data Name="RemainderMode" EnumValues="NODE,PAD,EXPAND" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="RemainderMode" EnumValues="Node,Pad,Expand" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
@@ -102,14 +102,14 @@
 	</Definition>
 	<Definition Name="Scale" Nullable="False" TextColour="112,109,201" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Scale</Const>
-		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Mode" EnumValues="Relative,Absolute" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="XEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="YEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
-		<Data Name="Snap" EnumValues="CENTER,NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Snap" EnumValues="Center,North,South,East,West,Northeast,Northwest,Southeast,Southwest" SkipIfDefault="False" meta:RefKey="Enum" />
 	</Definition>
 	<Definition Name="SelectNamedArea" Nullable="False" TextColour="255,196,0" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">SelectNamedArea</Const>
-		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Mode" EnumValues="Relative,Absolute" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="CountExp" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
@@ -121,7 +121,7 @@
 		<Data Name="Overwrite" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="Split" Nullable="False" TextColour="8,226,226" meta:RefKey="StructDef">
-		<Data Name="Side" EnumValues="NORTH,SOUTH,EAST,WEST,EDGE,REMAINDER" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Side" EnumValues="North,South,East,West,Edge,Remainder" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
 	</Definition>
@@ -135,7 +135,7 @@
 	</Definition>
 	<Definition Name="SquidlibDungeonGenerator" Nullable="False" TextColour="89,255,11" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">SquidlibDungeonGenerator</Const>
-		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="TilesetType" EnumValues="Default_dungeon,Caves_limit_connectivity,Caves_tiny_corridors,Corner_caves,Horizontal_corridors_a,Horizontal_corridors_b,Horizontal_corridors_c,Limit_connectivity_fat,Limited_connectivity,Maze_a,Maze_b,Open_areas,Reference_caves,Rooms_and_corridors_a,Rooms_and_corridors_b,Rooms_limit_connectivity,Round_rooms_diagonal_corridors,Simple_caves,Square_rooms_with_random_rects" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Water" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Grass" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Traps" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
@@ -146,7 +146,7 @@
 	</Definition>
 	<Definition Name="SquidlibFlowingCaveGenerator" Nullable="False" TextColour="89,255,11" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">SquidlibFlowingCaveGenerator</Const>
-		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="TilesetType" EnumValues="Default_dungeon,Caves_limit_connectivity,Caves_tiny_corridors,Corner_caves,Horizontal_corridors_a,Horizontal_corridors_b,Horizontal_corridors_c,Limit_connectivity_fat,Limited_connectivity,Maze_a,Maze_b,Open_areas,Reference_caves,Rooms_and_corridors_a,Rooms_and_corridors_b,Rooms_limit_connectivity,Round_rooms_diagonal_corridors,Simple_caves,Square_rooms_with_random_rects" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="RoomChance" Type="Float" Default="0.0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Overwrite" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
@@ -166,7 +166,7 @@
 	</Definition>
 	<Definition Name="SquidlibSectionGenerator" Nullable="False" TextColour="89,255,11" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">SquidlibSectionGenerator</Const>
-		<Data Name="TilesetType" EnumValues="DEFAULT_DUNGEON,CAVES_LIMIT_CONNECTIVITY,CAVES_TINY_CORRIDORS,CORNER_CAVES,HORIZONTAL_CORRIDORS_A,HORIZONTAL_CORRIDORS_B,HORIZONTAL_CORRIDORS_C,LIMIT_CONNECTIVITY_FAT,LIMITED_CONNECTIVITY,MAZE_A,MAZE_B,OPEN_AREAS,REFERENCE_CAVES,ROOMS_AND_CORRIDORS_A,ROOMS_AND_CORRIDORS_B,ROOMS_LIMIT_CONNECTIVITY,ROUND_ROOMS_DIAGONAL_CORRIDORS,SIMPLE_CAVES,SQUARE_ROOMS_WITH_RANDOM_RECTS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="TilesetType" EnumValues="Default_dungeon,Caves_limit_connectivity,Caves_tiny_corridors,Corner_caves,Horizontal_corridors_a,Horizontal_corridors_b,Horizontal_corridors_c,Limit_connectivity_fat,Limited_connectivity,Maze_a,Maze_b,Open_areas,Reference_caves,Rooms_and_corridors_a,Rooms_and_corridors_b,Rooms_limit_connectivity,Round_rooms_diagonal_corridors,Simple_caves,Square_rooms_with_random_rects" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Water" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Lake" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Maze" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
@@ -202,7 +202,7 @@
 	</Definition>
 	<Definition Name="Take" Nullable="False" TextColour="214,86,219" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Take</Const>
-		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Mode" EnumValues="Relative,Absolute" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="CountExp" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Node" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
 		<Data Name="Remainder" Keys="MapGeneratorNode" Nullable="True" SkipIfDefault="True" meta:RefKey="GraphReference" />
@@ -211,6 +211,6 @@
 		<Const Name="classID">Translate</Const>
 		<Data Name="XEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="YEqn" SkipIfDefault="False" Default="1" meta:RefKey="String" />
-		<Data Name="Mode" EnumValues="RELATIVE,ABSOLUTE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Mode" EnumValues="Relative,Absolute" SkipIfDefault="False" meta:RefKey="Enum" />
 	</Definition>
 </Definitions>

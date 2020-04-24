@@ -1,0 +1,28 @@
+<Buff xmlns:meta="Editor">
+	<Name>Bleed</Name>
+	<Description>You bleed whenever you move</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Icons/bleeding-wound</Name>
+		<Colour>255,0,0,255</Colour>
+	</Icon>
+	<Statistics />
+	<EventHandlers>
+		<Move>
+			<EventAndCondition>
+				<Condition>1</Condition>
+				<Sequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<Damage>
+								<classID>Damage</classID>
+								<Damage>source.damage * 0.2</Damage>
+								<Type>Pure</Type>
+							</Damage>
+						</Timeline>
+					</Actions>
+				</Sequence>
+			</EventAndCondition>
+		</Move>
+	</EventHandlers>
+	<IsPositive>false</IsPositive>
+</Buff>

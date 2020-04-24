@@ -1,0 +1,12 @@
+<Buff xmlns:meta="Editor">
+	<Name>Acid</Name>
+	<Description>Acid is eating away at your armour</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Icons/defensedown</Name>
+	</Icon>
+	<Statistics>
+		<Armour>-0.1</Armour>
+	</Statistics>
+	<EventHandlers />
+	<IsPositive>false</IsPositive>
+</Buff>

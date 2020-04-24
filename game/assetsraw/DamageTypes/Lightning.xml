@@ -1,0 +1,51 @@
+<ActionSequence xmlns:meta="Editor">
+	<Actions>
+		<Timeline>
+			<SelectEntities>
+				<Time>0.00171517592</Time>
+				<classID>SelectEntities</classID>
+				<Mode>Enemies</Mode>
+				<Count>1</Count>
+				<Condition>random</Condition>
+				<Minimum>false</Minimum>
+				<AllowSelf>false</AllowSelf>
+				<AllowCurrent>false</AllowCurrent>
+			</SelectEntities>
+			<FlightParticle>
+				<Time>0.0245842</Time>
+				<Duration LockDuration="False">0.166943863</Duration>
+				<classID>FlightParticle</classID>
+				<Particle meta:RefKey="ParticleEffectTemplate">
+					<Base meta:RefKey="ParticleEffect">
+						<Name>FlightParticle</Name>
+					</Base>
+					<Overrides>
+						<OverrideTexture>
+							<Name>EffectSprites/Bolt/Bolt_0</Name>
+							<Texture meta:RefKey="Texture">
+								<File>EffectSprites/LightningBoltMove/LightningBolt_2</File>
+							</Texture>
+						</OverrideTexture>
+					</Overrides>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</FlightParticle>
+			<SpawnOneShotParticle>
+				<Time>0.198910385</Time>
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>LightningBurst</Name>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</SpawnOneShotParticle>
+		</Timeline>
+		<Timeline>
+			<Damage>
+				<Time>0.233528256</Time>
+				<classID>Damage</classID>
+				<Damage>damage*0.4</Damage>
+				<Type>None</Type>
+			</Damage>
+		</Timeline>
+	</Actions>
+</ActionSequence>

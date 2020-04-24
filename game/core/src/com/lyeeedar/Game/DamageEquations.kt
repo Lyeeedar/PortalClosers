@@ -65,6 +65,11 @@ class DamageEquations
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
 		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): Float
 		{
+			if (damage.type == DamageType.PURE)
+			{
+				return damage.damage
+			}
+
 			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
 			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats, bonusStatusChance))
 			{

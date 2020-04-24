@@ -14,6 +14,7 @@ import squidpony.squidmath.LightRNG
 enum class DamageType
 {
 	NONE,
+	PURE, // completely ignore all mitigation
 	FIRE, // applies damage dot
 	ICE, // freezes target in place for a number of turns
 	LIGHTNING, // chance to chain damage to a nearby target
@@ -28,6 +29,7 @@ enum class DamageType
 			return when(this)
 			{
 				NONE -> ""
+				PURE -> ""
 				FIRE -> Localisation.getText("damagetype.fire", "UI")
 				ICE -> Localisation.getText("damagetype.ice", "UI")
 				LIGHTNING -> Localisation.getText("damagetype.lightning", "UI")
@@ -44,6 +46,7 @@ enum class DamageType
 			return when(this)
 			{
 				NONE -> ""
+				PURE -> ""
 				FIRE -> Localisation.getText("damagetype.fire.description", "UI")
 				ICE -> Localisation.getText("damagetype.ice.description", "UI")
 				LIGHTNING -> Localisation.getText("damagetype.lightning.description", "UI")
@@ -64,6 +67,7 @@ enum class DamageType
 		when (this)
 		{
 			NONE -> {}
+			PURE -> {}
 			FIRE -> applyFire(attacker, defender, attackDamage, world)
 			ICE -> applyIce(attacker, defender, attackDamage, world)
 			LIGHTNING -> applyLightning(attacker, defender, attackDamage, world)

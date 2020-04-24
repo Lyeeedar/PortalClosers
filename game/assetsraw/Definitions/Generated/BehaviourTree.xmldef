@@ -6,6 +6,9 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourActionDefs" Keys="Branch,ClearValue,Datascope,Import,Node" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Branch,ClearValue,Datascope,Import,Node,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
 	<Definition Name="Branch" Nullable="False" TextColour="238,94,94" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Branch</Const>
 		<Data Name="Branches" Keys="ConditionAndNode" meta:RefKey="Collection" />
@@ -38,7 +41,7 @@
 	</Definition>
 	<Definition Name="RunUntilState" DefKey="AbstractBehaviourActionDefs" Background="78,204,204" HasAttributes="True" meta:RefKey="GraphCollectionDef">
 		<Attributes meta:RefKey="Attributes">
-			<Data Name="TargetState" EnumValues="COMPLETED,RUNNING,FAILED" SkipIfDefault="False" meta:RefKey="Enum" />
+			<Data Name="TargetState" EnumValues="Completed,Running,Failed" SkipIfDefault="False" meta:RefKey="Enum" />
 		</Attributes>
 	</Definition>
 </Definitions>

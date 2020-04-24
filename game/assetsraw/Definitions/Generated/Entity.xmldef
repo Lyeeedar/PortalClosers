@@ -17,10 +17,10 @@
 	</Definition>
 	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
 		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="Type" EnumValues="NONE,FIRE,ICE,LIGHTNING,VORPAL,POISON,BLEED,ACID,val niceName: String,get,return when,NONE -> "",FIRE -> Localisation.getText,ICE -> Localisation.getText,LIGHTNING -> Localisation.getText,VORPAL -> Localisation.getText,POISON -> Localisation.getText,BLEED -> Localisation.getText,ACID -> Localisation.getText" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
-		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="FlightEffect" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
@@ -33,10 +33,6 @@
 	</Definition>
 	<Definition Name="Empty" Nullable="False" TextColour="52,227,52" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Empty</Const>
-	</Definition>
-	<Definition Name="EventAndCondition" Nullable="False" TextColour="208,113,113" meta:RefKey="StructDef">
-		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
-		<Data Name="Sequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="EventHandler" Nullable="False" TextColour="79,251,251" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">EventHandler</Const>
@@ -70,7 +66,7 @@
 	</Definition>
 	<Definition Name="Position" Nullable="False" TextColour="2,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Position</Const>
-		<Data Name="Slot" EnumValues="FLOOR,FLOORDETAIL,WALL,WALLDETAIL,BELOWENTITY,ENTITY,ABOVEENTITY,EFFECT,LIGHT" Default="ENTITY" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Slot" EnumValues="Floor,Floordetail,Wall,Walldetail,Belowentity,Entity,Aboveentity,Effect,Light" Default="Entity" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>

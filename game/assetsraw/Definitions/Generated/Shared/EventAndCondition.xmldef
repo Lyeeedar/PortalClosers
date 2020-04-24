@@ -1,0 +1,6 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="EventAndCondition" Nullable="False" TextColour="208,113,113" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Sequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+</Definitions>

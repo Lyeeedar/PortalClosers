@@ -4,13 +4,12 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.XmlDataClass
-import com.lyeeedar.Util.getXml
 import java.util.*
 
+@DataFile(icon = "Sprites/GUI/Buff.png")
 class Buff : XmlDataClass()
 {
 	lateinit var name: String
