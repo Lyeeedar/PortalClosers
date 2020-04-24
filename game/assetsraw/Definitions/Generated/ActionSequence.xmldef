@@ -40,9 +40,10 @@
 	<Definition Name="Damage" Nullable="False" TextColour="204,164,204" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Damage</Const>
 		<Data Name="Damage" SkipIfDefault="False" Default="1" meta:RefKey="String" />
-		<Data Name="BonusLifesteal" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Type" EnumValues="NONE,FIRE,ICE,LIGHTNING,VORPAL,POISON,BLEED,ACID,val niceName: String,get,return when,NONE -> "",FIRE -> Localisation.getText,ICE -> Localisation.getText,LIGHTNING -> Localisation.getText,VORPAL -> Localisation.getText,POISON -> Localisation.getText,BLEED -> Localisation.getText,ACID -> Localisation.getText" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="BonusCritChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="BonusCritDamage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="BonusStatusChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="FlightParticle" Nullable="False" TextColour="230,9,230" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">FlightParticle</Const>

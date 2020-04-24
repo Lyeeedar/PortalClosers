@@ -21,7 +21,7 @@ class TaskSystem(world: World) : AbstractTaskSystem(world)
 
 			if (task is TaskMove)
 			{
-				val fleet = stats.getStat(Statistic.FLEETFOOT)
+				val fleet = stats.getStat(Statistic.FLEET_FOOT)
 				speed += fleet
 			}
 			else if (task is TaskAttack)

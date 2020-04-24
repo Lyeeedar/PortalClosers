@@ -17,6 +17,7 @@
 	</Definition>
 	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
 		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Type" EnumValues="NONE,FIRE,ICE,LIGHTNING,VORPAL,POISON,BLEED,ACID,val niceName: String,get,return when,NONE -> "",FIRE -> Localisation.getText,ICE -> Localisation.getText,LIGHTNING -> Localisation.getText,VORPAL -> Localisation.getText,POISON -> Localisation.getText,BLEED -> Localisation.getText,ACID -> Localisation.getText" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
@@ -81,18 +82,21 @@
 		<Const Name="classID">Statistics</Const>
 		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->
-			<Data Name="Maxhp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Max_hp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Offense-->
-			<Data Name="Power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Critchance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Critdamage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Atk_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Ability_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Status_chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Crit_chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Crit_damage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Defense-->
+			<Data Name="Armour" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Regeneration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Lifesteal" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Aegis" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Buff-->
 			<Data Name="Haste" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Fleetfoot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Fleet_foot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Dervish" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Negative-->
 			<Data Name="Root" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />

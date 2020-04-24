@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.AttackDamage
 import com.lyeeedar.Game.DamageEquations
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
@@ -99,7 +100,10 @@ class TaskAttack : AbstractTask()
 			{
 				for (entity in entitiesToHit)
 				{
-					val dam = DamageEquations.getAttackDam(rng, e.stats()!!, stats.data.attackDefinition.damage)
+					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
+					val baseAttack = e.stats()!!.getStat(Statistic.ATK_POWER) * stats.data.attackDefinition.damage
+
+					val dam = DamageEquations.getAttackDam(rng, e.stats()!!, AttackDamage(baseAttack, stats.data.attackDefinition.type))
 					DamageEquations.doAttack(rng, e, entity, dam, world)
 				}
 			}, delay)

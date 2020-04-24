@@ -44,16 +44,14 @@ class HealAction : AbstractOneShotActionSequenceAction()
 					map.clear()
 					sourceStats.write(map, "self")
 					targetstats.write(map, "target")
+					state.writeVariables(map)
 
-					var healModifier = amount.evaluate(map)
-					//healModifier += healModifier * sourceStats.getStat(Statistic.ABILITYPOWER)
+					var healing = amount.evaluate(map)
+					healing += healing * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					val power = sourceStats.getStat(Statistic.POWER)
-					val healing = power * healModifier
 					targetstats.heal(healing)
 
 					state.source.stats()!!.healing += healing
-
 					if (state.source.stats()!!.summoner != null)
 					{
 						state.source.stats()!!.summoner!!.stats()!!.healing += healing

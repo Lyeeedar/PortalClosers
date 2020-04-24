@@ -4,9 +4,12 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClass
 import com.lyeeedar.Util.getXml
+import java.util.*
 
 class Buff : XmlDataClass()
 {
@@ -33,4 +36,46 @@ class Buff : XmlDataClass()
 			return buff
 		}
 	}
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		name = xmlData.get("Name")
+		description = xmlData.get("Description")
+		icon = AssetManager.tryLoadSprite(xmlData.getChildByName("Icon"))
+		duration = xmlData.getInt("Duration", 5)
+		val statisticsEl = xmlData.getChildByName("Statistics")
+		if (statisticsEl != null)
+		{
+			for (el in statisticsEl.children)
+			{
+				val enumVal = Statistic.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				statistics[enumVal] = el.float()
+			}
+		}
+		val eventHandlersEl = xmlData.getChildByName("EventHandlers")
+		if (eventHandlersEl != null)
+		{
+			for (el in eventHandlersEl.children)
+			{
+				val enumVal = EventType.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val objeventHandlers: Array<EventAndCondition> = Array()
+				val objeventHandlersEl = xmlData.getChildByName("EventHandlers")
+				if (objeventHandlersEl != null)
+				{
+					for (el in objeventHandlersEl.children)
+					{
+						val objobjeventHandlers: EventAndCondition
+						val objobjeventHandlersEl = xmlData.getChildByName("EventHandlers")!!
+						objobjeventHandlers = EventAndCondition()
+						objobjeventHandlers.load(objobjeventHandlersEl)
+						objeventHandlers.add(objobjeventHandlers)
+					}
+				}
+				eventHandlers[enumVal] = objeventHandlers
+			}
+		}
+		isPositive = xmlData.getBoolean("IsPositive", true)
+	}
+	//endregion
 }

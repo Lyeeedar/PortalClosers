@@ -42,7 +42,7 @@ class RenderSystem(world: World) : AbstractRenderSystem(world)
 			val totalWidth = pos.data.size.toFloat() * 0.95f
 
 			val hp = stats.hp
-			val maxhp = stats.getStat(Statistic.MAXHP)
+			val maxhp = stats.getStat(Statistic.MAX_HP)
 
 			val solidSpaceRatio = 0.05f
 			val space = totalWidth

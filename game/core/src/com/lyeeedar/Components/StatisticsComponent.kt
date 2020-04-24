@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Game.Buff
+import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Systems.*
@@ -197,15 +198,19 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 	fun get(key: String): Float
 	{
-		val key = key.toLowerCase()
+		val key = key.toLowerCase(Locale.ENGLISH)
 		if (key == "hp")
 		{
 			return hp
 		}
+		else if (key == "damage")
+		{
+			return getStat(Statistic.ATK_POWER) * data.attackDefinition.damage
+		}
 
 		for (stat in Statistic.Values)
 		{
-			if (stat.toString().toLowerCase() == key)
+			if (stat.toString().toLowerCase(Locale.ENGLISH) == key)
 			{
 				return getStat(stat)
 			}
@@ -254,14 +259,17 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 	fun write(variableMap: ObjectFloatMap<String>, prefixName: String? = null): ObjectFloatMap<String>
 	{
-		val prefix = if (prefixName != null) "$prefixName.".toLowerCase() else ""
+		val prefix = if (prefixName != null) "$prefixName.".toLowerCase(Locale.ENGLISH) else ""
 
 		variableMap.put(prefix + "hp", hp)
 		variableMap.put(prefix + "level", level.toFloat())
 
+		val attack = getStat(Statistic.ATK_POWER) * data.attackDefinition.damage
+		variableMap.put(prefix + "damage", attack)
+
 		for (stat in Statistic.Values)
 		{
-			variableMap.put(prefix + stat.toString().toLowerCase(), getStat(stat))
+			variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), getStat(stat))
 		}
 
 		return variableMap
@@ -275,10 +283,11 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 			val prefix = if (prefixName != null) "$prefixName." else ""
 
 			variableMap.put(prefix + "hp", 0f)
+			variableMap.put(prefix + "damage", 0f)
 
 			for (stat in Statistic.Values)
 			{
-				variableMap.put(prefix + stat.toString().toLowerCase(), 0f)
+				variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), 0f)
 			}
 
 			return variableMap
@@ -342,6 +351,7 @@ class MessageData()
 class AttackDefinition : XmlDataClass()
 {
 	var damage: Float = 1f
+	lateinit var type: DamageType
 	var range: Int = 1
 	var hitEffect: ParticleEffectDescription? = null
 	var flightEffect: ParticleEffectDescription? = null
@@ -350,6 +360,7 @@ class AttackDefinition : XmlDataClass()
 	override fun load(xmlData: XmlData)
 	{
 		damage = xmlData.getFloat("Damage", 1f)
+		type = DamageType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
 		range = xmlData.getInt("Range", 1)
 		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
 		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))

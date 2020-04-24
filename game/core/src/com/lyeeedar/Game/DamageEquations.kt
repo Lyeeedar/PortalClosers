@@ -24,17 +24,14 @@ class DamageEquations
 		}
 
 		// AttackDam = BaseAtk * 20%Modifier * CritMult
-		fun getAttackDam(rng: LightRNG, attackerStats: StatisticsComponent, multiplier: Float, extraCritChance: Float = 0f, extraCritDam: Float = 0f): AttackDamage
+		fun getAttackDam(rng: LightRNG, attackerStats: StatisticsComponent, baseAttack: AttackDamage, extraCritChance: Float = 0f, extraCritDam: Float = 0f): AttackDamage
 		{
-			// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
-			val baseAttack = attackerStats.getStat(Statistic.ATK_POWER)
-
 			val modifier = rng.randomWeighted() * 0.2f // 20% range, weighted to 0
-			val attack = baseAttack * (1f + modifier)
+			val attack = baseAttack.damage * (1f + modifier)
 
 			val critMult = getCritMultiplier(rng, attackerStats, extraCritChance, extraCritDam)
 
-			return AttackDamage(attack * critMult.damage * multiplier, DamageType.NONE, critMult.wasCrit)
+			return AttackDamage(attack * critMult.damage, baseAttack.type, critMult.wasCrit)
 		}
 
 		// ArmourMitigation = Damage / (Damage + Armour)
@@ -66,10 +63,10 @@ class DamageEquations
 		}
 
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
-		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage): Float
+		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): Float
 		{
 			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
-			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats))
+			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats, bonusStatusChance))
 			{
 				armourMitigation = 1f
 			}
@@ -80,9 +77,9 @@ class DamageEquations
 			return damage.damage * armourMitigation * (1f - dr) * levelSuppression
 		}
 
-		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent): Boolean
+		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent, bonusStatusChance: Float): Boolean
 		{
-			val statusChance = attackerStats.getStat(Statistic.STATUS_CHANCE)
+			val statusChance = attackerStats.getStat(Statistic.STATUS_CHANCE) + bonusStatusChance
 
 			return rng.nextFloat() < statusChance
 		}
@@ -98,7 +95,7 @@ class DamageEquations
 			return false
 		}
 
-		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World)
+		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World, bonusStatusChance: Float = 0f)
 		{
 			val defenderPos = defender.pos()!!.position
 			val defenderStats = defender.stats()!!
@@ -124,11 +121,11 @@ class DamageEquations
 			}
 
 			// apply modified dam
-			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage)
+			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage, bonusStatusChance)
 			defenderStats.damage(finalDam, damage.wasCrit)
 
 			// add final dam to stuff
-			if (shouldApplyStatus(rng, attackerStats))
+			if (shouldApplyStatus(rng, attackerStats, bonusStatusChance))
 			{
 				damage.type.applyStatus(rng, attacker, defender, finalDam, world)
 			}
@@ -198,7 +195,7 @@ class DamageEquations
 	}
 }
 
-class AttackDamage(val damage: Float, var type: DamageType, val wasCrit: Boolean)
+class AttackDamage(val damage: Float, var type: DamageType, val wasCrit: Boolean = false)
 {
 
 }
