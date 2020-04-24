@@ -33,3 +33,4 @@ gambeson
 debuff
 debuffs
 vampiric
+Vorpal

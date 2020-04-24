@@ -21,9 +21,9 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 {
 	enum class Mode
 	{
-		Allies,
-		Enemies,
-		Any
+		ALLIES,
+		ENEMIES,
+		ANY
 	}
 	lateinit var mode: Mode
 
@@ -94,14 +94,14 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 						}
 					}
 
-					if (mode == Mode.Allies)
+					if (mode == Mode.ALLIES)
 					{
 						if (entity.isAllies(state.source))
 						{
 							entities.add(entity)
 						}
 					}
-					else if (mode == Mode.Enemies)
+					else if (mode == Mode.ENEMIES)
 					{
 						if (entity.isEnemies(state.source))
 						{

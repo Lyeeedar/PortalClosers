@@ -4,6 +4,7 @@
 	<Icon meta:RefKey="Sprite">
 		<Name>Icons/defensedown</Name>
 	</Icon>
+	<Duration>10</Duration>
 	<Statistics>
 		<Armour>-0.1</Armour>
 	</Statistics>

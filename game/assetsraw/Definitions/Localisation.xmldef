@@ -1,0 +1,19 @@
+<Definitions Colour="252,236,193" Icon="Sprites/Oryx/Custom/items/paper.png" xmlns:meta="Editor">
+	<Definition Name="Localisation" meta:RefKey="Collection">
+		<Data Name="Text" HasAttributes="True" meta:RefKey="String">
+			<Attributes meta:RefKey="Attributes">
+				<Attribute Name="ID" meta:RefKey="String" />
+				<Attribute Name="TranslateType" EnumValues="None,Auto,Manual" Default="None" meta:RefKey="Enum" />
+				<Attribute Name="TranslatedHash" meta:RefKey="String" />
+			</Attributes>
+		</Data>
+	</Definition>
+	<Definition Name="Languages" meta:RefKey="Collection">
+		<Data Name="Language" meta:RefKey="Struct">
+			<Data Name="Code" meta:RefKey="String" />
+			<Data Name="Name" meta:RefKey="String" />
+			<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="IsAutoTranslated" meta:RefKey="Boolean" />
+		</Data>
+	</Definition>
+</Definitions>
