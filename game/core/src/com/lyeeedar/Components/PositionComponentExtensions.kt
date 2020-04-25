@@ -3,6 +3,7 @@ package com.lyeeedar.Components
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Util.Point
 
 var PositionComponent.tile: Tile?
@@ -74,14 +75,14 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 	val tiles = com.badlogic.gdx.utils.Array<Tile>(1)
 	for (i in 0 until data.size)
 	{
-		val t = tile.world.grid.tryGet(tile, sx + xstep * i, sy + ystep * i, null) ?: continue
+		val t = tile.world.grid.tryGet(tile, sx + xstep * i, sy + ystep * i, null) as? Tile ?: continue
 		tiles.add(t)
 	}
 
 	return tiles
 }
 
-fun PositionComponent.isValidTile(t: Tile, entity: Entity): Boolean
+fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity): Boolean
 {
 	for (x in 0 until data.size)
 	{
@@ -125,7 +126,7 @@ fun PositionComponent.addToTile(entity: Entity)
 	}
 }
 
-fun PositionComponent.doMove(t: Tile, entity: Entity)
+fun PositionComponent.doMove(t: AbstractTile, entity: Entity)
 {
 	removeFromTile(entity)
 

@@ -53,7 +53,7 @@ class TaskMove : AbstractTask()
 			world.eventSystem()?.addEvent(eventData)
 		}
 
-		if (pos.position is Tile)
+		if (pos.position is AbstractTile)
 		{
 			val prev = (pos.position as Tile)
 			val next = world.grid.tryGet(prev, direction, null) ?: return

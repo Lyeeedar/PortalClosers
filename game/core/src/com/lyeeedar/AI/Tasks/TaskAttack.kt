@@ -8,7 +8,6 @@ import com.lyeeedar.Direction
 import com.lyeeedar.Game.AttackDamage
 import com.lyeeedar.Game.DamageEquations
 import com.lyeeedar.Game.Statistic
-import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.SpaceSlot
@@ -18,10 +17,10 @@ import squidpony.squidmath.LightRNG
 
 class TaskAttack : AbstractTask()
 {
-	lateinit var tile: Tile
+	lateinit var tile: AbstractTile
 	lateinit var attackDefinition: AttackDefinition
 
-	fun set(tile: Tile, attackDefinition: AttackDefinition): TaskAttack
+	fun set(tile: AbstractTile, attackDefinition: AttackDefinition): TaskAttack
 	{
 		this.tile = tile
 		this.attackDefinition = attackDefinition
