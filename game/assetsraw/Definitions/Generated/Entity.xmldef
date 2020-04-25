@@ -9,18 +9,18 @@
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
-			<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="Renderable" Keys="Renderable" meta:RefKey="Reference" />
 		</Data>
 		<Data Name="Above" meta:RefKey="Collection">
-			<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="Renderable" Keys="Renderable" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
 		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="HitEffect" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
-		<Data Name="FlightEffect" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
+		<Data Name="FlightEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>

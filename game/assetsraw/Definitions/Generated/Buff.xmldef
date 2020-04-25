@@ -2,7 +2,7 @@
 	<Definition Name="Buff" Nullable="False" TextColour="236,236,152" meta:RefKey="Struct">
 		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Buffs" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Buffs" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="Icon" Keys="Sprite" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Icon" Keys="Sprite" meta:RefKey="Reference" />
 		<Data Name="Duration" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->

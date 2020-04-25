@@ -40,9 +40,16 @@ class HateComponent : NonDataComponent()
 
 	fun degradeHate()
 	{
-		for (key in hateMap.keys())
+		val itr = hateMap.iterator()
+		while (itr.hasNext)
 		{
-			hateMap[key] = max(hateMap[key, 0f] - 1f, 0f)
+			val pair = itr.next()
+			pair.value -= max(1f, pair.value / 4f)
+
+			if (pair.value <= 0f)
+			{
+				itr.remove()
+			}
 		}
 	}
 

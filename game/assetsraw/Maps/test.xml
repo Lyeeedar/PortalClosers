@@ -1,0 +1,105 @@
+<MapGenerator meta:X="0" meta:Y="0" GUID="32167423-9f75-49a4-b94a-2f5339766086" xmlns:meta="Editor">
+	<BaseSize>30,30</BaseSize>
+	<Root meta:RefKey="MapGeneratorNode">70821707-e34c-48f1-a4b8-9ed700c26155</Root>
+	<NodeMap>
+		<MapGeneratorNode meta:X="315" meta:Y="-30" GUID="70821707-e34c-48f1-a4b8-9ed700c26155">
+			<Child>
+				<classID>Node</classID>
+				<Child meta:RefKey="MapGeneratorNode">3324ec76-5fd2-496d-8656-bacc7abfe575</Child>
+			</Child>
+			<SquidlibOrganicMapGenerator>
+				<classID>SquidlibOrganicMapGenerator</classID>
+			</SquidlibOrganicMapGenerator>
+			<FindRooms>
+				<classID>FindRooms</classID>
+				<RoomName>rooms</RoomName>
+				<CorridorName>corridors</CorridorName>
+			</FindRooms>
+			<ConnectRooms>
+				<classID>ConnectRooms</classID>
+				<PathStyle>Wandering</PathStyle>
+				<RoomName>rooms</RoomName>
+			</ConnectRooms>
+			<SelectNamedArea>
+				<classID>SelectNamedArea</classID>
+				<Mode>Random</Mode>
+				<CountExp>1</CountExp>
+				<Name>rooms</Name>
+				<Node meta:RefKey="MapGeneratorNode">08bd8076-c6ac-4d55-872b-c241aed65f44</Node>
+				<Remainder meta:RefKey="MapGeneratorNode">b98c54e3-b02b-4cbf-83e1-ed85b372a15f</Remainder>
+			</SelectNamedArea>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="615" meta:Y="-60" GUID="3324ec76-5fd2-496d-8656-bacc7abfe575">
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Floor meta:RefKey="SpriteWrapper">
+						<Sprite meta:RefKey="Sprite">
+							<Name>grass</Name>
+						</Sprite>
+					</Floor>
+					<Content />
+				</SymbolDef>
+			</DefineSymbol>
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Char>#</Char>
+					<Wall meta:RefKey="SpriteWrapper">
+						<Sprite meta:RefKey="RenderedLayeredSprite">
+							<Layers>
+								<Layer>
+									<Name>grass</Name>
+								</Layer>
+								<Layer>
+									<Name>Oryx/Custom/terrain/tree1</Name>
+									<DrawActualSize>true</DrawActualSize>
+								</Layer>
+							</Layers>
+						</Sprite>
+					</Wall>
+					<Content />
+				</SymbolDef>
+			</DefineSymbol>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="780" meta:Y="135" GUID="08bd8076-c6ac-4d55-872b-c241aed65f44">
+			<Filter>
+				<classID>Filter</classID>
+				<Mode>Center</Mode>
+				<Node meta:RefKey="MapGeneratorNode">4e8ed4f2-5af3-442a-b5cb-9f7871bf6b4d</Node>
+			</Filter>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="765" meta:Y="390" GUID="b98c54e3-b02b-4cbf-83e1-ed85b372a15f">
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>3</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">94cfa4e1-5c98-466e-bc59-c0658f4eff54</Node>
+			</Take>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1043" meta:Y="390" GUID="94cfa4e1-5c98-466e-bc59-c0658f4eff54">
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Char>!</Char>
+					<Content />
+					<EnemyDescription meta:RefKey="EnemyDescription" />
+				</SymbolDef>
+			</DefineSymbol>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1057" meta:Y="135" GUID="4e8ed4f2-5af3-442a-b5cb-9f7871bf6b4d">
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>1</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">951b7ae2-c09a-4d84-aec5-ff835ef10db2</Node>
+			</Take>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1335" meta:Y="135" GUID="951b7ae2-c09a-4d84-aec5-ff835ef10db2">
+			<SetNamedArea>
+				<classID>SetNamedArea</classID>
+				<Name>playerspawn</Name>
+			</SetNamedArea>
+		</MapGeneratorNode>
+	</NodeMap>
+</MapGenerator>
