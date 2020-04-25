@@ -1,9 +1,7 @@
 package com.lyeeedar.MapGeneration
 
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.EntityData
-import com.lyeeedar.Pathfinding.IPathfindingTile
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
@@ -12,14 +10,14 @@ import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClass
 import java.util.*
 
-class Symbol: XmlDataClass(), IPathfindingTile
+class Symbol: XmlDataClass(), IMapGeneratorSymbol
 {
 	var extends: Char = ' '
-	var char: Char = '.'
+	override var char: Char = '.'
 
 	var floor: SpriteWrapper? = null
 	var wall: SpriteWrapper? = null
-	var content: FastEnumMap<SpaceSlot, EntityData> = FastEnumMap(SpaceSlot::class.java)
+	var contents: FastEnumMap<SpaceSlot, EntityData> = FastEnumMap(SpaceSlot::class.java)
 	var enemyDescription: EnemyDescription? = null
 
 	//region non-data
@@ -27,11 +25,11 @@ class Symbol: XmlDataClass(), IPathfindingTile
 	var locked = false
 	//endregion
 
-	fun evaluateExtends(symbolTable: ObjectMap<Char, Symbol>)
+	override fun evaluateExtends(symbolTable: ObjectMap<Char, IMapGeneratorSymbol>)
 	{
 		if (extends != ' ')
 		{
-			val sym = symbolTable[extends] ?: return
+			val sym = symbolTable[extends] as? Symbol ?: return
 
 			floor = floor ?: sym.floor
 			wall = wall ?: sym.wall
@@ -39,17 +37,19 @@ class Symbol: XmlDataClass(), IPathfindingTile
 
 			for (slot in SpaceSlot.Values)
 			{
-				content[slot] = content[slot] ?: sym.content[slot]
+				contents[slot] = contents[slot] ?: sym.contents[slot]
 			}
 		}
 	}
 
-	fun write(data: Symbol, overwrite: Boolean = false)
+	override fun write(other: IMapGeneratorSymbol, overwrite: Boolean)
 	{
+		val data = other as Symbol
+
 		if (overwrite)
 		{
-			content.clear()
-			content.addAll(data.content)
+			contents.clear()
+			contents.addAll(data.contents)
 
 			floor = data.floor
 			wall = data.wall
@@ -59,7 +59,7 @@ class Symbol: XmlDataClass(), IPathfindingTile
 		{
 			for (slot in SpaceSlot.Values)
 			{
-				content[slot] = data.content[slot] ?: content[slot]
+				contents[slot] = data.contents[slot] ?: contents[slot]
 			}
 
 			floor = data.floor ?: floor
@@ -70,14 +70,19 @@ class Symbol: XmlDataClass(), IPathfindingTile
 		char = data.char
 	}
 
-	fun clear()
+	override fun clear()
 	{
 		wall = null
 		enemyDescription = null
-		content.clear()
+		contents.clear()
 	}
 
-	fun copy(): Symbol
+	override fun isEmpty(): Boolean
+	{
+		return contents.size == 0 && wall == null && enemyDescription == null
+	}
+
+	override fun copy(): IMapGeneratorSymbol
 	{
 		val symbol = Symbol()
 		symbol.char = char
@@ -102,17 +107,17 @@ class Symbol: XmlDataClass(), IPathfindingTile
 		char = xmlData.get("Char", ".")!![0]
 		floor = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("Floor"))
 		wall = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("Wall"))
-		val contentEl = xmlData.getChildByName("Content")
-		if (contentEl != null)
+		val contentsEl = xmlData.getChildByName("Contents")
+		if (contentsEl != null)
 		{
-			for (el in contentEl.children)
+			for (el in contentsEl.children)
 			{
 				val enumVal = SpaceSlot.valueOf(el.name.toUpperCase(Locale.ENGLISH))
-				val objcontent: EntityData
-				val objcontentEl = xmlData.getChildByName("Content")!!
-				objcontent = EntityData()
-				objcontent.load(objcontentEl)
-				content[enumVal] = objcontent
+				val objcontents: EntityData
+				val objcontentsEl = xmlData.getChildByName("Contents")!!
+				objcontents = EntityData()
+				objcontents.load(objcontentsEl)
+				contents[enumVal] = objcontents
 			}
 		}
 		val enemyDescriptionEl = xmlData.getChildByName("EnemyDescription")

@@ -205,7 +205,7 @@
 		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default='.' meta:RefKey="String" />
 		<Data Name="Floor" Keys="SpriteWrapper" meta:RefKey="Reference" />
 		<Data Name="Wall" Keys="SpriteWrapper" meta:RefKey="Reference" />
-		<Data Name="Content" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+		<Data Name="Contents" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<Data Name="Floor" Keys="Entity" meta:RefKey="Reference" />
 			<Data Name="Floordetail" Keys="Entity" meta:RefKey="Reference" />
 			<Data Name="Wall" Keys="Entity" meta:RefKey="Reference" />
