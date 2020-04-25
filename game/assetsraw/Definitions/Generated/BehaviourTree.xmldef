@@ -4,11 +4,15 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="Branch,ClearValue,Datascope,Import,Node" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="Attack,Branch,ClearValue,Datascope,Import,Kill,MoveTo,Node,Wait" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Branch,ClearValue,Datascope,Import,Node,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Attack,Branch,ClearValue,Datascope,Import,Kill,MoveTo,Node,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="Attack" Nullable="False" TextColour="19,214,214" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Attack</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="Branch" Nullable="False" TextColour="238,94,94" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Branch</Const>
 		<Data Name="Branches" Keys="ConditionAndNode" meta:RefKey="Collection" />
@@ -29,6 +33,15 @@
 		<Const Name="classID">Import</Const>
 		<Data Name="Path" StripExtension="True" ResourceType="BehaviourTree" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
+	<Definition Name="Kill" Nullable="False" TextColour="17,17,204" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Kill</Const>
+	</Definition>
+	<Definition Name="MoveTo" Nullable="False" TextColour="228,18,228" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">MoveTo</Const>
+		<Data Name="Dst" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Towards" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="Node" Nullable="False" TextColour="26,204,204" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Node</Const>
 		<Data Name="Node" DefKey="AbstractBehaviourNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
@@ -43,5 +56,9 @@
 		<Attributes meta:RefKey="Attributes">
 			<Data Name="TargetState" EnumValues="Completed,Running,Failed" SkipIfDefault="False" meta:RefKey="Enum" />
 		</Attributes>
+	</Definition>
+	<Definition Name="Wait" Nullable="False" TextColour="206,206,2" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Wait</Const>
+		<Data Name="Count" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 	</Definition>
 </Definitions>

@@ -72,9 +72,13 @@ class XmlDataClassLoader
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
+				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
+				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
 				"RunUntilState" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilStateBehaviourNode()
+				"MoveTo" -> com.lyeeedar.AI.BehaviourTree.Actions.MoveToBehaviourAction()
 				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
+				"Kill" -> com.lyeeedar.AI.BehaviourTree.Actions.KillBehaviourAction()
 				"RunAll" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunAllBehaviourNode()
 				"RunUntilNotCompleted" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotCompletedBehaviourNode()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourTreeItem!")
@@ -84,11 +88,15 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
+				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
+				"MoveTo" -> com.lyeeedar.AI.BehaviourTree.Actions.MoveToBehaviourAction()
 				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
+				"Kill" -> com.lyeeedar.AI.BehaviourTree.Actions.KillBehaviourAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourAction!")
 			}
 		}

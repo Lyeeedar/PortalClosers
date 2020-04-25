@@ -20,7 +20,8 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	Transient({ TransientComponent() }),
 
 	// Game
-	Statistics({StatisticsComponent(StatisticsComponentData())});
+	Statistics({StatisticsComponent(StatisticsComponentData())}),
+	Vision({ VisionComponent() });
 
 	companion object
 	{
