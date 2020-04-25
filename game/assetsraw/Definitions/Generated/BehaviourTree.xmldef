@@ -4,11 +4,11 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="Attack,Branch,ClearValue,Datascope,Import,Kill,MoveTo,Node,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,Wait" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Attack,Branch,ClearValue,Datascope,Import,Kill,MoveTo,Node,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState,Wait" meta:RefKey="ReferenceDef" />
 	<Definition Name="Attack" Nullable="False" TextColour="19,214,214" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Attack</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
@@ -25,9 +25,23 @@
 		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Node" DefKey="AbstractBehaviourNodeDefs" UseParentDescription="True" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
 	</Definition>
+	<Definition Name="ConvertToPosition" Nullable="False" TextColour="132,204,204" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">ConvertToPosition</Const>
+		<Data Name="Input" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Output" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="Datascope" Nullable="False" TextColour="241,17,17" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Datascope</Const>
 		<Data Name="Node" DefKey="AbstractBehaviourNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="GetAgro" Nullable="False" TextColour="210,210,123" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">GetAgro</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="GetAllVisible" Nullable="False" TextColour="204,127,127" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">GetAllVisible</Const>
+		<Data Name="Type" EnumValues="Tiles" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="Import" Nullable="False" TextColour="244,117,244" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Import</Const>

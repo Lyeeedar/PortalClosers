@@ -9,6 +9,7 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
 				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
@@ -35,6 +36,7 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
@@ -68,6 +70,7 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
@@ -77,9 +80,11 @@ class XmlDataClassLoader
 				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
 				"RunUntilState" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilStateBehaviourNode()
 				"MoveTo" -> com.lyeeedar.AI.BehaviourTree.Actions.MoveToBehaviourAction()
+				"GetAllVisible" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAllVisibleBehaviourAction()
 				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
 				"Kill" -> com.lyeeedar.AI.BehaviourTree.Actions.KillBehaviourAction()
 				"RunAll" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunAllBehaviourNode()
+				"ConvertToPosition" -> com.lyeeedar.AI.BehaviourTree.Actions.ConvertToPositionBehaviourAction()
 				"RunUntilNotCompleted" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotCompletedBehaviourNode()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourTreeItem!")
 			}
@@ -90,13 +95,16 @@ class XmlDataClassLoader
 			{
 				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
+				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
 				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
 				"MoveTo" -> com.lyeeedar.AI.BehaviourTree.Actions.MoveToBehaviourAction()
+				"GetAllVisible" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAllVisibleBehaviourAction()
 				"Branch" -> com.lyeeedar.AI.BehaviourTree.Actions.BranchBehaviourAction()
 				"Kill" -> com.lyeeedar.AI.BehaviourTree.Actions.KillBehaviourAction()
+				"ConvertToPosition" -> com.lyeeedar.AI.BehaviourTree.Actions.ConvertToPositionBehaviourAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractBehaviourAction!")
 			}
 		}

@@ -9,6 +9,7 @@ import com.lyeeedar.Game.AttackDamage
 import com.lyeeedar.Game.DamageEquations
 import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
+import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.EventData
 import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
@@ -39,8 +40,10 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 		for (point in state.targets)
 		{
 			val tile = state.world.grid.tryGet(point, null) ?: continue
-			for (entity in tile.contents)
+			for (slot in SpaceSlot.EntityValues)
 			{
+				val entity = tile.contents[slot] ?: continue
+
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 

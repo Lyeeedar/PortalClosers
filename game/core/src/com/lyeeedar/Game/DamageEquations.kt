@@ -1,6 +1,5 @@
 package com.lyeeedar.Game
 
-import com.badlogic.gdx.math.MathUtils
 import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.*
@@ -128,6 +127,7 @@ class DamageEquations
 			// apply modified dam
 			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage, bonusStatusChance)
 			defenderStats.damage(finalDam, damage.wasCrit)
+			defender.hate()?.addDamageHate(attacker, defender, finalDam)
 
 			// add final dam to stuff
 			if (shouldApplyStatus(rng, attackerStats, bonusStatusChance))
