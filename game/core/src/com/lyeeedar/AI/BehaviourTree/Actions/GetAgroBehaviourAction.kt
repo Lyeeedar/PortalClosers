@@ -15,7 +15,7 @@ class GetAgroBehaviourAction : AbstractBehaviourAction()
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
 		val hate = state.entity.addOrGet(ComponentType.Hate) as HateComponent
-		val target = hate.getAgroedTarget(state.entity)
+		val target = hate.getAgroedTarget(state.entity, state.world)
 
 		if (target == null)
 		{

@@ -48,6 +48,7 @@
 			<Data Name="Crit" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Agro_changed" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<!--General events-->
 			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />

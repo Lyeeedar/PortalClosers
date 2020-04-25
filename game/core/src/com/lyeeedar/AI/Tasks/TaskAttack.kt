@@ -62,8 +62,7 @@ class TaskAttack : AbstractTask()
 		{
 			for (entity in entitiesToHit)
 			{
-				val eventData = EventData.obtain().set(EventType.ATTACK, e, entity)
-				eventSystem.addEvent(eventData)
+				eventSystem.addEvent(EventType.ATTACK, e, entity)
 			}
 		}
 

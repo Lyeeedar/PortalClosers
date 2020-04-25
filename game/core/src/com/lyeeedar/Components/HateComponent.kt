@@ -2,6 +2,7 @@ package com.lyeeedar.Components
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.max
 import com.lyeeedar.Util.set
@@ -45,7 +46,7 @@ class HateComponent : NonDataComponent()
 		}
 	}
 
-	fun getAgroedTarget(defender: Entity): Entity?
+	fun getAgroedTarget(defender: Entity, world: World): Entity?
 	{
 		val defenderPos = defender.pos()!!.position
 
@@ -70,6 +71,12 @@ class HateComponent : NonDataComponent()
 		if (bestTarget != null && lastAgroedTarget != bestTarget)
 		{
 			defender.stats()!!.addMessage("!", Colour.RED, 1f)
+
+			if (EventSystem.isEventRegistered(EventType.AGRO_CHANGED, defender))
+			{
+				val eventSystem = world.eventSystem()!!
+				eventSystem.addEvent(EventType.AGRO_CHANGED, defender, bestTarget)
+			}
 		}
 
 		lastAgroedTarget = bestTarget

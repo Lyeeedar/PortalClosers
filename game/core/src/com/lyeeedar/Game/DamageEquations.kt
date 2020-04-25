@@ -113,8 +113,7 @@ class DamageEquations
 			{
 				if (EventSystem.isEventRegistered(EventType.BLOCK, defender))
 				{
-					val eventData = EventData.obtain().set(EventType.BLOCK, defender, attacker, mapOf(Pair("damage", damage.damage)))
-					eventSystem.addEvent(eventData)
+					eventSystem.addEvent(EventType.BLOCK, defender, attacker, mapOf(Pair("damage", damage.damage)))
 				}
 
 				defenderStats.blockedDamage = true
@@ -156,8 +155,7 @@ class DamageEquations
 
 				if (EventSystem.isEventRegistered(EventType.HEALED, attacker))
 				{
-					val healEventData = EventData.obtain().set(EventType.HEALED, attacker, defender, mapOf(Pair("amount", stolenLife)))
-					eventSystem.addEvent(healEventData)
+					eventSystem.addEvent(EventType.HEALED, attacker, defender, mapOf(Pair("amount", stolenLife)))
 				}
 			}
 			else if (stolenLife < 0f)
@@ -172,29 +170,26 @@ class DamageEquations
 			{
 				if (EventSystem.isEventRegistered(EventType.CRIT, attacker))
 				{
-					val dealEventData = EventData.obtain().set(EventType.CRIT, attacker, defender, mapOf(
+					eventSystem.addEvent(EventType.CRIT, attacker, defender, mapOf(
 						Pair("damage", finalDam),
 						Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
-					eventSystem.addEvent(dealEventData)
 				}
 			}
 
 			// deal damage
 			if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, attacker))
 			{
-				val dealEventData = EventData.obtain().set(EventType.DEAL_DAMAGE, attacker, defender, mapOf(
+				eventSystem.addEvent(EventType.DEAL_DAMAGE, attacker, defender, mapOf(
 					Pair("damage", finalDam),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
-				eventSystem.addEvent(dealEventData)
 			}
 
 			// take damage
 			if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, defender))
 			{
-				val takeEventData = EventData.obtain().set(EventType.TAKE_DAMAGE, defender, attacker, mapOf(
+				eventSystem.addEvent(EventType.TAKE_DAMAGE, defender, attacker, mapOf(
 					Pair("damage", finalDam),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
-				eventSystem.addEvent(takeEventData)
 			}
 		}
 	}

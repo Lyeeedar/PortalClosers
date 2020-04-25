@@ -62,8 +62,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 					if (EventSystem.isEventRegistered(EventType.HEALED, entity))
 					{
-						val healEventData = EventData.obtain().set(EventType.HEALED, entity, state.source, mapOf(Pair("amount", healing)))
-						eventSystem.addEvent(healEventData)
+						eventSystem.addEvent(EventType.HEALED, entity, state.source, mapOf(Pair("amount", healing)))
 					}
 				}
 			}

@@ -49,8 +49,7 @@ class TaskMove : AbstractTask()
 
 		if (EventSystem.isEventRegistered(EventType.MOVE, e))
 		{
-			val eventData = EventData.obtain().set(EventType.MOVE, e, e)
-			world.eventSystem()?.addEvent(eventData)
+			world.eventSystem()?.addEvent(EventType.MOVE, e, e)
 		}
 
 		if (pos.position is AbstractTile)

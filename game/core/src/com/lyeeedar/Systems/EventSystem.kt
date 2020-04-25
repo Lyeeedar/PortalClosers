@@ -23,6 +23,7 @@ enum class EventType
 	CRIT,
 	BLOCK,
 	KILL,
+	AGRO_CHANGED,
 
 	// General events
 	DEATH,
@@ -44,7 +45,7 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 	{
 		if (isEventRegistered(EventType.ON_TURN, entity))
 		{
-			addEvent(EventData.obtain().set(EventType.ON_TURN, entity, entity))
+			addEvent(EventType.ON_TURN, entity, entity)
 		}
 	}
 
@@ -117,9 +118,9 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 		}
 	}
 
-	fun addEvent(eventData: EventData)
+	fun addEvent(type: EventType, source: Entity, target: Entity, inputVariables: Map<String, Float>? = null)
 	{
-		queuedEvents.add(eventData)
+		queuedEvents.add(EventData.obtain().set(type, source, target, inputVariables))
 	}
 
 	companion object
