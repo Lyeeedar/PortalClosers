@@ -78,6 +78,7 @@ class Buff : XmlDataClass()
 			}
 		}
 		isPositive = xmlData.getBoolean("IsPositive", true)
+		afterLoad()
 	}
 	//endregion
 }

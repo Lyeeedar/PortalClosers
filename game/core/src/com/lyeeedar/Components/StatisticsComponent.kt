@@ -16,27 +16,35 @@ import kotlin.math.sqrt
 
 class StatisticsComponentData : AbstractComponentData()
 {
-	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
+	val baseStatistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 	var faction: String = ""
 	lateinit var attackDefinition: AttackDefinition
+	var difficultyRating: DifficultyRating? = null
 
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		val statisticsEl = xmlData.getChildByName("Statistics")
-		if (statisticsEl != null)
+		val baseStatisticsEl = xmlData.getChildByName("BaseStatistics")
+		if (baseStatisticsEl != null)
 		{
-			for (el in statisticsEl.children)
+			for (el in baseStatisticsEl.children)
 			{
 				val enumVal = Statistic.valueOf(el.name.toUpperCase(Locale.ENGLISH))
-				statistics[enumVal] = el.float()
+				baseStatistics[enumVal] = el.float()
 			}
 		}
 		faction = xmlData.get("Faction", "")!!
 		val attackDefinitionEl = xmlData.getChildByName("AttackDefinition")!!
 		attackDefinition = AttackDefinition()
 		attackDefinition.load(attackDefinitionEl)
+		val difficultyRatingEl = xmlData.getChildByName("DifficultyRating")
+		if (difficultyRatingEl != null)
+		{
+			difficultyRating = DifficultyRating()
+			difficultyRating!!.load(difficultyRatingEl)
+		}
+		afterLoad()
 	}
 	override val classID: String = "Statistics"
 	//endregion
@@ -45,6 +53,8 @@ class StatisticsComponentData : AbstractComponentData()
 class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<StatisticsComponentData>(data)
 {
 	override val type: ComponentType = ComponentType.Statistics
+
+	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 
 	//region hp and damage
 	var hp: Float = 0f
@@ -140,7 +150,26 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		buffs.clear()
 	}
 
-	fun resetHP()
+	fun calculateStatistics(level: Int)
+	{
+		this.level = level
+		for (stat in Statistic.Values)
+		{
+			statistics[stat] = data.baseStatistics[stat, 0f]
+		}
+
+		val rating = data.difficultyRating
+		if (rating != null)
+		{
+			statistics[Statistic.ATK_POWER] = statistics[Statistic.ATK_POWER] + rating.calculateAttack(level)
+			statistics[Statistic.ARMOUR] = statistics[Statistic.ARMOUR] + rating.calculateArmour(level)
+			statistics[Statistic.MAX_HP] = statistics[Statistic.MAX_HP] + rating.calculateHP(level, statistics)
+		}
+
+		resetHP()
+	}
+
+	private fun resetHP()
 	{
 		hp = getStat(Statistic.MAX_HP)
 		lostHp = 0f
@@ -218,7 +247,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 	fun getStat(statistic: Statistic): Float
 	{
-		var value = data.statistics[statistic] ?: 0f
+		var value = statistics[statistic] ?: 0f
 
 		// apply stat modifier, but only to the base stats
 		if (Statistic.BaseValues.contains(statistic))
@@ -361,11 +390,12 @@ class AttackDefinition : XmlDataClass()
 		range = xmlData.getInt("Range", 1)
 		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
 		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))
+		afterLoad()
 	}
 	//endregion
 }
 
-class DifficultyRating
+class DifficultyRating : XmlDataClass()
 {
 	// Equations:
 	// raw = 100 + (20 * level)
@@ -377,7 +407,7 @@ class DifficultyRating
 	var armourFactor: Float = 0.7f
 	var damage: Float = 0.1f
 
-	fun calculateRaw(level: Int): Float
+	private fun calculateRaw(level: Int): Float
 	{
 		return 100f + 20f * level
 	}
@@ -388,7 +418,7 @@ class DifficultyRating
 		return armourFactor * raw
 	}
 
-	fun calculatePlayerHP(level: Int): Float
+	private fun calculatePlayerHP(level: Int): Float
 	{
 		return 1000f + level * 100f
 	}
@@ -411,4 +441,14 @@ class DifficultyRating
 
 		return 0.5f * (sqrt(dpt) * (sqrt(4*raw - dpt)) + dpt)
 	}
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		timeToKill = xmlData.getInt("TimeToKill", 8)
+		armourFactor = xmlData.getFloat("ArmourFactor", 0.7f)
+		damage = xmlData.getFloat("Damage", 0.1f)
+		afterLoad()
+	}
+	//endregion
 }

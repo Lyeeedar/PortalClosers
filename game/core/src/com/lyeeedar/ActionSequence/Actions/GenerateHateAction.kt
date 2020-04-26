@@ -58,6 +58,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		amount = CompiledExpression(xmlData.get("Amount"))
+		afterLoad()
 	}
 	override val classID: String = "GenerateHate"
 	//endregion

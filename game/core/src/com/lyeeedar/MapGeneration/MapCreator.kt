@@ -8,7 +8,7 @@ import com.lyeeedar.Util.*
 
 class MapCreator
 {
-	fun generateMap(path: String, faction: String, player: Entity, seed: Long): Array2D<Tile>
+	fun generateMap(path: String, faction: String, player: Entity, level: Int, seed: Long): Array2D<Tile>
 	{
 		val rng = Random.obtainTS(seed)
 		val faction = Faction.load(faction)
@@ -40,6 +40,8 @@ class MapCreator
 					val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
 					pos.position = tile
 					pos.addToTile(entity)
+
+					entity.statistics()?.calculateStatistics(level)
 				}
 
 				val enemyDesc = symbol.enemyDescription
@@ -47,12 +49,17 @@ class MapCreator
 				{
 					val faction = if (enemyDesc.faction != null) Faction.load(enemyDesc.faction!!) else faction
 
-					val entityData = if (enemyDesc.isBoss) faction.bosses.random(rng) else faction.enemies.random(rng)
-					val entity = entityData.create()
+					val sourcePool = if (enemyDesc.isBoss) faction.bosses else faction.enemies
+					val filtered = sourcePool.filter { it.levelRange.x <= level && it.levelRange.y >= level }
+
+					val entityData = filtered.random(rng)
+					val entity = entityData.entity.create()
 
 					val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
 					pos.position = tile
 					pos.addToTile(entity)
+
+					entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
 				}
 			}
 		}

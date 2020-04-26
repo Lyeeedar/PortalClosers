@@ -33,6 +33,7 @@ class WaitBehaviourAction : AbstractBehaviourAction()
 	{
 		super.load(xmlData)
 		count = CompiledExpression(xmlData.get("Count"))
+		afterLoad()
 	}
 	override val classID: String = "Wait"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

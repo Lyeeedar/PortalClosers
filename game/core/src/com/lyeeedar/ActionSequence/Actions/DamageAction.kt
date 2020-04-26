@@ -76,6 +76,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 		bonusCritChance = xmlData.getFloat("BonusCritChance", 0f)
 		bonusCritDamage = xmlData.getFloat("BonusCritDamage", 0f)
 		bonusStatusChance = xmlData.getFloat("BonusStatusChance", 0f)
+		afterLoad()
 	}
 	override val classID: String = "Damage"
 	//endregion

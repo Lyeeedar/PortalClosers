@@ -27,6 +27,11 @@
 		<Data Name="Text" SkipIfDefault="True" Default="" meta:RefKey="String" />
 		<Data Name="TurnsToShow" Type="Int" Default="-1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
+	<Definition Name="DifficultyRating" Nullable="False" TextColour="74,204,204" meta:RefKey="StructDef">
+		<Data Name="TimeToKill" Type="Int" Default="8" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="ArmourFactor" Type="Float" Default="0.7" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Damage" Type="Float" Default="0.1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
 	<Definition Name="DirectionalSprite" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>
 		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
@@ -77,7 +82,7 @@
 	</Definition>
 	<Definition Name="Statistics" Nullable="False" TextColour="204,56,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Statistics</Const>
-		<Data Name="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+		<Data Name="BaseStatistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->
 			<Data Name="Max_hp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Offense-->
@@ -102,5 +107,6 @@
 		</Data>
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
 		<Data Name="AttackDefinition" Keys="AttackDefinition" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="DifficultyRating" Keys="DifficultyRating" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

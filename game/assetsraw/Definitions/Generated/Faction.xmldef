@@ -1,6 +1,11 @@
 <Definitions Colour="250,136,136" Icon="Sprites/Oryx/uf_split/uf_heroes/rat_giant_1.png" xmlns:meta="Editor">
 	<Definition Name="Faction" Nullable="False" TextColour="75,75,209" meta:RefKey="Struct">
-		<Data Name="Enemies" Keys="Entity" meta:RefKey="Collection" />
-		<Data Name="Bosses" Keys="Entity" meta:RefKey="Collection" />
+		<Data Name="Enemies" Keys="FactionMonster" meta:RefKey="Collection" />
+		<Data Name="Bosses" Keys="FactionMonster" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="FactionMonster" Nullable="False" TextColour="48,204,204" meta:RefKey="StructDef">
+		<Data Name="Rarity" EnumValues="Common,Uncommon,Rare,Superrare,Legendary" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="LevelRange" Type="Int" NumComponents="2" SkipIfDefault="True" Default="1, 999" meta:RefKey="Vector" />
+		<Data Name="Entity" Keys="Entity" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

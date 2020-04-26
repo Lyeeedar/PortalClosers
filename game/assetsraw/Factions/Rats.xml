@@ -3,11 +3,7 @@
 		<Entity>
 			<Components>
 				<Renderable>
-					<classID>Renderable</classID>
-					<Renderable meta:RefKey="Renderables">
-						<Name>Oryx/uf_split/uf_heroes/rat</Name>
-						<DrawActualSize>true</DrawActualSize>
-					</Renderable>
+					<Renderable meta:RefKey="Renderables">Renderable</Renderable>
 				</Renderable>
 				<Name>
 					<classID>Name</classID>
@@ -20,17 +16,17 @@
 				</Position>
 				<Statistics>
 					<classID>Statistics</classID>
-					<Statistics>
-						<Max_hp>400</Max_hp>
-						<Atk_power>50</Atk_power>
-						<Armour>50</Armour>
-					</Statistics>
+					<BaseStatistics />
+					<Faction>rat</Faction>
 					<AttackDefinition meta:RefKey="AttackDefinition">
 						<Type>None</Type>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>EnemyAttacks/Claws</Name>
 						</HitEffect>
 					</AttackDefinition>
+					<DifficultyRating meta:RefKey="DifficultyRating">
+						<ArmourFactor>0.3</ArmourFactor>
+					</DifficultyRating>
 				</Statistics>
 			</Components>
 		</Entity>
@@ -52,11 +48,7 @@
 				</Position>
 				<Statistics>
 					<classID>Statistics</classID>
-					<Statistics>
-						<Max_hp>400</Max_hp>
-						<Atk_power>50</Atk_power>
-						<Armour>50</Armour>
-					</Statistics>
+					<BaseStatistics />
 					<AttackDefinition meta:RefKey="AttackDefinition">
 						<Type>None</Type>
 						<HitEffect meta:RefKey="ParticleEffect">

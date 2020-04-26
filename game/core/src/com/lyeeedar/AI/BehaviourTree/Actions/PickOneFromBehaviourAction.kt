@@ -74,6 +74,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		output = xmlData.get("Output")
 		condition = CompiledExpression(xmlData.get("Condition"), "dist,hp,level,damage")
 		minimum = xmlData.getBoolean("Minimum", true)
+		afterLoad()
 	}
 	override val classID: String = "PickOneFrom"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

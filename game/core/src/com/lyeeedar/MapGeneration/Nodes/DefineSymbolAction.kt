@@ -29,6 +29,7 @@ class DefineSymbolAction : AbstractMapGenerationAction()
 	{
 		super.load(xmlData)
 		symbolDef = xmlData.getChildByName("SymbolDef")!!
+		afterLoad()
 	}
 	override val classID: String = "DefineSymbol"
 	override fun resolve(nodes: ObjectMap<String, MapGeneratorNode>)
