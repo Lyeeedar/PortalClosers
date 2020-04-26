@@ -75,7 +75,7 @@
 	</Definition>
 	<Definition Name="ReplaceSourceRenderable" Nullable="False" TextColour="246,55,246" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">ReplaceSourceRenderable</Const>
-		<Data Name="Renderable" Keys="Renderable" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Renderable" Keys="Renderables" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="BlendDuration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="RestoreOriginal" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>

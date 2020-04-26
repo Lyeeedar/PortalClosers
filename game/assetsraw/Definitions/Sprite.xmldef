@@ -116,5 +116,5 @@
 		<Data Name="Layer2" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
 		<Data Name="Layer3" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
 	</Definition>
-	<Definition Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="Renderables" Keys="Sprite,TilingSprite,ParticleEffect" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>
