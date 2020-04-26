@@ -7,6 +7,7 @@ import com.lyeeedar.Game.addSystems
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
+import squidpony.squidmath.LightRNG
 
 class MapCreator
 {
@@ -27,8 +28,9 @@ class MapCreator
 			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 			val world = World(map)
 			world.addSystems()
+			world.rng = LightRNG(seed)
 
-			var seed = seed
+			// setup tiles base
 			for (x in 0 until map.width)
 			{
 				for (y in 0 until map.height)
@@ -36,8 +38,20 @@ class MapCreator
 					val symbol = symbolGrid[x, y]
 					val tile = map[x, y]
 
-					tile.floor = symbol.floor!!
+					tile.floor = symbol.floor
 					tile.wall = symbol.wall
+					tile.world = world
+				}
+			}
+
+			// add entities
+			var seed = seed
+			for (x in 0 until map.width)
+			{
+				for (y in 0 until map.height)
+				{
+					val symbol = symbolGrid[x, y]
+					val tile = map[x, y]
 
 					for (slot in SpaceSlot.Values)
 					{
@@ -73,12 +87,17 @@ class MapCreator
 				}
 			}
 
+			// add player
 			val playerSpawnArea = generator.namedAreas["playerspawn"][0]
 			val playerSpawnPos = playerSpawnArea.getAllPoints().random(rng)
 
 			player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
 			player.position()!!.addToTile(player)
 			player.ai()!!.state.set(player, world, 0)
+			player.addComponent(ComponentType.Task)
+			player.addComponent(ComponentType.Renderable)
+
+			world.player = player
 
 			rng.freeTS()
 
