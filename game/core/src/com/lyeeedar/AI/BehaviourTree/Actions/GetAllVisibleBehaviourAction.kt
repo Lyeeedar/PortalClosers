@@ -15,7 +15,9 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 {
 	enum class Type
 	{
-		TILES, ALLIES, ENEMIES
+		TILES,
+		ALLIES,
+		ENEMIES
 	}
 	lateinit var type: Type
 	lateinit var key: String

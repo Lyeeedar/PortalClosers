@@ -2,6 +2,7 @@ package com.lyeeedar.Components
 
 enum class ComponentType private constructor(val constructor: ()->AbstractComponent<*>)
 {
+	AI({ AIComponent(AIComponentData()) }),
 	ActionSequence({ ActionSequenceComponent() }),
 	AdditionalRenderable({ AdditionalRenderableComponent(AdditionalRenderableComponentData()) }),
 	ArchetypeBuilder({ ArchetypeBuilderComponent() }),
@@ -28,6 +29,7 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	}
 }
 
+inline fun Entity.ai(): AIComponent? = this.components[ComponentType.AI] as AIComponent?
 inline fun Entity.actionSequence(): ActionSequenceComponent? = this.components[ComponentType.ActionSequence] as ActionSequenceComponent?
 inline fun Entity.additionalRenderable(): AdditionalRenderableComponent? = this.components[ComponentType.AdditionalRenderable] as AdditionalRenderableComponent?
 inline fun Entity.archetypeBuilder(): ArchetypeBuilderComponent? = this.components[ComponentType.ArchetypeBuilder] as ArchetypeBuilderComponent?

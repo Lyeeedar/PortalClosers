@@ -73,6 +73,8 @@ class XmlDataClassLoader
 				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
+				"ProcessInput" -> com.lyeeedar.AI.BehaviourTree.Actions.ProcessInputBehaviourAction()
+				"RunUntilNotFailed" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotFailedBehaviourNode()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
 				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
@@ -99,6 +101,7 @@ class XmlDataClassLoader
 				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
+				"ProcessInput" -> com.lyeeedar.AI.BehaviourTree.Actions.ProcessInputBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
 				"PickOneFrom" -> com.lyeeedar.AI.BehaviourTree.Actions.PickOneFromBehaviourAction()
 				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
@@ -115,6 +118,7 @@ class XmlDataClassLoader
 			return when (classID)
 			{
 				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
+				"RunUntilNotFailed" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotFailedBehaviourNode()
 				"RunUntilState" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilStateBehaviourNode()
 				"RunAll" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunAllBehaviourNode()
 				"RunUntilNotCompleted" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotCompletedBehaviourNode()
@@ -134,6 +138,7 @@ class XmlDataClassLoader
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
 				"Empty" -> com.lyeeedar.Components.EmptyComponentData()
 				"Position" -> com.lyeeedar.Components.PositionComponentData()
+				"AI" -> com.lyeeedar.Components.AIComponentData()
 				"MetaRegion" -> com.lyeeedar.Components.MetaRegionComponentData()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComponentData!")
 			}

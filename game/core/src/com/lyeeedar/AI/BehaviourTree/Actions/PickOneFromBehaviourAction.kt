@@ -10,8 +10,7 @@ import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.statistics
-import com.lyeeedar.Util.DataCompiledExpression
-import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import java.lang.RuntimeException
 
@@ -20,7 +19,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 	lateinit var input: String
 	lateinit var output: String
 
-	@DataCompiledExpression(knownVariables = "dist,hp,level,damage", default = "dist")
+	@DataCompiledExpression(knownVariables = "dist,hp,level,damage,random", default = "dist")
 	lateinit var condition: CompiledExpression
 
 	var minimum: Boolean = true
@@ -42,6 +41,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 				map.clear()
 				val dist = entity.position()!!.position.taxiDist(state.entity.position()!!.position)
 				map.put("dist", dist.toFloat())
+				map.put("random", state.rng.nextFloat())
 				entity.statistics()?.write(map)
 
 				return condition.evaluate(map)
@@ -52,6 +52,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 				map.clear()
 				val dist = point.taxiDist(state.entity.position()!!.position)
 				map.put("dist", dist.toFloat())
+				map.put("random", state.rng.nextFloat())
 
 				return condition.evaluate(map)
 			}
@@ -72,7 +73,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		super.load(xmlData)
 		input = xmlData.get("Input")
 		output = xmlData.get("Output")
-		condition = CompiledExpression(xmlData.get("Condition"), "dist,hp,level,damage")
+		condition = CompiledExpression(xmlData.get("Condition"), "dist,hp,level,damage,random")
 		minimum = xmlData.getBoolean("Minimum", true)
 		afterLoad()
 	}

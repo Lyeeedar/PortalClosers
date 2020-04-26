@@ -4,11 +4,11 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,PickOneFrom,Wait" meta:RefKey="ReferenceDef" />
-	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,PickOneFrom,ProcessInput,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourNodeDefs" Keys="RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilNotFailed,RunUntilState" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,PickOneFrom,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilState,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="Attack,Branch,ClearValue,ConvertToPosition,Datascope,GetAgro,GetAllVisible,Import,Kill,MoveTo,Node,PickOneFrom,ProcessInput,RunAll,RunOneRandomly,RunUntilNotCompleted,RunUntilNotFailed,RunUntilState,Wait" meta:RefKey="ReferenceDef" />
 	<Definition Name="Attack" Nullable="False" TextColour="19,214,214" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Attack</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
@@ -40,7 +40,7 @@
 	</Definition>
 	<Definition Name="GetAllVisible" Nullable="False" TextColour="204,127,127" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">GetAllVisible</Const>
-		<Data Name="Type" EnumValues="Tiles" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Type" EnumValues="Tiles,Allies,Enemies" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="Import" Nullable="False" TextColour="244,117,244" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
@@ -64,14 +64,19 @@
 		<Const Name="classID">PickOneFrom</Const>
 		<Data Name="Input" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Output" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="Condition" SkipIfDefault="False" Default="dist" ToolTip="Known variables: dist,hp,level,damage" meta:RefKey="String" />
+		<Data Name="Condition" SkipIfDefault="False" Default="dist" ToolTip="Known variables: dist,hp,level,damage,random" meta:RefKey="String" />
 		<Data Name="Minimum" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="ProcessInput" Nullable="False" TextColour="253,253,85" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">ProcessInput</Const>
 	</Definition>
 	<Definition Name="RunAll" DefKey="AbstractBehaviourActionDefs" Background="204,28,28" meta:RefKey="GraphCollectionDef">
 	</Definition>
 	<Definition Name="RunOneRandomly" DefKey="AbstractBehaviourActionDefs" Background="26,204,26" meta:RefKey="GraphCollectionDef">
 	</Definition>
 	<Definition Name="RunUntilNotCompleted" DefKey="AbstractBehaviourActionDefs" Background="49,49,204" meta:RefKey="GraphCollectionDef">
+	</Definition>
+	<Definition Name="RunUntilNotFailed" DefKey="AbstractBehaviourActionDefs" Background="53,204,53" meta:RefKey="GraphCollectionDef">
 	</Definition>
 	<Definition Name="RunUntilState" DefKey="AbstractBehaviourActionDefs" Background="78,204,204" HasAttributes="True" meta:RefKey="GraphCollectionDef">
 		<Attributes meta:RefKey="Attributes">

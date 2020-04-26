@@ -4,11 +4,12 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Faction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
 
 class MapCreator
 {
-	fun generateMap(path: String, faction: String, player: Entity, level: Int, seed: Long): Array2D<Tile>
+	fun generateMap(path: String, faction: String, player: Entity, level: Int, seed: Long, world: World): Array2D<Tile>
 	{
 		val rng = Random.obtainTS(seed)
 		val faction = Faction.load(faction)
@@ -22,6 +23,7 @@ class MapCreator
 
 		val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 
+		var seed = seed
 		for (x in 0 until map.width)
 		{
 			for (y in 0 until map.height)
@@ -42,6 +44,7 @@ class MapCreator
 					pos.addToTile(entity)
 
 					entity.statistics()?.calculateStatistics(level)
+					entity.ai()?.state?.set(entity, world, seed++)
 				}
 
 				val enemyDesc = symbol.enemyDescription
@@ -60,6 +63,7 @@ class MapCreator
 					pos.addToTile(entity)
 
 					entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
+					entity.ai()?.state?.set(entity, world, seed++)
 				}
 			}
 		}

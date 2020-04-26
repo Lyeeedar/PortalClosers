@@ -1,62 +1,70 @@
 <Faction xmlns:meta="Editor">
 	<Enemies>
-		<Entity>
-			<Components>
-				<Renderable>
-					<Renderable meta:RefKey="Renderables">Renderable</Renderable>
-				</Renderable>
-				<Name>
-					<classID>Name</classID>
-					<Name>Mutated Rat</Name>
-					<Title></Title>
-				</Name>
-				<Position>
-					<classID>Position</classID>
-					<Slot>Entity</Slot>
-				</Position>
-				<Statistics>
-					<classID>Statistics</classID>
-					<BaseStatistics />
-					<Faction>rat</Faction>
-					<AttackDefinition meta:RefKey="AttackDefinition">
-						<Type>None</Type>
-						<HitEffect meta:RefKey="ParticleEffect">
-							<Name>EnemyAttacks/Claws</Name>
-						</HitEffect>
-					</AttackDefinition>
-					<DifficultyRating meta:RefKey="DifficultyRating">
-						<ArmourFactor>0.3</ArmourFactor>
-					</DifficultyRating>
-				</Statistics>
-			</Components>
-		</Entity>
+		<FactionMonster>
+			<Rarity>Common</Rarity>
+			<Entity meta:RefKey="Entity">
+				<Components>
+					<Position>
+						<classID>Position</classID>
+						<Slot>Entity</Slot>
+					</Position>
+					<Renderable>
+						<Renderable meta:RefKey="Renderables">Renderable</Renderable>
+					</Renderable>
+					<Statistics>
+						<classID>Statistics</classID>
+						<BaseStatistics />
+						<AttackDefinition meta:RefKey="AttackDefinition">
+							<Type>None</Type>
+							<HitEffect meta:RefKey="ParticleEffect">
+								<Name>EnemyAttacks/Claws</Name>
+							</HitEffect>
+						</AttackDefinition>
+						<DifficultyRating meta:RefKey="DifficultyRating">
+							<ArmourFactor>0.3</ArmourFactor>
+						</DifficultyRating>
+					</Statistics>
+					<AI>
+						<classID>AI</classID>
+						<AiPath>AI/testMonster</AiPath>
+					</AI>
+				</Components>
+			</Entity>
+		</FactionMonster>
 	</Enemies>
 	<Bosses>
-		<Entity>
-			<Components>
-				<Renderable>
-					<Renderable meta:RefKey="Renderables">Renderable</Renderable>
-				</Renderable>
-				<Name>
-					<classID>Name</classID>
-					<Name>Mutated Rat</Name>
-					<Title></Title>
-				</Name>
-				<Position>
-					<classID>Position</classID>
-					<Slot>Entity</Slot>
-				</Position>
-				<Statistics>
-					<classID>Statistics</classID>
-					<BaseStatistics />
-					<AttackDefinition meta:RefKey="AttackDefinition">
-						<Type>None</Type>
-						<HitEffect meta:RefKey="ParticleEffect">
-							<Name>EnemyAttacks/Claws</Name>
-						</HitEffect>
-					</AttackDefinition>
-				</Statistics>
-			</Components>
-		</Entity>
+		<FactionMonster>
+			<Rarity>Common</Rarity>
+			<Entity meta:RefKey="Entity">
+				<Components>
+					<Position>
+						<classID>Position</classID>
+						<Slot>Entity</Slot>
+					</Position>
+					<Renderable>
+						<Renderable meta:RefKey="Renderables">Renderable</Renderable>
+					</Renderable>
+					<Statistics>
+						<classID>Statistics</classID>
+						<BaseStatistics />
+						<AttackDefinition meta:RefKey="AttackDefinition">
+							<Type>None</Type>
+							<HitEffect meta:RefKey="ParticleEffect">
+								<Name>EnemyAttacks/Claws</Name>
+							</HitEffect>
+						</AttackDefinition>
+						<DifficultyRating meta:RefKey="DifficultyRating">
+							<TimeToKill>15</TimeToKill>
+							<ArmourFactor>0.3</ArmourFactor>
+							<Damage>0.9</Damage>
+						</DifficultyRating>
+					</Statistics>
+					<AI>
+						<classID>AI</classID>
+						<AiPath>AI/testMonster</AiPath>
+					</AI>
+				</Components>
+			</Entity>
+		</FactionMonster>
 	</Bosses>
 </Faction>

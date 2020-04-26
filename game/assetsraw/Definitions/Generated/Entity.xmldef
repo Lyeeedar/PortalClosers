@@ -3,9 +3,13 @@
 		<Data Name="Extends" StripExtension="True" ResourceType="Entity" SkipIfDefault="True" Default="" meta:RefKey="File" />
 		<Data Name="Components" ChildrenAreUnique="True" DefKey="AbstractComponentDataDefs" meta:RefKey="Collection" />
 	</Definition>
+	<Definition Name="AI" Nullable="False" TextColour="228,61,228" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">AI</Const>
+		<Data Name="AiPath" StripExtension="True" ResourceType="BehaviourTree" SkipIfDefault="False" Default="" meta:RefKey="File" />
+	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AdditionalRenderable,Dialogue,DirectionalSprite,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSprite,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
