@@ -9,14 +9,14 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,Empty,EventHandler,MetaRegion,Name,Position,RenderableComponent,Statistics" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
-			<Data Name="Renderable" Keys="Renderables" meta:RefKey="Reference" />
+			<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" meta:RefKey="Reference" />
 		</Data>
 		<Data Name="Above" meta:RefKey="Collection">
-			<Data Name="Renderable" Keys="Renderables" meta:RefKey="Reference" />
+			<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
@@ -80,9 +80,9 @@
 		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="Renderable" Nullable="False" TextColour="232,27,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="RenderableComponent" Nullable="False" TextColour="232,27,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Renderable</Const>
-		<Data Name="Renderable" Keys="Renderables" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Statistics" Nullable="False" TextColour="204,56,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Statistics</Const>

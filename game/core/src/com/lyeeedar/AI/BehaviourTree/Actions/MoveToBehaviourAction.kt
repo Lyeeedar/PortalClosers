@@ -130,7 +130,6 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 		dst = xmlData.getInt("Dst", 0)
 		towards = xmlData.getBoolean("Towards", true)
 		key = xmlData.get("Key")
-		afterLoad()
 	}
 	override val classID: String = "MoveTo"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

@@ -77,7 +77,6 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 		super.load(xmlData)
 		type = Type.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
 		key = xmlData.get("Key")
-		afterLoad()
 	}
 	override val classID: String = "GetAllVisible"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

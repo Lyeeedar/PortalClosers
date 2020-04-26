@@ -44,7 +44,6 @@ class StatisticsComponentData : AbstractComponentData()
 			difficultyRating = DifficultyRating()
 			difficultyRating!!.load(difficultyRatingEl)
 		}
-		afterLoad()
 	}
 	override val classID: String = "Statistics"
 	//endregion
@@ -390,7 +389,6 @@ class AttackDefinition : XmlDataClass()
 		range = xmlData.getInt("Range", 1)
 		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
 		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))
-		afterLoad()
 	}
 	//endregion
 }
@@ -448,7 +446,6 @@ class DifficultyRating : XmlDataClass()
 		timeToKill = xmlData.getInt("TimeToKill", 8)
 		armourFactor = xmlData.getFloat("ArmourFactor", 0.7f)
 		damage = xmlData.getFloat("Damage", 0.1f)
-		afterLoad()
 	}
 	//endregion
 }

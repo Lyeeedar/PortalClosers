@@ -61,7 +61,6 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		afterLoad()
 	}
 	override val classID: String = "ProcessInput"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

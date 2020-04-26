@@ -47,7 +47,6 @@ class AttackBehaviourAction : AbstractBehaviourAction()
 	{
 		super.load(xmlData)
 		key = xmlData.get("Key")
-		afterLoad()
 	}
 	override val classID: String = "Attack"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

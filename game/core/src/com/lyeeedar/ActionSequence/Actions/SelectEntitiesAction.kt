@@ -149,7 +149,6 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		minimum = xmlData.getBoolean("Minimum", true)
 		allowSelf = xmlData.getBoolean("AllowSelf", true)
 		allowCurrent = xmlData.getBoolean("AllowCurrent", true)
-		afterLoad()
 	}
 	override val classID: String = "SelectEntities"
 	//endregion

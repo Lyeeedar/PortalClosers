@@ -36,7 +36,6 @@ class StunAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		count = xmlData.getInt("Count", 1)
-		afterLoad()
 	}
 	override val classID: String = "Stun"
 	//endregion

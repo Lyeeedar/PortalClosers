@@ -109,7 +109,6 @@ class FactionMonster : XmlDataClass()
 		val entityEl = xmlData.getChildByName("Entity")!!
 		entity = EntityData()
 		entity.load(entityEl)
-		afterLoad()
 	}
 	//endregion
 }

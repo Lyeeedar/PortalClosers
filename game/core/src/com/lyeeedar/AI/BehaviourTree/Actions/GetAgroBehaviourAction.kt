@@ -34,7 +34,6 @@ class GetAgroBehaviourAction : AbstractBehaviourAction()
 	{
 		super.load(xmlData)
 		key = xmlData.get("Key")
-		afterLoad()
 	}
 	override val classID: String = "GetAgro"
 	override fun resolve(nodes: ObjectMap<String, AbstractBehaviourNode>)

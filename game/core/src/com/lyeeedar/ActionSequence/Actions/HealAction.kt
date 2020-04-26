@@ -75,7 +75,6 @@ class HealAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		amount = CompiledExpression(xmlData.get("Amount"))
-		afterLoad()
 	}
 	override val classID: String = "Heal"
 	//endregion

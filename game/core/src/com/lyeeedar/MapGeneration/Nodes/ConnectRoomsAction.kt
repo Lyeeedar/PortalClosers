@@ -374,7 +374,6 @@ class ConnectRoomsAction : AbstractMapGenerationAction()
 			side = CorridorFeature()
 			side!!.load(sideEl)
 		}
-		afterLoad()
 	}
 	override val classID: String = "ConnectRooms"
 	override fun resolve(nodes: ObjectMap<String, MapGeneratorNode>)
@@ -404,7 +403,6 @@ class CorridorFeature : XmlDataClass()
 		placementMode = PlacementMode.valueOf(xmlData.get("PlacementMode").toUpperCase(Locale.ENGLISH))
 		interval = xmlData.getInt("Interval", 0)
 		char = xmlData.get("Char", " ")!![0]
-		afterLoad()
 	}
 	//endregion
 }

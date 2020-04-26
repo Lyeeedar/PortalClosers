@@ -126,7 +126,6 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			enemyDescription = EnemyDescription()
 			enemyDescription!!.load(enemyDescriptionEl)
 		}
-		afterLoad()
 	}
 	//endregion
 }
@@ -143,7 +142,6 @@ class EnemyDescription : XmlDataClass()
 		faction = xmlData.get("Faction", null)
 		difficulty = xmlData.getInt("Difficulty", 1)
 		isBoss = xmlData.getBoolean("IsBoss", false)
-		afterLoad()
 	}
 	//endregion
 }

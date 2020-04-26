@@ -8,9 +8,6 @@
 						<classID>Position</classID>
 						<Slot>Entity</Slot>
 					</Position>
-					<Renderable>
-						<Renderable meta:RefKey="Renderables">Renderable</Renderable>
-					</Renderable>
 					<Statistics>
 						<classID>Statistics</classID>
 						<BaseStatistics />
@@ -28,6 +25,13 @@
 						<classID>AI</classID>
 						<AiPath>AI/testMonster</AiPath>
 					</AI>
+					<RenderableComponent>
+						<classID>Renderable</classID>
+						<Renderable meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_heroes/rat</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Renderable>
+					</RenderableComponent>
 				</Components>
 			</Entity>
 		</FactionMonster>
@@ -41,9 +45,6 @@
 						<classID>Position</classID>
 						<Slot>Entity</Slot>
 					</Position>
-					<Renderable>
-						<Renderable meta:RefKey="Renderables">Renderable</Renderable>
-					</Renderable>
 					<Statistics>
 						<classID>Statistics</classID>
 						<BaseStatistics />
@@ -63,6 +64,13 @@
 						<classID>AI</classID>
 						<AiPath>AI/testMonster</AiPath>
 					</AI>
+					<RenderableComponent>
+						<classID>Renderable</classID>
+						<Renderable meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_heroes/rat</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Renderable>
+					</RenderableComponent>
 				</Components>
 			</Entity>
 		</FactionMonster>

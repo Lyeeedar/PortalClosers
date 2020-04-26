@@ -21,7 +21,6 @@ class EventAndCondition() : XmlDataClass()
 		val sequenceEl = xmlData.getChildByName("Sequence")!!
 		sequence = ActionSequence()
 		sequence.load(sequenceEl)
-		afterLoad()
 	}
 	//endregion
 }
@@ -56,7 +55,6 @@ class EventHandlerComponentData : AbstractComponentData()
 				handlers[enumVal] = objhandlers
 			}
 		}
-		afterLoad()
 	}
 	override val classID: String = "EventHandler"
 	//endregion
