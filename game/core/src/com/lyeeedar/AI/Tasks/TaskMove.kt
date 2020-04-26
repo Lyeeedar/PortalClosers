@@ -52,22 +52,13 @@ class TaskMove : AbstractTask()
 			world.eventSystem()?.addEvent(EventType.MOVE, e, e)
 		}
 
-		if (pos.position is AbstractTile)
+		val prev = pos.position
+		val next = world.grid.tryGet(prev, direction, null) ?: return
+		if (pos.isValidTile(next, e))
 		{
-			val prev = (pos.position as Tile)
-			val next = world.grid.tryGet(prev, direction, null) ?: return
+			pos.doMove(next, e)
 
-			if (pos.isValidTile(next, e))
-			{
-				pos.doMove(next, e)
-
-				e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.15f)
-			}
-		}
-		else
-		{
-			pos.position.x += direction.x
-			pos.position.y += direction.y
+			e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.15f)
 		}
 	}
 

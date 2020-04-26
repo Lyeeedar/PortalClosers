@@ -64,6 +64,8 @@ class MapCreator
 
 						entity.statistics()?.calculateStatistics(level)
 						entity.ai()?.state?.set(entity, world, seed++)
+
+						world.addEntity(entity)
 					}
 
 					val enemyDesc = symbol.enemyDescription
@@ -83,6 +85,8 @@ class MapCreator
 
 						entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
 						entity.ai()?.state?.set(entity, world, seed++)
+
+						world.addEntity(entity)
 					}
 				}
 			}
@@ -98,6 +102,8 @@ class MapCreator
 			player.addComponent(ComponentType.Renderable)
 
 			world.player = player
+
+			world.addEntity(player)
 
 			rng.freeTS()
 

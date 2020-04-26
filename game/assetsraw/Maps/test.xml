@@ -22,7 +22,7 @@
 			</ConnectRooms>
 			<SelectNamedArea>
 				<classID>SelectNamedArea</classID>
-				<Mode>Random</Mode>
+				<Mode>Smallest</Mode>
 				<CountExp>1</CountExp>
 				<Name>rooms</Name>
 				<Node meta:RefKey="MapGeneratorNode">08bd8076-c6ac-4d55-872b-c241aed65f44</Node>
@@ -38,7 +38,7 @@
 							<Name>grass</Name>
 						</Sprite>
 					</Floor>
-					<Content />
+					<Contents />
 				</SymbolDef>
 			</DefineSymbol>
 			<DefineSymbol>
@@ -58,7 +58,7 @@
 							</Layers>
 						</Sprite>
 					</Wall>
-					<Content />
+					<Contents />
 				</SymbolDef>
 			</DefineSymbol>
 		</MapGeneratorNode>
@@ -81,11 +81,17 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
+					<Extends>.</Extends>
 					<Char>!</Char>
-					<Content />
+					<Contents />
 					<EnemyDescription meta:RefKey="EnemyDescription" />
 				</SymbolDef>
 			</DefineSymbol>
+			<Fill>
+				<classID>Fill</classID>
+				<Char>!</Char>
+				<Overwrite>true</Overwrite>
+			</Fill>
 		</MapGeneratorNode>
 		<MapGeneratorNode meta:X="1057" meta:Y="135" GUID="4e8ed4f2-5af3-442a-b5cb-9f7871bf6b4d">
 			<Take>

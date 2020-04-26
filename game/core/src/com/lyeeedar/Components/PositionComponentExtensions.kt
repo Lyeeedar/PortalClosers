@@ -89,7 +89,7 @@ fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity): Boolean
 		for (y in 0 until data.size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null)
-			if (tile == null || (tile.contents.get(data.slot) != null && tile.contents.get(data.slot) != entity) || tile.contents.get(SpaceSlot.WALL) != null)
+			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(data.slot) != null && tile.contents.get(data.slot) != entity))
 			{
 				return false
 			}
