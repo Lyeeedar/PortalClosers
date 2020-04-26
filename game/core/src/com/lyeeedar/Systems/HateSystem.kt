@@ -3,7 +3,7 @@ package com.lyeeedar.Systems
 import com.lyeeedar.Components.*
 import com.lyeeedar.SpaceSlot
 
-class HateSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.Hate).get())
+class HateSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.Hate).get())
 {
 	override fun updateEntity(entity: Entity, deltaTime: Float)
 	{

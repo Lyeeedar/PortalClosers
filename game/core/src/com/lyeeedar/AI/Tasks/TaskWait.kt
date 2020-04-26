@@ -8,7 +8,7 @@ import squidpony.squidmath.LightRNG
 
 class TaskWait(): AbstractTask()
 {
-	override fun execute(e: Entity, world: World, rng: LightRNG)
+	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
 		e.directionalSprite()?.currentAnim = "wait"
 	}

@@ -1,0 +1,42 @@
+<Entity xmlns:meta="Editor">
+	<Components>
+		<AI>
+			<classID>AI</classID>
+			<AiPath>AI/player</AiPath>
+		</AI>
+		<DirectionalSpriteComponent>
+			<classID>DirectionalSprite</classID>
+			<DirectionalSprite meta:RefKey="DirectionalSprite">
+				<Animations>
+					<Animation>
+						<Name>idle</Name>
+						<Up meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_heroes/archer</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Up>
+						<Down meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_heroes/archer</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Down>
+					</Animation>
+				</Animations>
+			</DirectionalSprite>
+		</DirectionalSpriteComponent>
+		<Position>
+			<classID>Position</classID>
+			<Slot>Entity</Slot>
+		</Position>
+		<Statistics>
+			<classID>Statistics</classID>
+			<BaseStatistics>
+				<Max_hp>1000</Max_hp>
+				<Atk_power>100</Atk_power>
+				<Armour>100</Armour>
+			</BaseStatistics>
+			<Faction>player</Faction>
+			<AttackDefinition meta:RefKey="AttackDefinition">
+				<Type>None</Type>
+			</AttackDefinition>
+		</Statistics>
+	</Components>
+</Entity>

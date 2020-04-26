@@ -17,7 +17,7 @@
 				<classID>FlightParticle</classID>
 				<Particle meta:RefKey="ParticleEffectTemplate">
 					<Base meta:RefKey="ParticleEffect">
-						<Name>FlightParticle</Name>
+						<Name>Ranged/FlightParticle</Name>
 					</Base>
 					<Overrides>
 						<OverrideTexture>

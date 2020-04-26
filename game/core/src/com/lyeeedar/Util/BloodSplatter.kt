@@ -17,7 +17,7 @@ class BloodSplatter
 
 		val splatters = AssetManager.loadSprite("Oryx/Custom/terrain/bloodsplatter")
 
-		fun splatter(source: Point, target: Point, emitDist: Float, world: World)
+		fun splatter(source: Point, target: Point, emitDist: Float, world: World<*>)
 		{
 			var vector = target.toVec()
 			vector.sub(source.x.toFloat(), source.y.toFloat())

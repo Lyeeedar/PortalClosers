@@ -10,7 +10,7 @@ import squidpony.squidmath.LightRNG
 
 class TaskInterrupt : AbstractTask()
 {
-	override fun execute(e: Entity, world: World, rng: LightRNG)
+	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
 		var interrupted = false
 		val activeAbility = e.actionSequence()

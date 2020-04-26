@@ -9,7 +9,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSprite,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,Empty,EventHandler,MetaRegion,Name,Position,Renderable,Statistics" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -36,7 +36,7 @@
 		<Data Name="ArmourFactor" Type="Float" Default="0.7" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Damage" Type="Float" Default="0.1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="DirectionalSprite" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+	<Definition Name="DirectionalSpriteComponent" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>
 		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>

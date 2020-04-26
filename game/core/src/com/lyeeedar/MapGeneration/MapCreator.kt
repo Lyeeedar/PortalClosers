@@ -3,13 +3,14 @@ package com.lyeeedar.MapGeneration
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Faction
 import com.lyeeedar.Game.Tile
+import com.lyeeedar.Game.addSystems
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
 
 class MapCreator
 {
-	fun generateMap(path: String, faction: String, player: Entity, level: Int, seed: Long, world: World): Array2D<Tile>
+	fun generateWorld(path: String, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
 	{
 		val rng = Random.obtainTS(seed)
 		val faction = Faction.load(faction)
@@ -22,6 +23,8 @@ class MapCreator
 		val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
 
 		val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
+		val world = World(map)
+		world.addSystems()
 
 		var seed = seed
 		for (x in 0 until map.width)
@@ -73,9 +76,10 @@ class MapCreator
 
 		player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
 		player.position()!!.addToTile(player)
+		player.ai()!!.state.set(player, world, 0)
 
 		rng.freeTS()
 
-		return map
+		return world
 	}
 }

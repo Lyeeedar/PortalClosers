@@ -52,7 +52,7 @@ class HateComponent : NonDataComponent()
 		}
 	}
 
-	fun getAgroedTarget(defender: Entity, world: World): Entity?
+	fun getAgroedTarget(defender: Entity, world: World<*>): Entity?
 	{
 		val defenderPos = defender.position()!!.position
 

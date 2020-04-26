@@ -5,7 +5,7 @@
 				<Duration LockDuration="False">0.233333334</Duration>
 				<classID>AttachParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
-					<Name>Poison</Name>
+					<Name>StatusAndEffects/Poison</Name>
 				</Particle>
 				<Key>poison</Key>
 			</AttachParticle>

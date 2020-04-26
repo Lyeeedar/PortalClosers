@@ -5,7 +5,7 @@
 				<Duration LockDuration="False">0.297869027</Duration>
 				<classID>AttachParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
-					<Name>IceShard</Name>
+					<Name>Abilities/IceShard</Name>
 				</Particle>
 				<Key>ice</Key>
 				<KillOnEnd>true</KillOnEnd>

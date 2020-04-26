@@ -62,7 +62,7 @@ enum class DamageType
 		val Values = values()
 	}
 
-	fun applyStatus(rng: LightRNG, attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	fun applyStatus(rng: LightRNG, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		when (this)
 		{
@@ -78,39 +78,39 @@ enum class DamageType
 		}
 	}
 
-	private fun applyFire(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyFire(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		applyActionSequence("DamageTypes/Fire", attacker, defender, attackDamage, world)
 	}
 
-	private fun applyIce(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyIce(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		applyActionSequence("DamageTypes/Ice", attacker, defender, attackDamage, world)
 	}
 
-	private fun applyPoison(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyPoison(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		applyActionSequence("DamageTypes/Poison", attacker, defender, attackDamage, world)
 	}
 
-	private fun applyLightning(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyLightning(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		applyActionSequence("DamageTypes/Lightning", attacker, defender, attackDamage, world)
 	}
 
-	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Acid")
 		defender.statistics()!!.buffs.add(buff)
 	}
 
-	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Bleed")
 		defender.statistics()!!.buffs.add(buff)
 	}
 
-	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World)
+	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val actionSequence = ActionSequence.load(sequencePath)
 		val actionSequenceState = ActionSequenceState.obtain()

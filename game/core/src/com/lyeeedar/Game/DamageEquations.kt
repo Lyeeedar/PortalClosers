@@ -80,7 +80,7 @@ class DamageEquations
 			return false
 		}
 
-		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World, bonusStatusChance: Float = 0f)
+		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World<*>, bonusStatusChance: Float = 0f)
 		{
 			val defenderPos = defender.position()!!.position
 			val defenderStats = defender.statistics()!!

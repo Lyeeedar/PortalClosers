@@ -7,9 +7,9 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 
-fun World.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
+fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
 const val numHpPips = 10
-class RenderSystem(world: World) : AbstractRenderSystem(world)
+class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 {
 	val allyHpCol = Colour.GREEN.copy()
 	val enemyHpCol = Colour.RED.copy()

@@ -1,6 +1,6 @@
 package com.lyeeedar.Systems
 
-class TileSystem(world: World) : AbstractSystem(world)
+class TileSystem(world: World<*>) : AbstractSystem(world)
 {
 	override fun doUpdate(deltaTime: Float)
 	{

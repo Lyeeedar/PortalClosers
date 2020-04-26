@@ -24,7 +24,7 @@ class TaskMove : AbstractTask()
 		return this
 	}
 
-	override fun execute(e: Entity, world: World, rng: LightRNG)
+	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
 		val pos = e.position() ?: return
 		if (pos.moveLocked) return

@@ -28,7 +28,7 @@ class TaskAttack : AbstractTask()
 		return this
 	}
 
-	override fun execute(e: Entity, world: World, rng: LightRNG)
+	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
 		val pos = e.position()!!
 		val stats = e.statistics()!!

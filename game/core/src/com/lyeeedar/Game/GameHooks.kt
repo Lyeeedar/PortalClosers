@@ -1,6 +1,7 @@
 package com.lyeeedar.Game
 
 import com.lyeeedar.ScreenEnum
+import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
 
@@ -18,4 +19,19 @@ fun newGame() {
 
 fun load(): Boolean {
 	return false
+}
+
+fun World<Tile>.addSystems()
+{
+	// update
+	systems.add(TaskSystem(this))
+	systems.add(StatisticsSystem(this))
+	systems.add(TileSystem(this))
+	systems.add(HateSystem(this))
+	systems.add(EventSystem(this))
+
+	// render
+	systems.add(DialogueSystem(this))
+	systems.add(DirectionalSpriteSystem(this))
+	systems.add(RenderSystem(this))
 }

@@ -6,7 +6,7 @@ import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Statistic
 
-class TaskSystem(world: World) : AbstractTaskSystem(world)
+class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 {
 	override fun getTaskCost(entity: Entity, task: AbstractTask): Float
 	{
