@@ -46,7 +46,7 @@ class EventHandlerComponentData : AbstractComponentData()
 					for (el in objhandlersEl.children)
 					{
 						val objobjhandlers: EventAndCondition
-						val objobjhandlersEl = xmlData.getChildByName("Handlers")!!
+						val objobjhandlersEl = el
 						objobjhandlers = EventAndCondition()
 						objobjhandlers.load(objobjhandlersEl)
 						objhandlers.add(objobjhandlers)

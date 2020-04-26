@@ -68,7 +68,7 @@ class Buff : XmlDataClass()
 					for (el in objeventHandlersEl.children)
 					{
 						val objobjeventHandlers: EventAndCondition
-						val objobjeventHandlersEl = xmlData.getChildByName("EventHandlers")!!
+						val objobjeventHandlersEl = el
 						objobjeventHandlers = EventAndCondition()
 						objobjeventHandlers.load(objobjeventHandlersEl)
 						objeventHandlers.add(objobjeventHandlers)

@@ -12,6 +12,7 @@ import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import java.util.*
+import kotlin.math.sqrt
 
 class StatisticsComponentData : AbstractComponentData()
 {
@@ -362,4 +363,52 @@ class AttackDefinition : XmlDataClass()
 		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))
 	}
 	//endregion
+}
+
+class DifficultyRating
+{
+	// Equations:
+	// raw = 100 + (20 * level)
+	// armour = factor * raw
+	// hp = (dr * raw^2 * ttk) / (armour + raw)
+	// dpt=damage/ttk, atk = 0.5*(sqrt(dpt) * sqrt(4*rawarmour-dpt) + dpt)
+
+	var timeToKill: Int = 8
+	var armourFactor: Float = 0.7f
+	var damage: Float = 0.1f
+
+	fun calculateRaw(level: Int): Float
+	{
+		return 100f + 20f * level
+	}
+
+	fun calculateArmour(level: Int): Float
+	{
+		val raw = calculateRaw(level)
+		return armourFactor * raw
+	}
+
+	fun calculatePlayerHP(level: Int): Float
+	{
+		return 1000f + level * 100f
+	}
+
+	fun calculateHP(level: Int, statistics: FastEnumMap<Statistic, Float>): Float
+	{
+		val raw = calculateRaw(level)
+		val dr = 1f - (statistics.get(Statistic.DR) ?: 0f)
+		val armour = calculateArmour(level)
+
+		return (dr * raw * raw * timeToKill) / (armour + raw)
+	}
+
+	fun calculateAttack(level: Int): Float
+	{
+		val raw = calculateRaw(level)
+		val damage = this.damage * calculatePlayerHP(level)
+
+		val dpt = damage / timeToKill
+
+		return 0.5f * (sqrt(dpt) * (sqrt(4*raw - dpt)) + dpt)
+	}
 }

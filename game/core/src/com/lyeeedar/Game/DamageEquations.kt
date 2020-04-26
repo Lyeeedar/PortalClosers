@@ -43,24 +43,6 @@ class DamageEquations
 			return mitigation
 		}
 
-		// LevelSuppression =  EasingFactor / (EasingFactor + (DefenderLvl - AttackerLvl))
-		fun calculateLevelSuppression(attackerStats: StatisticsComponent, defenderStats: StatisticsComponent): Float
-		{
-			val easingFactor = 20f
-			val attackerLvl = attackerStats.level
-			val defenderLvl = defenderStats.level
-			val levelDiff = defenderLvl - attackerLvl
-
-			if (levelDiff < -easingFactor)
-			{
-				return 1f
-			}
-
-			val rawSuppresion = easingFactor / (easingFactor + levelDiff)
-
-			return min(1f, rawSuppresion)
-		}
-
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
 		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): Float
 		{
@@ -75,10 +57,9 @@ class DamageEquations
 				armourMitigation = 1f
 			}
 
-			val levelSuppression = calculateLevelSuppression(attackerStats, defenderStats)
 			val dr = defenderStats.getStat(Statistic.DR)
 
-			return damage.damage * armourMitigation * (1f - dr) * levelSuppression
+			return damage.damage * armourMitigation * (1f - dr)
 		}
 
 		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent, bonusStatusChance: Float): Boolean

@@ -1,0 +1,6 @@
+<Definitions Colour="250,136,136" Icon="Sprites/Oryx/uf_split/uf_heroes/rat_giant_1.png" xmlns:meta="Editor">
+	<Definition Name="Faction" Nullable="False" TextColour="75,75,209" meta:RefKey="Struct">
+		<Data Name="Enemies" Keys="Entity" meta:RefKey="Collection" />
+		<Data Name="Bosses" Keys="Entity" meta:RefKey="Collection" />
+	</Definition>
+</Definitions>
