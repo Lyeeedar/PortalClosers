@@ -20,9 +20,9 @@ class RenderSystem(world: World) : AbstractRenderSystem(world)
 
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
-		val pos = entity.pos()!!
+		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
-		val stats = entity.stats()
+		val stats = entity.statistics()
 		if (stats != null)
 		{
 			val px = pos.position.x.toFloat() + pos.offset.x
@@ -78,7 +78,7 @@ class RenderSystem(world: World) : AbstractRenderSystem(world)
 	override fun getPlayerPosition(): Vector2
 	{
 		val entity = world.player!!
-		val pos = entity.pos()!!
+		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
 
 		val px = pos.position.x.toFloat() + pos.offset.x

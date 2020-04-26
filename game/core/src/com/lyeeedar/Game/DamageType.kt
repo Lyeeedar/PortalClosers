@@ -4,7 +4,7 @@ import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.actionSequence
-import com.lyeeedar.Components.stats
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.Components.transientActionSequenceArchetype
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.Localisation
@@ -101,13 +101,13 @@ enum class DamageType
 	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
 	{
 		val buff = Buff.load("DamageTypes/Acid")
-		defender.stats()!!.buffs.add(buff)
+		defender.statistics()!!.buffs.add(buff)
 	}
 
 	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World)
 	{
 		val buff = Buff.load("DamageTypes/Bleed")
-		defender.stats()!!.buffs.add(buff)
+		defender.statistics()!!.buffs.add(buff)
 	}
 
 	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World)

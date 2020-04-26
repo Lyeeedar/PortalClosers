@@ -7,7 +7,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.isEnemies
-import com.lyeeedar.Components.pos
+import com.lyeeedar.Components.position
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
@@ -49,7 +49,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	{
 		variables.clear()
 		variables["random"] = rng.nextFloat()
-		variables["dist"] = entity.pos()!!.position.taxiDist(state.source.pos()!!.position).toFloat()
+		variables["dist"] = entity.position()!!.position.taxiDist(state.source.position()!!.position).toFloat()
 
 		return variables
 	}
@@ -62,7 +62,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		state.targets.clear()
 		state.lockedEntityTargets.clear()
 
-		val pos = state.source.pos()!!.position
+		val pos = state.source.position()!!.position
 
 		val xs = max(0, pos.x-radius)
 		val xe = min(state.world.grid.width, pos.x+radius)
@@ -132,7 +132,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 			if (i == sorted.size) break
 
 			val entity = sorted[i]
-			state.targets.add(entity.pos()!!.position)
+			state.targets.add(entity.position()!!.position)
 		}
 
 		return ActionState.Completed

@@ -7,7 +7,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.hate
 import com.lyeeedar.Components.isEnemies
-import com.lyeeedar.Components.stats
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.XmlData
 
@@ -34,10 +34,10 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 				hitEntities.add(entity)
 
 				val hate = entity.hate() ?: continue
-				val targetstats = entity.stats() ?: continue
+				val targetstats = entity.statistics() ?: continue
 				if (entity.isEnemies(state.source))
 				{
-					val sourceStats = state.source.stats()!!
+					val sourceStats = state.source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")

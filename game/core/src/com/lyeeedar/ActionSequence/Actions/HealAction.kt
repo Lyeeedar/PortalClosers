@@ -6,10 +6,9 @@ import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.isAllies
-import com.lyeeedar.Components.stats
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.SpaceSlot
-import com.lyeeedar.Systems.EventData
 import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Systems.eventSystem
@@ -39,10 +38,10 @@ class HealAction : AbstractOneShotActionSequenceAction()
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 
-				val targetstats = entity.stats() ?: continue
+				val targetstats = entity.statistics() ?: continue
 				if (entity.isAllies(state.source))
 				{
-					val sourceStats = state.source.stats()!!
+					val sourceStats = state.source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")
@@ -54,10 +53,10 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 					targetstats.heal(healing)
 
-					state.source.stats()!!.healing += healing
-					if (state.source.stats()!!.summoner != null)
+					state.source.statistics()!!.healing += healing
+					if (state.source.statistics()!!.summoner != null)
 					{
-						state.source.stats()!!.summoner!!.stats()!!.healing += healing
+						state.source.statistics()!!.summoner!!.statistics()!!.healing += healing
 					}
 
 					if (EventSystem.isEventRegistered(EventType.HEALED, entity))

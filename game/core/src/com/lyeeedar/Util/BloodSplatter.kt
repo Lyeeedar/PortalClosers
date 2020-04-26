@@ -42,7 +42,7 @@ class BloodSplatter
 			val renderable = entity.renderable()!!
 			renderable.data.renderable = sprite
 
-			val pos = entity.pos()!!
+			val pos = entity.position()!!
 			pos.position = target.copy()
 			pos.offset.set(vector)
 

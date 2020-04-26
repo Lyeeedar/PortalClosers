@@ -7,7 +7,6 @@ import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.max
 import com.lyeeedar.Util.set
 
-inline fun Entity.hate(): HateComponent? = this.components[ComponentType.Hate] as HateComponent?
 class HateComponent : NonDataComponent()
 {
 	override val type: ComponentType = ComponentType.Hate
@@ -27,7 +26,7 @@ class HateComponent : NonDataComponent()
 
 	fun addDamageHate(attacker: Entity, defender: Entity, amount: Float)
 	{
-		val defenderHP = defender.stats()!!.getStat(Statistic.MAX_HP)
+		val defenderHP = defender.statistics()!!.getStat(Statistic.MAX_HP)
 		val fraction = amount / defenderHP
 
 		hateMap[attacker] = hateMap[attacker, 0f] + fraction*20
@@ -55,14 +54,14 @@ class HateComponent : NonDataComponent()
 
 	fun getAgroedTarget(defender: Entity, world: World): Entity?
 	{
-		val defenderPos = defender.pos()!!.position
+		val defenderPos = defender.position()!!.position
 
 		var bestTarget: Entity? = null
 		var bestHate = -Float.MAX_VALUE
 
 		for (target in hateMap)
 		{
-			val targetPos = target.key.pos() ?: continue
+			val targetPos = target.key.position() ?: continue
 
 			val dist = defenderPos.taxiDist(targetPos.position)
 			val falloff = (10f - dist) / 10f
@@ -77,7 +76,7 @@ class HateComponent : NonDataComponent()
 
 		if (bestTarget != null && lastAgroedTarget != bestTarget)
 		{
-			defender.stats()!!.addMessage("!", Colour.RED, 1f)
+			defender.statistics()!!.addMessage("!", Colour.RED, 1f)
 
 			if (EventSystem.isEventRegistered(EventType.AGRO_CHANGED, defender))
 			{

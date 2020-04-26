@@ -5,8 +5,8 @@ import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
 import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskAttack
-import com.lyeeedar.Components.pos
-import com.lyeeedar.Components.stats
+import com.lyeeedar.Components.position
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.Components.task
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Util.Point
@@ -19,9 +19,9 @@ class AttackBehaviourAction : AbstractBehaviourAction()
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
 		val target = state.getData<Point>(key, 0)
-		val posData = state.entity.pos()
+		val posData = state.entity.position()
 		val taskData = state.entity.task()
-		val stats = state.entity.stats()
+		val stats = state.entity.statistics()
 
 		// doesnt have all the needed data, fail
 		if ( target == null || posData == null || taskData == null || stats == null )

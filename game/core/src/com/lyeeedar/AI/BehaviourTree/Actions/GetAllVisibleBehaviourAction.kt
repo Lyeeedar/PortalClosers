@@ -22,8 +22,8 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
-		val pos = state.entity.pos()
-		val stats = state.entity.stats()
+		val pos = state.entity.position()
+		val stats = state.entity.statistics()
 
 		if (pos == null || stats == null) return EvaluationState.FAILED
 
@@ -44,7 +44,7 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 				{
 					val entity = tile.contents[slot] ?: continue
 
-					if (entity.isMarkedForDeletion() || (entity.stats()?.hp ?: 0f) <= 0f) continue
+					if (entity.isMarkedForDeletion() || (entity.statistics()?.hp ?: 0f) <= 0f) continue
 
 					if (type == Type.ALLIES)
 					{

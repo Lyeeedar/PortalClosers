@@ -6,7 +6,7 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.isOnTile
-import com.lyeeedar.Components.pos
+import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
 import com.lyeeedar.Pathfinding.Pathfinder
@@ -24,7 +24,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
 		val target = state.getData<Point>(key, 0)
-		val posData = state.entity.pos()
+		val posData = state.entity.position()
 		val position = posData?.position
 		val taskData = state.entity.task()
 

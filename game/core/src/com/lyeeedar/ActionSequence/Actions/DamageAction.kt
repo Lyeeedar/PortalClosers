@@ -10,10 +10,6 @@ import com.lyeeedar.Game.DamageEquations
 import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.SpaceSlot
-import com.lyeeedar.Systems.EventData
-import com.lyeeedar.Systems.EventSystem
-import com.lyeeedar.Systems.EventType
-import com.lyeeedar.Systems.eventSystem
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
@@ -47,10 +43,10 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 
-				val targetstats = entity.stats() ?: continue
+				val targetstats = entity.statistics() ?: continue
 				if (entity.isEnemies(state.source))
 				{
-					val sourceStats = state.source.stats()!!
+					val sourceStats = state.source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")
@@ -60,7 +56,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					var damage = damage.evaluate(map)
 					damage += damage * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					val attackDam = DamageEquations.getAttackDam(rng, state.source.stats()!!, AttackDamage(damage, type), bonusCritChance, bonusCritDamage)
+					val attackDam = DamageEquations.getAttackDam(rng, state.source.statistics()!!, AttackDamage(damage, type), bonusCritChance, bonusCritDamage)
 					DamageEquations.doAttack(rng, state.source, entity, attackDam, state.world, bonusStatusChance)
 				}
 			}

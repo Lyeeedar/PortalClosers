@@ -8,13 +8,10 @@ import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
-import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
 import java.util.*
-import squidpony.squidmath.LightRNG
 
 class StatisticsComponentData : AbstractComponentData()
 {
@@ -44,7 +41,6 @@ class StatisticsComponentData : AbstractComponentData()
 	//endregion
 }
 
-inline fun Entity.stats(): StatisticsComponent? = this.components[ComponentType.Statistics] as StatisticsComponent?
 class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<StatisticsComponentData>(data)
 {
 	override val type: ComponentType = ComponentType.Statistics
@@ -297,15 +293,15 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 
 fun Entity.isAllies(other: Entity): Boolean
 {
-	val stats = stats() ?: return false
-	val ostats = other.stats() ?: return false
+	val stats = this.statistics() ?: return false
+	val ostats = other.statistics() ?: return false
 
 	return stats.data.faction == ostats.data.faction
 }
 fun Entity.isEnemies(other: Entity): Boolean
 {
-	val stats = stats() ?: return false
-	val ostats = other.stats() ?: return false
+	val stats = this.statistics() ?: return false
+	val ostats = other.statistics() ?: return false
 
 	return stats.data.faction != ostats.data.faction
 }

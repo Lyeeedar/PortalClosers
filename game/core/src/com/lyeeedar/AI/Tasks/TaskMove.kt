@@ -26,10 +26,10 @@ class TaskMove : AbstractTask()
 
 	override fun execute(e: Entity, world: World, rng: LightRNG)
 	{
-		val pos = e.pos() ?: return
+		val pos = e.position() ?: return
 		if (pos.moveLocked) return
 
-		val stats = e.stats()
+		val stats = e.statistics()
 
 		if (stats != null)
 		{
@@ -37,7 +37,7 @@ class TaskMove : AbstractTask()
 			if (root > 0f && Random.random(rng) < root)
 			{
 				val stunParticle = AssetManager.loadParticleEffect("Stunned").getParticleEffect()
-				stunParticle.addToWorld(world, e.pos()!!.position, Vector2(0f, 0.8f))
+				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
 
 				stats.addMessage("Rooted!", Colour.YELLOW, 0.4f)
 

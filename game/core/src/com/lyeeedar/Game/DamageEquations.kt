@@ -101,10 +101,10 @@ class DamageEquations
 
 		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World, bonusStatusChance: Float = 0f)
 		{
-			val defenderPos = defender.pos()!!.position
-			val defenderStats = defender.stats()!!
-			val attackerPos = attacker.pos()!!.position
-			val attackerStats = attacker.stats()!!
+			val defenderPos = defender.position()!!.position
+			val defenderStats = defender.statistics()!!
+			val attackerPos = attacker.position()!!.position
+			val attackerStats = attacker.statistics()!!
 
 			val eventSystem = world.eventSystem()!!
 
@@ -137,7 +137,7 @@ class DamageEquations
 			attackerStats.attackDamageDealt += finalDam
 			if (attackerStats.summoner != null)
 			{
-				attackerStats.summoner!!.stats()!!.attackDamageDealt += finalDam
+				attackerStats.summoner!!.statistics()!!.attackDamageDealt += finalDam
 			}
 
 			if (damage.wasCrit || Random.random(Random.sharedRandom) < 0.5f)

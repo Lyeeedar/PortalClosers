@@ -4,7 +4,7 @@ import com.lyeeedar.AI.Tasks.AbstractTask
 import com.lyeeedar.AI.Tasks.TaskAttack
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.stats
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.Components.task
 import com.lyeeedar.Game.Statistic
 
@@ -14,7 +14,7 @@ class TaskSystem(world: World) : AbstractTaskSystem(world)
 	{
 		var speed = 0f
 
-		val stats = entity.stats()
+		val stats = entity.statistics()
 		if (stats != null)
 		{
 			speed += stats.getStat(Statistic.HASTE)

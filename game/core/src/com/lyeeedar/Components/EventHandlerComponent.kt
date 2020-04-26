@@ -60,7 +60,6 @@ class EventHandlerComponentData : AbstractComponentData()
 	//endregion
 }
 
-inline fun Entity.eventHandler(): EventHandlerComponent? = this.components[ComponentType.EventHandler] as EventHandlerComponent?
 class EventHandlerComponent(data: EventHandlerComponentData) : AbstractComponent<EventHandlerComponentData>(data)
 {
 	override val type: ComponentType = ComponentType.EventHandler

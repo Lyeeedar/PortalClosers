@@ -65,7 +65,7 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 				continue
 			}
 
-			val stats = event.source.stats()
+			val stats = event.source.statistics()
 			if (stats != null)
 			{
 				for (i in 0 until stats.buffs.size)
@@ -131,7 +131,7 @@ class EventSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesF
 
 		fun isEventRegistered(type: EventType, entity: Entity): Boolean
 		{
-			val stats = entity.stats()
+			val stats = entity.statistics()
 			if (stats != null)
 			{
 				for (i in 0 until stats.buffs.size)
@@ -171,7 +171,7 @@ class EventData()
 	{
 		this.type = type
 		this.source = source
-		this.targets.add(target.pos()!!.position)
+		this.targets.add(target.position()!!.position)
 		targetEntity = target
 
 		if (inputVariables != null)
@@ -182,8 +182,8 @@ class EventData()
 			}
 		}
 
-		source.stats()?.write(variables, "self")
-		target.stats()?.write(variables, "target")
+		source.statistics()?.write(variables, "self")
+		target.statistics()?.write(variables, "target")
 
 		return this
 	}

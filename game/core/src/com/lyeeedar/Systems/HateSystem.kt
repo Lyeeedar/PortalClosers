@@ -15,7 +15,7 @@ class HateSystem(world: World) : AbstractEntitySystem(world, world.getEntitiesFo
 		val hate = entity.hate()!!
 		hate.degradeHate()
 
-		val pos = entity.pos()
+		val pos = entity.position()
 		if (pos != null)
 		{
 			for (x in -10 until 10)

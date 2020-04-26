@@ -30,8 +30,8 @@ class TaskAttack : AbstractTask()
 
 	override fun execute(e: Entity, world: World, rng: LightRNG)
 	{
-		val pos = e.pos()!!
-		val stats = e.stats()!!
+		val pos = e.position()!!
+		val stats = e.statistics()!!
 
 		val fumble = stats.getStat(Statistic.FUMBLE)
 		if (fumble > 0f && Random.random(rng) < fumble)
@@ -99,9 +99,9 @@ class TaskAttack : AbstractTask()
 				for (entity in entitiesToHit)
 				{
 					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
-					val baseAttack = e.stats()!!.getStat(Statistic.ATK_POWER) * stats.data.attackDefinition.damage
+					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.data.attackDefinition.damage
 
-					val dam = DamageEquations.getAttackDam(rng, e.stats()!!, AttackDamage(baseAttack, stats.data.attackDefinition.type))
+					val dam = DamageEquations.getAttackDam(rng, e.statistics()!!, AttackDamage(baseAttack, stats.data.attackDefinition.type))
 					DamageEquations.doAttack(rng, e, entity, dam, world)
 				}
 			}, delay)
