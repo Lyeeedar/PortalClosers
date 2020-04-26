@@ -10,76 +10,79 @@ import com.lyeeedar.Util.*
 
 class MapCreator
 {
-	fun generateWorld(path: String, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+	companion object
 	{
-		val rng = Random.obtainTS(seed)
-		val faction = Faction.load(faction)
-
-		val xml = getXml(path)
-
-		val generator = MapGenerator()
-		generator.load(xml)
-
-		val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
-
-		val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
-		val world = World(map)
-		world.addSystems()
-
-		var seed = seed
-		for (x in 0 until map.width)
+		fun generateWorld(path: String, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
 		{
-			for (y in 0 until map.height)
+			val rng = Random.obtainTS(seed)
+			val faction = Faction.load(faction)
+
+			val xml = getXml(path)
+
+			val generator = MapGenerator()
+			generator.load(xml)
+
+			val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
+
+			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
+			val world = World(map)
+			world.addSystems()
+
+			var seed = seed
+			for (x in 0 until map.width)
 			{
-				val symbol = symbolGrid[x, y]
-				val tile = map[x, y]
-
-				tile.floor = symbol.floor!!
-				tile.wall = symbol.wall
-
-				for (slot in SpaceSlot.Values)
+				for (y in 0 until map.height)
 				{
-					val entityData = symbol.contents[slot] ?: continue
-					val entity = entityData.create()
+					val symbol = symbolGrid[x, y]
+					val tile = map[x, y]
 
-					val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
-					pos.position = tile
-					pos.addToTile(entity)
+					tile.floor = symbol.floor!!
+					tile.wall = symbol.wall
 
-					entity.statistics()?.calculateStatistics(level)
-					entity.ai()?.state?.set(entity, world, seed++)
-				}
+					for (slot in SpaceSlot.Values)
+					{
+						val entityData = symbol.contents[slot] ?: continue
+						val entity = entityData.create()
 
-				val enemyDesc = symbol.enemyDescription
-				if (enemyDesc != null)
-				{
-					val faction = if (enemyDesc.faction != null) Faction.load(enemyDesc.faction!!) else faction
+						val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
+						pos.position = tile
+						pos.addToTile(entity)
 
-					val sourcePool = if (enemyDesc.isBoss) faction.bosses else faction.enemies
-					val filtered = sourcePool.filter { it.levelRange.x <= level && it.levelRange.y >= level }
+						entity.statistics()?.calculateStatistics(level)
+						entity.ai()?.state?.set(entity, world, seed++)
+					}
 
-					val entityData = filtered.random(rng)
-					val entity = entityData.entity.create()
+					val enemyDesc = symbol.enemyDescription
+					if (enemyDesc != null)
+					{
+						val faction = if (enemyDesc.faction != null) Faction.load(enemyDesc.faction!!) else faction
 
-					val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
-					pos.position = tile
-					pos.addToTile(entity)
+						val sourcePool = if (enemyDesc.isBoss) faction.bosses else faction.enemies
+						val filtered = sourcePool.filter { it.levelRange.x <= level && it.levelRange.y >= level }
 
-					entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
-					entity.ai()?.state?.set(entity, world, seed++)
+						val entityData = filtered.random(rng)
+						val entity = entityData.entity.create()
+
+						val pos = entity.addOrGet(ComponentType.Position) as PositionComponent
+						pos.position = tile
+						pos.addToTile(entity)
+
+						entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
+						entity.ai()?.state?.set(entity, world, seed++)
+					}
 				}
 			}
+
+			val playerSpawnArea = generator.namedAreas["playerspawn"][0]
+			val playerSpawnPos = playerSpawnArea.getAllPoints().random(rng)
+
+			player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
+			player.position()!!.addToTile(player)
+			player.ai()!!.state.set(player, world, 0)
+
+			rng.freeTS()
+
+			return world
 		}
-
-		val playerSpawnArea = generator.namedAreas["playerspawn"][0]
-		val playerSpawnPos = playerSpawnArea.getAllPoints().random(rng)
-
-		player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
-		player.position()!!.addToTile(player)
-		player.ai()!!.state.set(player, world, 0)
-
-		rng.freeTS()
-
-		return world
 	}
 }

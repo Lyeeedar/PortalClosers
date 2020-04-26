@@ -12,7 +12,7 @@ fun save() {
 fun newGame() {
 	Statics.settings = Settings()
 
-	Statics.game.switchScreen(ScreenEnum.EXAMPLE)
+	Statics.game.switchScreen(ScreenEnum.WORLD)
 
 	Statics.analytics.tutorialBegin()
 }

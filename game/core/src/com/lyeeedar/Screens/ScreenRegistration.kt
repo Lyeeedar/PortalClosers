@@ -9,6 +9,7 @@ val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = null
 enum class ScreenEnum
 {
 	EXAMPLE,
+	WORLD,
 	PARTICLEEDITOR,
 	INVALID
 }
@@ -30,6 +31,7 @@ fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
 	screens[ScreenEnum.EXAMPLE] = ExampleScreen()
+	screens[ScreenEnum.WORLD] = WorldScreen()
 
 	return screens
 }
