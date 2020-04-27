@@ -58,7 +58,7 @@ class TaskMove : AbstractTask()
 		{
 			pos.doMove(next, e)
 
-			e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.15f)
+			e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
 		}
 	}
 
