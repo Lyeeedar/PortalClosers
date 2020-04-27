@@ -10,13 +10,13 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 {
 	override fun getPassable(travelType: SpaceSlot, self: Any?): Boolean
 	{
-		if (travelType == SpaceSlot.LIGHT)
-		{
-			return wall == null
-		}
-
 		if (wall != null) return false
 		if (contents.get(SpaceSlot.WALL) != null) { return false; }
+
+		if (travelType == SpaceSlot.LIGHT)
+		{
+			return true
+		}
 
 		val obj = contents.get(travelType)
 		if (obj != null && obj != self)

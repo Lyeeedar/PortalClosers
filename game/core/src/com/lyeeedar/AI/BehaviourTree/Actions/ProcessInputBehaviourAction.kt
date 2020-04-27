@@ -12,6 +12,7 @@ import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
 import com.lyeeedar.Systems.renderSystem
+import com.lyeeedar.Util.Controls
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 
@@ -23,6 +24,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		val renderSystem = state.world.renderSystem() ?: return EvaluationState.FAILED
 		val pos = state.entity.position() ?: return EvaluationState.FAILED
 		val task = state.entity.task() ?: return EvaluationState.FAILED
+		if (task.tasks.size > 0) return EvaluationState.FAILED
 
 		if (Gdx.input.isTouched(0) && !Gdx.input.isTouched(1) && !Gdx.input.isTouched(2) && !Gdx.input.isTouched(3) && !Gdx.input.isTouched(4))
 		{
@@ -45,13 +47,37 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val dir = Direction.getCardinalDirection(pos.position, tile)
+				val dir = Direction.getCardinalDirection(tile, pos.position)
 				task.tasks.add(TaskMove.obtain().set(dir))
 			}
 		}
 		else
 		{
-			return EvaluationState.FAILED
+			if (Statics.controls.isKeyDown(Controls.Keys.LEFT))
+			{
+				task.tasks.add(TaskMove.obtain().set(Direction.WEST))
+			}
+			else if (Statics.controls.isKeyDown(Controls.Keys.RIGHT))
+			{
+				task.tasks.add(TaskMove.obtain().set(Direction.EAST))
+			}
+			else if (Statics.controls.isKeyDown(Controls.Keys.UP))
+			{
+				task.tasks.add(TaskMove.obtain().set(Direction.NORTH))
+			}
+			else if (Statics.controls.isKeyDown(Controls.Keys.DOWN))
+			{
+				task.tasks.add(TaskMove.obtain().set(Direction.SOUTH))
+			}
+			else if (Statics.controls.isKeyDownAndNotConsumed(Controls.Keys.WAIT))
+			{
+				Statics.controls.consumeKeyPress(Controls.Keys.WAIT)
+				task.tasks.add(TaskWait.obtain())
+			}
+			else
+			{
+				return EvaluationState.FAILED
+			}
 		}
 
 		return EvaluationState.COMPLETED
