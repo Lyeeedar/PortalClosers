@@ -18,7 +18,7 @@
 					<Lifetime>0.3,0.3</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|1|1</Keyframe>
+							<Keyframe>0|0.3|0.6</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
@@ -38,8 +38,8 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.07051282|0.7</Keyframe>
-							<Keyframe>0.8363906|0.7</Keyframe>
+							<Keyframe>0.07051282|0.5</Keyframe>
+							<Keyframe>0.8363906|0.5</Keyframe>
 							<Keyframe>0.9947731|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>

@@ -30,7 +30,7 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 		if (pos == null || stats == null) return EvaluationState.FAILED
 
 		val vision = state.entity.addOrGet(ComponentType.Vision) as VisionComponent
-		val points = vision.visionCache.getShadowCast(pos.position.x, pos.position.y, 10)
+		val points = vision.visionCache.getShadowCast(pos.position.x, pos.position.y, 6)
 
 		if (type == Type.TILES)
 		{

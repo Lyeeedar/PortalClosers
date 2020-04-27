@@ -26,6 +26,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 
 	//region non-data
 	val map = ObjectFloatMap<String>()
+	val itemSortValueMap = ObjectFloatMap<Any>()
 	//endregion
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
@@ -33,33 +34,34 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		val array = state.getData<Array<*>>(input, 0) ?: return EvaluationState.FAILED
 		if (array.size == 0) return EvaluationState.FAILED
 
-		val comparator: ((Any) -> Float) = when (array[0])
+		itemSortValueMap.clear()
+		for (item in array)
 		{
-			is Entity -> fun (item: Any): Float {
-				val entity = item as Entity
+			val sortValue = when (item)
+			{
+				is Entity -> {
+					map.clear()
+					val dist = item.position()!!.position.taxiDist(state.entity.position()!!.position)
+					map.put("dist", dist.toFloat())
+					map.put("random", state.rng.nextFloat())
+					item.statistics()?.write(map)
 
-				map.clear()
-				val dist = entity.position()!!.position.taxiDist(state.entity.position()!!.position)
-				map.put("dist", dist.toFloat())
-				map.put("random", state.rng.nextFloat())
-				entity.statistics()?.write(map)
+					condition.evaluate(map)
+				}
+				is Point -> {
+					map.clear()
+					val dist = item.taxiDist(state.entity.position()!!.position)
+					map.put("dist", dist.toFloat())
+					map.put("random", state.rng.nextFloat())
 
-				return condition.evaluate(map)
+					condition.evaluate(map)
+				}
+				else -> throw RuntimeException("Cannot pick one from array of " + item::class.java.name)
 			}
-			is Point -> fun (item: Any): Float {
-				val point = item as Point
-
-				map.clear()
-				val dist = point.taxiDist(state.entity.position()!!.position)
-				map.put("dist", dist.toFloat())
-				map.put("random", state.rng.nextFloat())
-
-				return condition.evaluate(map)
-			}
-			else -> throw RuntimeException("Cannot pick one from array of " + array[0]::class.java.name)
+			itemSortValueMap[item] = sortValue
 		}
 
-		val sorted = if (minimum) array.sortedBy(comparator) else array.sortedByDescending(comparator)
+		val sorted = if (minimum) array.sortedBy{ itemSortValueMap[it, 0f] } else array.sortedByDescending{ itemSortValueMap[it, 0f] }
 		val item = sorted.firstOrNull() ?: return EvaluationState.FAILED
 
 		state.setData(output, 0, item)

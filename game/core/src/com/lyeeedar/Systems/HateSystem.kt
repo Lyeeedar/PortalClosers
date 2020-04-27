@@ -18,20 +18,20 @@ class HateSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitie
 		val pos = entity.position()
 		if (pos != null)
 		{
-			for (x in -10 until 10)
-			{
-				for (y in -10 until 10)
-				{
-					val tile = world.grid.tryGet(pos.position, x, y, null) ?: continue
-					val dist = tile.taxiDist(pos.position)
+			val vision = entity.addOrGet(ComponentType.Vision) as VisionComponent
+			val points = vision.visionCache.getShadowCast(pos.position.x, pos.position.y, 6)
 
-					for (slot in SpaceSlot.EntityValues)
+			for (point in points)
+			{
+				val tile = world.grid.tryGet(point, null) ?: continue
+				val dist = tile.taxiDist(pos.position)
+
+				for (slot in SpaceSlot.EntityValues)
+				{
+					val other = tile.contents[slot] ?: continue
+					if (other.isEnemies(entity))
 					{
-						val other = tile.contents[slot] ?: continue
-						if (other.isEnemies(entity))
-						{
-							hate.addProximityHate(other, dist)
-						}
+						hate.addProximityHate(other, dist)
 					}
 				}
 			}

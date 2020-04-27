@@ -45,4 +45,8 @@ class AIComponent(data: AIComponentData) : AbstractComponent<AIComponentData>(da
 
 	}
 
+	override fun onAddedToEntity(entity: Entity)
+	{
+		entity.addComponent(ComponentType.Task)
+	}
 }
