@@ -87,7 +87,7 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		var ax = px
 		var ay = py
 
-		val offset = renderable.animation?.renderOffset(false)
+		val offset = renderable.animation?.renderOffset(true)
 		if (offset != null)
 		{
 			ax += offset[0]

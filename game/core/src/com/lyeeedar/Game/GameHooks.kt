@@ -34,4 +34,7 @@ fun World<Tile>.addSystems()
 	systems.add(DialogueSystem(this))
 	systems.add(DirectionalSpriteSystem(this))
 	systems.add(RenderSystem(this))
+
+	// cleanup
+	systems.add(DeletionSystem(this))
 }

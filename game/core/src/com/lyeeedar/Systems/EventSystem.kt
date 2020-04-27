@@ -96,7 +96,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 				if (handler.condition.evaluate(eventData.variables) != 0f)
 				{
 					val sequence = handler.sequence
-					val state = ActionSequenceState()
+					val state = ActionSequenceState.obtain()
 					state.set(eventData.source, world)
 					state.targets.clear()
 					state.targets.addAll(eventData.targets)

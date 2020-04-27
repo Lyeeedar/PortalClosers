@@ -36,6 +36,11 @@
 			<Faction>player</Faction>
 			<AttackDefinition meta:RefKey="AttackDefinition">
 				<Type>None</Type>
+				<Range>4</Range>
+				<FlightEffect meta:RefKey="ParticleEffect">
+					<Name>Ranged/Arrow</Name>
+					<KillOnAnimComplete>true</KillOnAnimComplete>
+				</FlightEffect>
 			</AttackDefinition>
 		</Statistics>
 	</Components>
