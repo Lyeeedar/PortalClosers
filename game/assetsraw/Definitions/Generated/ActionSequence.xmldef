@@ -7,14 +7,14 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Data Name="Duration" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="Meta(Repeat),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Animation" Nullable="False" TextColour="35,35,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Animation</Const>
 		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash" SkipIfDefault="False" meta:RefKey="Enum" />
@@ -106,6 +106,9 @@
 		<Data Name="Coverage" SkipIfDefault="False" Default="count" ToolTip="Known variables: count" meta:RefKey="String" />
 		<Data Name="Radius" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="EmptyOnly" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="SetSourcePoint" Nullable="False" TextColour="247,176,78" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">SetSourcePoint</Const>
 	</Definition>
 	<Definition Name="SpawnOneShotParticle" Nullable="False" TextColour="204,204,167" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">SpawnOneShotParticle</Const>

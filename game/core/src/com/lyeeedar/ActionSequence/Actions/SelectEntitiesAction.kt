@@ -4,10 +4,7 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
-import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.isAllies
-import com.lyeeedar.Components.isEnemies
-import com.lyeeedar.Components.position
+import com.lyeeedar.Components.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
@@ -72,6 +69,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		val ys = max(0, pos.y-radius)
 		val ye = min(state.world.grid.height, pos.y+radius)
 
+		entities.clear()
 		val rng = Random.obtainTS(state.seed++)
 		itemSortValueMap.clear()
 		for (x in xs until xe)
@@ -90,7 +88,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 				for (slot in SpaceSlot.EntityValues)
 				{
 					val entity = tile.contents[slot]?.get() ?: continue
-					if (entity.position() == null) continue
+					if (entity.position() == null || entity.isMarkedForDeletion() || (entity.statistics()?.hp ?: 0f) <= 0f) continue
 
 					if (!allowSelf)
 					{
@@ -149,7 +147,8 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 			if (i == sorted.size) break
 
 			val entity = sorted[i]
-			state.targets.add(entity.position()!!.position)
+			val pos = entity.position()?.position ?: continue
+			state.targets.add(pos)
 		}
 
 		return ActionState.Completed

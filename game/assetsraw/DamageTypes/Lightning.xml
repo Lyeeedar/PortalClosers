@@ -1,7 +1,11 @@
 <ActionSequence xmlns:meta="Editor">
 	<Actions>
 		<Timeline>
+			<SetSourcePoint>
+				<classID>SetSourcePoint</classID>
+			</SetSourcePoint>
 			<SelectEntities>
+				<Time>0.006560651</Time>
 				<classID>SelectEntities</classID>
 				<Mode>Enemies</Mode>
 				<Count>1</Count>
