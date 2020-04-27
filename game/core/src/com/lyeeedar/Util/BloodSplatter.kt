@@ -39,8 +39,7 @@ class BloodSplatter
 
 			val entity = bloodArchetype.build()
 
-			val renderable = entity.renderable()!!
-			renderable.data.renderable = sprite
+			entity.renderable()?.set(sprite)
 
 			val pos = entity.position()!!
 			pos.position = target.copy()
