@@ -98,6 +98,8 @@ class TaskAttack : AbstractTask()
 			{
 				for (entity in entitiesToHit)
 				{
+					if (entity.isMarkedForDeletion()) continue
+
 					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
 					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.data.attackDefinition.damage
 

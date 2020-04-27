@@ -47,7 +47,7 @@ class BloodSplatter
 			pos.offset.set(vector)
 
 			val animDur = 0.1f + 0.15f * dist
-			sprite.animation = LeapAnimation.obtain().set(animDur, arrayOf(vector * -1f, Vector2()), 0.1f + 0.1f * dist)
+			sprite.animation = LeapAnimation.obtain().set(animDur, vector * -1f, Vector2(), 0.1f + 0.1f * dist)
 			sprite.animation!!.isBlocking = false
 
 			world.addEntity(entity)

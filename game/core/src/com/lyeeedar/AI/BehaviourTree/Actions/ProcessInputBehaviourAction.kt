@@ -18,6 +18,7 @@ import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.renderSystem
+import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Controls
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
@@ -39,15 +40,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		var moveDir: Direction? = null
 		if (Gdx.input.isTouched(0) && !Gdx.input.isTouched(1) && !Gdx.input.isTouched(2) && !Gdx.input.isTouched(3) && !Gdx.input.isTouched(4))
 		{
-			val touchX = Gdx.input.x
-			val touchY = Gdx.input.y
-
-			val mousePos: Vector3 = Statics.stage.camera.unproject(Vector3(touchX.toFloat(), touchY.toFloat(), 0f))
-
-			val mousePosX = mousePos.x.toInt()
-			val mousePosY = mousePos.y.toInt()
-
-			val tile = renderSystem.getClickTile(mousePosX, mousePosY) ?: return EvaluationState.FAILED
+			val tile = RenderSystemWidget.instance.selectedPoint ?: return EvaluationState.FAILED
 
 			if (tile == pos.position)
 			{

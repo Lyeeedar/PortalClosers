@@ -26,7 +26,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		skipRenderEntities = !visible.currentValue && !visible.targetValue
 
 		val prevHash = renderCol.hashCode()
-		renderCol.set(Colour.WHITE)
+		renderCol.set(tileCol)
 		renderCol.mul(seen.alpha)
 		renderCol.mul(0.5f + 0.5f * visible.alpha)
 
