@@ -30,6 +30,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
+		val source = state.source.get()!!
+
 		val rng = Random.obtainTS(state.seed++)
 
 		hitEntities.clear()
@@ -38,15 +40,15 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 			val tile = state.world.grid.tryGet(point, null) ?: continue
 			for (slot in SpaceSlot.EntityValues)
 			{
-				val entity = tile.contents[slot] ?: continue
+				val entity = tile.contents[slot]?.get() ?: continue
 
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 
 				val targetstats = entity.statistics() ?: continue
-				if (entity.isEnemies(state.source))
+				if (entity.isEnemies(source))
 				{
-					val sourceStats = state.source.statistics()!!
+					val sourceStats = source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")
@@ -56,8 +58,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					var damage = damage.evaluate(map)
 					damage += damage * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					val attackDam = DamageEquations.getAttackDam(rng, state.source.statistics()!!, AttackDamage(damage, type), bonusCritChance, bonusCritDamage)
-					DamageEquations.doAttack(rng, state.source, entity, attackDam, state.world, bonusStatusChance)
+					val attackDam = DamageEquations.getAttackDam(rng, source.statistics()!!, AttackDamage(damage, type), bonusCritChance, bonusCritDamage)
+					DamageEquations.doAttack(rng, source, entity, attackDam, state.world, bonusStatusChance)
 				}
 			}
 		}

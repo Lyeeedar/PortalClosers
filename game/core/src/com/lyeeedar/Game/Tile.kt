@@ -46,7 +46,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 			return true
 		}
 
-		val obj = contents.get(travelType)
+		val obj = contents.get(travelType)?.get()
 		if (obj != null && obj != self)
 		{
 			if (self is Entity)
@@ -65,7 +65,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 
 	override fun getInfluence(travelType: SpaceSlot, self: Any?): Int
 	{
-		val obj = contents.get(travelType)
+		val obj = contents.get(travelType)?.get()
 		if (obj != null && obj != self)
 		{
 			if (self is Entity)

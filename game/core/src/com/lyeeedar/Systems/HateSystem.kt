@@ -28,7 +28,7 @@ class HateSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitie
 
 				for (slot in SpaceSlot.EntityValues)
 				{
-					val other = tile.contents[slot] ?: continue
+					val other = tile.contents[slot]?.get() ?: continue
 					if (other.isEnemies(entity))
 					{
 						hate.addProximityHate(other, dist)

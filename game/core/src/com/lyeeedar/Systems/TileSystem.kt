@@ -35,6 +35,15 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 						}
 					}
 				}
+
+				for (slot in SpaceSlot.Values)
+				{
+					val entity = tile.contents[slot]
+					if (entity != null && !entity.isValid())
+					{
+						tile.contents.remove(slot)
+					}
+				}
 			}
 		}
 	}
@@ -83,7 +92,7 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 
 				for (slot in SpaceSlot.EntityValues)
 				{
-					val entity = tile.contents[slot] ?: continue
+					val entity = tile.contents[slot]?.get() ?: continue
 					val pos = entity.position()
 					if (pos != null)
 					{

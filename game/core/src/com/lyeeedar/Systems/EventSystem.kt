@@ -45,7 +45,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 	{
 		if (isEventRegistered(EventType.ON_TURN, entity))
 		{
-			addEvent(EventType.ON_TURN, entity, entity)
+			addEvent(EventType.ON_TURN, EntityReference(entity), EntityReference(entity))
 		}
 	}
 
@@ -59,13 +59,14 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		{
 			val event = executingArray[i]
 
-			if (event.source.isMarkedForDeletion())
+			val source = event.source.get()
+			if (source == null || source.isMarkedForDeletion())
 			{
 				event.free()
 				continue
 			}
 
-			val stats = event.source.statistics()
+			val stats = source.statistics()
 			if (stats != null)
 			{
 				for (i in 0 until stats.buffs.size)
@@ -75,7 +76,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 				}
 			}
 
-			val eventHandler = event.source.eventHandler()
+			val eventHandler = source.eventHandler()
 			if (eventHandler != null)
 			{
 				checkHandlers(event, eventHandler.handlers)
@@ -118,7 +119,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		}
 	}
 
-	fun addEvent(type: EventType, source: Entity, target: Entity, inputVariables: Map<String, Float>? = null)
+	fun addEvent(type: EventType, source: EntityReference, target: EntityReference, inputVariables: Map<String, Float>? = null)
 	{
 		queuedEvents.add(EventData.obtain().set(type, source, target, inputVariables))
 	}
@@ -161,17 +162,17 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 class EventData()
 {
 	lateinit var type: EventType
-	lateinit var source: Entity
+	lateinit var source: EntityReference
 	val targets = Array<Point>(1)
 	val variables = ObjectFloatMap<String>()
 
-	var targetEntity: Entity? = null
+	var targetEntity: EntityReference? = null
 
-	fun set(type: EventType, source: Entity, target: Entity, inputVariables: Map<String, Float>? = null): EventData
+	fun set(type: EventType, source: EntityReference, target: EntityReference, inputVariables: Map<String, Float>? = null): EventData
 	{
 		this.type = type
 		this.source = source
-		this.targets.add(target.position()!!.position)
+		this.targets.add(target.entity.position()!!.position)
 		targetEntity = target
 
 		if (inputVariables != null)
@@ -182,8 +183,8 @@ class EventData()
 			}
 		}
 
-		source.statistics()?.write(variables, "self")
-		target.statistics()?.write(variables, "target")
+		source.entity.statistics()?.write(variables, "self")
+		target.entity.statistics()?.write(variables, "target")
 
 		return this
 	}

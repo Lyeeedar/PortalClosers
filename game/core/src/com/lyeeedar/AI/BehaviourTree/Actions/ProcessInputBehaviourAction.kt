@@ -32,9 +32,9 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
-		val renderSystem = state.world.renderSystem() ?: return EvaluationState.FAILED
-		val pos = state.entity.position() ?: return EvaluationState.FAILED
-		val task = state.entity.task() ?: return EvaluationState.FAILED
+		val entity = state.entity.get() ?: return EvaluationState.FAILED
+		val pos = entity.position() ?: return EvaluationState.FAILED
+		val task = entity.task() ?: return EvaluationState.FAILED
 		if (task.tasks.size > 0) return EvaluationState.FAILED
 
 		var moveDir: Direction? = null
@@ -91,7 +91,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val attack = state.entity.statistics()!!.attackDefinition
+				val attack = entity.statistics()!!.attackDefinition
 				potentialTargets.clear()
 
 				if (attack.range <= 1)
@@ -115,8 +115,8 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 				{
 					for (slot in SpaceSlot.EntityValues)
 					{
-						val entity = tile.contents[slot] ?: continue
-						if (entity.isEnemies(state.entity))
+						val other = tile.contents[slot]?.get() ?: continue
+						if (other.isEnemies(entity))
 						{
 							val dist = pos.position.taxiDist(tile)
 							if (dist < enemyTileDist)
@@ -132,7 +132,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 
 				if (enemyTile != null)
 				{
-					val attack = state.entity.statistics()!!.attackDefinition
+					val attack = entity.statistics()!!.attackDefinition
 					task.tasks.add(TaskAttack.obtain().set(enemyTile, attack))
 				}
 				else

@@ -24,9 +24,9 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
 		val target = state.getData<Point>(key, 0)
-		val posData = state.entity.position()
+		val posData = state.entity.get()?.position()
 		val position = posData?.position
-		val taskData = state.entity.task()
+		val taskData = state.entity.get()?.task()
 
 		// doesnt have all the needed data, fail
 		if ( target == null || posData == null || position == null || taskData == null )

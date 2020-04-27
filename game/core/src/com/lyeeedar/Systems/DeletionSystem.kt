@@ -38,13 +38,13 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 			{
 				for (slot in SpaceSlot.EntityValues)
 				{
-					val e = killerTile.contents[slot] ?: continue
+					val e = killerTile.contents[slot]?.get() ?: continue
 					val stats = e.statistics() ?: continue
 
 					if (e.isEnemies(entity) && EventSystem.isEventRegistered(EventType.KILL, e))
 					{
 						// we have our killer!
-						world.eventSystem()?.addEvent(EventType.KILL, e, entity)
+						world.eventSystem()?.addEvent(EventType.KILL, EntityReference(e), EntityReference(entity))
 					}
 				}
 			}
@@ -54,7 +54,7 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 			{
 				if (EventSystem.isEventRegistered(EventType.DEATH, listener))
 				{
-					world.eventSystem()?.addEvent(EventType.DEATH, listener, entity)
+					world.eventSystem()?.addEvent(EventType.DEATH, EntityReference(listener), EntityReference(entity))
 				}
 			}
 		}

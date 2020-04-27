@@ -8,6 +8,7 @@ import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
 import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.Components.Entity
+import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Util.*
@@ -31,6 +32,8 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
+		val entity = state.entity.get() ?: return EvaluationState.FAILED
+
 		val array = state.getData<Array<*>>(input, 0) ?: return EvaluationState.FAILED
 		if (array.size == 0) return EvaluationState.FAILED
 
@@ -39,18 +42,18 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		{
 			val sortValue = when (item)
 			{
-				is Entity -> {
+				is EntityReference -> {
 					map.clear()
-					val dist = item.position()!!.position.taxiDist(state.entity.position()!!.position)
+					val dist = item.entity.position()!!.position.taxiDist(entity.position()!!.position)
 					map.put("dist", dist.toFloat())
 					map.put("random", state.rng.nextFloat())
-					item.statistics()?.write(map)
+					item.entity.statistics()?.write(map)
 
 					condition.evaluate(map)
 				}
 				is Point -> {
 					map.clear()
-					val dist = item.taxiDist(state.entity.position()!!.position)
+					val dist = item.taxiDist(entity.position()!!.position)
 					map.put("dist", dist.toFloat())
 					map.put("random", state.rng.nextFloat())
 

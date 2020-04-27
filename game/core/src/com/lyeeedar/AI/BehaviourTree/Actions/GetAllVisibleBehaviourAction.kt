@@ -24,12 +24,13 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
-		val pos = state.entity.position()
-		val stats = state.entity.statistics()
+		val entity = state.entity.get() ?: return EvaluationState.FAILED
+		val pos = entity.position()
+		val stats = entity.statistics()
 
 		if (pos == null || stats == null) return EvaluationState.FAILED
 
-		val vision = state.entity.addOrGet(ComponentType.Vision) as VisionComponent
+		val vision = entity.addOrGet(ComponentType.Vision) as VisionComponent
 		val points = vision.visionCache.getShadowCast(pos.position.x, pos.position.y, 6)
 
 		if (type == Type.TILES)
@@ -38,28 +39,28 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 		}
 		else
 		{
-			val output = Array<Entity>()
+			val output = Array<EntityReference>()
 			for (point in points)
 			{
 				val tile = state.world.grid.tryGet(point, null) ?: continue
 				for (slot in SpaceSlot.EntityValues)
 				{
-					val entity = tile.contents[slot] ?: continue
+					val other = tile.contents[slot]?.get() ?: continue
 
-					if (entity.isMarkedForDeletion() || (entity.statistics()?.hp ?: 0f) <= 0f) continue
+					if (other.isMarkedForDeletion() || (other.statistics()?.hp ?: 0f) <= 0f) continue
 
 					if (type == Type.ALLIES)
 					{
-						if (entity != state.entity && entity.isAllies(state.entity))
+						if (other != entity && other.isAllies(entity))
 						{
-							output.add(entity)
+							output.add(EntityReference(other))
 						}
 					}
 					else
 					{
-						if (entity.isEnemies(state.entity))
+						if (other.isEnemies(entity))
 						{
-							output.add(entity)
+							output.add(EntityReference(other))
 						}
 					}
 				}

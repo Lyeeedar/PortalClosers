@@ -22,22 +22,24 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
+		val source = state.source.get()!!
+
 		hitEntities.clear()
 		for (target in state.targets)
 		{
 			val tile = state.world.grid.tryGet(target, null) ?: continue
 			for (slot in SpaceSlot.EntityValues)
 			{
-				val entity = tile.contents[slot] ?: continue
+				val entity = tile.contents[slot]?.get() ?: continue
 
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 
 				val hate = entity.hate() ?: continue
 				val targetstats = entity.statistics() ?: continue
-				if (entity.isEnemies(state.source))
+				if (entity.isEnemies(source))
 				{
-					val sourceStats = state.source.statistics()!!
+					val sourceStats = source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")
@@ -45,7 +47,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 					state.writeVariables(map)
 
 					val hateAmount = amount.evaluate(map)
-					hate.addRawHate(state.source, hateAmount)
+					hate.addRawHate(source, hateAmount)
 				}
 			}
 		}

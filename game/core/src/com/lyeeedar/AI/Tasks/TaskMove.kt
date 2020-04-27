@@ -49,7 +49,8 @@ class TaskMove : AbstractTask()
 
 		if (EventSystem.isEventRegistered(EventType.MOVE, e))
 		{
-			world.eventSystem()?.addEvent(EventType.MOVE, e, e)
+			val ref = EntityReference(e)
+			world.eventSystem()?.addEvent(EventType.MOVE, ref, ref)
 		}
 
 		val prev = pos.position

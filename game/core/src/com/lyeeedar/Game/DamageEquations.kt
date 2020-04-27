@@ -94,7 +94,7 @@ class DamageEquations
 			{
 				if (EventSystem.isEventRegistered(EventType.BLOCK, defender))
 				{
-					eventSystem.addEvent(EventType.BLOCK, defender, attacker, mapOf(Pair("damage", damage.damage)))
+					eventSystem.addEvent(EventType.BLOCK, EntityReference(defender), EntityReference(attacker), mapOf(Pair("damage", damage.damage)))
 				}
 
 				defenderStats.blockedDamage = true
@@ -136,7 +136,7 @@ class DamageEquations
 
 				if (EventSystem.isEventRegistered(EventType.HEALED, attacker))
 				{
-					eventSystem.addEvent(EventType.HEALED, attacker, defender, mapOf(Pair("amount", stolenLife)))
+					eventSystem.addEvent(EventType.HEALED, EntityReference(attacker), EntityReference(defender), mapOf(Pair("amount", stolenLife)))
 				}
 			}
 			else if (stolenLife < 0f)
@@ -151,7 +151,7 @@ class DamageEquations
 			{
 				if (EventSystem.isEventRegistered(EventType.CRIT, attacker))
 				{
-					eventSystem.addEvent(EventType.CRIT, attacker, defender, mapOf(
+					eventSystem.addEvent(EventType.CRIT, EntityReference(attacker), EntityReference(defender), mapOf(
 						Pair("damage", finalDam),
 						Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 				}
@@ -160,7 +160,7 @@ class DamageEquations
 			// deal damage
 			if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, attacker))
 			{
-				eventSystem.addEvent(EventType.DEAL_DAMAGE, attacker, defender, mapOf(
+				eventSystem.addEvent(EventType.DEAL_DAMAGE, EntityReference(attacker), EntityReference(defender), mapOf(
 					Pair("damage", finalDam),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}
@@ -168,7 +168,7 @@ class DamageEquations
 			// take damage
 			if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, defender))
 			{
-				eventSystem.addEvent(EventType.TAKE_DAMAGE, defender, attacker, mapOf(
+				eventSystem.addEvent(EventType.TAKE_DAMAGE, EntityReference(defender), EntityReference(attacker), mapOf(
 					Pair("damage", finalDam),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}

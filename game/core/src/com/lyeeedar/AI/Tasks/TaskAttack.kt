@@ -51,7 +51,7 @@ class TaskAttack : AbstractTask()
 		val entitiesToHit = ObjectSet<EntityReference>()
 		for (slot in SpaceSlot.EntityValues)
 		{
-			val entity = tile.contents[slot] ?: continue
+			val entity = tile.contents[slot]?.get() ?: continue
 			if (e.isEnemies(entity))
 			{
 				entitiesToHit.add(EntityReference(entity))
@@ -63,7 +63,7 @@ class TaskAttack : AbstractTask()
 		{
 			for (entity in entitiesToHit)
 			{
-				eventSystem.addEvent(EventType.ATTACK, e, entity.entity)
+				eventSystem.addEvent(EventType.ATTACK, EntityReference(e), entity)
 			}
 		}
 

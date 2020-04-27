@@ -1,27 +1,47 @@
 package com.lyeeedar.Components
 
 import com.badlogic.gdx.utils.ObjectFloatMap
+import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.max
 import com.lyeeedar.Util.set
+import ktx.collections.set
+
+class HateData(val entityReference: EntityReference)
+{
+	var value: Float = 0f
+}
 
 class HateComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Hate
 
-	val hateMap = ObjectFloatMap<Entity>()
-	var lastAgroedTarget: Entity? = null
+	val hateMap = ObjectMap<String, HateData>()
+	var lastAgroedTarget: EntityReference? = null
+
+	fun getData(entity: Entity): HateData
+	{
+		val key = "${entity.hashCode()}${entity.usageID}"
+		var data = hateMap[key]
+		if (data == null)
+		{
+			data = HateData(EntityReference(entity))
+			hateMap[key] = data
+		}
+
+		return data
+	}
 
 	fun addRawHate(entity: Entity, amount: Float)
 	{
-		hateMap[entity] = hateMap[entity, 0f] + amount
+		getData(entity).value += amount
 	}
 
 	fun addProximityHate(entity: Entity, dist: Int)
 	{
-		hateMap[entity] = hateMap[entity, 0f] + (10 - dist)
+		getData(entity).value += (10 - dist)
 	}
 
 	fun addDamageHate(attacker: Entity, defender: Entity, amount: Float)
@@ -29,12 +49,7 @@ class HateComponent : AbstractComponent()
 		val defenderHP = defender.statistics()!!.getStat(Statistic.MAX_HP)
 		val fraction = amount / defenderHP
 
-		hateMap[attacker] = hateMap[attacker, 0f] + fraction*20
-	}
-
-	fun clearHate(entity: Entity)
-	{
-		hateMap[entity] = 0f
+		getData(attacker).value += fraction*20
 	}
 
 	fun degradeHate()
@@ -43,45 +58,54 @@ class HateComponent : AbstractComponent()
 		while (itr.hasNext)
 		{
 			val pair = itr.next()
-			pair.value -= max(1f, pair.value / 4f)
-
-			if (pair.value <= 0f)
+			if (!pair.value.entityReference.isValid())
 			{
 				itr.remove()
+			}
+			else
+			{
+				pair.value.value -= max(1f, pair.value.value / 4f)
+
+				if (pair.value.value <= 0f)
+				{
+					itr.remove()
+				}
 			}
 		}
 	}
 
-	fun getAgroedTarget(defender: Entity, world: World<*>): Entity?
+	fun getAgroedTarget(defender: Entity, world: World<*>): EntityReference?
 	{
 		val defenderPos = defender.position()!!.position
 
-		var bestTarget: Entity? = null
+		var bestTarget: EntityReference? = null
 		var bestHate = -Float.MAX_VALUE
 
-		for (target in hateMap)
+		for (data in hateMap.values())
 		{
-			val targetPos = target.key.position() ?: continue
+			val target = data.entityReference.get() ?: continue
+
+			val targetPos = target.position() ?: continue
 
 			val dist = defenderPos.taxiDist(targetPos.position)
 			val falloff = (10f - dist) / 10f
 
-			val scaledHate = target.value * falloff
+			val scaledHate = data.value * falloff
 			if (scaledHate > bestHate)
 			{
 				bestHate = scaledHate
-				bestTarget = target.key
+				bestTarget = data.entityReference
 			}
 		}
 
-		if (bestTarget != null && lastAgroedTarget != bestTarget)
+		if (bestTarget != null && lastAgroedTarget?.get() != bestTarget.get())
 		{
 			defender.statistics()!!.addMessage("!", Colour.RED, 1f)
 
 			if (EventSystem.isEventRegistered(EventType.AGRO_CHANGED, defender))
 			{
 				val eventSystem = world.eventSystem()!!
-				eventSystem.addEvent(EventType.AGRO_CHANGED, defender, bestTarget)
+				eventSystem.addEvent(EventType.AGRO_CHANGED, EntityReference(defender), bestTarget)
 			}
 		}
 

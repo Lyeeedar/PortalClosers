@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
+import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Statistic
@@ -25,6 +26,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
+		val source = state.source.get()!!
 		val eventSystem = state.world.eventSystem() ?: return ActionState.Completed
 
 		hitEntities.clear()
@@ -33,15 +35,15 @@ class HealAction : AbstractOneShotActionSequenceAction()
 			val tile = state.world.grid.tryGet(point, null) ?: continue
 			for (slot in SpaceSlot.EntityValues)
 			{
-				val entity = tile.contents[slot] ?: continue
+				val entity = tile.contents[slot]?.get() ?: continue
 
 				if (hitEntities.contains(entity)) continue
 				hitEntities.add(entity)
 
 				val targetstats = entity.statistics() ?: continue
-				if (entity.isAllies(state.source))
+				if (entity.isAllies(source))
 				{
-					val sourceStats = state.source.statistics()!!
+					val sourceStats = source.statistics()!!
 
 					map.clear()
 					sourceStats.write(map, "self")
@@ -53,15 +55,15 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 					targetstats.heal(healing)
 
-					state.source.statistics()!!.healing += healing
-					if (state.source.statistics()!!.summoner != null)
+					sourceStats.healing += healing
+					if (sourceStats.summoner != null)
 					{
-						state.source.statistics()!!.summoner!!.statistics()!!.healing += healing
+						sourceStats.summoner!!.statistics()!!.healing += healing
 					}
 
 					if (EventSystem.isEventRegistered(EventType.HEALED, entity))
 					{
-						eventSystem.addEvent(EventType.HEALED, entity, state.source, mapOf(Pair("amount", healing)))
+						eventSystem.addEvent(EventType.HEALED, EntityReference(entity), EntityReference(source), mapOf(Pair("amount", healing)))
 					}
 				}
 			}

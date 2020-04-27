@@ -49,20 +49,22 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	{
 		variables.clear()
 		variables["random"] = rng.nextFloat()
-		variables["dist"] = entity.position()!!.position.taxiDist(state.source.position()!!.position).toFloat()
+		variables["dist"] = entity.position()!!.position.taxiDist(state.source.get()!!.position()!!.position).toFloat()
 
 		return variables
 	}
 
 	override fun enter(state: ActionSequenceState): ActionState
 	{
+		val source = state.source.get()!!
+
 		oldTargetsStore.clear()
 		oldTargetsStore.addAll(state.targets)
 
 		state.targets.clear()
 		state.lockedEntityTargets.clear()
 
-		val pos = state.source.position()!!.position
+		val pos = source.position()!!.position
 
 		val xs = max(0, pos.x-radius)
 		val xe = min(state.world.grid.width, pos.x+radius)
@@ -84,11 +86,11 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 
 				for (slot in SpaceSlot.EntityValues)
 				{
-					val entity = tile.contents[slot] ?: continue
+					val entity = tile.contents[slot]?.get() ?: continue
 
 					if (!allowSelf)
 					{
-						if (entity == state.source)
+						if (entity == source)
 						{
 							continue
 						}
@@ -96,14 +98,14 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 
 					if (mode == Mode.ALLIES)
 					{
-						if (entity.isAllies(state.source))
+						if (entity.isAllies(source))
 						{
 							entities.add(entity)
 						}
 					}
 					else if (mode == Mode.ENEMIES)
 					{
-						if (entity.isEnemies(state.source))
+						if (entity.isEnemies(source))
 						{
 							entities.add(entity)
 						}

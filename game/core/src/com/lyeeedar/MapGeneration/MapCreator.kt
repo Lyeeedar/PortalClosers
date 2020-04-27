@@ -63,7 +63,7 @@ class MapCreator
 						pos.addToTile(entity)
 
 						entity.statistics()?.calculateStatistics(level)
-						entity.ai()?.state?.set(entity, world, seed++)
+						entity.ai()?.state?.set(EntityReference(entity), world, seed++)
 
 						world.addEntity(entity)
 					}
@@ -84,7 +84,7 @@ class MapCreator
 						pos.addToTile(entity)
 
 						entity.statistics()?.calculateStatistics(level+(enemyDesc.difficulty-1))
-						entity.ai()?.state?.set(entity, world, seed++)
+						entity.ai()?.state?.set(EntityReference(entity), world, seed++)
 
 						world.addEntity(entity)
 					}
@@ -97,7 +97,7 @@ class MapCreator
 
 			player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
 			player.position()!!.addToTile(player)
-			player.ai()!!.state.set(player, world, 0)
+			player.ai()!!.state.set(EntityReference(player), world, 0)
 			player.addComponent(ComponentType.Task)
 			player.addComponent(ComponentType.Renderable)
 

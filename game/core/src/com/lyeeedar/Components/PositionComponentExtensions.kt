@@ -89,7 +89,7 @@ fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity): Boolean
 		for (y in 0 until size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null)
-			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(slot) != null && tile.contents.get(slot) != entity))
+			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(slot) != null && tile.contents.get(slot)?.get() != entity))
 			{
 				return false
 			}
@@ -108,13 +108,15 @@ fun PositionComponent.removeFromTile(entity: Entity)
 		for (y in 0 until size)
 		{
 			val tile = tile!!.world.grid.tryGet(tile!!, x, y, null) ?: continue
-			if (tile.contents[slot] == entity) tile.contents.remove(slot)
+			if (tile.contents[slot]?.get() == entity) tile.contents.remove(slot)
 		}
 	}
 }
 
 fun PositionComponent.addToTile(entity: Entity)
 {
+	val ref = EntityReference(entity)
+
 	val t = tile!!
 	for (x in 0 until size)
 	{
@@ -122,7 +124,7 @@ fun PositionComponent.addToTile(entity: Entity)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null) ?: continue
 			if (tile.contents[slot] != null) throw RuntimeException("Tile wasnt empty!")
-			tile.contents[slot] = entity
+			tile.contents[slot] = ref
 		}
 	}
 }

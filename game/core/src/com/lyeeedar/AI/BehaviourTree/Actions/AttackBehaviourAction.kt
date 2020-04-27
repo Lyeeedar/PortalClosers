@@ -19,9 +19,9 @@ class AttackBehaviourAction : AbstractBehaviourAction()
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
 		val target = state.getData<Point>(key, 0)
-		val posData = state.entity.position()
-		val taskData = state.entity.task()
-		val stats = state.entity.statistics()
+		val posData = state.entity.get()?.position()
+		val taskData = state.entity.get()?.task()
+		val stats = state.entity.get()?.statistics()
 
 		// doesnt have all the needed data, fail
 		if ( target == null || posData == null || taskData == null || stats == null )

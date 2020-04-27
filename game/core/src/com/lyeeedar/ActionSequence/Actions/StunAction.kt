@@ -18,7 +18,7 @@ class StunAction : AbstractOneShotActionSequenceAction()
 
 			for (slot in SpaceSlot.EntityValues)
 			{
-				val entity = tile.contents[slot] ?: continue
+				val entity = tile.contents[slot]?.get() ?: continue
 				val task = entity.task() ?: continue
 
 				for (i in 0 until count)

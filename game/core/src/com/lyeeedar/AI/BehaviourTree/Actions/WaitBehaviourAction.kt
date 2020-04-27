@@ -16,7 +16,7 @@ class WaitBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
-		val task = state.entity.task() ?: return EvaluationState.FAILED
+		val task = state.entity.get()?.task() ?: return EvaluationState.FAILED
 
 		val num = count.evaluate(state.getVariables()).round()
 

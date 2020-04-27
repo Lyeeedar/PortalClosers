@@ -2,10 +2,7 @@ package com.lyeeedar.Game
 
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.ActionSequence.ActionSequenceState
-import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.actionSequence
-import com.lyeeedar.Components.statistics
-import com.lyeeedar.Components.transientActionSequenceArchetype
+import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.Localisation
 import ktx.collections.set
@@ -114,10 +111,10 @@ enum class DamageType
 	{
 		val actionSequence = ActionSequence.load(sequencePath)
 		val actionSequenceState = ActionSequenceState.obtain()
-		actionSequenceState.set(attacker, world)
+		actionSequenceState.set(EntityReference(attacker), world)
 		actionSequenceState.data["damage"] = attackDamage
 
-		actionSequenceState.lockedEntityTargets.add(defender)
+		actionSequenceState.lockedEntityTargets.add(EntityReference(defender))
 
 		val containerEntity = transientActionSequenceArchetype.build()
 		containerEntity.actionSequence()!!.set(actionSequence, actionSequenceState)
