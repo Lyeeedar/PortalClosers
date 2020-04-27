@@ -79,7 +79,7 @@ class TaskAttack : AbstractTask()
 			effect.killOnAnimComplete = true
 			effect.animation = MoveAnimation.obtain().set(animDuration, diff)
 
-			effect.addToWorld(world, tile, Vector2(0.5f, 0.5f))
+			effect.addToWorld(world, tile, Vector2(0f, 0.5f))
 
 			delay += animDuration
 		}
