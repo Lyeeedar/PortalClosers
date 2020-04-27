@@ -36,7 +36,7 @@ class TaskAttack : AbstractTask()
 		val fumble = stats.getStat(Statistic.FUMBLE)
 		if (fumble > 0f && Random.random(rng) < fumble)
 		{
-			val stunParticle = AssetManager.loadParticleEffect("Stunned").getParticleEffect()
+			val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 			stunParticle.addToWorld(world, pos.position, Vector2(0f, 0.8f))
 
 			stats.addMessage("Fumbled!", Colour.YELLOW, 0.4f)

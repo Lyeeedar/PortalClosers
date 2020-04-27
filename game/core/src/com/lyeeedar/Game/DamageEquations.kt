@@ -44,22 +44,25 @@ class DamageEquations
 		}
 
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
-		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): Float
+		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): AttackDamage
 		{
 			if (damage.type == DamageType.PURE)
 			{
-				return damage.damage
+				return damage
 			}
 
 			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
 			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats, bonusStatusChance))
 			{
 				armourMitigation = 1f
+				damage.didApplyStatus = true
 			}
 
 			val dr = defenderStats.getStat(Statistic.DR)
 
-			return damage.damage * armourMitigation * (1f - dr)
+			damage.damage = damage.damage * armourMitigation * (1f - dr)
+
+			return damage
 		}
 
 		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent, bonusStatusChance: Float): Boolean
@@ -106,19 +109,21 @@ class DamageEquations
 
 			// apply modified dam
 			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage, bonusStatusChance)
-			defenderStats.damage(finalDam, damage.wasCrit)
-			defender.hate()?.addDamageHate(attacker, defender, finalDam)
-
 			// add final dam to stuff
 			if (shouldApplyStatus(rng, attackerStats, bonusStatusChance))
 			{
-				damage.type.applyStatus(rng, attacker, defender, finalDam, world)
+				damage.type.applyStatus(rng, attacker, defender, finalDam.damage, world)
+				finalDam.didApplyStatus = true
 			}
 
-			attackerStats.attackDamageDealt += finalDam
+			defenderStats.damage(finalDam.damage, damage.wasCrit, if (finalDam.didApplyStatus) finalDam.type else DamageType.NONE)
+			defender.hate()?.addDamageHate(attacker, defender, finalDam.damage)
+
+
+			attackerStats.attackDamageDealt += finalDam.damage
 			if (attackerStats.summoner != null)
 			{
-				attackerStats.summoner!!.statistics()!!.attackDamageDealt += finalDam
+				attackerStats.summoner!!.statistics()!!.attackDamageDealt += finalDam.damage
 			}
 
 			if (damage.wasCrit || Random.random(Random.sharedRandom) < 0.5f)
@@ -128,7 +133,7 @@ class DamageEquations
 			defenderStats.lastHitSource = attackerPos
 
 			val lifeSteal = attackerStats.getStat(Statistic.LIFESTEAL)
-			val stolenLife = finalDam * lifeSteal
+			val stolenLife = finalDam.damage * lifeSteal
 			if (stolenLife > 0f)
 			{
 				attackerStats.heal(stolenLife)
@@ -141,7 +146,7 @@ class DamageEquations
 			}
 			else if (stolenLife < 0f)
 			{
-				attackerStats.damage(stolenLife, false)
+				attackerStats.damage(stolenLife, false, DamageType.NONE)
 			}
 
 			// do damage events
@@ -152,7 +157,7 @@ class DamageEquations
 				if (EventSystem.isEventRegistered(EventType.CRIT, attacker))
 				{
 					eventSystem.addEvent(EventType.CRIT, EntityReference(attacker), EntityReference(defender), mapOf(
-						Pair("damage", finalDam),
+						Pair("damage", finalDam.damage),
 						Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 				}
 			}
@@ -161,7 +166,7 @@ class DamageEquations
 			if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, attacker))
 			{
 				eventSystem.addEvent(EventType.DEAL_DAMAGE, EntityReference(attacker), EntityReference(defender), mapOf(
-					Pair("damage", finalDam),
+					Pair("damage", finalDam.damage),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}
 
@@ -169,14 +174,14 @@ class DamageEquations
 			if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, defender))
 			{
 				eventSystem.addEvent(EventType.TAKE_DAMAGE, EntityReference(defender), EntityReference(attacker), mapOf(
-					Pair("damage", finalDam),
+					Pair("damage", finalDam.damage),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}
 		}
 	}
 }
 
-class AttackDamage(val damage: Float, var type: DamageType, val wasCrit: Boolean = false)
+class AttackDamage(var damage: Float, var type: DamageType, val wasCrit: Boolean = false, var didApplyStatus: Boolean = false)
 {
 
 }

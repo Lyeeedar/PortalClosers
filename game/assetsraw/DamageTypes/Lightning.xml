@@ -2,7 +2,6 @@
 	<Actions>
 		<Timeline>
 			<SelectEntities>
-				<Time>0.00171517592</Time>
 				<classID>SelectEntities</classID>
 				<Mode>Enemies</Mode>
 				<Count>1</Count>
@@ -13,7 +12,7 @@
 			</SelectEntities>
 			<FlightParticle>
 				<Time>0.0245842</Time>
-				<Duration LockDuration="False">0.166943863</Duration>
+				<Duration LockDuration="False">0.113335833</Duration>
 				<classID>FlightParticle</classID>
 				<Particle meta:RefKey="ParticleEffectTemplate">
 					<Base meta:RefKey="ParticleEffect">
@@ -21,7 +20,7 @@
 					</Base>
 					<Overrides>
 						<OverrideTexture>
-							<Name>EffectSprites/Bolt/Bolt_0</Name>
+							<Name>white</Name>
 							<Texture meta:RefKey="Texture">
 								<File>EffectSprites/LightningBoltMove/LightningBolt_2</File>
 							</Texture>
@@ -30,22 +29,22 @@
 				</Particle>
 				<SpawnBehaviour>Immediate</SpawnBehaviour>
 			</FlightParticle>
-			<SpawnOneShotParticle>
-				<Time>0.198910385</Time>
-				<classID>SpawnOneShotParticle</classID>
-				<Particle meta:RefKey="ParticleEffect">
-					<Name>LightningBurst</Name>
-				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
-			</SpawnOneShotParticle>
-		</Timeline>
-		<Timeline>
 			<Damage>
-				<Time>0.233528256</Time>
+				<Time>0.151016563</Time>
 				<classID>Damage</classID>
 				<Damage>damage*0.4</Damage>
 				<Type>None</Type>
 			</Damage>
+		</Timeline>
+		<Timeline>
+			<SpawnOneShotParticle>
+				<Time>0.10625162</Time>
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>Abilities/LightningBurst</Name>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</SpawnOneShotParticle>
 		</Timeline>
 	</Actions>
 </ActionSequence>

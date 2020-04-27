@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.AI.Tasks.TaskInterrupt
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -141,7 +142,7 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 		}
 		else if (regen < 0f)
 		{
-			stats.damage(maxHP * regen, false)
+			stats.damage(maxHP * regen, false, DamageType.BLEED)
 		}
 
 		val itr = stats.buffs.iterator()

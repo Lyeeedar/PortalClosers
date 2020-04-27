@@ -193,7 +193,7 @@ class StatisticsComponent : DataComponent()
 		tookDamage = false
 	}
 
-	fun damage(damage: Float, wasCrit: Boolean)
+	fun damage(damage: Float, wasCrit: Boolean, type: DamageType)
 	{
 		if (damage == 0f) return
 
@@ -203,14 +203,22 @@ class StatisticsComponent : DataComponent()
 		val alpha = damage / maxHP
 		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
 
-		var message = damage.ciel().toString()
+		var message = ""
+		if (type != DamageType.NONE && type != DamageType.PURE)
+		{
+			message += type.niceName + ": "
+		}
+
+		message += damage.ciel().toString()
 
 		if (wasCrit)
 		{
 			message += "!!"
 		}
 
-		addMessage(message, Colour.RED, size)
+		val colour = if (type != DamageType.NONE && type != DamageType.PURE) type.colour else Colour.RED
+
+		addMessage(message, colour, size)
 	}
 
 	fun heal(amount: Float)

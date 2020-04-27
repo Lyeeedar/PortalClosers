@@ -22,7 +22,7 @@ class TaskInterrupt : AbstractTask()
 			interrupted = true
 		}
 
-		val stunParticle = AssetManager.loadParticleEffect("Stunned").getParticleEffect()
+		val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 		stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
 
 		val message = if (interrupted) "Interrupted!" else "Stunned!"

@@ -25,6 +25,7 @@ fun World<Tile>.addSystems()
 {
 	// update
 	systems.add(TaskSystem(this))
+	systems.add(ActionSequenceSystem(this))
 	systems.add(StatisticsSystem(this))
 	systems.add(TileSystem(this))
 	systems.add(HateSystem(this))

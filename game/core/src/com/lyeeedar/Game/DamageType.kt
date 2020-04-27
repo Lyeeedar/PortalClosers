@@ -4,21 +4,22 @@ import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.World
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Localisation
 import ktx.collections.set
 import squidpony.squidmath.LightRNG
 
-enum class DamageType
+enum class DamageType constructor(val colour: Colour)
 {
-	NONE,
-	PURE, // completely ignore all mitigation
-	FIRE, // applies damage dot
-	ICE, // freezes target in place for a number of turns
-	LIGHTNING, // chance to chain damage to a nearby target
-	VORPAL, // pierces armour
-	POISON, // applies a dot that isnt mitigated by armour
-	BLEED, // does damage on each move
-	ACID; // reduces armour
+	NONE(Colour.WHITE),
+	PURE(Colour.WHITE), // completely ignore all mitigation
+	FIRE(Colour.ORANGE), // applies damage dot
+	ICE(Colour.CYAN), // freezes target in place for a number of turns
+	LIGHTNING(Colour.YELLOW), // chance to chain damage to a nearby target
+	VORPAL(Colour.BLACK), // pierces armour
+	POISON(Colour.PURPLE), // applies a dot that isnt mitigated by armour
+	BLEED(Colour.RED), // does damage on each move
+	ACID(Colour.GREEN); // reduces armour
 
 	val niceName: String
 		get()
@@ -110,14 +111,14 @@ enum class DamageType
 	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val actionSequence = ActionSequence.load(sequencePath)
-		val actionSequenceState = ActionSequenceState.obtain()
-		actionSequenceState.set(EntityReference(attacker), world)
-		actionSequenceState.data["damage"] = attackDamage
-
-		actionSequenceState.lockedEntityTargets.add(EntityReference(defender))
 
 		val containerEntity = transientActionSequenceArchetype.build()
-		containerEntity.actionSequence()!!.set(actionSequence, actionSequenceState)
+		containerEntity.actionSequence()!!.set(actionSequence)
+
+		val actionSequenceState = containerEntity.actionSequence()!!.actionSequenceState
+		actionSequenceState.lockedEntityTargets.add(EntityReference(defender))
+		actionSequenceState.set(EntityReference(attacker), world)
+		actionSequenceState.data["damage"] = attackDamage
 
 		world.addEntity(containerEntity)
 	}

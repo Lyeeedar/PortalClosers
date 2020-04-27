@@ -96,22 +96,19 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			{
 				if (handler.condition.evaluate(eventData.variables) != 0f)
 				{
-					val sequence = handler.sequence
-					val state = ActionSequenceState.obtain()
-					state.set(eventData.source, world)
-					state.targets.clear()
-					state.targets.addAll(eventData.targets)
-
-					if (eventData.targetEntity != null)
-					{
-						state.lockedEntityTargets.add(eventData.targetEntity!!)
-					}
-
 					val entity = spawnedEventEntityArchetype.build()
 
 					val comp = entity.actionSequence()!!
-					comp.actionSequence = sequence
-					comp.actionSequenceState = state
+					comp.actionSequence = handler.sequence
+
+					comp.actionSequenceState.set(eventData.source, world)
+					comp.actionSequenceState.targets.clear()
+					comp.actionSequenceState.targets.addAll(eventData.targets)
+
+					if (eventData.targetEntity != null)
+					{
+						comp.actionSequenceState.lockedEntityTargets.add(eventData.targetEntity!!)
+					}
 
 					world.addEntity(entity)
 				}

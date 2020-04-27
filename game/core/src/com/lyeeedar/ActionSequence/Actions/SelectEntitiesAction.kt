@@ -43,6 +43,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	val oldTargetsStore = ObjectSet<Point>()
 	val entities = ObjectSet<Entity>()
 	val variables = ObjectFloatMap<String>()
+	val itemSortValueMap = ObjectFloatMap<Any>()
 	//endregion
 
 	private fun createVariables(entity: Entity, state: ActionSequenceState, rng: LightRNG): ObjectFloatMap<String>
@@ -71,6 +72,8 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		val ys = max(0, pos.y-radius)
 		val ye = min(state.world.grid.height, pos.y+radius)
 
+		val rng = Random.obtainTS(state.seed++)
+		itemSortValueMap.clear()
 		for (x in xs until xe)
 		{
 			for (y in ys until ye)
@@ -87,6 +90,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 				for (slot in SpaceSlot.EntityValues)
 				{
 					val entity = tile.contents[slot]?.get() ?: continue
+					if (entity.position() == null) continue
 
 					if (!allowSelf)
 					{
@@ -96,33 +100,44 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 						}
 					}
 
+					var add = false
 					if (mode == Mode.ALLIES)
 					{
 						if (entity.isAllies(source))
 						{
-							entities.add(entity)
+							add = true
 						}
 					}
 					else if (mode == Mode.ENEMIES)
 					{
 						if (entity.isEnemies(source))
 						{
-							entities.add(entity)
+							add = true
 						}
 					}
 					else
 					{
+						if (entity.isAllies(source) || entity.isEnemies(source))
+						{
+							add = true
+						}
+					}
+
+					if (add)
+					{
 						entities.add(entity)
+						val value = condition.evaluate(createVariables(entity, state, rng), state.seed++)
+						itemSortValueMap[entity] = value
 					}
 				}
 			}
 		}
 
-		val rng = Random.obtainTS(state.seed++)
+
 		val sorted = if (minimum)
-									entities.sortedBy { condition.evaluate(createVariables(it, state, rng), state.seed++) }.toGdxArray()
+									entities.sortedBy { itemSortValueMap[it, 0f] }.toGdxArray()
 								else
-									entities.sortedByDescending { condition.evaluate(createVariables(it, state, rng), state.seed++) }.toGdxArray()
+									entities.sortedByDescending { itemSortValueMap[it, 0f] }.toGdxArray()
 		rng.freeTS()
 
 		variables.clear()
