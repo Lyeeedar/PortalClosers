@@ -49,11 +49,17 @@ class StatisticsComponentData : AbstractComponentData()
 	//endregion
 }
 
-class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<StatisticsComponentData>(data)
+class StatisticsComponent : DataComponent()
 {
 	override val type: ComponentType = ComponentType.Statistics
 
+	val baseStatistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
+
+	var difficultyRating: DifficultyRating? = null
+
+	var faction: String = ""
+	var attackDefinition = AttackDefinition()
 
 	//region hp and damage
 	var hp: Float = 0f
@@ -149,15 +155,25 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		buffs.clear()
 	}
 
+	override fun initialiseFrom(data: AbstractComponentData)
+	{
+		val data = data as StatisticsComponentData
+
+		baseStatistics.addAll(data.baseStatistics)
+		faction = data.faction
+		attackDefinition = data.attackDefinition
+		difficultyRating = data.difficultyRating
+	}
+
 	fun calculateStatistics(level: Int)
 	{
 		this.level = level
 		for (stat in Statistic.Values)
 		{
-			statistics[stat] = data.baseStatistics[stat, 0f]
+			statistics[stat] = baseStatistics[stat, 0f]
 		}
 
-		val rating = data.difficultyRating
+		val rating = difficultyRating
 		if (rating != null)
 		{
 			statistics[Statistic.ATK_POWER] = statistics[Statistic.ATK_POWER] + rating.calculateAttack(level)
@@ -230,7 +246,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		}
 		else if (key == "damage")
 		{
-			return getStat(Statistic.ATK_POWER) * data.attackDefinition.damage
+			return getStat(Statistic.ATK_POWER) * attackDefinition.damage
 		}
 
 		for (stat in Statistic.Values)
@@ -289,7 +305,7 @@ class StatisticsComponent(data: StatisticsComponentData) : AbstractComponent<Sta
 		variableMap.put(prefix + "hp", hp)
 		variableMap.put(prefix + "level", level.toFloat())
 
-		val attack = getStat(Statistic.ATK_POWER) * data.attackDefinition.damage
+		val attack = getStat(Statistic.ATK_POWER) * attackDefinition.damage
 		variableMap.put(prefix + "damage", attack)
 
 		for (stat in Statistic.Values)
@@ -325,14 +341,14 @@ fun Entity.isAllies(other: Entity): Boolean
 	val stats = this.statistics() ?: return false
 	val ostats = other.statistics() ?: return false
 
-	return stats.data.faction == ostats.data.faction
+	return stats.faction == ostats.faction
 }
 fun Entity.isEnemies(other: Entity): Boolean
 {
 	val stats = this.statistics() ?: return false
 	val ostats = other.statistics() ?: return false
 
-	return stats.data.faction != ostats.data.faction
+	return stats.faction != ostats.faction
 }
 
 class MessageData()

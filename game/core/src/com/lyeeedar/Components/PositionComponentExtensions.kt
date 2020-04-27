@@ -17,9 +17,9 @@ fun PositionComponent.isOnTile(point: Point): Boolean
 {
 	val tile = this.tile ?: return false
 
-	for (x in 0 until data.size)
+	for (x in 0 until size)
 	{
-		for (y in 0 until data.size)
+		for (y in 0 until size)
 		{
 			val t = tile.world.grid.tryGet(tile, x, y, null) ?: continue
 			if (t == point) return true
@@ -42,7 +42,7 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 	if ( dir == Direction.NORTH )
 	{
 		sx = 0
-		sy = data.size - 1
+		sy = size - 1
 
 		xstep = 1
 		ystep = 0
@@ -57,7 +57,7 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 	}
 	else if ( dir == Direction.EAST )
 	{
-		sx = data.size - 1
+		sx = size - 1
 		sy = 0
 
 		xstep = 0
@@ -73,7 +73,7 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 	}
 
 	val tiles = com.badlogic.gdx.utils.Array<Tile>(1)
-	for (i in 0 until data.size)
+	for (i in 0 until size)
 	{
 		val t = tile.world.grid.tryGet(tile, sx + xstep * i, sy + ystep * i, null) as? Tile ?: continue
 		tiles.add(t)
@@ -84,12 +84,12 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 
 fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity): Boolean
 {
-	for (x in 0 until data.size)
+	for (x in 0 until size)
 	{
-		for (y in 0 until data.size)
+		for (y in 0 until size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null)
-			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(data.slot) != null && tile.contents.get(data.slot) != entity))
+			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(slot) != null && tile.contents.get(slot) != entity))
 			{
 				return false
 			}
@@ -103,12 +103,12 @@ fun PositionComponent.removeFromTile(entity: Entity)
 {
 	if (tile == null) return
 
-	for (x in 0 until data.size)
+	for (x in 0 until size)
 	{
-		for (y in 0 until data.size)
+		for (y in 0 until size)
 		{
 			val tile = tile!!.world.grid.tryGet(tile!!, x, y, null) ?: continue
-			if (tile.contents[data.slot] == entity) tile.contents.remove(data.slot)
+			if (tile.contents[slot] == entity) tile.contents.remove(slot)
 		}
 	}
 }
@@ -116,12 +116,13 @@ fun PositionComponent.removeFromTile(entity: Entity)
 fun PositionComponent.addToTile(entity: Entity)
 {
 	val t = tile!!
-	for (x in 0 until data.size)
+	for (x in 0 until size)
 	{
-		for (y in 0 until data.size)
+		for (y in 0 until size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null) ?: continue
-			tile.contents[data.slot] = entity
+			if (tile.contents[slot] != null) throw RuntimeException("Tile wasnt empty!")
+			tile.contents[slot] = entity
 		}
 	}
 }

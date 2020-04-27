@@ -60,12 +60,22 @@ class EventHandlerComponentData : AbstractComponentData()
 	//endregion
 }
 
-class EventHandlerComponent(data: EventHandlerComponentData) : AbstractComponent<EventHandlerComponentData>(data)
+class EventHandlerComponent : DataComponent()
 {
 	override val type: ComponentType = ComponentType.EventHandler
 
+	var handlers: FastEnumMap<EventType, Array<EventAndCondition>> = FastEnumMap(EventType::class.java)
+
 	override fun reset()
 	{
+		handlers.clear()
+	}
 
+	override fun initialiseFrom(data: AbstractComponentData)
+	{
+		val data = data as EventHandlerComponentData
+
+		handlers.clear()
+		handlers.addAll(data.handlers)
 	}
 }

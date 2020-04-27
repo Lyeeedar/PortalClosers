@@ -7,7 +7,7 @@ import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.max
 import com.lyeeedar.Util.set
 
-class HateComponent : NonDataComponent()
+class HateComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Hate
 

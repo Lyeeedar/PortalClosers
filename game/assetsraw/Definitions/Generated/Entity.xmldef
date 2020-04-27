@@ -9,7 +9,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,Empty,EventHandler,MetaRegion,Name,Position,RenderableComponent,Statistics" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,EventHandler,MetaRegion,Name,Position,RenderableComponent,Statistics" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -39,9 +39,6 @@
 	<Definition Name="DirectionalSpriteComponent" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>
 		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-	</Definition>
-	<Definition Name="Empty" Nullable="False" TextColour="52,227,52" Extends="AbstractComponentData" meta:RefKey="StructDef">
-		<Const Name="classID">Empty</Const>
 	</Definition>
 	<Definition Name="EventHandler" Nullable="False" TextColour="79,251,251" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">EventHandler</Const>

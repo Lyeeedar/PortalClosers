@@ -2,7 +2,7 @@
 	<Components>
 		<AI>
 			<classID>AI</classID>
-			<AiPath>AI/player</AiPath>
+			<AiPath>AI/testMonster</AiPath>
 		</AI>
 		<DirectionalSpriteComponent>
 			<classID>DirectionalSprite</classID>
@@ -29,7 +29,7 @@
 		<Statistics>
 			<classID>Statistics</classID>
 			<BaseStatistics>
-				<Max_hp>1000</Max_hp>
+				<Max_hp>10000</Max_hp>
 				<Atk_power>100</Atk_power>
 				<Armour>100</Armour>
 			</BaseStatistics>

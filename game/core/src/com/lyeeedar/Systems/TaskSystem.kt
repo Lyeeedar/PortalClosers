@@ -52,6 +52,6 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 	override fun doEntityAI(entity: Entity)
 	{
 		val ai = entity.ai()!!
-		ai.data.ai.evaluate(ai.state)
+		ai.ai.evaluate(ai.state)
 	}
 }

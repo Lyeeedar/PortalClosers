@@ -56,8 +56,8 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 			val pos = entity.position()!!
 			val p = hitEffect.getParticleEffect()
-			p.size[0] = pos.data.size
-			p.size[1] = pos.data.size
+			p.size[0] = pos.size
+			p.size[1] = pos.size
 
 			p.addToWorld(world, pos.position)
 
@@ -70,8 +70,8 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 			val pos = entity.position()!!
 			val p = blockBrokenEffect.getParticleEffect()
-			p.size[0] = pos.data.size
-			p.size[1] = pos.data.size
+			p.size[0] = pos.size
+			p.size[1] = pos.size
 
 			p.addToWorld(world, pos.position)
 
@@ -83,8 +83,8 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 			val pos = entity.position()!!
 			val p = blockEffect.getParticleEffect()
-			p.size[0] = pos.data.size
-			p.size[1] = pos.data.size
+			p.size[0] = pos.size
+			p.size[1] = pos.size
 
 			p.addToWorld(world, pos.position)
 		}

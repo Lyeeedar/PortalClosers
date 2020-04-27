@@ -136,7 +136,6 @@ class XmlDataClassLoader
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
-				"Empty" -> com.lyeeedar.Components.EmptyComponentData()
 				"Position" -> com.lyeeedar.Components.PositionComponentData()
 				"AI" -> com.lyeeedar.Components.AIComponentData()
 				"MetaRegion" -> com.lyeeedar.Components.MetaRegionComponentData()

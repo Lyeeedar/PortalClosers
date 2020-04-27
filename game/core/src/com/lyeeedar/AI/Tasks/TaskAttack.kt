@@ -48,13 +48,14 @@ class TaskAttack : AbstractTask()
 
 		e.renderable()!!.renderable.animation = BumpAnimation.obtain().set(0.2f, Direction.getDirection(pos.position, tile))
 
-		val entitiesToHit = ObjectSet<Entity>()
+		val entitiesToHit = ObjectSet<EntityReference>()
 		for (slot in SpaceSlot.EntityValues)
 		{
 			val entity = tile.contents[slot] ?: continue
-			if (e.isAllies(entity)) continue
-
-			entitiesToHit.add(entity)
+			if (e.isEnemies(entity))
+			{
+				entitiesToHit.add(EntityReference(entity))
+			}
 		}
 
 		val eventSystem = world.eventSystem()!!
@@ -62,7 +63,7 @@ class TaskAttack : AbstractTask()
 		{
 			for (entity in entitiesToHit)
 			{
-				eventSystem.addEvent(EventType.ATTACK, e, entity)
+				eventSystem.addEvent(EventType.ATTACK, e, entity.entity)
 			}
 		}
 
@@ -98,13 +99,13 @@ class TaskAttack : AbstractTask()
 			{
 				for (entity in entitiesToHit)
 				{
-					if (entity.isMarkedForDeletion()) continue
+					if (!entity.isValid()) continue
 
 					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
-					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.data.attackDefinition.damage
+					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.attackDefinition.damage
 
-					val dam = DamageEquations.getAttackDam(rng, e.statistics()!!, AttackDamage(baseAttack, stats.data.attackDefinition.type))
-					DamageEquations.doAttack(rng, e, entity, dam, world)
+					val dam = DamageEquations.getAttackDam(rng, e.statistics()!!, AttackDamage(baseAttack, stats.attackDefinition.type))
+					DamageEquations.doAttack(rng, e, entity.entity, dam, world)
 				}
 			}, delay)
 	}

@@ -1,23 +1,23 @@
 package com.lyeeedar.Components
 
-enum class ComponentType private constructor(val constructor: ()->AbstractComponent<*>)
+enum class ComponentType private constructor(val constructor: ()->AbstractComponent)
 {
-	AI({ AIComponent(AIComponentData()) }),
+	AI({ AIComponent() }),
 	ActionSequence({ ActionSequenceComponent() }),
-	AdditionalRenderable({ AdditionalRenderableComponent(AdditionalRenderableComponentData()) }),
+	AdditionalRenderable({ AdditionalRenderableComponent() }),
 	ArchetypeBuilder({ ArchetypeBuilderComponent() }),
-	Dialogue({ DialogueComponent(DialogueComponentData()) }),
-	DirectionalSprite({ DirectionalSpriteComponent(DirectionalSpriteComponentData()) }),
+	Dialogue({ DialogueComponent() }),
+	DirectionalSprite({ DirectionalSpriteComponent() }),
 	Event({ EventComponent() }),
-	EventHandler({ EventHandlerComponent(EventHandlerComponentData()) }),
+	EventHandler({ EventHandlerComponent() }),
 	Hate({ HateComponent() }),
 	LoadData({ LoadDataComponent() }),
 	MarkedForDeletion({ MarkedForDeletionComponent() }),
-	MetaRegion({ MetaRegionComponent(MetaRegionComponentData()) }),
-	Name({ NameComponent(NameComponentData()) }),
-	Position({ PositionComponent(PositionComponentData()) }),
-	Renderable({ RenderableComponent(RenderableComponentData()) }),
-	Statistics({ StatisticsComponent(StatisticsComponentData()) }),
+	MetaRegion({ MetaRegionComponent() }),
+	Name({ NameComponent() }),
+	Position({ PositionComponent() }),
+	Renderable({ RenderableComponent() }),
+	Statistics({ StatisticsComponent() }),
 	Task({ TaskComponent() }),
 	Transient({ TransientComponent() }),
 	Vision({ VisionComponent() });

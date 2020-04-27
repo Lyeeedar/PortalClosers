@@ -14,7 +14,7 @@ class WorldScreen : AbstractScreen()
 	{
 		val player = EntityLoader.load("Entities/player")
 		player.statistics()!!.calculateStatistics(1)
-		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 0)
+		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 2)
 
 		mainTable.add(RenderSystemWidget(world)).grow()
 	}

@@ -49,8 +49,8 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			return EvaluationState.COMPLETED
 		}
 
-		val pathFinder = Pathfinder(state.world.grid, position.x, position.y, target.x, target.y, posData.data.size, state.entity)
-		val path = pathFinder.getPath( posData.data.slot )
+		val pathFinder = Pathfinder(state.world.grid, position.x, position.y, target.x, target.y, posData.size, state.entity)
+		val path = pathFinder.getPath( posData.slot )
 
 		if (path == null)
 		{
@@ -78,7 +78,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 		}
 
 		// if next step is impassable then fail
-		if (nextTile?.getPassable(posData.data.slot, state.entity) != true)
+		if (nextTile?.getPassable(posData.slot, state.entity) != true)
 		{
 			state.removeData(lastPosKey, dataGuid)
 			Point.freeAll(path)

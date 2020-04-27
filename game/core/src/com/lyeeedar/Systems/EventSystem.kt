@@ -78,7 +78,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			val eventHandler = event.source.eventHandler()
 			if (eventHandler != null)
 			{
-				checkHandlers(event, eventHandler.data.handlers)
+				checkHandlers(event, eventHandler.handlers)
 			}
 
 			event.free()
@@ -147,7 +147,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			val eventHandler = entity.eventHandler()
 			if (eventHandler != null)
 			{
-				if ((eventHandler.data.handlers[type]?.size ?: 0) > 0)
+				if ((eventHandler.handlers[type]?.size ?: 0) > 0)
 				{
 					return true
 				}

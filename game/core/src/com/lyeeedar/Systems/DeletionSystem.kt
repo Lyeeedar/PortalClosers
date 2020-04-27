@@ -21,8 +21,8 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 			if (pos != null)
 			{
 				val effect = AssetManager.loadParticleEffect("Death").getParticleEffect()
-				effect.size[0] = pos.data.size
-				effect.size[1] = pos.data.size
+				effect.size[0] = pos.size
+				effect.size[1] = pos.size
 				effect.addToWorld(world, pos.position)
 
 				// all the blood

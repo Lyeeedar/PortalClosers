@@ -91,7 +91,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val attack = state.entity.statistics()!!.data.attackDefinition
+				val attack = state.entity.statistics()!!.attackDefinition
 				potentialTargets.clear()
 
 				if (attack.range <= 1)
@@ -132,7 +132,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 
 				if (enemyTile != null)
 				{
-					val attack = state.entity.statistics()!!.data.attackDefinition
+					val attack = state.entity.statistics()!!.attackDefinition
 					task.tasks.add(TaskAttack.obtain().set(enemyTile, attack))
 				}
 				else

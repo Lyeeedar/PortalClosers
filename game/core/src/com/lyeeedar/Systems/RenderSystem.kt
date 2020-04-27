@@ -40,7 +40,7 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 			val hpColour = if (world.player!!.isAllies(entity)) allyHpCol else enemyHpCol
 
-			val totalWidth = pos.data.size.toFloat() * 0.95f
+			val totalWidth = pos.size.toFloat() * 0.95f
 
 			val hp = stats.hp
 			val maxhp = stats.getStat(Statistic.MAX_HP)
@@ -60,17 +60,19 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				overhead *= ratio
 			}
 
-			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, pos.data.slot.ordinal, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay)
+			val index = pos.slot.ordinal
+
+			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay)
 
 			val lostLen = (hp + stats.lostHp) / maxhp
-			renderer.queueTexture(white, ax + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead, pos.data.slot.ordinal, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay)
+			renderer.queueTexture(white, ax + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead, index, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay)
 
 			val hpLen = hp / maxhp
-			renderer.queueTexture(white, ax + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead, pos.data.slot.ordinal, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay)
+			renderer.queueTexture(white, ax + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead, index, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay)
 
 			for (i in 0 until numHpPips)
 			{
-				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, pos.data.slot.ordinal, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay)
+				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay)
 			}
 		}
 	}

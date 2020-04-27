@@ -51,7 +51,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		{
 			if (self is Entity)
 			{
-				if (self.isAllies(obj) && obj.position()!!.turnsOnTile < 3)
+				if (self.isAllies(obj))
 				{
 					return true
 				}
@@ -65,6 +65,18 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 
 	override fun getInfluence(travelType: SpaceSlot, self: Any?): Int
 	{
+		val obj = contents.get(travelType)
+		if (obj != null && obj != self)
+		{
+			if (self is Entity)
+			{
+				if (self.isAllies(obj))
+				{
+					return 1000
+				}
+			}
+		}
+
 		return 0
 	}
 }

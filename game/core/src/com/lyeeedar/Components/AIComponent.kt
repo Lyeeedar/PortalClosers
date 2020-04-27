@@ -34,15 +34,23 @@ class AIComponentData : AbstractComponentData()
 	//endregion
 }
 
-class AIComponent(data: AIComponentData) : AbstractComponent<AIComponentData>(data)
+class AIComponent : DataComponent()
 {
 	override val type: ComponentType = ComponentType.AI
+
+	lateinit var ai: BehaviourTree
 
 	val state = BehaviourTreeState()
 
 	override fun reset()
 	{
 
+	}
+
+	override fun initialiseFrom(data: AbstractComponentData)
+	{
+		val data = data as AIComponentData
+		ai = data.ai
 	}
 
 	override fun onAddedToEntity(entity: Entity)
