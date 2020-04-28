@@ -11,8 +11,8 @@ import squidpony.squidmath.LightRNG
 
 enum class DamageType constructor(val colour: Colour)
 {
-	NONE(Colour.WHITE),
-	PURE(Colour.WHITE), // completely ignore all mitigation
+	NONE(Colour.RED), // change to deal +40% damage
+	PURE(Colour.RED), // completely ignore all mitigation
 	FIRE(Colour.ORANGE), // applies damage dot
 	ICE(Colour.CYAN), // freezes target in place for a number of turns
 	LIGHTNING(Colour.YELLOW), // chance to chain damage to a nearby target
@@ -26,8 +26,8 @@ enum class DamageType constructor(val colour: Colour)
 		{
 			return when(this)
 			{
-				NONE -> ""
-				PURE -> ""
+				NONE -> Localisation.getText("damagetype.none", "UI")
+				PURE -> Localisation.getText("damagetype.pure", "UI")
 				FIRE -> Localisation.getText("damagetype.fire", "UI")
 				ICE -> Localisation.getText("damagetype.ice", "UI")
 				LIGHTNING -> Localisation.getText("damagetype.lightning", "UI")
@@ -43,8 +43,8 @@ enum class DamageType constructor(val colour: Colour)
 		{
 			return when(this)
 			{
-				NONE -> ""
-				PURE -> ""
+				NONE -> Localisation.getText("damagetype.none.description", "UI")
+				PURE -> Localisation.getText("damagetype.pure.description", "UI")
 				FIRE -> Localisation.getText("damagetype.fire.description", "UI")
 				ICE -> Localisation.getText("damagetype.ice.description", "UI")
 				LIGHTNING -> Localisation.getText("damagetype.lightning.description", "UI")
@@ -60,19 +60,19 @@ enum class DamageType constructor(val colour: Colour)
 		val Values = values()
 	}
 
-	fun applyStatus(rng: LightRNG, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	fun applyCriticalEffect(attacker: Entity, defender: Entity, attackDamage: AttackDamage, world: World<*>)
 	{
 		when (this)
 		{
-			NONE -> {}
+			NONE -> { attackDamage.damage *= 1.3f }
 			PURE -> {}
-			FIRE -> applyFire(attacker, defender, attackDamage, world)
-			ICE -> applyIce(attacker, defender, attackDamage, world)
-			LIGHTNING -> applyLightning(attacker, defender, attackDamage, world)
+			FIRE -> applyFire(attacker, defender, attackDamage.damage, world)
+			ICE -> applyIce(attacker, defender, attackDamage.damage, world)
+			LIGHTNING -> applyLightning(attacker, defender, attackDamage.damage, world)
 			VORPAL -> {}
-			POISON -> applyPoison(attacker, defender, attackDamage, world)
-			BLEED -> applyBleed(attacker, defender, attackDamage, world)
-			ACID -> applyAcid(attacker, defender, attackDamage, world)
+			POISON -> applyPoison(attacker, defender, attackDamage.damage, world)
+			BLEED -> applyBleed(attacker, defender, attackDamage.damage, world)
+			ACID -> applyAcid(attacker, defender, attackDamage.damage, world)
 		}
 	}
 

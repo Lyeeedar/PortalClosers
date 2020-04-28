@@ -104,8 +104,8 @@ class TaskAttack : AbstractTask()
 					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
 					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.attackDefinition.damage
 
-					val dam = DamageEquations.getAttackDam(rng, e.statistics()!!, AttackDamage(baseAttack, stats.attackDefinition.type))
-					DamageEquations.doAttack(rng, e, entity.entity, dam, world)
+					val dam = DamageEquations.getAttackDam(rng, baseAttack)
+					DamageEquations.doAttack(rng, e, entity.entity, AttackDamage(dam, stats.attackDefinition.type), world)
 				}
 			}, delay)
 	}

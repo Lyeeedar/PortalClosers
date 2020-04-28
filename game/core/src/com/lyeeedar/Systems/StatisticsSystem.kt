@@ -142,7 +142,7 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 		}
 		else if (regen < 0f)
 		{
-			stats.damage(maxHP * regen, false, DamageType.BLEED)
+			stats.damage(maxHP * regen)
 		}
 
 		val itr = stats.buffs.iterator()

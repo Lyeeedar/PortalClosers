@@ -16,9 +16,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	// Offense
 	ATK_POWER(1f, Float.MAX_VALUE, false),
 	ABILITY_POWER(0f, Float.MAX_VALUE, true),
-	STATUS_CHANCE(0f, 1f, true),
 	CRIT_CHANCE(0f, 1f, true),
-	CRIT_DAMAGE(1f, Float.MAX_VALUE, true),
 
 	// Defense
 	ARMOUR(0f, Float.MAX_VALUE, false),
@@ -46,9 +44,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 
 				ATK_POWER -> Localisation.getText("statistic.attackpower", "UI")
 				ABILITY_POWER -> Localisation.getText("statistic.abilitypower", "UI")
-				STATUS_CHANCE -> Localisation.getText("statistic.statuschance", "UI")
 				CRIT_CHANCE -> Localisation.getText("statistic.critchance", "UI")
-				CRIT_DAMAGE -> Localisation.getText("statistic.critdamage", "UI")
 
 				ARMOUR -> Localisation.getText("statistic.armour", "UI")
 				DR -> Localisation.getText("statistic.dr", "UI")
@@ -75,9 +71,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 
 				ATK_POWER -> Localisation.getText("statistic.attackpower.description", "UI")
 				ABILITY_POWER -> Localisation.getText("statistic.abilitypower.description", "UI")
-				STATUS_CHANCE -> Localisation.getText("statistic.statuschance.description", "UI")
 				CRIT_CHANCE -> Localisation.getText("statistic.critchance.description", "UI")
-				CRIT_DAMAGE -> Localisation.getText("statistic.critdamage.description", "UI")
 
 				ARMOUR -> Localisation.getText("statistic.armour.description", "UI")
 				DR -> Localisation.getText("statistic.dr.description", "UI")
@@ -99,8 +93,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	{
 		val Values = Statistic.values()
 		val BaseValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER)
-		val CoreValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE, CRIT_DAMAGE, STATUS_CHANCE)
-		val AttackValues = arrayOf(ATK_POWER, ABILITY_POWER, CRIT_CHANCE, CRIT_DAMAGE, STATUS_CHANCE)
+		val CoreValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
+		val AttackValues = arrayOf(ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
 		val DefenseValues = arrayOf(ARMOUR, DR, REGENERATION, LIFESTEAL, AEGIS)
 		val SpeedValues = arrayOf(HASTE, FLEET_FOOT, DERVISH)
 		val NegativeValues = arrayOf(ROOT, FUMBLE, DISTRACTION)

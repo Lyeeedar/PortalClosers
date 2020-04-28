@@ -8,12 +8,8 @@
     <Text ID="statistic.attackpower.description">How much damage you deal with your attacks.</Text>
     <Text ID="statistic.abilitypower">Ability Power</Text>
     <Text ID="statistic.abilitypower.description">The bonus to the effectiveness of your abilities.</Text>
-    <Text ID="statistic.statuschance">Status Chance</Text>
-    <Text ID="statistic.statuschance.description">The chance to activate element status effects.</Text>
-    <Text ID="statistic.critchance">Critical Chance</Text>
-    <Text ID="statistic.critchance.description">The chance to deal a critical hit anytime you deal damage.</Text>
-    <Text ID="statistic.critdamage">Critical Damage</Text>
-    <Text ID="statistic.critdamage.description">The multiplier to your damage when you deal a critical hit.</Text>
+    <Text ID="statistic.critchance">Critical Effect Chance</Text>
+    <Text ID="statistic.critchance.description">The chance to deal a critical effect based on your damage type, anytime you deal damage.</Text>
     <Text ID="statistic.armour">Armour</Text>
     <Text ID="statistic.armour.description">Your resistance to damage.</Text>
     <Text ID="statistic.dr">Damage Resistance</Text>
@@ -37,6 +33,10 @@
     <Text ID="statistic.distraction">Distraction</Text>
     <Text ID="statistic.distraction.description">The chance to fail to use an ability, anytime you use an ability.</Text>
 
+    <Text ID="damagetype.none">Crit</Text>
+    <Text ID="damagetype.none.description">Has a change to deal an extra [GOLD]30%[] damage.</Text>
+    <Text ID="damagetype.pure">Pure</Text>
+    <Text ID="damagetype.pure.description">The damage cannot be blocked or reduced in any way.</Text>
     <Text ID="damagetype.fire">Fire</Text>
     <Text ID="damagetype.fire.description">Has a chance to ignite the target, dealing a further [GOLD]150%[] damage over the next [GOLD]5[] turns.</Text>
     <Text ID="damagetype.ice">Ice</Text>

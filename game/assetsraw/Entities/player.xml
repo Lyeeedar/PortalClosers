@@ -31,7 +31,7 @@
 			<BaseStatistics>
 				<Max_hp>10000</Max_hp>
 				<Atk_power>100</Atk_power>
-				<Status_chance>0.5</Status_chance>
+				<Crit_chance>0.5</Crit_chance>
 				<Armour>100</Armour>
 			</BaseStatistics>
 			<Faction>player</Faction>

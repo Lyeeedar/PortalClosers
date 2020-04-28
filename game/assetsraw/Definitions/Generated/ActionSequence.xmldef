@@ -46,9 +46,7 @@
 		<Const Name="classID">Damage</Const>
 		<Data Name="Damage" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="BonusCritChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="BonusCritDamage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="BonusStatusChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="AlwaysCrit" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="FlightParticle" Nullable="False" TextColour="230,9,230" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">FlightParticle</Const>

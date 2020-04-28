@@ -10,9 +10,7 @@
 			<!--Offense-->
 			<Data Name="Atk_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Ability_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Status_chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Crit_chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Crit_damage" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Defense-->
 			<Data Name="Armour" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Regeneration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />

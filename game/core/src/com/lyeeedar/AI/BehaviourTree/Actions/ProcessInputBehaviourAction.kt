@@ -51,7 +51,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				moveDir = Direction.getCardinalDirection(tile, pos.position)
+				moveDir = Direction.getDirection(pos.position, tile)
 			}
 		}
 		else

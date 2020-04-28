@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Game.AttackDamage
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.DamageType
 import com.lyeeedar.Game.Statistic
@@ -193,31 +194,29 @@ class StatisticsComponent : DataComponent()
 		tookDamage = false
 	}
 
-	fun damage(damage: Float, wasCrit: Boolean, type: DamageType)
+	fun damage(damage: Float)
 	{
-		if (damage == 0f) return
+		damage(AttackDamage(damage, DamageType.NONE))
+	}
+	fun damage(damage: AttackDamage)
+	{
+		if (damage.damage == 0f) return
 
-		hp -= damage
+		hp -= damage.damage
 
 		val maxHP = getStat(Statistic.MAX_HP)
-		val alpha = damage / maxHP
+		val alpha = damage.damage / maxHP
 		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
 
 		var message = ""
-		if (type != DamageType.NONE && type != DamageType.PURE)
+		if (damage.wasCrit)
 		{
-			message += type.niceName + ": "
+			message += damage.type.niceName + ": "
 		}
 
-		message += damage.ciel().toString()
+		message += damage.damage.ciel().toString()
 
-		if (wasCrit)
-		{
-			message += "!!"
-		}
-
-		val colour = if (type != DamageType.NONE && type != DamageType.PURE) type.colour else Colour.RED
-
+		val colour = damage.type.colour
 		addMessage(message, colour, size)
 	}
 

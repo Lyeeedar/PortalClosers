@@ -19,9 +19,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 {
 	lateinit var damage: CompiledExpression
 	lateinit var type: DamageType
-	var bonusCritChance: Float = 0f
-	var bonusCritDamage: Float = 0f
-	var bonusStatusChance: Float = 0f
+	var alwaysCrit: Boolean = false
 
 	//region non-data
 	val hitEntities = ObjectSet<Entity>()
@@ -58,8 +56,13 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					var damage = damage.evaluate(map)
 					damage += damage * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					val attackDam = DamageEquations.getAttackDam(rng, source.statistics()!!, AttackDamage(damage, type), bonusCritChance, bonusCritDamage)
-					DamageEquations.doAttack(rng, source, entity, attackDam, state.world, bonusStatusChance)
+					val attackDam = DamageEquations.getAttackDam(rng, damage)
+
+					val attackType = if (type == DamageType.NONE) sourceStats.attackDefinition.type else type
+					val attackObj = AttackDamage(attackDam, attackType)
+					attackObj.wasCrit = alwaysCrit
+
+					DamageEquations.doAttack(rng, source, entity, attackObj, state.world)
 				}
 			}
 		}
@@ -73,9 +76,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 		super.load(xmlData)
 		damage = CompiledExpression(xmlData.get("Damage"))
 		type = DamageType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
-		bonusCritChance = xmlData.getFloat("BonusCritChance", 0f)
-		bonusCritDamage = xmlData.getFloat("BonusCritDamage", 0f)
-		bonusStatusChance = xmlData.getFloat("BonusStatusChance", 0f)
+		alwaysCrit = xmlData.getBoolean("AlwaysCrit", false)
 	}
 	override val classID: String = "Damage"
 	//endregion

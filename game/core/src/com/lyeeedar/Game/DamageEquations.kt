@@ -9,28 +9,13 @@ class DamageEquations
 {
 	companion object
 	{
-		// AverageCritMult = 1f + (CritChance * CritDamage)
-		fun getCritMultiplier(rng: LightRNG, attackerStats: StatisticsComponent, extraCritChance: Float = 0f, extraCritDam: Float = 0f): AttackDamage
-		{
-			val critChance = attackerStats.getStat(Statistic.CRIT_CHANCE) + extraCritChance
-			if (rng.nextFloat() <= critChance)
-			{
-				val mult = 1f + attackerStats.getStat(Statistic.CRIT_DAMAGE) + extraCritDam
-				return AttackDamage(mult, DamageType.NONE, true)
-			}
-
-			return AttackDamage(1f, DamageType.NONE, false)
-		}
-
-		// AttackDam = BaseAtk * 20%Modifier * CritMult
-		fun getAttackDam(rng: LightRNG, attackerStats: StatisticsComponent, baseAttack: AttackDamage, extraCritChance: Float = 0f, extraCritDam: Float = 0f): AttackDamage
+		// AttackDam = BaseAtk * 20%Modifier
+		fun getAttackDam(rng: LightRNG, baseAttack: Float): Float
 		{
 			val modifier = rng.randomWeighted() * 0.2f // 20% range, weighted to 0
-			val attack = baseAttack.damage * (1f + modifier)
+			val attack = baseAttack * (1f + modifier)
 
-			val critMult = getCritMultiplier(rng, attackerStats, extraCritChance, extraCritDam)
-
-			return AttackDamage(attack * critMult.damage, baseAttack.type, critMult.wasCrit)
+			return attack
 		}
 
 		// ArmourMitigation = Damage / (Damage + Armour)
@@ -44,32 +29,28 @@ class DamageEquations
 		}
 
 		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
-		fun calculateFinalDamage(rng: LightRNG, attackerStats: StatisticsComponent, defenderStats: StatisticsComponent, damage: AttackDamage, bonusStatusChance: Float): AttackDamage
+		fun calculateFinalDamage(defenderStats: StatisticsComponent, damage: AttackDamage)
 		{
 			if (damage.type == DamageType.PURE)
 			{
-				return damage
+				return
 			}
 
 			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
-			if (damage.type == DamageType.VORPAL && shouldApplyStatus(rng, attackerStats, bonusStatusChance))
+			if (damage.type == DamageType.VORPAL && damage.wasCrit)
 			{
 				armourMitigation = 1f
-				damage.didApplyStatus = true
 			}
 
 			val dr = defenderStats.getStat(Statistic.DR)
 
 			damage.damage = damage.damage * armourMitigation * (1f - dr)
-
-			return damage
 		}
 
-		fun shouldApplyStatus(rng: LightRNG, attackerStats: StatisticsComponent, bonusStatusChance: Float): Boolean
+		fun wasCrit(rng: LightRNG, attackerStats: StatisticsComponent): Boolean
 		{
-			val statusChance = attackerStats.getStat(Statistic.STATUS_CHANCE) + bonusStatusChance
-
-			return rng.nextFloat() < statusChance
+			val critChance = attackerStats.getStat(Statistic.CRIT_CHANCE)
+			return rng.nextFloat() < critChance
 		}
 
 		fun checkAegis(rng: LightRNG, defenderStats: StatisticsComponent): Boolean
@@ -83,7 +64,7 @@ class DamageEquations
 			return false
 		}
 
-		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World<*>, bonusStatusChance: Float = 0f)
+		fun doAttack(rng: LightRNG, attacker: Entity, defender: Entity, damage: AttackDamage, world: World<*>)
 		{
 			val defenderPos = defender.position()!!.position
 			val defenderStats = defender.statistics()!!
@@ -92,8 +73,13 @@ class DamageEquations
 
 			val eventSystem = world.eventSystem()!!
 
-			// try blocking
-			if (checkAegis(rng, defenderStats))
+			if (wasCrit(rng, attackerStats))
+			{
+				damage.wasCrit = true
+			}
+
+			// try blocking, only if not pure
+			if (damage.type != DamageType.PURE && checkAegis(rng, defenderStats))
 			{
 				if (EventSystem.isEventRegistered(EventType.BLOCK, defender))
 				{
@@ -108,22 +94,21 @@ class DamageEquations
 			}
 
 			// apply modified dam
-			val finalDam = calculateFinalDamage(rng, attackerStats, defenderStats, damage, bonusStatusChance)
+			calculateFinalDamage(defenderStats, damage)
 			// add final dam to stuff
-			if (shouldApplyStatus(rng, attackerStats, bonusStatusChance))
+			if (damage.wasCrit)
 			{
-				damage.type.applyStatus(rng, attacker, defender, finalDam.damage, world)
-				finalDam.didApplyStatus = true
+				damage.type.applyCriticalEffect(attacker, defender, damage, world)
 			}
 
-			defenderStats.damage(finalDam.damage, damage.wasCrit, if (finalDam.didApplyStatus) finalDam.type else DamageType.NONE)
-			defender.hate()?.addDamageHate(attacker, defender, finalDam.damage)
+			defenderStats.damage(damage)
+			defender.hate()?.addDamageHate(attacker, defender, damage.damage)
 
 
-			attackerStats.attackDamageDealt += finalDam.damage
+			attackerStats.attackDamageDealt += damage.damage
 			if (attackerStats.summoner != null)
 			{
-				attackerStats.summoner!!.statistics()!!.attackDamageDealt += finalDam.damage
+				attackerStats.summoner!!.statistics()!!.attackDamageDealt += damage.damage
 			}
 
 			if (damage.wasCrit || Random.random(Random.sharedRandom) < 0.5f)
@@ -133,7 +118,7 @@ class DamageEquations
 			defenderStats.lastHitSource = attackerPos
 
 			val lifeSteal = attackerStats.getStat(Statistic.LIFESTEAL)
-			val stolenLife = finalDam.damage * lifeSteal
+			val stolenLife = damage.damage * lifeSteal
 			if (stolenLife > 0f)
 			{
 				attackerStats.heal(stolenLife)
@@ -146,7 +131,7 @@ class DamageEquations
 			}
 			else if (stolenLife < 0f)
 			{
-				attackerStats.damage(stolenLife, false, DamageType.NONE)
+				attackerStats.damage(stolenLife)
 			}
 
 			// do damage events
@@ -157,7 +142,7 @@ class DamageEquations
 				if (EventSystem.isEventRegistered(EventType.CRIT, attacker))
 				{
 					eventSystem.addEvent(EventType.CRIT, EntityReference(attacker), EntityReference(defender), mapOf(
-						Pair("damage", finalDam.damage),
+						Pair("damage", damage.damage),
 						Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 				}
 			}
@@ -166,7 +151,7 @@ class DamageEquations
 			if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, attacker))
 			{
 				eventSystem.addEvent(EventType.DEAL_DAMAGE, EntityReference(attacker), EntityReference(defender), mapOf(
-					Pair("damage", finalDam.damage),
+					Pair("damage", damage.damage),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}
 
@@ -174,14 +159,14 @@ class DamageEquations
 			if (EventSystem.isEventRegistered(EventType.TAKE_DAMAGE, defender))
 			{
 				eventSystem.addEvent(EventType.TAKE_DAMAGE, EntityReference(defender), EntityReference(attacker), mapOf(
-					Pair("damage", finalDam.damage),
+					Pair("damage", damage.damage),
 					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
 			}
 		}
 	}
 }
 
-class AttackDamage(var damage: Float, var type: DamageType, val wasCrit: Boolean = false, var didApplyStatus: Boolean = false)
+class AttackDamage(var damage: Float, var type: DamageType)
 {
-
+	var wasCrit: Boolean = false
 }
