@@ -52,7 +52,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		return variables
 	}
 
-	override fun enter(state: ActionSequenceState): ActionState
+	override fun enter(state: ActionSequenceState)
 	{
 		val source = state.source.get()!!
 
@@ -150,8 +150,6 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 			val pos = entity.position()?.position ?: continue
 			state.targets.add(pos)
 		}
-
-		return ActionState.Completed
 	}
 
 	//region generated

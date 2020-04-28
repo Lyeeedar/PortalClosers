@@ -72,7 +72,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 				for (i in 0 until stats.buffs.size)
 				{
 					val buff = stats.buffs[i]
-					checkHandlers(event, buff.eventHandlers)
+					checkHandlers(event, buff.eventHandlers, buff.source)
 				}
 			}
 
@@ -86,7 +86,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		}
 	}
 
-	private fun checkHandlers(eventData: EventData, eventHandler: FastEnumMap<EventType, Array<EventAndCondition>>)
+	private fun checkHandlers(eventData: EventData, eventHandler: FastEnumMap<EventType, Array<EventAndCondition>>, overrideSource: EntityReference? = null)
 	{
 		val handlers = eventHandler[eventData.type]
 
@@ -101,7 +101,8 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 					val comp = entity.actionSequence()!!
 					comp.actionSequence = handler.sequence
 
-					comp.actionSequenceState.set(eventData.source, world)
+					val source = if (overrideSource?.get() != null) overrideSource else eventData.source
+					comp.actionSequenceState.set(source, world)
 					comp.actionSequenceState.targets.clear()
 					comp.actionSequenceState.targets.addAll(eventData.targets)
 

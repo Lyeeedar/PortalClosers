@@ -2,7 +2,7 @@
 	<Components>
 		<AI>
 			<classID>AI</classID>
-			<AiPath>AI/testMonster</AiPath>
+			<AiPath>AI/player</AiPath>
 		</AI>
 		<DirectionalSpriteComponent>
 			<classID>DirectionalSprite</classID>
@@ -36,7 +36,7 @@
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<AttackDefinition meta:RefKey="AttackDefinition">
-				<Type>Lightning</Type>
+				<Type>Bleed</Type>
 				<HitEffect meta:RefKey="ParticleEffect">
 					<Name>EnemyAttacks/slash</Name>
 				</HitEffect>

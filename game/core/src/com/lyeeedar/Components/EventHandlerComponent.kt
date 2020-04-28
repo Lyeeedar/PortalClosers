@@ -40,7 +40,7 @@ class EventHandlerComponentData : AbstractComponentData()
 			{
 				val enumVal = EventType.valueOf(el.name.toUpperCase(Locale.ENGLISH))
 				val objhandlers: Array<EventAndCondition> = Array()
-				val objhandlersEl = xmlData.getChildByName("Handlers")
+				val objhandlersEl = el
 				if (objhandlersEl != null)
 				{
 					for (el in objhandlersEl.children)

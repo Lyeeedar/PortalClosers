@@ -1,5 +1,6 @@
 package com.lyeeedar.headless
 
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Util.XmlData
 import java.util.*
 
@@ -11,7 +12,7 @@ class GameXmlLoadTester
 		{
 			when (xml.name.toUpperCase(Locale.ENGLISH))
 			{
-
+				"BUFF" -> Buff.load(xml)
 			}
 		}
 	}

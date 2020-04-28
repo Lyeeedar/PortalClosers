@@ -114,7 +114,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			{
 				val enumVal = SpaceSlot.valueOf(el.name.toUpperCase(Locale.ENGLISH))
 				val objcontents: EntityData
-				val objcontentsEl = xmlData.getChildByName("Contents")!!
+				val objcontentsEl = el
 				objcontents = EntityData()
 				objcontents.load(objcontentsEl)
 				contents[enumVal] = objcontents

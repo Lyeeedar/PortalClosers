@@ -20,7 +20,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 	val map = ObjectFloatMap<String>()
 	//endregion
 
-	override fun enter(state: ActionSequenceState): ActionState
+	override fun enter(state: ActionSequenceState)
 	{
 		val source = state.source.get()!!
 
@@ -42,7 +42,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 					val sourceStats = source.statistics()!!
 
 					map.clear()
-					sourceStats.write(map, "self")
+					sourceStats.write(map, "source")
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
@@ -51,8 +51,6 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 				}
 			}
 		}
-
-		return ActionState.Completed
 	}
 
 	//region generated

@@ -99,12 +99,14 @@ enum class DamageType constructor(val colour: Colour)
 	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Acid")
+		buff.source = EntityReference(attacker)
 		defender.statistics()!!.buffs.add(buff)
 	}
 
 	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Bleed")
+		buff.source = EntityReference(attacker)
 		defender.statistics()!!.buffs.add(buff)
 	}
 

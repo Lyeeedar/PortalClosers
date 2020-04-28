@@ -24,10 +24,10 @@ class HealAction : AbstractOneShotActionSequenceAction()
 	val map = ObjectFloatMap<String>()
 	//endregion
 
-	override fun enter(state: ActionSequenceState): ActionState
+	override fun enter(state: ActionSequenceState)
 	{
 		val source = state.source.get()!!
-		val eventSystem = state.world.eventSystem() ?: return ActionState.Completed
+		val eventSystem = state.world.eventSystem() ?: return
 
 		hitEntities.clear()
 		for (point in state.targets)
@@ -46,7 +46,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 					val sourceStats = source.statistics()!!
 
 					map.clear()
-					sourceStats.write(map, "self")
+					sourceStats.write(map, "source")
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
@@ -68,8 +68,6 @@ class HealAction : AbstractOneShotActionSequenceAction()
 				}
 			}
 		}
-
-		return ActionState.Completed
 	}
 
 	//region generated

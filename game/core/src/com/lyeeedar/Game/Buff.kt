@@ -1,6 +1,7 @@
 package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
@@ -26,12 +27,21 @@ class Buff : XmlDataClass()
 
 	var isPositive: Boolean = true
 
+	//region non-data
+	var source: EntityReference? = null
+	//endregion
+
 	companion object
 	{
 		fun load(path: String): Buff
 		{
 			val xml = getXml(path)
 
+			return load(xml)
+		}
+
+		fun load(xml: XmlData): Buff
+		{
 			val buff = Buff()
 			buff.load(xml)
 
@@ -62,7 +72,7 @@ class Buff : XmlDataClass()
 			{
 				val enumVal = EventType.valueOf(el.name.toUpperCase(Locale.ENGLISH))
 				val objeventHandlers: Array<EventAndCondition> = Array()
-				val objeventHandlersEl = xmlData.getChildByName("EventHandlers")
+				val objeventHandlersEl = el
 				if (objeventHandlersEl != null)
 				{
 					for (el in objeventHandlersEl.children)

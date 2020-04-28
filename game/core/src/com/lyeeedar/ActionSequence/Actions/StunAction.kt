@@ -10,7 +10,7 @@ class StunAction : AbstractOneShotActionSequenceAction()
 {
 	var count: Int = 1
 
-	override fun enter(state: ActionSequenceState): ActionState
+	override fun enter(state: ActionSequenceState)
 	{
 		for (target in state.targets)
 		{
@@ -27,8 +27,6 @@ class StunAction : AbstractOneShotActionSequenceAction()
 				}
 			}
 		}
-
-		return ActionState.Completed
 	}
 
 	//region generated
