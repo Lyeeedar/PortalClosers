@@ -216,7 +216,7 @@ class StatisticsComponent : DataComponent()
 
 		message += damage.damage.ciel().toString()
 
-		val colour = damage.type.colour
+		val colour = if (damage.wasCrit) damage.type.colour else DamageType.NONE.colour
 		addMessage(message, colour, size)
 	}
 

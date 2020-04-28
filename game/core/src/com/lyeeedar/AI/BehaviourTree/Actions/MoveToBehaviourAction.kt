@@ -41,9 +41,9 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 
 		// if we arrived at our target, succeed
 		if (
-			(towards && (position.taxiDist(target) <= dst || posData.isOnTile(target)))
+			(towards && (position.dist(target) <= dst || posData.isOnTile(target)))
 			||
-			(!towards && position.taxiDist(target) >= dst) )
+			(!towards && position.dist(target) >= dst) )
 		{
 			state.removeData(lastPosKey, dataGuid)
 			return EvaluationState.COMPLETED
@@ -67,15 +67,6 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 		}
 
 		val nextTile = state.world.grid.tryGet( path.get( 1 ), null )
-
-		// possible loop, quit just in case
-		val lastPos = state.getData(lastPosKey, dataGuid, Point.MINUS_ONE)
-		if (nextTile == lastPos)
-		{
-			state.removeData(lastPosKey, dataGuid)
-			Point.freeAll(path)
-			return EvaluationState.FAILED
-		}
 
 		// if next step is impassable then fail
 		if (nextTile?.getPassable(posData.slot, state.entity) != true)

@@ -36,7 +36,7 @@
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<AttackDefinition meta:RefKey="AttackDefinition">
-				<Type>Bleed</Type>
+				<Type>Lightning</Type>
 				<HitEffect meta:RefKey="ParticleEffect">
 					<Name>EnemyAttacks/slash</Name>
 				</HitEffect>

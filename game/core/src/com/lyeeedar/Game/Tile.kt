@@ -72,7 +72,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 			{
 				if (self.isAllies(obj))
 				{
-					return 1000
+					return 100
 				}
 			}
 		}

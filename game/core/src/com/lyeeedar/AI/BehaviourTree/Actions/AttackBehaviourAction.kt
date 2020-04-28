@@ -32,7 +32,7 @@ class AttackBehaviourAction : AbstractBehaviourAction()
 		val tile = posData.position as? Tile ?: return EvaluationState.FAILED
 		val targetTile = state.world.grid.tryGet(target, null) ?: return EvaluationState.FAILED
 
-		if (target.taxiDist(tile) > stats.attackDefinition.range)
+		if (target.dist(tile) > stats.attackDefinition.range)
 		{
 			return EvaluationState.FAILED
 		}

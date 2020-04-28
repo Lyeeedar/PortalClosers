@@ -1,5 +1,5 @@
 <MapGenerator meta:X="0" meta:Y="0" GUID="32167423-9f75-49a4-b94a-2f5339766086" xmlns:meta="Editor">
-	<BaseSize>30,30</BaseSize>
+	<BaseSize>80,80</BaseSize>
 	<Root meta:RefKey="MapGeneratorNode">70821707-e34c-48f1-a4b8-9ed700c26155</Root>
 	<NodeMap>
 		<MapGeneratorNode meta:X="315" meta:Y="-30" GUID="70821707-e34c-48f1-a4b8-9ed700c26155">

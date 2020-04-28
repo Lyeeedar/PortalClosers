@@ -87,7 +87,7 @@ class HateComponent : AbstractComponent()
 
 			val targetPos = target.position() ?: continue
 
-			val dist = defenderPos.taxiDist(targetPos.position)
+			val dist = defenderPos.dist(targetPos.position)
 			val falloff = (10f - dist) / 10f
 
 			val scaledHate = data.value * falloff

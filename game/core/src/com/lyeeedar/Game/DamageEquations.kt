@@ -143,7 +143,7 @@ class DamageEquations
 				{
 					eventSystem.addEvent(EventType.CRIT, EntityReference(attacker), EntityReference(defender), mapOf(
 						Pair("damage", damage.damage),
-						Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
+						Pair("dist", attackerPos.dist(defenderPos).toFloat())))
 				}
 			}
 
@@ -152,7 +152,7 @@ class DamageEquations
 			{
 				eventSystem.addEvent(EventType.DEAL_DAMAGE, EntityReference(attacker), EntityReference(defender), mapOf(
 					Pair("damage", damage.damage),
-					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
+					Pair("dist", attackerPos.dist(defenderPos).toFloat())))
 			}
 
 			// take damage
@@ -160,7 +160,7 @@ class DamageEquations
 			{
 				eventSystem.addEvent(EventType.TAKE_DAMAGE, EntityReference(defender), EntityReference(attacker), mapOf(
 					Pair("damage", damage.damage),
-					Pair("dist", attackerPos.taxiDist(defenderPos).toFloat())))
+					Pair("dist", attackerPos.dist(defenderPos).toFloat())))
 			}
 		}
 	}

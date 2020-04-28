@@ -24,7 +24,7 @@ class HateSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitie
 			for (point in points)
 			{
 				val tile = world.grid.tryGet(point, null) ?: continue
-				val dist = tile.taxiDist(pos.position)
+				val dist = tile.dist(pos.position)
 
 				for (slot in SpaceSlot.EntityValues)
 				{

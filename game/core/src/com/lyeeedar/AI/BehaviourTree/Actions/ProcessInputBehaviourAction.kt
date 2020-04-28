@@ -10,10 +10,7 @@ import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskAttack
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.AI.Tasks.TaskWait
-import com.lyeeedar.Components.isEnemies
-import com.lyeeedar.Components.position
-import com.lyeeedar.Components.statistics
-import com.lyeeedar.Components.task
+import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
@@ -40,7 +37,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		var moveDir: Direction? = null
 		if (Gdx.input.isTouched(0) && !Gdx.input.isTouched(1) && !Gdx.input.isTouched(2) && !Gdx.input.isTouched(3) && !Gdx.input.isTouched(4))
 		{
-			val tile = RenderSystemWidget.instance.selectedPoint ?: return EvaluationState.FAILED
+			val tile = RenderSystemWidget.instance.selectedPoint
 
 			if (tile == pos.position)
 			{
@@ -51,7 +48,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				moveDir = Direction.getDirection(pos.position, tile)
+				moveDir = Direction.getCardinalDirection(tile, pos.position)
 			}
 		}
 		else
@@ -118,7 +115,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 						val other = tile.contents[slot]?.get() ?: continue
 						if (other.isEnemies(entity))
 						{
-							val dist = pos.position.taxiDist(tile)
+							val dist = pos.position.dist(tile)
 							if (dist < enemyTileDist)
 							{
 								enemyTile = tile
@@ -137,7 +134,15 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 				}
 				else
 				{
-					task.tasks.add(TaskMove.obtain().set(moveDir))
+					val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
+					if (targetTile != null && pos.isValidTile(targetTile, entity))
+					{
+						task.tasks.add(TaskMove.obtain().set(moveDir))
+					}
+					else
+					{
+						return EvaluationState.FAILED
+					}
 				}
 			}
 		}

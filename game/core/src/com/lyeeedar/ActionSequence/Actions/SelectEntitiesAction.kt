@@ -47,7 +47,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	{
 		variables.clear()
 		variables["random"] = rng.nextFloat()
-		variables["dist"] = entity.position()!!.position.taxiDist(state.source.get()!!.position()!!.position).toFloat()
+		variables["dist"] = entity.position()!!.position.dist(state.source.get()!!.position()!!.position).toFloat()
 
 		return variables
 	}

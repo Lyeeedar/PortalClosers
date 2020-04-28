@@ -44,7 +44,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 			{
 				is EntityReference -> {
 					map.clear()
-					val dist = item.entity.position()!!.position.taxiDist(entity.position()!!.position)
+					val dist = item.entity.position()!!.position.dist(entity.position()!!.position)
 					map.put("dist", dist.toFloat())
 					map.put("random", state.rng.nextFloat())
 					item.entity.statistics()?.write(map)
@@ -53,7 +53,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 				}
 				is Point -> {
 					map.clear()
-					val dist = item.taxiDist(entity.position()!!.position)
+					val dist = item.dist(entity.position()!!.position)
 					map.put("dist", dist.toFloat())
 					map.put("random", state.rng.nextFloat())
 

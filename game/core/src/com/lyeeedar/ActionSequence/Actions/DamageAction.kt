@@ -20,6 +20,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	lateinit var damage: CompiledExpression
 	lateinit var type: DamageType
 	var alwaysCrit: Boolean = false
+	var useAttackDamageType: Boolean = false
 
 	//region non-data
 	val hitEntities = ObjectSet<Entity>()
@@ -58,7 +59,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 					val attackDam = DamageEquations.getAttackDam(rng, damage)
 
-					val attackType = if (type == DamageType.NONE) sourceStats.attackDefinition.type else type
+					val attackType = if (useAttackDamageType) sourceStats.attackDefinition.type else type
 					val attackObj = AttackDamage(attackDam, attackType)
 					attackObj.wasCrit = alwaysCrit
 
@@ -77,6 +78,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 		damage = CompiledExpression(xmlData.get("Damage"))
 		type = DamageType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
 		alwaysCrit = xmlData.getBoolean("AlwaysCrit", false)
+		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", false)
 	}
 	override val classID: String = "Damage"
 	//endregion
