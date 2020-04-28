@@ -1,4 +1,8 @@
 <Localisation Language="en" xmlns:meta="Editor">
 	<Text ID="Bleed.Buff.Description:a6eeda50-43c9-4d57-be16-c859f5506997">You bleed whenever you move</Text>
 	<Text ID="Bleed.Buff.Name:b702a6b4-4298-4f50-9153-825b080b5584">Bleed</Text>
+	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:bdbaf651-2629-49cf-bc1f-833982de07f1">You are burning.</Text>
+	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:2676c048-90e8-4c65-b8f3-b3dd1bc90bfe">Ignited</Text>
+	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:25f299b0-3339-411b-bfa3-33a74a97363e">You are poisoned.</Text>
+	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:62588d34-8424-416a-b20a-8e6802c50b10">Poisoned</Text>
 </Localisation>

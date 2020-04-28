@@ -7,11 +7,11 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(Buff,Damage,GenerateHate,Heal,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,GenerateHate,Heal,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Data Name="Duration" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="(Buff),Meta(Repeat),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="(AddBuff),Meta(Repeat),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 	</Definition>
 	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
@@ -37,7 +37,7 @@
 		<Const Name="classID">BlockTurn</Const>
 		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="Buff" Nullable="False" TextColour="2,204,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
+	<Definition Name="AddBuff" Nullable="False" TextColour="2,204,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Buff</Const>
 		<Data Name="Buff" Keys="Buff" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="IsBuff" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />

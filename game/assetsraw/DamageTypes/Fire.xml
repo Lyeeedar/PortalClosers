@@ -19,16 +19,35 @@
 			</Repeat>
 		</Timeline>
 		<Timeline>
+			<BlockTurn>
+				<Time>0.08094021</Time>
+				<classID>BlockTurn</classID>
+			</BlockTurn>
 			<Damage>
 				<Time>0.109669842</Time>
 				<classID>Damage</classID>
 				<Damage>source.damage * 0.3</Damage>
 				<Type>None</Type>
 			</Damage>
-			<BlockTurn>
-				<Time>0.08094021</Time>
-				<classID>BlockTurn</classID>
-			</BlockTurn>
+		</Timeline>
+		<Timeline>
+			<AddBuff>
+				<Duration LockDuration="False">0.196949944</Duration>
+				<classID>Buff</classID>
+				<Buff meta:RefKey="Buff">
+					<Name>Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:2676c048-90e8-4c65-b8f3-b3dd1bc90bfe</Name>
+					<Description>Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:bdbaf651-2629-49cf-bc1f-833982de07f1</Description>
+					<Icon meta:RefKey="Sprite">
+						<Name>Icons/enrage</Name>
+						<Colour>255,159,0,255</Colour>
+					</Icon>
+					<Duration>99</Duration>
+					<Statistics />
+					<EventHandlers />
+					<IsPositive>false</IsPositive>
+				</Buff>
+				<IsBuff>false</IsBuff>
+			</AddBuff>
 		</Timeline>
 	</Actions>
 </ActionSequence>

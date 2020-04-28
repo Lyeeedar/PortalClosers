@@ -8,10 +8,12 @@ import com.lyeeedar.Components.isEnemies
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.DataXml
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
 
+@DataClass(name = "AddBuff")
 class BuffAction : AbstractDurationActionSequenceAction()
 {
 	@DataXml(actualClass = "Buff")
