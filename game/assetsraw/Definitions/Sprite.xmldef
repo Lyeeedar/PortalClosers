@@ -1,4 +1,4 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="12,166,15" Icon="Sprites/Oryx/Custom/terrain/tree1.png" xmlns:meta="Editor">
 	<Definition Name="Sprite" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Name" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
 		<Data Name="DrawActualSize" meta:RefKey="Boolean" />
@@ -30,7 +30,7 @@
 	<Definition Name="DirectedSprite" Collapse="True" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Path" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" SkipIfDefault="False" meta:RefKey="File" />
 	</Definition>
-	<Definition Name="SpriteWrapper" IsGlobal="True" meta:RefKey="StructDef">
+	<Definition Name="SpriteWrapper" meta:RefKey="Struct">
 		<Data Name="Sprite" Keys="RenderedLayeredSprite,Sprite" meta:RefKey="Reference" />
 		<Data Name="TilingSprite" Keys="TilingSprite" meta:RefKey="Reference" />
 		<Data Name="SpriteVariants" meta:RefKey="Collection">

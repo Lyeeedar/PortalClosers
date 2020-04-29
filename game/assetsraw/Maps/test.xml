@@ -33,25 +33,7 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
-					<Floor meta:RefKey="SpriteWrapper">
-						<Sprite meta:RefKey="Sprite">
-							<Name>grass</Name>
-						</Sprite>
-						<SpriteVariants>
-							<Sprite>
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/uf_split/uf_terrain/ground_grass_4</Name>
-								</Sprite>
-								<Chance>0.1</Chance>
-							</Sprite>
-							<Sprite>
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/uf_split/uf_terrain/ground_grass_3</Name>
-								</Sprite>
-								<Chance>0.05</Chance>
-							</Sprite>
-						</SpriteVariants>
-					</Floor>
+					<Floor>Sprites/Defs/Grass</Floor>
 					<Contents />
 				</SymbolDef>
 			</DefineSymbol>
@@ -59,63 +41,7 @@
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
 					<Char>#</Char>
-					<Wall meta:RefKey="SpriteWrapper">
-						<Sprite meta:RefKey="RenderedLayeredSprite">
-							<Layers>
-								<Layer>
-									<Name>grass</Name>
-								</Layer>
-								<Layer>
-									<Name>Oryx/Custom/terrain/tree1</Name>
-									<DrawActualSize>true</DrawActualSize>
-								</Layer>
-							</Layers>
-						</Sprite>
-						<SpriteVariants>
-							<Sprite>
-								<Sprite meta:RefKey="RenderedLayeredSprite">
-									<Layers>
-										<Layer>
-											<Name>grass</Name>
-										</Layer>
-										<Layer>
-											<Name>Oryx/Custom/terrain/tree2</Name>
-											<DrawActualSize>true</DrawActualSize>
-										</Layer>
-									</Layers>
-								</Sprite>
-								<Chance>0.2</Chance>
-							</Sprite>
-							<Sprite>
-								<Sprite meta:RefKey="RenderedLayeredSprite">
-									<Layers>
-										<Layer>
-											<Name>grass</Name>
-										</Layer>
-										<Layer>
-											<Name>Oryx/Custom/terrain/tree3</Name>
-											<DrawActualSize>true</DrawActualSize>
-										</Layer>
-									</Layers>
-								</Sprite>
-								<Chance>0.1</Chance>
-							</Sprite>
-							<Sprite>
-								<Sprite meta:RefKey="RenderedLayeredSprite">
-									<Layers>
-										<Layer>
-											<Name>grass</Name>
-										</Layer>
-										<Layer>
-											<Name>Oryx/Custom/terrain/tree4</Name>
-											<DrawActualSize>true</DrawActualSize>
-										</Layer>
-									</Layers>
-								</Sprite>
-								<Chance>0.03</Chance>
-							</Sprite>
-						</SpriteVariants>
-					</Wall>
+					<Wall>Sprites/Defs/Trees</Wall>
 					<Contents />
 				</SymbolDef>
 			</DefineSymbol>

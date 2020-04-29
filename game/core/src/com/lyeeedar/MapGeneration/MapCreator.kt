@@ -38,8 +38,8 @@ class MapCreator
 					val symbol = symbolGrid[x, y]
 					val tile = map[x, y]
 
-					tile.floor = symbol.floor
-					tile.wall = symbol.wall
+					tile.floor = AssetManager.tryLoadSpriteWrapper(symbol.floor)
+					tile.wall = AssetManager.tryLoadSpriteWrapper(symbol.wall)
 					tile.world = world
 				}
 			}

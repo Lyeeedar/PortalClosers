@@ -4,10 +4,8 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.EntityData
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.SpaceSlot
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.XmlDataClass
 import java.util.*
 
 class Symbol: XmlDataClass(), IMapGeneratorSymbol
@@ -15,8 +13,10 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 	var extends: Char = ' '
 	override var char: Char = '.'
 
-	var floor: SpriteWrapper? = null
-	var wall: SpriteWrapper? = null
+	@DataFileReference(resourceType = "SpriteWrapper")
+	var floor: String? = null
+	@DataFileReference(resourceType = "SpriteWrapper")
+	var wall: String? = null
 	var contents: FastEnumMap<SpaceSlot, EntityData> = FastEnumMap(SpaceSlot::class.java)
 	var enemyDescription: EnemyDescription? = null
 
@@ -105,8 +105,8 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 	{
 		extends = xmlData.get("Extends", " ")!![0]
 		char = xmlData.get("Char", ".")!![0]
-		floor = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("Floor"))
-		wall = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("Wall"))
+		floor = xmlData.get("Floor", null)
+		wall = xmlData.get("Wall", null)
 		val contentsEl = xmlData.getChildByName("Contents")
 		if (contentsEl != null)
 		{
