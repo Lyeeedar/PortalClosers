@@ -11,11 +11,11 @@
 					<Animation>
 						<Name>idle</Name>
 						<Up meta:RefKey="Sprite">
-							<Name>Oryx/uf_split/uf_heroes/archer</Name>
+							<Name>Oryx/Custom/heroes/saurena</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Up>
 						<Down meta:RefKey="Sprite">
-							<Name>Oryx/uf_split/uf_heroes/archer</Name>
+							<Name>Oryx/Custom/heroes/saurena</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Down>
 					</Animation>
