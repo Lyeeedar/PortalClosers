@@ -8,7 +8,7 @@
 				<Time>0.006560651</Time>
 				<classID>SelectEntities</classID>
 				<Mode>Enemies</Mode>
-				<Count>1</Count>
+				<Count>2</Count>
 				<Condition>random</Condition>
 				<Minimum>false</Minimum>
 				<AllowSelf>false</AllowSelf>
@@ -36,7 +36,7 @@
 			<Damage>
 				<Time>0.151016563</Time>
 				<classID>Damage</classID>
-				<Damage>damage*0.4</Damage>
+				<Damage>damage*0.7</Damage>
 				<Type>None</Type>
 			</Damage>
 		</Timeline>
