@@ -1,0 +1,29 @@
+<BehaviourTree meta:X="0" meta:Y="0" GUID="9f9a5793-45b8-4c6b-9700-9881bd10fb15" xmlns:meta="Editor">
+	<Root meta:RefKey="RunUntilNotFailed">5812b1f4-6f97-418d-84f6-f119f96b7bb8</Root>
+	<NodeMap>
+		<RunUntilNotFailed meta:X="285" meta:Y="0" GUID="5812b1f4-6f97-418d-84f6-f119f96b7bb8">
+			<!--Get agroed or closest enemy-->
+			<GetAgro>
+				<classID>GetAgro</classID>
+				<Key>enemy</Key>
+			</GetAgro>
+			<Node>
+				<classID>Node</classID>
+				<Node meta:RefKey="RunUntilNotCompleted">57e55260-8ee4-4850-a4f7-75255af4eaa2</Node>
+			</Node>
+		</RunUntilNotFailed>
+		<RunUntilNotCompleted meta:X="645" meta:Y="0" GUID="57e55260-8ee4-4850-a4f7-75255af4eaa2">
+			<GetAllVisible>
+				<classID>GetAllVisible</classID>
+				<Type>Enemies</Type>
+				<Key>enemies</Key>
+			</GetAllVisible>
+			<PickOneFrom>
+				<classID>PickOneFrom</classID>
+				<Input>enemies</Input>
+				<Output>enemy</Output>
+				<Condition>dist</Condition>
+			</PickOneFrom>
+		</RunUntilNotCompleted>
+	</NodeMap>
+</BehaviourTree>

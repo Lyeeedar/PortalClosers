@@ -6,8 +6,10 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.Components.ComponentType
 import com.lyeeedar.Components.HateComponent
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 
+@DataClass(category = "Entity")
 class GetAgroBehaviourAction : AbstractBehaviourAction()
 {
 	lateinit var key: String

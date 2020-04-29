@@ -1,0 +1,31 @@
+<BehaviourTree meta:X="0" meta:Y="0" GUID="121c634e-8a02-49cc-90cb-68b296981a86" xmlns:meta="Editor">
+	<Root meta:RefKey="RunUntilNotCompleted">0665f4b4-70f1-4e4b-b342-8aeee0172a4d</Root>
+	<NodeMap>
+		<RunUntilNotCompleted meta:X="285" meta:Y="0" GUID="0665f4b4-70f1-4e4b-b342-8aeee0172a4d">
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/SelectEnemy</Path>
+			</Import>
+			<ConvertToPosition>
+				<classID>ConvertToPosition</classID>
+				<Input>enemy</Input>
+				<Output>enemyPos</Output>
+			</ConvertToPosition>
+			<Node>
+				<classID>Node</classID>
+				<Node meta:RefKey="RunUntilNotFailed">7fcfbc2e-a086-4db8-8e87-ffc4b9c45364</Node>
+			</Node>
+		</RunUntilNotCompleted>
+		<RunUntilNotFailed meta:X="615" meta:Y="150" GUID="7fcfbc2e-a086-4db8-8e87-ffc4b9c45364">
+			<Attack>
+				<classID>Attack</classID>
+				<Key>enemyPos</Key>
+			</Attack>
+			<MoveTo>
+				<classID>MoveTo</classID>
+				<Dst>1</Dst>
+				<Key>enemyPos</Key>
+			</MoveTo>
+		</RunUntilNotFailed>
+	</NodeMap>
+</BehaviourTree>

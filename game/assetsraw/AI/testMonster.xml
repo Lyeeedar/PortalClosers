@@ -1,114 +1,15 @@
 <BehaviourTree meta:X="0" meta:Y="0" GUID="f475f509-b39a-43ef-b0f3-90a8b4a29326" xmlns:meta="Editor">
 	<Root meta:RefKey="RunUntilNotFailed">c08cb163-9b4f-4d6c-aa31-0d45927783db</Root>
 	<NodeMap>
-		<RunUntilNotFailed meta:X="285" meta:Y="-15" GUID="c08cb163-9b4f-4d6c-aa31-0d45927783db">
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunUntilNotCompleted">6959e35b-0877-4851-82dc-6d89c32b549a</Node>
-			</Node>
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunOneRandomly">64de2af5-b67f-4826-90fa-e77fcbc7b69e</Node>
-			</Node>
+		<RunUntilNotFailed meta:X="270" meta:Y="0" GUID="c08cb163-9b4f-4d6c-aa31-0d45927783db">
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/MoveAndAttackEnemyMelee</Path>
+			</Import>
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/RandomWander</Path>
+			</Import>
 		</RunUntilNotFailed>
-		<RunUntilNotCompleted meta:X="675" meta:Y="-15" GUID="6959e35b-0877-4851-82dc-6d89c32b549a">
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunUntilNotFailed">8fbe3a14-10b0-4bf7-a775-dc6d56e40059</Node>
-			</Node>
-			<ConvertToPosition>
-				<classID>ConvertToPosition</classID>
-				<Input>enemy</Input>
-				<Output>enemyPos</Output>
-			</ConvertToPosition>
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunUntilNotFailed">070d09a6-37a6-43fe-ab94-0e5e62540632</Node>
-			</Node>
-		</RunUntilNotCompleted>
-		<RunUntilNotFailed meta:X="990" meta:Y="-45" GUID="8fbe3a14-10b0-4bf7-a775-dc6d56e40059">
-			<GetAgro>
-				<classID>GetAgro</classID>
-				<Key>enemy</Key>
-			</GetAgro>
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunUntilNotCompleted">8d915084-e217-4ed7-9d08-58e9cf42696f</Node>
-			</Node>
-		</RunUntilNotFailed>
-		<RunUntilNotCompleted meta:X="1275" meta:Y="-45" GUID="8d915084-e217-4ed7-9d08-58e9cf42696f">
-			<GetAllVisible>
-				<classID>GetAllVisible</classID>
-				<Type>Enemies</Type>
-				<Key>enemies</Key>
-			</GetAllVisible>
-			<PickOneFrom>
-				<classID>PickOneFrom</classID>
-				<Input>enemies</Input>
-				<Output>enemy</Output>
-				<Condition>dist</Condition>
-			</PickOneFrom>
-		</RunUntilNotCompleted>
-		<RunUntilNotFailed meta:X="990" meta:Y="120" GUID="070d09a6-37a6-43fe-ab94-0e5e62540632">
-			<Attack>
-				<classID>Attack</classID>
-				<Key>enemyPos</Key>
-			</Attack>
-			<MoveTo>
-				<classID>MoveTo</classID>
-				<Dst>1</Dst>
-				<Key>enemyPos</Key>
-			</MoveTo>
-		</RunUntilNotFailed>
-		<RunOneRandomly meta:X="660" meta:Y="240" GUID="64de2af5-b67f-4826-90fa-e77fcbc7b69e">
-			<Wait>
-				<classID>Wait</classID>
-				<Count>1</Count>
-			</Wait>
-			<Wait>
-				<classID>Wait</classID>
-				<Count>1</Count>
-			</Wait>
-			<Wait>
-				<classID>Wait</classID>
-				<Count>1</Count>
-			</Wait>
-			<Node>
-				<classID>Node</classID>
-				<Node meta:RefKey="RunUntilNotCompleted">3226888e-f513-4b6a-aa7d-27cd4ac20e21</Node>
-			</Node>
-		</RunOneRandomly>
-		<RunUntilNotCompleted meta:X="1020" meta:Y="285" GUID="3226888e-f513-4b6a-aa7d-27cd4ac20e21">
-			<Branch>
-				<classID>Branch</classID>
-				<Branches>
-					<ConditionAndNode>
-						<Condition>explorePos==0</Condition>
-						<Node meta:RefKey="RunUntilNotCompleted">87b7baca-bc95-42d5-b387-2b0c7650b379</Node>
-					</ConditionAndNode>
-				</Branches>
-			</Branch>
-			<MoveTo>
-				<classID>MoveTo</classID>
-				<Key>explorePos</Key>
-			</MoveTo>
-			<ClearValue>
-				<classID>ClearValue</classID>
-				<Key>explorePos</Key>
-			</ClearValue>
-		</RunUntilNotCompleted>
-		<RunUntilNotCompleted meta:X="1515" meta:Y="285" GUID="87b7baca-bc95-42d5-b387-2b0c7650b379">
-			<GetAllVisible>
-				<classID>GetAllVisible</classID>
-				<Type>Tiles</Type>
-				<Key>tiles</Key>
-			</GetAllVisible>
-			<PickOneFrom>
-				<classID>PickOneFrom</classID>
-				<Input>tiles</Input>
-				<Output>explorePos</Output>
-				<Condition>random</Condition>
-			</PickOneFrom>
-		</RunUntilNotCompleted>
 	</NodeMap>
 </BehaviourTree>

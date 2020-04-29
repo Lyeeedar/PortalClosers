@@ -1,0 +1,33 @@
+<BehaviourTree meta:X="0" meta:Y="0" GUID="397656b4-fa42-4a80-a296-94fee1b10bae" xmlns:meta="Editor">
+	<Root meta:RefKey="RunAll">34488669-134c-46cd-ba73-62cba970b70b</Root>
+	<NodeMap>
+		<RunUntilNotCompleted meta:X="660" meta:Y="0" GUID="88f25442-9b95-460f-8289-c946f195458e">
+			<ConvertToPosition>
+				<classID>ConvertToPosition</classID>
+				<Input>leader</Input>
+				<Output>leaderPos</Output>
+			</ConvertToPosition>
+			<MoveTo>
+				<classID>MoveTo</classID>
+				<Dst>4</Dst>
+				<Key>leaderPos</Key>
+			</MoveTo>
+			<ClearValue>
+				<classID>ClearValue</classID>
+				<Key>leaderPos</Key>
+			</ClearValue>
+		</RunUntilNotCompleted>
+		<RunAll meta:X="195" meta:Y="0" GUID="34488669-134c-46cd-ba73-62cba970b70b">
+			<!--Only run if we have a leader-->
+			<Branch>
+				<classID>Branch</classID>
+				<Branches>
+					<ConditionAndNode>
+						<Condition>leader</Condition>
+						<Node meta:RefKey="RunUntilNotCompleted">88f25442-9b95-460f-8289-c946f195458e</Node>
+					</ConditionAndNode>
+				</Branches>
+			</Branch>
+		</RunAll>
+	</NodeMap>
+</BehaviourTree>

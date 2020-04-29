@@ -17,10 +17,11 @@ import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.renderSystem
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Controls
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 
-
+@DataClass(category = "Action")
 class ProcessInputBehaviourAction : AbstractBehaviourAction()
 {
 	//region non-data

@@ -9,9 +9,11 @@ import com.lyeeedar.Components.position
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Components.task
 import com.lyeeedar.Game.Tile
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
 
+@DataClass(category = "Action")
 class AttackBehaviourAction : AbstractBehaviourAction()
 {
 	lateinit var key: String

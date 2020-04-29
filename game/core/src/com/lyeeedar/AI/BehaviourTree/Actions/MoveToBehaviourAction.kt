@@ -10,9 +10,11 @@ import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
 import com.lyeeedar.Pathfinding.Pathfinder
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
 
+@DataClass(category = "Action")
 class MoveToBehaviourAction : AbstractBehaviourAction()
 {
 	val lastPosKey = "lastPos"

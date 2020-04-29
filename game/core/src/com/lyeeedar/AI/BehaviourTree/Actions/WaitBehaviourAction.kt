@@ -7,9 +7,11 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Components.task
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.round
 
+@DataClass(category = "Action")
 class WaitBehaviourAction : AbstractBehaviourAction()
 {
 	lateinit var count: CompiledExpression

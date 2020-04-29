@@ -1,0 +1,82 @@
+<BehaviourTree meta:X="0" meta:Y="0" GUID="3ece1d05-dd03-45ba-9d79-3f3e03167c9d" xmlns:meta="Editor">
+	<Root meta:RefKey="RunUntilNotCompleted">3196aed8-6dd5-480c-860b-a40655880db9</Root>
+	<NodeMap>
+		<RunUntilNotCompleted meta:X="315" meta:Y="0" GUID="3196aed8-6dd5-480c-860b-a40655880db9">
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/SelectEnemy</Path>
+			</Import>
+			<ConvertToPosition>
+				<classID>ConvertToPosition</classID>
+				<Input>enemy</Input>
+				<Output>enemyPos</Output>
+			</ConvertToPosition>
+			<Node>
+				<classID>Node</classID>
+				<Node meta:RefKey="RunUntilNotFailed">6e891b69-92f2-4fd5-812c-7853103594e0</Node>
+			</Node>
+		</RunUntilNotCompleted>
+		<RunUntilNotFailed meta:X="660" meta:Y="165" GUID="6e891b69-92f2-4fd5-812c-7853103594e0">
+			<!--Attempt to maintain distance-->
+			<Branch>
+				<classID>Branch</classID>
+				<Branches>
+					<ConditionAndNode>
+						<Condition>attackCount&gt;=2</Condition>
+						<Node meta:RefKey="RunAll">d4fc3deb-8a13-4dbd-a699-7f3c712521a4</Node>
+					</ConditionAndNode>
+					<ConditionAndNode>
+						<Condition>else</Condition>
+						<Node meta:RefKey="RunUntilNotFailed">65246503-a830-40b7-9d13-9e47f4309cd9</Node>
+					</ConditionAndNode>
+				</Branches>
+			</Branch>
+		</RunUntilNotFailed>
+		<RunAll meta:X="1020" meta:Y="165" GUID="d4fc3deb-8a13-4dbd-a699-7f3c712521a4">
+			<!--Move away-->
+			<MoveTo>
+				<classID>MoveTo</classID>
+				<Dst>3</Dst>
+				<Towards>false</Towards>
+				<Key>enemyPos</Key>
+			</MoveTo>
+			<ClearValue>
+				<classID>ClearValue</classID>
+				<Key>attackCount</Key>
+			</ClearValue>
+		</RunAll>
+		<RunUntilNotFailed meta:X="1005" meta:Y="330" GUID="65246503-a830-40b7-9d13-9e47f4309cd9">
+			<!--Attack or move to-->
+			<Node>
+				<classID>Node</classID>
+				<Node meta:RefKey="RunAll">28255bb3-f564-4971-940b-7a7a2a48a4eb</Node>
+			</Node>
+			<Node>
+				<classID>Node</classID>
+				<Node meta:RefKey="RunAll">14881f95-65ed-4bce-9467-9091cbf2f0f4</Node>
+			</Node>
+		</RunUntilNotFailed>
+		<RunAll meta:X="1245" meta:Y="345" GUID="28255bb3-f564-4971-940b-7a7a2a48a4eb">
+			<SetValue>
+				<classID>SetValue</classID>
+				<Key>attackCount</Key>
+				<Value>attackCount+1</Value>
+			</SetValue>
+			<Attack>
+				<classID>Attack</classID>
+				<Key>enemyPos</Key>
+			</Attack>
+		</RunAll>
+		<RunAll meta:X="1245" meta:Y="525" GUID="14881f95-65ed-4bce-9467-9091cbf2f0f4">
+			<MoveTo>
+				<classID>MoveTo</classID>
+				<Dst>1</Dst>
+				<Key>enemyPos</Key>
+			</MoveTo>
+			<ClearValue>
+				<classID>ClearValue</classID>
+				<Key>attackCount</Key>
+			</ClearValue>
+		</RunAll>
+	</NodeMap>
+</BehaviourTree>

@@ -15,6 +15,7 @@ import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import java.lang.RuntimeException
 
+@DataClass(category = "Data")
 class PickOneFromBehaviourAction : AbstractBehaviourAction()
 {
 	lateinit var input: String
