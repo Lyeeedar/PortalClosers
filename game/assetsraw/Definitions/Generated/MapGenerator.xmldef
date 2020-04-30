@@ -93,6 +93,12 @@
 		<Const Name="classID">Node</Const>
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
 	</Definition>
+	<Definition Name="PackDescription" Nullable="False" TextColour="209,38,38" meta:RefKey="StructDef">
+		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Difficulty" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="IsBoss" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Size" Type="Int" Name1="min" Name2="max" NumComponents="2" SkipIfDefault="True" Default="3,5" meta:RefKey="Vector" />
+	</Definition>
 	<Definition Name="PerPoint" Nullable="False" TextColour="157,31,189" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">PerPoint</Const>
 		<Data Name="Node" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
@@ -217,6 +223,7 @@
 			<Data Name="Light" Keys="Entity" meta:RefKey="Reference" />
 		</Data>
 		<Data Name="EnemyDescription" Keys="EnemyDescription" meta:RefKey="Reference" />
+		<Data Name="PackDescription" Keys="PackDescription" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Take" Nullable="False" TextColour="214,86,219" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Take</Const>

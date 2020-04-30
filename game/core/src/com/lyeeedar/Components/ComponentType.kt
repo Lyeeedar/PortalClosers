@@ -15,6 +15,7 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	MarkedForDeletion({ MarkedForDeletionComponent() }),
 	MetaRegion({ MetaRegionComponent() }),
 	Name({ NameComponent() }),
+	Pack({ PackComponent() }),
 	Position({ PositionComponent() }),
 	Renderable({ RenderableComponent() }),
 	Statistics({ StatisticsComponent() }),
@@ -42,6 +43,7 @@ inline fun Entity.loadData(): LoadDataComponent? = this.components[ComponentType
 inline fun Entity.markedForDeletion(): MarkedForDeletionComponent? = this.components[ComponentType.MarkedForDeletion] as MarkedForDeletionComponent?
 inline fun Entity.metaRegion(): MetaRegionComponent? = this.components[ComponentType.MetaRegion] as MetaRegionComponent?
 inline fun Entity.name(): NameComponent? = this.components[ComponentType.Name] as NameComponent?
+inline fun Entity.pack(): PackComponent? = this.components[ComponentType.Pack] as PackComponent?
 inline fun Entity.position(): PositionComponent? = this.components[ComponentType.Position] as PositionComponent?
 inline fun Entity.renderable(): RenderableComponent? = this.components[ComponentType.Renderable] as RenderableComponent?
 inline fun Entity.statistics(): StatisticsComponent? = this.components[ComponentType.Statistics] as StatisticsComponent?

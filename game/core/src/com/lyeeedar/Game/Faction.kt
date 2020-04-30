@@ -2,18 +2,47 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Components.EntityData
+import com.lyeeedar.Components.*
+import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import java.util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import squidpony.squidmath.LightRNG
 
 @DataFile(colour="250,136,136", icon="Sprites/Oryx/uf_split/uf_heroes/rat_giant_1.png")
 class Faction : XmlDataClass()
 {
-	val enemies: Array<FactionMonster> = Array()
+	val mobs: Array<FactionMonster> = Array()
+	val leaders: Array<FactionMonster> = Array()
 	val bosses: Array<FactionMonster> = Array()
+
+	fun getPack(rng: LightRNG, numMobs: Int, isBoss: Boolean): PackData
+	{
+		val leaderArray: Array<FactionMonster>
+		val mobArray: Array<FactionMonster>
+		if (isBoss)
+		{
+			leaderArray = bosses
+			mobArray = leaders
+		}
+		else
+		{
+			leaderArray = leaders
+			mobArray = mobs
+		}
+
+		val pack = PackData()
+		pack.leader = leaderArray.random(rng).entity
+
+		for (i in 0 until numMobs)
+		{
+			pack.mobs.add(mobArray.random(rng).entity)
+		}
+
+		return pack
+	}
 
 	fun applyRarity(array: Array<FactionMonster>)
 	{
@@ -40,7 +69,8 @@ class Faction : XmlDataClass()
 
 	override fun afterLoad()
 	{
-		applyRarity(enemies)
+		applyRarity(mobs)
+		applyRarity(leaders)
 		applyRarity(bosses)
 	}
 
@@ -65,16 +95,28 @@ class Faction : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		val enemiesEl = xmlData.getChildByName("Enemies")
-		if (enemiesEl != null)
+		val mobsEl = xmlData.getChildByName("Mobs")
+		if (mobsEl != null)
 		{
-			for (el in enemiesEl.children)
+			for (el in mobsEl.children)
 			{
-				val objenemies: FactionMonster
-				val objenemiesEl = el
-				objenemies = FactionMonster()
-				objenemies.load(objenemiesEl)
-				enemies.add(objenemies)
+				val objmobs: FactionMonster
+				val objmobsEl = el
+				objmobs = FactionMonster()
+				objmobs.load(objmobsEl)
+				mobs.add(objmobs)
+			}
+		}
+		val leadersEl = xmlData.getChildByName("Leaders")
+		if (leadersEl != null)
+		{
+			for (el in leadersEl.children)
+			{
+				val objleaders: FactionMonster
+				val objleadersEl = el
+				objleaders = FactionMonster()
+				objleaders.load(objleadersEl)
+				leaders.add(objleaders)
 			}
 		}
 		val bossesEl = xmlData.getChildByName("Bosses")
@@ -97,18 +139,64 @@ class Faction : XmlDataClass()
 class FactionMonster : XmlDataClass()
 {
 	lateinit var rarity: Rarity
-	var levelRange: Point = Point(1, 999)
 	lateinit var entity: EntityData
 
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
 		rarity = Rarity.valueOf(xmlData.get("Rarity").toUpperCase(Locale.ENGLISH))
-		val levelRangeRaw = xmlData.get("LevelRange", "1, 999")!!.split(',')
-		levelRange = Point(levelRangeRaw[0].trim().toInt(), levelRangeRaw[1].trim().toInt())
 		val entityEl = xmlData.getChildByName("Entity")!!
 		entity = EntityData()
 		entity.load(entityEl)
 	}
 	//endregion
+}
+fun EntityData.create(difficulty: Int, world: World<*>, seed: Long): Entity
+{
+	val entity = create()
+	entity.statistics()?.calculateStatistics(difficulty)
+	entity.ai()?.state?.set(EntityReference(entity), world, seed)
+
+	return entity
+}
+
+class Pack
+{
+	lateinit var leader: EntityReference
+	val mobs = Array<EntityReference>()
+
+	val entities: Sequence<EntityReference>
+		get() = sequence {
+			if (leader.isValid()) yield(leader)
+			for (mob in mobs)
+			{
+				if (mob.isValid()) yield(mob)
+			}
+		}
+}
+
+class PackData
+{
+	lateinit var leader: EntityData
+	val mobs = Array<EntityData>()
+
+	fun create(difficulty: Int, world: World<*>, seed: Long): Pack
+	{
+		val seedRng = LightRNG(seed)
+
+		val pack = Pack()
+		pack.leader = EntityReference(leader.create(difficulty, world, seedRng.nextLong()))
+		pack.leader.entity.setPack(pack)
+
+		for (mobData in mobs)
+		{
+			val mob = EntityReference(mobData.create(difficulty, world, seedRng.nextLong()))
+			mob.entity.setPack(pack)
+			pack.mobs.add(mob)
+
+			mob.entity.ai()!!.state.setData("leader", 0, pack.leader)
+		}
+
+		return pack
+	}
 }

@@ -6,6 +6,7 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.Components.ComponentType
 import com.lyeeedar.Components.HateComponent
+import com.lyeeedar.Components.pack
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 
@@ -18,9 +19,18 @@ class GetAgroBehaviourAction : AbstractBehaviourAction()
 	{
 		val entity = state.entity.get() ?: return EvaluationState.FAILED
 		val hate = entity.addOrGet(ComponentType.Hate) as HateComponent
-		val target = hate.getAgroedTarget(entity, state.world)
+		var target = hate.getAgroedTarget(entity, state.world)
 
 		if (target == null)
+		{
+			val pack = entity.pack()
+			if (pack != null)
+			{
+				target = pack.getPackAgro()
+			}
+		}
+
+		if (target == null || !target.isValid())
 		{
 			state.removeData(key, 0)
 			return EvaluationState.FAILED

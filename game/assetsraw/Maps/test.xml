@@ -53,14 +53,6 @@
 				<Node meta:RefKey="MapGeneratorNode">4e8ed4f2-5af3-442a-b5cb-9f7871bf6b4d</Node>
 			</Filter>
 		</MapGeneratorNode>
-		<MapGeneratorNode meta:X="765" meta:Y="390" GUID="b98c54e3-b02b-4cbf-83e1-ed85b372a15f">
-			<Take>
-				<classID>Take</classID>
-				<Mode>Random</Mode>
-				<CountExp>3</CountExp>
-				<Node meta:RefKey="MapGeneratorNode">94cfa4e1-5c98-466e-bc59-c0658f4eff54</Node>
-			</Take>
-		</MapGeneratorNode>
 		<MapGeneratorNode meta:X="1043" meta:Y="390" GUID="94cfa4e1-5c98-466e-bc59-c0658f4eff54">
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
@@ -68,7 +60,7 @@
 					<Extends>.</Extends>
 					<Char>!</Char>
 					<Contents />
-					<EnemyDescription meta:RefKey="EnemyDescription" />
+					<PackDescription meta:RefKey="PackDescription" />
 				</SymbolDef>
 			</DefineSymbol>
 			<Fill>
@@ -90,6 +82,14 @@
 				<classID>SetNamedArea</classID>
 				<Name>playerspawn</Name>
 			</SetNamedArea>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="765" meta:Y="390" GUID="b98c54e3-b02b-4cbf-83e1-ed85b372a15f">
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>1</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">94cfa4e1-5c98-466e-bc59-c0658f4eff54</Node>
+			</Take>
 		</MapGeneratorNode>
 	</NodeMap>
 </MapGenerator>

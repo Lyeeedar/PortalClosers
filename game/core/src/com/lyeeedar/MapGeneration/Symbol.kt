@@ -19,6 +19,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 	var wall: String? = null
 	var contents: FastEnumMap<SpaceSlot, EntityData> = FastEnumMap(SpaceSlot::class.java)
 	var enemyDescription: EnemyDescription? = null
+	var packDescription: PackDescription? = null
 
 	//region non-data
 	var placerHashCode: Int = -1
@@ -34,6 +35,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			floor = floor ?: sym.floor
 			wall = wall ?: sym.wall
 			enemyDescription = enemyDescription ?: sym.enemyDescription
+			packDescription = packDescription ?: sym.packDescription
 
 			for (slot in SpaceSlot.Values)
 			{
@@ -54,6 +56,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			floor = data.floor
 			wall = data.wall
 			enemyDescription = data.enemyDescription
+			packDescription = data.packDescription
 		}
 		else
 		{
@@ -65,6 +68,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			floor = data.floor ?: floor
 			wall = data.wall ?: wall
 			enemyDescription = data.enemyDescription ?: enemyDescription
+			packDescription = data.packDescription ?: packDescription
 		}
 
 		char = data.char
@@ -126,6 +130,12 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 			enemyDescription = EnemyDescription()
 			enemyDescription!!.load(enemyDescriptionEl)
 		}
+		val packDescriptionEl = xmlData.getChildByName("PackDescription")
+		if (packDescriptionEl != null)
+		{
+			packDescription = PackDescription()
+			packDescription!!.load(packDescriptionEl)
+		}
 	}
 	//endregion
 }
@@ -142,6 +152,27 @@ class EnemyDescription : XmlDataClass()
 		faction = xmlData.get("Faction", null)
 		difficulty = xmlData.getInt("Difficulty", 1)
 		isBoss = xmlData.getBoolean("IsBoss", false)
+	}
+	//endregion
+}
+
+class PackDescription : XmlDataClass()
+{
+	var faction: String? = null
+	var difficulty: Int = 1
+	var isBoss: Boolean = false
+
+	@DataVector(name1 = "min", name2 = "max")
+	var size: Point = Point(3,5)
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		faction = xmlData.get("Faction", null)
+		difficulty = xmlData.getInt("Difficulty", 1)
+		isBoss = xmlData.getBoolean("IsBoss", false)
+		val sizeRaw = xmlData.get("Size", "3,5")!!.split(',')
+		size = Point(sizeRaw[0].trim().toInt(), sizeRaw[1].trim().toInt())
 	}
 	//endregion
 }

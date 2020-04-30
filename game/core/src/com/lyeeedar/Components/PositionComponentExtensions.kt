@@ -128,6 +128,12 @@ fun PositionComponent.addToTile(entity: Entity)
 		}
 	}
 }
+fun Entity.addToTile(tile: Tile)
+{
+	val pos = addOrGet(ComponentType.Position) as PositionComponent
+	pos.position = tile
+	pos.addToTile(this)
+}
 
 fun PositionComponent.doMove(t: AbstractTile, entity: Entity)
 {
