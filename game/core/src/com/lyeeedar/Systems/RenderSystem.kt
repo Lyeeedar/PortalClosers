@@ -78,11 +78,12 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	}
 
 	private val playerPosVec = Vector2()
-	override fun getPlayerPosition(): Vector2
+	override fun getPlayerPosition(deltaTime: Float): Vector2
 	{
 		val entity = world.player!!
 		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
+		renderer.update(renderable, deltaTime)
 
 		val px = pos.position.x.toFloat() + pos.offset.x
 		val py = pos.position.y.toFloat() + pos.offset.y
