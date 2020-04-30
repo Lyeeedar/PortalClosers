@@ -2,6 +2,7 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.math.MathUtils.lerp
 import com.lyeeedar.Components.Entity
+import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.position
 import com.lyeeedar.SpaceSlot
@@ -46,18 +47,19 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 			return true
 		}
 
-		val obj = contents.get(travelType)?.get()
-		if (obj != null && obj != self)
+		if (self is EntityReference)
 		{
-			if (self is Entity)
+			val selfEntity = self.get()
+			val obj = contents.get(travelType)?.get()
+			if (obj != null && selfEntity != null && obj != selfEntity)
 			{
-				if (self.isAllies(obj))
+				if (selfEntity.isAllies(obj))
 				{
 					return true
 				}
-			}
 
-			return false
+				return false
+			}
 		}
 
 		return true
@@ -65,12 +67,13 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 
 	override fun getInfluence(travelType: SpaceSlot, self: Any?): Int
 	{
-		val obj = contents.get(travelType)?.get()
-		if (obj != null && obj != self)
+		if (self is EntityReference)
 		{
-			if (self is Entity)
+			val selfEntity = self.get()
+			val obj = contents.get(travelType)?.get()
+			if (obj != null && selfEntity != null && obj != selfEntity)
 			{
-				if (self.isAllies(obj))
+				if (selfEntity.isAllies(obj))
 				{
 					return 100
 				}
