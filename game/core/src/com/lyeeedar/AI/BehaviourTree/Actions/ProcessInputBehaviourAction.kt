@@ -36,7 +36,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		if (task.tasks.size > 0) return EvaluationState.FAILED
 
 		var moveDir: Direction? = null
-		if (Gdx.input.isTouched(0) && !Gdx.input.isTouched(1) && !Gdx.input.isTouched(2) && !Gdx.input.isTouched(3) && !Gdx.input.isTouched(4))
+		if (RenderSystemWidget.instance.isSelected)
 		{
 			val tile = RenderSystemWidget.instance.selectedPoint
 

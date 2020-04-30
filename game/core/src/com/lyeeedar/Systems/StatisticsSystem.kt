@@ -1,5 +1,6 @@
 package com.lyeeedar.Systems
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Array
@@ -92,14 +93,13 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 		for (message in stats.messagesToShow)
 		{
-			val screenpos = RenderSystemWidget.instance.pointToScreenspace(entity.position()!!.position)
-			screenpos.add(world.tileSize / 2f + Random.random(Random.sharedRandom, -2, 2).toFloat(), world.tileSize + Random.random(Random.sharedRandom, -2, 2).toFloat())
+			val offset = Vector2(world.tileSize / 2f + Random.random(Random.sharedRandom, -2, 2).toFloat(), world.tileSize + Random.random(Random.sharedRandom, -2, 2).toFloat())
 
 			val label = Label(message.text, Statics.skin, "popup")
 			label.color = message.colour.color()
 			label.setFontScale(message.size)
 			label.rotation = -60f
-			label.setPosition(screenpos.x - label.prefWidth / 2f, screenpos.y)
+			label.setPosition(offset.x - label.prefWidth / 2f, offset.y)
 
 			val sequence =
 				Actions.alpha(0f) then
@@ -112,14 +112,9 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 			label.addAction(sequence)
 
-			val width = label.prefWidth
-			if (screenpos.x + width > Statics.stage.width)
-			{
-				label.setPosition(Statics.stage.width - width - 20, screenpos.y)
-			}
-
 			messageList.add(label)
 			Statics.stage.addActor(label)
+			RenderSystemWidget.instance.addAttachedToEntityWidget(EntityReference(entity), label)
 		}
 
 		for (message in stats.messagesToShow)
