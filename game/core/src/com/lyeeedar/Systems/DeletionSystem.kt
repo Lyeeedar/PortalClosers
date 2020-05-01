@@ -29,7 +29,7 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 				val numBlood = Random.random(Random.sharedRandom, 10, 20)
 				for (i in 0 until numBlood)
 				{
-					BloodSplatter.splatter(entityStats.lastHitSource, pos.position, 3f, world)
+					BloodSplatter.splatter(entityStats.lastHitSource, pos.position, 3f, world, entityStats.bloodColour)
 				}
 			}
 

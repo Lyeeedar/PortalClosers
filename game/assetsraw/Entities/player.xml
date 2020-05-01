@@ -41,6 +41,7 @@
 					<Name>EnemyAttacks/slash</Name>
 				</HitEffect>
 			</AttackDefinition>
+			<BloodColour>255,0,0,255</BloodColour>
 		</Statistics>
 	</Components>
 </Entity>

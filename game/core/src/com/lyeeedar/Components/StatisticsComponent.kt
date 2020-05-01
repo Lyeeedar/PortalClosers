@@ -21,6 +21,7 @@ class StatisticsComponentData : AbstractComponentData()
 	var faction: String = ""
 	lateinit var attackDefinition: AttackDefinition
 	var difficultyRating: DifficultyRating? = null
+	var bloodColour: Colour = Colour.RED
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -45,6 +46,7 @@ class StatisticsComponentData : AbstractComponentData()
 			difficultyRating = DifficultyRating()
 			difficultyRating!!.load(difficultyRatingEl)
 		}
+		bloodColour = AssetManager.tryLoadColour(xmlData.getChildByName("BloodColour"))!!
 	}
 	override val classID: String = "Statistics"
 	//endregion
@@ -118,6 +120,8 @@ class StatisticsComponent : DataComponent()
 	var tookDamage = false
 	var blockedDamage = false
 	var blockBroken = false
+
+	var bloodColour: Colour = Colour.RED
 	//endregion
 
 	//region level buffs and equipment
@@ -164,6 +168,7 @@ class StatisticsComponent : DataComponent()
 		faction = data.faction
 		attackDefinition = data.attackDefinition
 		difficultyRating = data.difficultyRating
+		bloodColour = data.bloodColour
 	}
 
 	fun calculateStatistics(level: Int)

@@ -21,6 +21,7 @@
 							<TimeToKill>6</TimeToKill>
 							<ArmourFactor>0.3</ArmourFactor>
 						</DifficultyRating>
+						<BloodColour>255,0,0,255</BloodColour>
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
@@ -60,6 +61,7 @@
 							<ArmourFactor>0.5</ArmourFactor>
 							<Damage>0.2</Damage>
 						</DifficultyRating>
+						<BloodColour>255,0,0,255</BloodColour>
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
@@ -100,6 +102,7 @@
 							<ArmourFactor>0.3</ArmourFactor>
 							<Damage>0.9</Damage>
 						</DifficultyRating>
+						<BloodColour>255,0,0,255</BloodColour>
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
