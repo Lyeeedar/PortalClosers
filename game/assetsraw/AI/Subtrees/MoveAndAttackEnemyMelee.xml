@@ -1,7 +1,7 @@
 <BehaviourTree meta:X="0" meta:Y="0" GUID="121c634e-8a02-49cc-90cb-68b296981a86" xmlns:meta="Editor">
-	<Root meta:RefKey="RunUntilNotCompleted">0665f4b4-70f1-4e4b-b342-8aeee0172a4d</Root>
+	<Root meta:RefKey="RunAll">05d369df-0908-4639-82a5-bfafba11a526</Root>
 	<NodeMap>
-		<RunUntilNotCompleted meta:X="285" meta:Y="0" GUID="0665f4b4-70f1-4e4b-b342-8aeee0172a4d">
+		<RunUntilNotCompleted meta:X="510" meta:Y="15" GUID="0665f4b4-70f1-4e4b-b342-8aeee0172a4d">
 			<Import>
 				<classID>Import</classID>
 				<Path>AI/Subtrees/SelectEnemy</Path>
@@ -16,7 +16,7 @@
 				<Node meta:RefKey="RunUntilNotFailed">7fcfbc2e-a086-4db8-8e87-ffc4b9c45364</Node>
 			</Node>
 		</RunUntilNotCompleted>
-		<RunUntilNotFailed meta:X="615" meta:Y="150" GUID="7fcfbc2e-a086-4db8-8e87-ffc4b9c45364">
+		<RunUntilNotFailed meta:X="840" meta:Y="165" GUID="7fcfbc2e-a086-4db8-8e87-ffc4b9c45364">
 			<Attack>
 				<classID>Attack</classID>
 				<Key>enemyPos</Key>
@@ -27,5 +27,14 @@
 				<Key>enemyPos</Key>
 			</MoveTo>
 		</RunUntilNotFailed>
+		<RunAll meta:X="204" meta:Y="0" GUID="05d369df-0908-4639-82a5-bfafba11a526">
+			<SetState>
+				<classID>SetState</classID>
+				<OutputMap>
+					<Running>Running</Running>
+				</OutputMap>
+				<Node meta:RefKey="RunUntilNotCompleted">0665f4b4-70f1-4e4b-b342-8aeee0172a4d</Node>
+			</SetState>
+		</RunAll>
 	</NodeMap>
 </BehaviourTree>

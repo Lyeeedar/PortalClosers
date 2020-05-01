@@ -1,7 +1,7 @@
 <BehaviourTree meta:X="0" meta:Y="0" GUID="397656b4-fa42-4a80-a296-94fee1b10bae" xmlns:meta="Editor">
-	<Root meta:RefKey="RunAll">34488669-134c-46cd-ba73-62cba970b70b</Root>
+	<Root meta:RefKey="RunAll">fba0018a-53a5-49b0-8ff0-d6d8aa677756</Root>
 	<NodeMap>
-		<RunUntilNotCompleted meta:X="660" meta:Y="0" GUID="88f25442-9b95-460f-8289-c946f195458e">
+		<RunUntilNotCompleted meta:X="495" meta:Y="0" GUID="88f25442-9b95-460f-8289-c946f195458e">
 			<ConvertToPosition>
 				<classID>ConvertToPosition</classID>
 				<Input>leader</Input>
@@ -17,17 +17,14 @@
 				<Key>leaderPos</Key>
 			</ClearValue>
 		</RunUntilNotCompleted>
-		<RunAll meta:X="195" meta:Y="0" GUID="34488669-134c-46cd-ba73-62cba970b70b">
-			<!--Only run if we have a leader-->
-			<Branch>
-				<classID>Branch</classID>
-				<Branches>
-					<ConditionAndNode>
-						<Condition>leader</Condition>
-						<Node meta:RefKey="RunUntilNotCompleted">88f25442-9b95-460f-8289-c946f195458e</Node>
-					</ConditionAndNode>
-				</Branches>
-			</Branch>
+		<RunAll meta:X="195" meta:Y="0" GUID="fba0018a-53a5-49b0-8ff0-d6d8aa677756">
+			<SetState>
+				<classID>SetState</classID>
+				<OutputMap>
+					<Running>Running</Running>
+				</OutputMap>
+				<Node meta:RefKey="RunUntilNotCompleted">88f25442-9b95-460f-8289-c946f195458e</Node>
+			</SetState>
 		</RunAll>
 	</NodeMap>
 </BehaviourTree>

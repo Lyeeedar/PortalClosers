@@ -1,4 +1,6 @@
-<Localisation xmlns:meta="Editor">
+<Localisation Language="en" xmlns:meta="Editor">
+	<Text ID="Acid.Buff.Description:3363abff-fe5e-4a22-9ce2-b2fddde844bd">Acid is eating away at your armour</Text>
+	<Text ID="Acid.Buff.Name:820e2713-059a-4850-8e3a-c5c83f9557fd">Acid</Text>
 	<Text ID="Bleed.Buff.Description:a6eeda50-43c9-4d57-be16-c859f5506997">You bleed whenever you move.</Text>
 	<Text ID="Bleed.Buff.Name:b702a6b4-4298-4f50-9153-825b080b5584">Bleed</Text>
 	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:bdbaf651-2629-49cf-bc1f-833982de07f1">You are burning.</Text>

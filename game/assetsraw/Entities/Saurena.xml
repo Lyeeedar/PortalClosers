@@ -2,7 +2,7 @@
 	<Components>
 		<AI>
 			<classID>AI</classID>
-			<AiPath>AI/player</AiPath>
+			<AiPath>AI/MeleeAI</AiPath>
 		</AI>
 		<DirectionalSpriteComponent>
 			<classID>DirectionalSprite</classID>
@@ -11,11 +11,11 @@
 					<Animation>
 						<Name>idle</Name>
 						<Up meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
+							<Name>Oryx/Custom/heroes/saurena</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Up>
 						<Down meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
+							<Name>Oryx/Custom/heroes/saurena</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Down>
 					</Animation>
@@ -29,18 +29,17 @@
 		<Statistics>
 			<classID>Statistics</classID>
 			<BaseStatistics>
-				<Max_hp>10000</Max_hp>
+				<Max_hp>1000</Max_hp>
 				<Atk_power>100</Atk_power>
 				<Crit_chance>0.5</Crit_chance>
 				<Armour>100</Armour>
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<AttackDefinition meta:RefKey="AttackDefinition">
-				<Type>Ice</Type>
-				<Range>3</Range>
-				<FlightEffect meta:RefKey="ParticleEffect">
-					<Name>Ranged/Bolt</Name>
-				</FlightEffect>
+				<Type>Lightning</Type>
+				<HitEffect meta:RefKey="ParticleEffect">
+					<Name>EnemyAttacks/slash</Name>
+				</HitEffect>
 			</AttackDefinition>
 			<BloodColour>255,0,0,255</BloodColour>
 		</Statistics>

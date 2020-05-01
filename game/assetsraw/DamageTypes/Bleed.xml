@@ -7,6 +7,32 @@
 	</Icon>
 	<Statistics />
 	<EventHandlers>
+		<Attack>
+			<EventAndCondition>
+				<Condition>1</Condition>
+				<Sequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<Damage>
+								<classID>Damage</classID>
+								<Damage>source.damage * 0.1</Damage>
+								<Type>Pure</Type>
+							</Damage>
+							<SpawnOneShotParticle>
+								<Time>0.0212529264</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>StatusAndEffects/Splatter</Name>
+									<Colour>224,0,0,255</Colour>
+								</Particle>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+							</SpawnOneShotParticle>
+						</Timeline>
+					</Actions>
+				</Sequence>
+			</EventAndCondition>
+		</Attack>
 		<Move>
 			<EventAndCondition>
 				<Condition>1</Condition>

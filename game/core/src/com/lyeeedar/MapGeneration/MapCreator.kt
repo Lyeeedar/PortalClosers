@@ -1,5 +1,6 @@
 package com.lyeeedar.MapGeneration
 
+import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
@@ -28,6 +29,14 @@ class MapCreator
 				val tile = world.grid.tryGet(current, dir, null) as? Tile ?: continue
 				floodFill(foundSet, tile, source, dist, world)
 			}
+		}
+
+		fun floodFill(source: Tile, dist: Int, world: World<*>): Array<Tile>
+		{
+			val set = ObjectSet<Tile>()
+			floodFill(set, source, source, dist, world)
+
+			return set.toGdxArray()
 		}
 
 		fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
@@ -63,9 +72,7 @@ class MapCreator
 				val faction = if (packDesc.faction != null) Faction.load(packDesc.faction!!) else faction
 				val pack = faction.getPack(rng, rng.nextInt(packDesc.size.x, packDesc.size.y+1), packDesc.isBoss).create(level+(packDesc.difficulty-1), world, rng.nextLong())
 
-				val tileset = ObjectSet<Tile>()
-				floodFill(tileset, tile, tile, 4, world)
-				val tiles = tileset.toGdxArray()
+				val tiles = floodFill(tile, 4, world)
 
 				val leader = pack.leader.get()!!
 				leader.addToTile(tile)
@@ -128,17 +135,30 @@ class MapCreator
 
 			// add player
 			val playerSpawnArea = generator.namedAreas["playerspawn"][0]
-			val playerSpawnPos = playerSpawnArea.getAllPoints().random(rng)
+			val playerStartTile = map[playerSpawnArea.getAllPoints()[0].toPoint()]
+			val startRoomPoints = floodFill(playerStartTile, 4, world)
 
-			player.position()!!.position = map[playerSpawnPos.x, playerSpawnPos.y]
-			player.position()!!.addToTile(player)
+			player.addToTile(playerStartTile)
 			player.ai()!!.state.set(EntityReference(player), world, 0)
 			player.addComponent(ComponentType.Task)
 			player.addComponent(ComponentType.Renderable)
 
 			world.player = player
-
 			world.addEntity(player)
+
+			val saurena = EntityLoader.load("Entities/Saurena")
+			saurena.addToTile(startRoomPoints.removeRandom(rng))
+			saurena.statistics()!!.calculateStatistics(level)
+			saurena.ai()!!.state.set(EntityReference(saurena), world, 1)
+			saurena.ai()!!.state.setData("leader", 0, EntityReference(player))
+			world.addEntity(saurena)
+
+			val julianna = EntityLoader.load("Entities/Julianna")
+			julianna.addToTile(startRoomPoints.removeRandom(rng))
+			julianna.statistics()!!.calculateStatistics(level)
+			julianna.ai()!!.state.set(EntityReference(julianna), world, 1)
+			julianna.ai()!!.state.setData("leader", 0, EntityReference(player))
+			world.addEntity(julianna)
 
 			rng.freeTS()
 

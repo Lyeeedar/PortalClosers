@@ -1,11 +1,14 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import ktx.collections.set
 
 fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
 const val numHpPips = 10
@@ -73,6 +76,14 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 			for (i in 0 until numHpPips)
 			{
 				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay)
+			}
+
+			for (i in 0 until stats.buffs.size)
+			{
+				val buff = stats.buffs[i]
+				val icon = buff.icon ?: continue
+
+				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, pos.slot.ordinal, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour)
 			}
 		}
 	}

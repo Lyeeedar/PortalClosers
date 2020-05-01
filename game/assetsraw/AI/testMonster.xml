@@ -4,6 +4,10 @@
 		<RunUntilNotFailed meta:X="270" meta:Y="0" GUID="c08cb163-9b4f-4d6c-aa31-0d45927783db">
 			<Import>
 				<classID>Import</classID>
+				<Path>AI/Subtrees/FollowLeader</Path>
+			</Import>
+			<Import>
+				<classID>Import</classID>
 				<Path>AI/Subtrees/MoveAndAttackEnemyMelee</Path>
 			</Import>
 			<Import>

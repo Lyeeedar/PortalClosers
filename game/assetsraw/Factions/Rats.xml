@@ -25,7 +25,7 @@
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
-						<AiPath>AI/testMonster</AiPath>
+						<AiPath>AI/MeleeAI</AiPath>
 					</AI>
 					<RenderableComponent>
 						<classID>Renderable</classID>
@@ -65,7 +65,7 @@
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
-						<AiPath>AI/testMonster</AiPath>
+						<AiPath>AI/MeleeAI</AiPath>
 					</AI>
 					<RenderableComponent>
 						<classID>Renderable</classID>
@@ -106,7 +106,7 @@
 					</Statistics>
 					<AI>
 						<classID>AI</classID>
-						<AiPath>AI/testMonster</AiPath>
+						<AiPath>AI/MeleeAI</AiPath>
 					</AI>
 					<RenderableComponent>
 						<classID>Renderable</classID>

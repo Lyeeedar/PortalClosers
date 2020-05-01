@@ -2,7 +2,7 @@
 	<Components>
 		<AI>
 			<classID>AI</classID>
-			<AiPath>AI/player</AiPath>
+			<AiPath>AI/RangedAI</AiPath>
 		</AI>
 		<DirectionalSpriteComponent>
 			<classID>DirectionalSprite</classID>
@@ -11,11 +11,11 @@
 					<Animation>
 						<Name>idle</Name>
 						<Up meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
+							<Name>Oryx/Custom/heroes/juliana_staff</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Up>
 						<Down meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
+							<Name>Oryx/Custom/heroes/juliana_staff</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Down>
 					</Animation>
@@ -36,10 +36,21 @@
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<AttackDefinition meta:RefKey="AttackDefinition">
-				<Type>Ice</Type>
+				<Type>Poison</Type>
 				<Range>3</Range>
-				<FlightEffect meta:RefKey="ParticleEffect">
-					<Name>Ranged/Bolt</Name>
+				<FlightEffect meta:RefKey="ParticleEffectTemplate">
+					<Base meta:RefKey="ParticleEffect">
+						<Name>Ranged/FlightParticle</Name>
+						<KillOnAnimComplete>true</KillOnAnimComplete>
+					</Base>
+					<Overrides>
+						<OverrideTexture>
+							<Name>white</Name>
+							<Texture meta:RefKey="Texture">
+								<File>Oryx/Custom/items/thorn_spear</File>
+							</Texture>
+						</OverrideTexture>
+					</Overrides>
 				</FlightEffect>
 			</AttackDefinition>
 			<BloodColour>255,0,0,255</BloodColour>

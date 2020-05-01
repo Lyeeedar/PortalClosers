@@ -46,7 +46,7 @@
 	<Text ID="damagetype.poison">Poison</Text>
 	<Text ID="damagetype.poison.description">Has a chance to deal a further [GOLD]80%[] damage over the next [GOLD]8[] turns. This damage ignores armour.</Text>
 	<Text ID="damagetype.bleed">Bleed</Text>
-	<Text ID="damagetype.bleed.description">Has a chance to cause the enemy to take [GOLD]20%[] damage each time they move. This damage ignores armour.</Text>
+	<Text ID="damagetype.bleed.description">Has a chance to cause the enemy to take [GOLD]30%[] damage each time they move, and [GOLD]10%[] damage each time they attack. This damage ignores armour.</Text>
 	<Text ID="damagetype.acid">Acid</Text>
-	<Text ID="damagetype.acid.description">Has a chance to reduce the enemies armour by [GOLD]10%[] for the next [GOLD]10[] turns.</Text>
+	<Text ID="damagetype.acid.description">Has a chance to reduce the enemies armour by [GOLD]20%[] for the next [GOLD]10[] turns.</Text>
 </Localisation>

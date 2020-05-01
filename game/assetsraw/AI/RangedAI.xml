@@ -1,0 +1,19 @@
+<BehaviourTree meta:X="0" meta:Y="0" GUID="423174f0-9993-4db9-a9eb-cc9a314e0687" xmlns:meta="Editor">
+	<Root meta:RefKey="RunUntilNotCompleted">362d154f-be66-4226-893b-3dd8244da2ca</Root>
+	<NodeMap>
+		<RunUntilNotCompleted meta:X="330" meta:Y="-30" GUID="362d154f-be66-4226-893b-3dd8244da2ca">
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/MoveAndAttackEnemyRanged</Path>
+			</Import>
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/FollowLeader</Path>
+			</Import>
+			<Import>
+				<classID>Import</classID>
+				<Path>AI/Subtrees/RandomWander</Path>
+			</Import>
+		</RunUntilNotCompleted>
+	</NodeMap>
+</BehaviourTree>
