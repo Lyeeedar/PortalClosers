@@ -9,7 +9,7 @@
 			</ConvertToPosition>
 			<MoveTo>
 				<classID>MoveTo</classID>
-				<Dst>4</Dst>
+				<Dst>3</Dst>
 				<Key>leaderPos</Key>
 			</MoveTo>
 			<ClearValue>

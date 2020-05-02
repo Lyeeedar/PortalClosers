@@ -95,17 +95,22 @@ class TaskAttack : AbstractTask()
 			delay += effect.blockinglifetime * 0.7f
 		}
 
+		val attacker = EntityReference(e)
 		tile.addDelayedAction(
 			{
-				for (entity in entitiesToHit)
+				val e = attacker.get()
+				if (e != null)
 				{
-					if (!entity.isValid()) continue
+					for (entity in entitiesToHit)
+					{
+						if (!entity.isValid()) continue
 
-					// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
-					val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.attackDefinition.damage
+						// TODO: Included weapon dam in this. Maybe 'BaseAttack = WeaponAttack+(StatAtk*LevelMult)'
+						val baseAttack = e.statistics()!!.getStat(Statistic.ATK_POWER) * stats.attackDefinition.damage
 
-					val dam = DamageEquations.getAttackDam(rng, baseAttack)
-					DamageEquations.doAttack(rng, e, entity.entity, AttackDamage(dam, stats.attackDefinition.type), world)
+						val dam = DamageEquations.getAttackDam(rng, baseAttack)
+						DamageEquations.doAttack(rng, e, entity.entity, AttackDamage(dam, stats.attackDefinition.type), world)
+					}
 				}
 			}, delay)
 	}

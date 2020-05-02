@@ -136,7 +136,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 				else
 				{
 					val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
-					if (targetTile != null && pos.isValidTile(targetTile, entity))
+					if (targetTile != null && (pos.isValidTile(targetTile, entity) || targetTile.contents[pos.slot]?.get()?.isAllies(entity) == true))
 					{
 						task.tasks.add(TaskMove.obtain().set(moveDir))
 					}

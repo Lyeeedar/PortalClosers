@@ -53,13 +53,38 @@ class TaskMove : AbstractTask()
 			world.eventSystem()?.addEvent(EventType.MOVE, ref, ref)
 		}
 
-		val prev = pos.position
+		val prev = world.grid.tryGet(pos.position, null) ?: return
 		val next = world.grid.tryGet(prev, direction, null) ?: return
+
 		if (pos.isValidTile(next, e))
 		{
 			pos.doMove(next, e)
-
 			e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+		}
+		else if (pos.canSwap)
+		{
+			val contents = next.contents[pos.slot]?.get()
+			if (contents != null && e.isAllies(contents))
+			{
+				val opos = contents.position()!!
+				if (opos.moveable && !opos.moveLocked)
+				{
+					val task = contents.task()
+					if (task != null)
+					{
+						task.tasks.clear()
+						task.tasks.add(TaskWait.obtain())
+					}
+
+					opos.removeFromTile(contents)
+
+					pos.doMove(next, e)
+					e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+
+					opos.doMove(prev, contents)
+					contents.renderable()!!.renderable.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+				}
+			}
 		}
 	}
 

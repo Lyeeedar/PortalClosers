@@ -25,6 +25,7 @@
 		<Position>
 			<classID>Position</classID>
 			<Slot>Entity</Slot>
+			<CanSwap>true</CanSwap>
 		</Position>
 		<Statistics>
 			<classID>Statistics</classID>

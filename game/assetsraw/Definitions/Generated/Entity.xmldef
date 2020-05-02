@@ -75,6 +75,7 @@
 		<Const Name="classID">Position</Const>
 		<Data Name="Slot" EnumValues="Floor,Floordetail,Wall,Walldetail,Belowentity,Entity,Aboveentity,Effect,Light" Default="Entity" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Moveable" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="CanSwap" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="RenderableComponent" Nullable="False" TextColour="232,27,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
