@@ -32,6 +32,23 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 		return 1f / if (speed < 0.2f) 0.2f else speed
 	}
 
+	override fun canStartTurn(): Boolean
+	{
+		for (x in 0 until world.grid.width)
+		{
+			for (y in 0 until world.grid.height)
+			{
+				val tile = world.grid[x, y]
+				if (tile.queuedActions.size > 0)
+				{
+					return false
+				}
+			}
+		}
+
+		return true
+	}
+
 	override fun getPlayerActionAmount(): Float
 	{
 		val player = world.player!!
