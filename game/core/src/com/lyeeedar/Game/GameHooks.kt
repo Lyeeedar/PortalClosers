@@ -28,6 +28,7 @@ fun World<Tile>.addSystems()
 	systems.add(ActionSequenceSystem(this))
 	systems.add(StatisticsSystem(this))
 	systems.add(TileSystem(this))
+	systems.add(WaterSystem(this))
 	systems.add(HateSystem(this))
 	systems.add(EventSystem(this))
 

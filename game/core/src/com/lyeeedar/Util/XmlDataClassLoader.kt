@@ -143,6 +143,7 @@ class XmlDataClassLoader
 				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
 				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
+				"Water" -> com.lyeeedar.Components.WaterComponentData()
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()

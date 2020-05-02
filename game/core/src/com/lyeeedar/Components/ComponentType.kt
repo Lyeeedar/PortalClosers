@@ -21,7 +21,8 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	Statistics({ StatisticsComponent() }),
 	Task({ TaskComponent() }),
 	Transient({ TransientComponent() }),
-	Vision({ VisionComponent() });
+	Vision({ VisionComponent() }),
+	Water({ WaterComponent() });
 
 	companion object
 	{
@@ -50,4 +51,5 @@ inline fun Entity.statistics(): StatisticsComponent? = this.components[Component
 inline fun Entity.task(): TaskComponent? = this.components[ComponentType.Task] as TaskComponent?
 inline fun Entity.transient(): TransientComponent? = this.components[ComponentType.Transient] as TransientComponent?
 inline fun Entity.vision(): VisionComponent? = this.components[ComponentType.Vision] as VisionComponent?
+inline fun Entity.water(): WaterComponent? = this.components[ComponentType.Water] as WaterComponent?
 

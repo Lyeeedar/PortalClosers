@@ -135,14 +135,12 @@
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Overwrite" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Split" Nullable="False" TextColour="8,226,226" meta:RefKey="StructDef">
+	<Definition Name="Split" Keys="SplitPart" TextColour="28,168,232" meta:RefKey="CollectionDef">
+	</Definition>
+	<Definition Name="SplitPart" Nullable="False" TextColour="252,108,108" meta:RefKey="StructDef">
 		<Data Name="Side" EnumValues="North,South,East,West,Edge,Remainder" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" meta:RefKey="GraphReference" />
-	</Definition>
-	<Definition Name="Split" Nullable="False" TextColour="28,168,232" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
-		<Const Name="classID">Split</Const>
-		<Data Name="Splits" Keys="Split" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="SquidlibDenseRoomGenerator" Nullable="False" TextColour="89,255,11" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">SquidlibDenseRoomGenerator</Const>
