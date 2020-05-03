@@ -6,6 +6,7 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	ActionSequence({ ActionSequenceComponent() }),
 	AdditionalRenderable({ AdditionalRenderableComponent() }),
 	ArchetypeBuilder({ ArchetypeBuilderComponent() }),
+	Blood({ BloodComponent() }),
 	Dialogue({ DialogueComponent() }),
 	DirectionalSprite({ DirectionalSpriteComponent() }),
 	Event({ EventComponent() }),
@@ -35,6 +36,7 @@ inline fun Entity.ai(): AIComponent? = this.components[ComponentType.AI] as AICo
 inline fun Entity.actionSequence(): ActionSequenceComponent? = this.components[ComponentType.ActionSequence] as ActionSequenceComponent?
 inline fun Entity.additionalRenderable(): AdditionalRenderableComponent? = this.components[ComponentType.AdditionalRenderable] as AdditionalRenderableComponent?
 inline fun Entity.archetypeBuilder(): ArchetypeBuilderComponent? = this.components[ComponentType.ArchetypeBuilder] as ArchetypeBuilderComponent?
+inline fun Entity.blood(): BloodComponent? = this.components[ComponentType.Blood] as BloodComponent?
 inline fun Entity.dialogue(): DialogueComponent? = this.components[ComponentType.Dialogue] as DialogueComponent?
 inline fun Entity.directionalSprite(): DirectionalSpriteComponent? = this.components[ComponentType.DirectionalSprite] as DirectionalSpriteComponent?
 inline fun Entity.event(): EventComponent? = this.components[ComponentType.Event] as EventComponent?
