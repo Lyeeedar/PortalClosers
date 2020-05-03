@@ -2,7 +2,6 @@ package com.lyeeedar.ActionSequence.Actions
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
 import com.lyeeedar.SpaceSlot
@@ -157,8 +156,8 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		mode = Mode.valueOf(xmlData.get("Mode").toUpperCase(Locale.ENGLISH))
-		count = CompiledExpression(xmlData.get("Count"), "count")
-		condition = CompiledExpression(xmlData.get("Condition"), "random,dist,hp")
+		count = CompiledExpression(xmlData.get("Count"))
+		condition = CompiledExpression(xmlData.get("Condition"))
 		radius = xmlData.getInt("Radius", 5)
 		minimum = xmlData.getBoolean("Minimum", true)
 		allowSelf = xmlData.getBoolean("AllowSelf", true)

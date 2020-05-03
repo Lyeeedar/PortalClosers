@@ -3,7 +3,6 @@ package com.lyeeedar.AI.BehaviourTree.Actions
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
 import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
@@ -38,35 +37,43 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		val array = state.getData<Array<*>>(input, 0) ?: return EvaluationState.FAILED
 		if (array.size == 0) return EvaluationState.FAILED
 
-		itemSortValueMap.clear()
-		for (item in array)
+		val item: Any
+		if (condition.expression == "random")
 		{
-			val sortValue = when (item)
-			{
-				is EntityReference -> {
-					map.clear()
-					val dist = item.entity.position()!!.position.dist(entity.position()!!.position)
-					map.put("dist", dist.toFloat())
-					map.put("random", state.rng.nextFloat())
-					item.entity.statistics()?.write(map)
-
-					condition.evaluate(map)
-				}
-				is Point -> {
-					map.clear()
-					val dist = item.dist(entity.position()!!.position)
-					map.put("dist", dist.toFloat())
-					map.put("random", state.rng.nextFloat())
-
-					condition.evaluate(map)
-				}
-				else -> throw RuntimeException("Cannot pick one from array of " + item::class.java.name)
-			}
-			itemSortValueMap[item] = sortValue
+			item = array.random(state.rng)
 		}
+		else
+		{
+			itemSortValueMap.clear()
+			for (item in array)
+			{
+				val sortValue = when (item)
+				{
+					is EntityReference ->
+					{
+						map.clear()
+						val dist = item.entity.position()!!.position.dist(entity.position()!!.position)
+						map.put("dist", dist.toFloat())
+						item.entity.statistics()?.write(map)
 
-		val sorted = if (minimum) array.sortedBy{ itemSortValueMap[it, 0f] } else array.sortedByDescending{ itemSortValueMap[it, 0f] }
-		val item = sorted.firstOrNull() ?: return EvaluationState.FAILED
+						condition.evaluate(map, state.rng)
+					}
+					is Point ->
+					{
+						map.clear()
+						val dist = item.dist(entity.position()!!.position)
+						map.put("dist", dist.toFloat())
+
+						condition.evaluate(map, state.rng)
+					}
+					else -> throw RuntimeException("Cannot pick one from array of " + item::class.java.name)
+				}
+				itemSortValueMap[item] = sortValue
+			}
+
+			val sorted = if (minimum) array.sortedBy { itemSortValueMap[it, 0f] } else array.sortedByDescending { itemSortValueMap[it, 0f] }
+			item = sorted.firstOrNull() ?: return EvaluationState.FAILED
+		}
 
 		state.setData(output, 0, item)
 
@@ -79,7 +86,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		super.load(xmlData)
 		input = xmlData.get("Input")
 		output = xmlData.get("Output")
-		condition = CompiledExpression(xmlData.get("Condition"), "dist,hp,level,damage,random")
+		condition = CompiledExpression(xmlData.get("Condition"))
 		minimum = xmlData.getBoolean("Minimum", true)
 	}
 	override val classID: String = "PickOneFrom"

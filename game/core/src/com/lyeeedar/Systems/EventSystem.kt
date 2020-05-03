@@ -94,7 +94,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		{
 			for (handler in handlers)
 			{
-				if (handler.condition.evaluate(eventData.variables) != 0f)
+				if (handler.condition.evaluate(eventData.variables, world.rng) != 0f)
 				{
 					val entity = spawnedEventEntityArchetype.build()
 

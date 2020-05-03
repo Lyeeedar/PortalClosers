@@ -2,7 +2,6 @@ package com.lyeeedar.ActionSequence.Actions
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.EntityReference
@@ -13,6 +12,7 @@ import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Systems.eventSystem
+import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.XmlData
 
 class HealAction : AbstractOneShotActionSequenceAction()
@@ -50,7 +50,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					var healing = amount.evaluate(map)
+					var healing = amount.evaluate(map, state.seed)
 					healing += healing * sourceStats.getStat(Statistic.ABILITY_POWER)
 
 					targetstats.heal(healing)

@@ -2,13 +2,13 @@ package com.lyeeedar.ActionSequence.Actions
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.hate
 import com.lyeeedar.Components.isEnemies
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.XmlData
 
 class GenerateHateAction : AbstractOneShotActionSequenceAction()
@@ -46,7 +46,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					val hateAmount = amount.evaluate(map)
+					val hateAmount = amount.evaluate(map, state.seed)
 					hate.addRawHate(source, hateAmount)
 				}
 			}

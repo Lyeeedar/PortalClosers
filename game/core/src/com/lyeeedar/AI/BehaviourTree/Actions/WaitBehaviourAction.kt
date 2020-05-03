@@ -1,12 +1,12 @@
 package com.lyeeedar.AI.BehaviourTree.Actions
 
 import com.badlogic.gdx.utils.ObjectMap
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
 import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Components.task
+import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.round
@@ -20,7 +20,7 @@ class WaitBehaviourAction : AbstractBehaviourAction()
 	{
 		val task = state.entity.get()?.task() ?: return EvaluationState.FAILED
 
-		val num = count.evaluate(state.getVariables()).round()
+		val num = count.evaluate(state.getVariables(), state.rng).round()
 
 		for (i in 0 until num)
 		{

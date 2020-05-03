@@ -2,7 +2,6 @@ package com.lyeeedar.ActionSequence.Actions
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.exp4j.Helpers.CompiledExpression
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.AttackDamage
@@ -54,7 +53,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					var damage = damage.evaluate(map)
+					var damage = damage.evaluate(map, state.seed)
 					damage += damage * sourceStats.getStat(Statistic.ABILITY_POWER)
 
 					val attackDam = DamageEquations.getAttackDam(rng, damage)
