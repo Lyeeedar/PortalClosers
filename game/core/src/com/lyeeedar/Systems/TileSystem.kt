@@ -35,15 +35,6 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 						}
 					}
 				}
-
-				for (slot in SpaceSlot.Values)
-				{
-					val entity = tile.contents[slot]
-					if (entity != null && !entity.isValid())
-					{
-						tile.contents.remove(slot)
-					}
-				}
 			}
 		}
 	}
@@ -74,8 +65,18 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 				val tile = world.grid[x, y] as Tile
 				val tileHash = tile.hashCode()
 
-				val isVisible = visionSet.contains(tileHash)
-				val isSeen = seenSet.contains(tileHash)
+				val isVisible: Boolean
+				val isSeen: Boolean
+				if (tile.dist(playerPos) > 15)
+				{
+					isVisible = false
+					isSeen = tile.isSeen
+				}
+				else
+				{
+					isVisible = visionSet.contains(tileHash)
+					isSeen = tile.isSeen or seenSet.contains(tileHash)
+				}
 
 				tile.updateVisibility(deltaTime, isSeen, isVisible)
 			}

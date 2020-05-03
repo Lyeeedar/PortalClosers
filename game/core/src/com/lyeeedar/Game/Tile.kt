@@ -12,11 +12,15 @@ import com.lyeeedar.Util.min
 
 class Tile(x: Int, y: Int) : AbstractTile(x, y)
 {
+	public var isSeen = false
 	private val seen = LerpedValue(0.3f)
 	private val visible = LerpedValue(0.3f)
 
+	private var lastRenderColData: Float = 0f
+
 	fun updateVisibility(delta: Float, isSeen: Boolean, isVisible: Boolean)
 	{
+		this.isSeen = this.isSeen or isSeen
 		seen.targetValue = isSeen
 		visible.targetValue = isVisible
 
@@ -26,14 +30,20 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		skipRender = !seen.currentValue && !seen.targetValue
 		skipRenderEntities = !visible.currentValue && !visible.targetValue
 
-		val prevHash = renderCol.hashCode()
-		renderCol.set(tileCol)
-		renderCol.mul(seen.alpha)
-		renderCol.mul(0.5f + 0.5f * visible.alpha)
-
-		if (renderCol.hashCode() != prevHash)
+		val renderColData = seen.alpha + visible.alpha + tileCol.hashCode()
+		if (renderColData != lastRenderColData)
 		{
-			isTileDirty = true
+			lastRenderColData = renderColData
+
+			val prevHash = renderCol.hashCode()
+			renderCol.set(tileCol)
+			renderCol.mul(seen.alpha)
+			renderCol.mul(0.5f + 0.5f * visible.alpha)
+
+			if (renderCol.hashCode() != prevHash)
+			{
+				isTileDirty = true
+			}
 		}
 	}
 
