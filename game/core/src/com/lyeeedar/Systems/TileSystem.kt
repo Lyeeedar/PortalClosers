@@ -6,6 +6,7 @@ import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.max
 
@@ -42,12 +43,15 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 	val visionShadowCast = ShadowCastCache()
 	val visionSet = IntSet()
 	val seenSet = IntSet()
+	val lastPos = Point(-1, -1)
 	fun doVisibility(deltaTime: Float)
 	{
 		val screenTileWidth = (Statics.resolution.xFloat / world.tileSize).toInt() + 4
 		val screenTileHeight = (Statics.resolution.yFloat / world.tileSize).toInt() + 4
 
 		val playerPos = world.player!!.position()!!.position
+		if (lastPos.equals(playerPos)) return
+
 		val rawCast = visionShadowCast.getShadowCast(playerPos.x, playerPos.y, max(screenTileWidth, screenTileHeight) / 2)
 
 		visionSet.clear()
