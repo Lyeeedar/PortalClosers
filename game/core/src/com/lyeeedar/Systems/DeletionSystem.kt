@@ -44,7 +44,7 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 					if (e.isEnemies(entity) && EventSystem.isEventRegistered(EventType.KILL, e))
 					{
 						// we have our killer!
-						world.eventSystem()?.addEvent(EventType.KILL, EntityReference(e), EntityReference(entity))
+						world.eventSystem()?.addEvent(EventType.KILL, e.getRef(), entity.getRef())
 					}
 				}
 			}
@@ -54,7 +54,7 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 			{
 				if (EventSystem.isEventRegistered(EventType.DEATH, listener))
 				{
-					world.eventSystem()?.addEvent(EventType.DEATH, EntityReference(listener), EntityReference(entity))
+					world.eventSystem()?.addEvent(EventType.DEATH, listener.getRef(), entity.getRef())
 				}
 			}
 		}

@@ -139,7 +139,7 @@ class MapCreator
 			val startRoomPoints = floodFill(playerStartTile, 4, world)
 
 			player.addToTile(playerStartTile)
-			player.ai()!!.state.set(EntityReference(player), world, 0)
+			player.ai()!!.state.set(player.getRef(), world, 0)
 			player.addComponent(ComponentType.Task)
 			player.addComponent(ComponentType.Renderable)
 
@@ -149,15 +149,15 @@ class MapCreator
 			val saurena = EntityLoader.load("Entities/Saurena")
 			saurena.addToTile(startRoomPoints.removeRandom(rng))
 			saurena.statistics()!!.calculateStatistics(level)
-			saurena.ai()!!.state.set(EntityReference(saurena), world, 1)
-			saurena.ai()!!.state.setData("leader", 0, EntityReference(player))
+			saurena.ai()!!.state.set(saurena.getRef(), world, 1)
+			saurena.ai()!!.state.setData("leader", 0, player.getRef())
 			world.addEntity(saurena)
 
 			val julianna = EntityLoader.load("Entities/Julianna")
 			julianna.addToTile(startRoomPoints.removeRandom(rng))
 			julianna.statistics()!!.calculateStatistics(level)
-			julianna.ai()!!.state.set(EntityReference(julianna), world, 1)
-			julianna.ai()!!.state.setData("leader", 0, EntityReference(player))
+			julianna.ai()!!.state.set(julianna.getRef(), world, 1)
+			julianna.ai()!!.state.setData("leader", 0, player.getRef())
 			world.addEntity(julianna)
 
 			rng.freeTS()

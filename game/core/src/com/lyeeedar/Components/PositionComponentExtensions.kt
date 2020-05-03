@@ -115,7 +115,7 @@ fun PositionComponent.removeFromTile(entity: Entity)
 
 fun PositionComponent.addToTile(entity: Entity)
 {
-	val ref = EntityReference(entity)
+	val ref = entity.getRef()
 
 	val t = tile!!
 	for (x in 0 until size)

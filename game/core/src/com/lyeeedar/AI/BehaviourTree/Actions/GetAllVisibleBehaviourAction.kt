@@ -55,14 +55,14 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 					{
 						if (other != entity && other.isAllies(entity))
 						{
-							output.add(EntityReference(other))
+							output.add(other.getRef())
 						}
 					}
 					else
 					{
 						if (other.isEnemies(entity))
 						{
-							output.add(EntityReference(other))
+							output.add(other.getRef())
 						}
 					}
 				}

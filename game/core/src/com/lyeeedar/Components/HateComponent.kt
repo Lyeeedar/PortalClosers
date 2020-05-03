@@ -27,7 +27,7 @@ class HateComponent : AbstractComponent()
 		var data = hateMap[key]
 		if (data == null)
 		{
-			data = HateData(EntityReference(entity))
+			data = HateData(entity.getRef())
 			hateMap[key] = data
 		}
 
@@ -105,7 +105,7 @@ class HateComponent : AbstractComponent()
 			if (EventSystem.isEventRegistered(EventType.AGRO_CHANGED, defender))
 			{
 				val eventSystem = world.eventSystem()!!
-				eventSystem.addEvent(EventType.AGRO_CHANGED, EntityReference(defender), bestTarget)
+				eventSystem.addEvent(EventType.AGRO_CHANGED, defender.getRef(), bestTarget)
 			}
 		}
 

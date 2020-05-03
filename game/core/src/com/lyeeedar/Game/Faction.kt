@@ -155,7 +155,7 @@ fun EntityData.create(difficulty: Int, world: World<*>, seed: Long): Entity
 {
 	val entity = create()
 	entity.statistics()?.calculateStatistics(difficulty)
-	entity.ai()?.state?.set(EntityReference(entity), world, seed)
+	entity.ai()?.state?.set(entity.getRef(), world, seed)
 
 	return entity
 }
@@ -185,12 +185,12 @@ class PackData
 		val seedRng = LightRNG(seed)
 
 		val pack = Pack()
-		pack.leader = EntityReference(leader.create(difficulty, world, seedRng.nextLong()))
+		pack.leader = leader.create(difficulty, world, seedRng.nextLong()).getRef()
 		pack.leader.entity.setPack(pack)
 
 		for (mobData in mobs)
 		{
-			val mob = EntityReference(mobData.create(difficulty, world, seedRng.nextLong()))
+			val mob = mobData.create(difficulty, world, seedRng.nextLong()).getRef()
 			mob.entity.setPack(pack)
 			pack.mobs.add(mob)
 

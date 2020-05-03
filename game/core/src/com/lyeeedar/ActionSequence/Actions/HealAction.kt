@@ -63,7 +63,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 					if (EventSystem.isEventRegistered(EventType.HEALED, entity))
 					{
-						eventSystem.addEvent(EventType.HEALED, EntityReference(entity), EntityReference(source), mapOf(Pair("amount", healing)))
+						eventSystem.addEvent(EventType.HEALED, entity.getRef(), source.getRef(), mapOf(Pair("amount", healing)))
 					}
 				}
 			}

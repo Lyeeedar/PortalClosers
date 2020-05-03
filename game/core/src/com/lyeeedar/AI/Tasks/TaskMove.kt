@@ -49,7 +49,7 @@ class TaskMove : AbstractTask()
 
 		if (EventSystem.isEventRegistered(EventType.MOVE, e))
 		{
-			val ref = EntityReference(e)
+			val ref = e.getRef()
 			world.eventSystem()?.addEvent(EventType.MOVE, ref, ref)
 		}
 

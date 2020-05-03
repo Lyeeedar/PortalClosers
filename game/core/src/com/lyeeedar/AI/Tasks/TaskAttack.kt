@@ -54,7 +54,7 @@ class TaskAttack : AbstractTask()
 			val entity = tile.contents[slot]?.get() ?: continue
 			if (e.isEnemies(entity))
 			{
-				entitiesToHit.add(EntityReference(entity))
+				entitiesToHit.add(entity.getRef())
 			}
 		}
 
@@ -63,7 +63,7 @@ class TaskAttack : AbstractTask()
 		{
 			for (entity in entitiesToHit)
 			{
-				eventSystem.addEvent(EventType.ATTACK, EntityReference(e), entity)
+				eventSystem.addEvent(EventType.ATTACK, e.getRef(), entity)
 			}
 		}
 
@@ -95,7 +95,7 @@ class TaskAttack : AbstractTask()
 			delay += effect.blockinglifetime * 0.7f
 		}
 
-		val attacker = EntityReference(e)
+		val attacker = e.getRef()
 		tile.addDelayedAction(
 			{
 				val e = attacker.get()

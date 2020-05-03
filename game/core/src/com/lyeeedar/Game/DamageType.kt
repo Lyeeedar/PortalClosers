@@ -99,14 +99,14 @@ enum class DamageType constructor(val colour: Colour)
 	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Acid")
-		buff.source = EntityReference(attacker)
+		buff.source = attacker.getRef()
 		defender.statistics()!!.buffs.add(buff)
 	}
 
 	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
 	{
 		val buff = Buff.load("DamageTypes/Bleed")
-		buff.source = EntityReference(attacker)
+		buff.source = attacker.getRef()
 		defender.statistics()!!.buffs.add(buff)
 	}
 
@@ -118,8 +118,8 @@ enum class DamageType constructor(val colour: Colour)
 		containerEntity.actionSequence()!!.set(actionSequence)
 
 		val actionSequenceState = containerEntity.actionSequence()!!.actionSequenceState
-		actionSequenceState.lockedEntityTargets.add(EntityReference(defender))
-		actionSequenceState.set(EntityReference(attacker), world)
+		actionSequenceState.lockedEntityTargets.add(defender.getRef())
+		actionSequenceState.set(attacker.getRef(), world)
 		actionSequenceState.data["damage"] = attackDamage
 
 		world.addEntity(containerEntity)

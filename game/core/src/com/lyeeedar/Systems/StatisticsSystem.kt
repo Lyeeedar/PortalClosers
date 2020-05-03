@@ -114,7 +114,7 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 			messageList.add(label)
 			Statics.stage.addActor(label)
-			RenderSystemWidget.instance.addAttachedToEntityWidget(EntityReference(entity), label)
+			RenderSystemWidget.instance.addAttachedToEntityWidget(entity.getRef(), label)
 		}
 
 		for (message in stats.messagesToShow)

@@ -45,7 +45,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 	{
 		if (isEventRegistered(EventType.ON_TURN, entity))
 		{
-			addEvent(EventType.ON_TURN, EntityReference(entity), EntityReference(entity))
+			addEvent(EventType.ON_TURN, entity.getRef(), entity.getRef())
 		}
 	}
 
