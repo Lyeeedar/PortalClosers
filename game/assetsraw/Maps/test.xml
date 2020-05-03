@@ -53,6 +53,62 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
+					<Contents>
+						<Floor meta:RefKey="Entity">
+							<Components>
+								<Position>
+									<classID>Position</classID>
+									<Slot>Floor</Slot>
+									<Moveable>false</Moveable>
+								</Position>
+								<Water>
+									<classID>Water</classID>
+									<FlowDir>Center</FlowDir>
+									<FlowChance>0</FlowChance>
+									<Depth>0.41</Depth>
+								</Water>
+								<RenderableComponent>
+									<classID>Renderable</classID>
+									<Renderable meta:RefKey="Sprite">
+										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
+									</Renderable>
+								</RenderableComponent>
+							</Components>
+						</Floor>
+					</Contents>
+				</SymbolDef>
+			</DefineSymbol>
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Char>~</Char>
+					<Contents>
+						<Floor meta:RefKey="Entity">
+							<Components>
+								<Position>
+									<classID>Position</classID>
+									<Slot>Floor</Slot>
+									<Moveable>false</Moveable>
+								</Position>
+								<Water>
+									<classID>Water</classID>
+									<FlowDir>East</FlowDir>
+									<Depth>0.4</Depth>
+								</Water>
+								<RenderableComponent>
+									<classID>Renderable</classID>
+									<Renderable meta:RefKey="Sprite">
+										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
+									</Renderable>
+								</RenderableComponent>
+							</Components>
+						</Floor>
+					</Contents>
+				</SymbolDef>
+			</DefineSymbol>
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
 					<Char>#</Char>
 					<Wall>Sprites/Defs/Trees</Wall>
 					<Contents />
@@ -105,34 +161,6 @@
 			</Take>
 		</MapGeneratorNode>
 		<MapGeneratorNode meta:X="1095" meta:Y="-90" GUID="7c1e21ff-5814-456a-9f07-cb9286e28d18">
-			<DefineSymbol>
-				<classID>DefineSymbol</classID>
-				<SymbolDef meta:RefKey="Symbol">
-					<Char>~</Char>
-					<Contents>
-						<Floor meta:RefKey="Entity">
-							<Components>
-								<Position>
-									<classID>Position</classID>
-									<Slot>Floor</Slot>
-									<Moveable>false</Moveable>
-								</Position>
-								<Water>
-									<classID>Water</classID>
-									<FlowDir>East</FlowDir>
-									<Depth>0.4</Depth>
-								</Water>
-								<RenderableComponent>
-									<classID>Renderable</classID>
-									<Renderable meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
-									</Renderable>
-								</RenderableComponent>
-							</Components>
-						</Floor>
-					</Contents>
-				</SymbolDef>
-			</DefineSymbol>
 			<Fill>
 				<classID>Fill</classID>
 				<Char>~</Char>

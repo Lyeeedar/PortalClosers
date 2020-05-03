@@ -62,7 +62,7 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 
 			ripple.stop()
 
-			ripple.addToWorld(world, entity.position()!!.position, slot = SpaceSlot.ENTITY)
+			ripple.addToWorld(world, entity.position()!!.position, slot = SpaceSlot.BELOWENTITY)
 		}
 
 		val renderable = entity.renderable() ?: return
@@ -73,7 +73,7 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 
 	fun addRipples(entity: Entity, depth: Float)
 	{
-		if (depth > 0.4f)
+		if (depth >= 0.4f)
 		{
 			val additional = entity.addOrGet(ComponentType.AdditionalRenderable) as AdditionalRenderableComponent
 
@@ -82,6 +82,8 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 				val ripple = rippleParticle.copy()
 				ripple.size[0] = entity.position()!!.size
 				ripple.size[1] = ripple.size[0]
+				ripple.loop = true
+				ripple.start()
 
 				additional.below[rippleKey] = ripple
 			}
