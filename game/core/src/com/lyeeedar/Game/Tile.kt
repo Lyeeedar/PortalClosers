@@ -16,7 +16,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	private val seen = LerpedValue(0.3f)
 	private val visible = LerpedValue(0.3f)
 
-	private var lastRenderColData: Float = 0f
+	private var lastRenderColData: Int = 0
 
 	fun updateVisibility(delta: Float, isSeen: Boolean, isVisible: Boolean)
 	{
@@ -30,7 +30,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		skipRender = !seen.currentValue && !seen.targetValue
 		skipRenderEntities = !visible.currentValue && !visible.targetValue
 
-		val renderColData = seen.alpha + visible.alpha + tileCol.hashCode()
+		val renderColData = (seen.alpha*255).toInt() + (visible.alpha*255).toInt() + tileCol.hashCode()
 		if (renderColData != lastRenderColData)
 		{
 			lastRenderColData = renderColData

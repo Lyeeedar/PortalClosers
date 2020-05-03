@@ -29,8 +29,8 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		val stats = entity.statistics()
 		if (stats != null)
 		{
-			val px = pos.position.x.toFloat() + pos.offset.x
-			val py = pos.position.y.toFloat() + pos.offset.y
+			val px = pos.position.xFloat + pos.offset.x
+			val py = pos.position.yFloat + pos.offset.y
 			var ax = px
 			var ay = py
 
@@ -96,8 +96,8 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		val renderable = entity.renderable()!!.renderable
 		renderer.update(renderable, deltaTime)
 
-		val px = pos.position.x.toFloat() + pos.offset.x
-		val py = pos.position.y.toFloat() + pos.offset.y
+		val px = pos.position.xFloat + pos.offset.x
+		val py = pos.position.yFloat + pos.offset.y
 		var ax = px
 		var ay = py
 

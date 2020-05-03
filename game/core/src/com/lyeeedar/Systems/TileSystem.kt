@@ -44,8 +44,8 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 	val seenSet = IntSet()
 	fun doVisibility(deltaTime: Float)
 	{
-		val screenTileWidth = (Statics.resolution.x.toFloat() / world.tileSize).toInt() + 4
-		val screenTileHeight = (Statics.resolution.y.toFloat() / world.tileSize).toInt() + 4
+		val screenTileWidth = (Statics.resolution.xFloat / world.tileSize).toInt() + 4
+		val screenTileHeight = (Statics.resolution.yFloat / world.tileSize).toInt() + 4
 
 		val playerPos = world.player!!.position()!!.position
 		val rawCast = visionShadowCast.getShadowCast(playerPos.x, playerPos.y, max(screenTileWidth, screenTileHeight) / 2)
