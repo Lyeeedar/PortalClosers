@@ -47,6 +47,7 @@ jobs:
         ./gradlew :headless:compileResources
         ./gradlew :desktop:build
         ./gradlew :android:assembleDebug
+        ./gradlew :core:test
         ./gradlew :headless:testResources
       if: steps.commit.outputs.status == 'Success'
 
