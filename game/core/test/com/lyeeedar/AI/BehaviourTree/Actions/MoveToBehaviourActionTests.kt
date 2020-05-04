@@ -87,22 +87,38 @@ class MoveToBehaviourActionTests
 		pathTaken.add(world.startTile)
 
 		val rng = LightRNG(0)
+		fun doTurn(shouldDoTask: Boolean): EvaluationState
+		{
+			val state = moveToAction.evaluate(aiState)
+
+			val task = entity.task()!!
+
+			if (shouldDoTask && state == EvaluationState.RUNNING)
+			{
+				assertEquals(1, task.tasks.size)
+
+				task.tasks[0].execute(entity, world.world, rng)
+				task.tasks.clear()
+			}
+			else
+			{
+				assertEquals(0, task.tasks.size)
+			}
+
+			return state
+		}
+
 		var i = 0
 		while (i < 100)
 		{
-			val state = moveToAction.evaluate(aiState)
+			val preMove = entity.position()!!.position.copy()
+			val state = doTurn(true)
 			if (state != EvaluationState.RUNNING)
 			{
 				break
 			}
+
 			i++
-
-			val task = entity.task()!!
-			assertEquals(1, task.tasks.size)
-
-			val preMove = entity.position()!!.position.copy()
-			task.tasks[0].execute(entity, world.world, rng)
-			task.tasks.clear()
 
 			pathTaken.add(entity.position()!!.position)
 
@@ -122,6 +138,15 @@ class MoveToBehaviourActionTests
 				val pos = entity.position()!!
 				pos.turnsOnTile++
 			}
+		}
+
+		for (n in 0 until 50)
+		{
+			val preMove = entity.position()!!.position.copy()
+			val state = doTurn(false)
+
+			assertNotEquals(EvaluationState.RUNNING, state)
+			assertEquals(entity.position()!!.position, preMove)
 		}
 
 		assertEquals(path, createOutput(world, pathTaken))

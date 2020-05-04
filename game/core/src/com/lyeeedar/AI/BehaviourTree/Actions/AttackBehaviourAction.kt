@@ -41,7 +41,7 @@ class AttackBehaviourAction : AbstractBehaviourAction()
 
 		taskData.tasks.add(TaskAttack.obtain().set(targetTile, stats.attackDefinition))
 
-		return EvaluationState.COMPLETED
+		return EvaluationState.RUNNING
 	}
 
 	//region generated
