@@ -6,6 +6,7 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.isOnTile
+import com.lyeeedar.Components.isValidTile
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
@@ -58,7 +59,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			val nextTile = state.world.grid.tryGet(position, dir, null )
 
 			// if next step is impassable then fail
-			if (nextTile?.getPassable(posData.slot, state.entity) != true)
+			if (nextTile == null || !posData.isValidTile(nextTile, entity))
 			{
 				return EvaluationState.FAILED
 			}
@@ -89,17 +90,18 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 				return EvaluationState.FAILED
 			}
 
-			val nextTile = state.world.grid.tryGet( path[1], null )
+			val nextTile = state.world.grid.tryGet(path[1], null)
 
 			// if next step is impassable then fail
-			if (nextTile?.getPassable(posData.slot, state.entity) != true)
+			if (nextTile == null || !posData.isValidTile(nextTile, entity))
 			{
+				cache.invalidatePath()
 				return EvaluationState.FAILED
 			}
 
 			val dir = Direction.getCardinalDirection(path[1], path[0])
 
-			if ( path.size - 1 <= dst || dir == Direction.CENTER )
+			if (dir == Direction.CENTER )
 			{
 				return EvaluationState.COMPLETED
 			}

@@ -148,8 +148,8 @@ class ConnectRoomsAction : AbstractMapGenerationAction()
 		val x2 = end.x.toInt()
 		val y2 = end.y.toInt()
 
-		val pathfinder = AStarPathfind(args.area.grid, x1, y1, x2, y2, true, width, SpaceSlot.ENTITY, this)
-		val path = pathfinder.path
+		val pathfinder = AStarPathfind(args.area.grid)
+		val path = pathfinder.getPath(x1, y1, x2, y2, true, width, SpaceSlot.ENTITY, this)
 
 		if (path == null)
 		{
