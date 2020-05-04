@@ -9,7 +9,11 @@ import com.lyeeedar.Components.isOnTile
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Tile
+import com.lyeeedar.Pathfinding.PathfindCache
 import com.lyeeedar.Pathfinding.Pathfinder
+import com.lyeeedar.Systems.AbstractTile
+import com.lyeeedar.Util.Array2D
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
@@ -17,7 +21,7 @@ import com.lyeeedar.Util.XmlData
 @DataClass(category = "Action")
 class MoveToBehaviourAction : AbstractBehaviourAction()
 {
-	val lastPosKey = "lastPos"
+	val cacheKey = "moveCache"
 
 	var dst: Int = 0
 	var towards: Boolean = true
@@ -25,20 +29,16 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
 	{
+		val entity = state.entity.get() ?: return EvaluationState.FAILED
 		val target = state.getData<Point>(key, 0)
-		val posData = state.entity.get()?.position()
+		val posData = entity.position()
 		val position = posData?.position
-		val taskData = state.entity.get()?.task()
+		val taskData = entity.task()
 
 		// doesnt have all the needed data, fail
 		if ( target == null || posData == null || position == null || taskData == null )
 		{
 			return EvaluationState.FAILED
-		}
-
-		if (!wasEvaluatedLastTime(state))
-		{
-			state.removeData(lastPosKey, dataGuid)
 		}
 
 		// if we arrived at our target, succeed
@@ -47,73 +47,67 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			||
 			(!towards && position.dist(target) >= dst) )
 		{
-			state.removeData(lastPosKey, dataGuid)
 			return EvaluationState.COMPLETED
 		}
 
-		val pathFinder = Pathfinder(state.world.grid, position.x, position.y, target.x, target.y, posData.size, state.entity)
-		val path = pathFinder.getPath( posData.slot )
-
-		if (path == null)
+		// if going away, just go directly away
+		if (!towards)
 		{
-			state.removeData(lastPosKey, dataGuid)
-			return EvaluationState.FAILED
-		}
+			val dir = Direction.getCardinalDirection(position, target)
 
-		// if couldnt find a valid path, fail
-		if ( path.size < 2 )
-		{
-			state.removeData(lastPosKey, dataGuid)
-			Point.freeAll(path)
-			return EvaluationState.FAILED
-		}
+			val nextTile = state.world.grid.tryGet(position, dir, null )
 
-		val nextTile = state.world.grid.tryGet( path.get( 1 ), null )
-
-		// if next step is impassable then fail
-		if (nextTile?.getPassable(posData.slot, state.entity) != true)
-		{
-			state.removeData(lastPosKey, dataGuid)
-			Point.freeAll(path)
-			return EvaluationState.FAILED
-		}
-
-		val offset = path.get( 1 ) - path.get( 0 )
-
-		// if moving towards path to the object
-		if ( towards )
-		{
-			if ( path.size - 1 <= dst || offset == Point.ZERO )
+			// if next step is impassable then fail
+			if (nextTile?.getPassable(posData.slot, state.entity) != true)
 			{
-				state.removeData(lastPosKey, dataGuid)
-				Point.freeAll(path)
-				offset.free()
-				return EvaluationState.COMPLETED
+				return EvaluationState.FAILED
 			}
 
-			state.setData(lastPosKey, dataGuid, position)
-			taskData.tasks.add(TaskMove.obtain().set(Direction.getDirection(offset)))
+			taskData.tasks.add(TaskMove.obtain().set(dir))
+
+			return EvaluationState.RUNNING
 		}
-		// if moving away then just run directly away
+		// path towards
 		else
 		{
-			if ( path.size - 1 >= dst || offset == Point.ZERO )
+			var cache = state.getData<PathfindCache<AbstractTile>>(cacheKey, dataGuid, null)
+			if (cache == null)
 			{
-				state.removeData(lastPosKey, dataGuid)
-				Point.freeAll(path)
-				offset.free()
+				cache = PathfindCache()
+				state.setData(cacheKey, dataGuid, cache)
+			}
+
+			val path = cache.getPath(state.world.grid as Array2D<AbstractTile>, position, target, posData.size, entity, posData.slot)
+			if (path == null)
+			{
+				return EvaluationState.FAILED
+			}
+
+			// if couldnt find a valid path, fail
+			if ( path.size < 2 )
+			{
+				return EvaluationState.FAILED
+			}
+
+			val nextTile = state.world.grid.tryGet( path[1], null )
+
+			// if next step is impassable then fail
+			if (nextTile?.getPassable(posData.slot, state.entity) != true)
+			{
+				return EvaluationState.FAILED
+			}
+
+			val dir = Direction.getCardinalDirection(path[1], path[0])
+
+			if ( path.size - 1 <= dst || dir == Direction.CENTER )
+			{
 				return EvaluationState.COMPLETED
 			}
 
-			state.setData(lastPosKey, dataGuid, position)
-			val opposite = offset * -1
-			taskData.tasks.add(TaskMove.obtain().set(Direction.getDirection(opposite)))
-			opposite.free()
-		}
+			taskData.tasks.add(TaskMove.obtain().set(dir))
 
-		Point.freeAll(path)
-		offset.free()
-		return EvaluationState.RUNNING
+			return EvaluationState.RUNNING
+		}
 	}
 
 	//region generated
