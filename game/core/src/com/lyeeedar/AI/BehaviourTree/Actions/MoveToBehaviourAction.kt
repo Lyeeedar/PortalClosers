@@ -41,6 +41,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 		{
 			return EvaluationState.FAILED
 		}
+		val targetTile = state.world.grid.tryGet(target, null) ?: return EvaluationState.FAILED
 
 		// if we arrived at our target, succeed
 		if (
@@ -74,11 +75,11 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			var cache = state.getData<PathfindCache<AbstractTile>>(cacheKey, dataGuid, null)
 			if (cache == null)
 			{
-				cache = PathfindCache()
+				cache = PathfindCache(1000)
 				state.setData(cacheKey, dataGuid, cache)
 			}
 
-			val path = cache.getPath(state.world.grid as Array2D<AbstractTile>, position, target, posData.size, entity, posData.slot)
+			val path = cache.getPath(state.world.grid as Array2D<AbstractTile>, position, target, posData.size, state.entity, posData.slot)
 			if (path == null)
 			{
 				return EvaluationState.FAILED

@@ -59,7 +59,7 @@ class TaskMove : AbstractTask()
 		if (pos.isValidTile(next, e))
 		{
 			pos.doMove(next, e)
-			e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+			e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
 		}
 		else if (pos.canSwap)
 		{
@@ -79,10 +79,10 @@ class TaskMove : AbstractTask()
 					opos.removeFromTile(contents)
 
 					pos.doMove(next, e)
-					e.renderable()!!.renderable.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+					e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
 
 					opos.doMove(prev, contents)
-					contents.renderable()!!.renderable.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+					contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
 				}
 			}
 		}
