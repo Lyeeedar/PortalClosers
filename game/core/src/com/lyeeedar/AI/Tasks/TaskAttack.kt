@@ -39,7 +39,7 @@ class TaskAttack : AbstractTask()
 			val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 			stunParticle.addToWorld(world, pos.position, Vector2(0f, 0.8f))
 
-			stats.addMessage("Fumbled!", Colour.YELLOW, 0.4f)
+			stats.addMessage(Localisation.getText("fumbled", "UI"), Colour.YELLOW, 0.4f)
 
 			return
 		}

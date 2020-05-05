@@ -10,6 +10,7 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Random
 import squidpony.squidmath.LightRNG
 
@@ -39,7 +40,7 @@ class TaskMove : AbstractTask()
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
 
-				stats.addMessage("Rooted!", Colour.YELLOW, 0.4f)
+				stats.addMessage(Localisation.getText("rooted", "UI"), Colour.YELLOW, 0.4f)
 
 				return
 			}

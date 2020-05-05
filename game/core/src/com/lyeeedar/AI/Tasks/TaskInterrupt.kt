@@ -6,6 +6,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Localisation
 import squidpony.squidmath.LightRNG
 
 class TaskInterrupt : AbstractTask()
@@ -14,9 +15,9 @@ class TaskInterrupt : AbstractTask()
 	{
 		var interrupted = false
 		val activeAbility = e.actionSequence()
-		if (activeAbility != null && activeAbility.actionSequence!!.cancellable)
+		if (activeAbility != null && activeAbility.actionSequence.cancellable)
 		{
-			activeAbility.actionSequence!!.cancel(activeAbility.actionSequenceState!!)
+			activeAbility.actionSequence.cancel(activeAbility.actionSequenceState)
 			e.removeComponent(ComponentType.ActionSequence)
 
 			interrupted = true
@@ -25,7 +26,7 @@ class TaskInterrupt : AbstractTask()
 		val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 		stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
 
-		val message = if (interrupted) "Interrupted!" else "Stunned!"
+		val message = if (interrupted) Localisation.getText("interrupted", "UI") else Localisation.getText("stunned", "UI")
 
 		e.statistics()?.addMessage(message, Colour.YELLOW, 0.4f)
 	}

@@ -1,6 +1,7 @@
 <Localisation xmlns:meta="Editor">
 	<Text ID="title">Portal Closers</Text>
 	<Text ID="languageselector.isautotranslated">Automatically translated</Text>
+
 	<Text ID="statistic.health">Health</Text>
 	<Text ID="statistic.health.description">The amount of damage you can take before death.</Text>
 	<Text ID="statistic.attackpower">Attack Power</Text>
@@ -31,6 +32,7 @@
 	<Text ID="statistic.fumble.description">The chance to fail to attack, anytime you attack.</Text>
 	<Text ID="statistic.distraction">Distraction</Text>
 	<Text ID="statistic.distraction.description">The chance to fail to use an ability, anytime you use an ability.</Text>
+
 	<Text ID="damagetype.none">Critical</Text>
 	<Text ID="damagetype.none.description">Has a chance to deal an extra [GOLD]30%[] damage.</Text>
 	<Text ID="damagetype.pure">Pure</Text>
@@ -49,4 +51,9 @@
 	<Text ID="damagetype.bleed.description">Has a chance to cause the enemy to take [GOLD]30%[] damage each time they move, and [GOLD]10%[] damage each time they attack. This damage ignores armour.</Text>
 	<Text ID="damagetype.acid">Acid</Text>
 	<Text ID="damagetype.acid.description">Has a chance to reduce the enemies armour by [GOLD]20%[] for the next [GOLD]10[] turns.</Text>
+
+	<Text ID="fumbled">Fumbled!</Text>
+	<Text ID="rooted">Rooted!</Text>
+	<Text ID="stunned">Stunned!</Text>
+	<Text ID="interrupted">Interrupted!</Text>
 </Localisation>
