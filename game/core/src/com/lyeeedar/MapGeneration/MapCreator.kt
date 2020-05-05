@@ -27,6 +27,11 @@ class MapCreator
 			for (dir in Direction.CardinalValues)
 			{
 				val tile = world.grid.tryGet(current, dir, null) as? Tile ?: continue
+
+				if (tile.wall != null) continue
+				if (tile.contents[SpaceSlot.WALL] != null) continue
+				if (tile.contents[SpaceSlot.ENTITY] != null) continue
+
 				floodFill(foundSet, tile, source, dist, world)
 			}
 		}
