@@ -181,7 +181,7 @@
 									<Light meta:RefKey="Light">
 										<Colour>254,255,68,255</Colour>
 										<Brightness>0.4</Brightness>
-										<Range>4</Range>
+										<Range>3</Range>
 									</Light>
 								</LightComponent>
 							</Components>
