@@ -150,11 +150,13 @@ class XmlDataClassLoader
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
 				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
 				"Water" -> com.lyeeedar.Components.WaterComponentData()
+				"BakedLight" -> com.lyeeedar.Components.BakedLightComponentData()
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
 				"Position" -> com.lyeeedar.Components.PositionComponentData()
 				"AI" -> com.lyeeedar.Components.AIComponentData()
+				"Light" -> com.lyeeedar.Components.LightComponentData()
 				"MetaRegion" -> com.lyeeedar.Components.MetaRegionComponentData()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComponentData!")
 			}

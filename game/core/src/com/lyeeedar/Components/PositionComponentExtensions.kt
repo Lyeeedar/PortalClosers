@@ -128,10 +128,11 @@ fun PositionComponent.addToTile(entity: Entity)
 		}
 	}
 }
-fun Entity.addToTile(tile: Tile)
+fun Entity.addToTile(tile: Tile, slot: SpaceSlot? = null)
 {
 	val pos = addOrGet(ComponentType.Position) as PositionComponent
 	pos.position = tile
+	if (slot != null) pos.slot = slot
 	pos.addToTile(this)
 }
 

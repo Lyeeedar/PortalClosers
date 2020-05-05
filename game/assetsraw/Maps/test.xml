@@ -41,6 +41,12 @@
 				<Node meta:RefKey="MapGeneratorNode">08bd8076-c6ac-4d55-872b-c241aed65f44</Node>
 				<Remainder meta:RefKey="MapGeneratorNode">b98c54e3-b02b-4cbf-83e1-ed85b372a15f</Remainder>
 			</SelectNamedArea>
+			<Filter>
+				<classID>Filter</classID>
+				<Mode>Character</Mode>
+				<Char>#</Char>
+				<Node meta:RefKey="MapGeneratorNode">befc4984-b79c-4357-b178-60c8a10ef1fa</Node>
+			</Filter>
 		</MapGeneratorNode>
 		<MapGeneratorNode meta:X="615" meta:Y="-60" GUID="3324ec76-5fd2-496d-8656-bacc7abfe575">
 			<DefineSymbol>
@@ -48,34 +54,6 @@
 				<SymbolDef meta:RefKey="Symbol">
 					<Floor>Sprites/Defs/Grass</Floor>
 					<Contents />
-				</SymbolDef>
-			</DefineSymbol>
-			<DefineSymbol>
-				<classID>DefineSymbol</classID>
-				<SymbolDef meta:RefKey="Symbol">
-					<Contents>
-						<Floor meta:RefKey="Entity">
-							<Components>
-								<Position>
-									<classID>Position</classID>
-									<Slot>Floor</Slot>
-									<Moveable>false</Moveable>
-								</Position>
-								<Water>
-									<classID>Water</classID>
-									<FlowDir>Center</FlowDir>
-									<FlowChance>0</FlowChance>
-									<Depth>0.41</Depth>
-								</Water>
-								<RenderableComponent>
-									<classID>Renderable</classID>
-									<Renderable meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
-									</Renderable>
-								</RenderableComponent>
-							</Components>
-						</Floor>
-					</Contents>
 				</SymbolDef>
 			</DefineSymbol>
 			<DefineSymbol>
@@ -101,6 +79,14 @@
 										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
 									</Renderable>
 								</RenderableComponent>
+								<BakedLight>
+									<classID>BakedLight</classID>
+									<Light meta:RefKey="Light">
+										<Colour>10,212,240,255</Colour>
+										<Brightness>0.2</Brightness>
+										<Range>3</Range>
+									</Light>
+								</BakedLight>
 							</Components>
 						</Floor>
 					</Contents>
@@ -135,7 +121,6 @@
 			<Fill>
 				<classID>Fill</classID>
 				<Char>!</Char>
-				<Overwrite>true</Overwrite>
 			</Fill>
 		</MapGeneratorNode>
 		<MapGeneratorNode meta:X="1057" meta:Y="135" GUID="4e8ed4f2-5af3-442a-b5cb-9f7871bf6b4d">
@@ -164,6 +149,49 @@
 			<Fill>
 				<classID>Fill</classID>
 				<Char>~</Char>
+				<Overwrite>true</Overwrite>
+			</Fill>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="735" meta:Y="630" GUID="befc4984-b79c-4357-b178-60c8a10ef1fa">
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>5%</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">8b60a63e-6363-460e-ac2f-1de2cfe57d6b</Node>
+			</Take>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1011" meta:Y="630" GUID="8b60a63e-6363-460e-ac2f-1de2cfe57d6b">
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Extends>.</Extends>
+					<Char>T</Char>
+					<Contents>
+						<Wall meta:RefKey="Entity">
+							<Components>
+								<RenderableComponent>
+									<classID>Renderable</classID>
+									<Renderable meta:RefKey="Sprite">
+										<Name>Oryx/Custom/terrain/treeglowing</Name>
+										<DrawActualSize>true</DrawActualSize>
+									</Renderable>
+								</RenderableComponent>
+								<LightComponent>
+									<classID>Light</classID>
+									<Light meta:RefKey="Light">
+										<Colour>254,255,68,255</Colour>
+										<Brightness>0.4</Brightness>
+										<Range>4</Range>
+									</Light>
+								</LightComponent>
+							</Components>
+						</Wall>
+					</Contents>
+				</SymbolDef>
+			</DefineSymbol>
+			<Fill>
+				<classID>Fill</classID>
+				<Char>T</Char>
 				<Overwrite>true</Overwrite>
 			</Fill>
 		</MapGeneratorNode>

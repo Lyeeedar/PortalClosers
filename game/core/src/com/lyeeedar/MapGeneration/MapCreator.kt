@@ -51,7 +51,7 @@ class MapCreator
 				val entityData = symbol.contents[slot] ?: continue
 				val entity = entityData.create(level, world, rng.nextLong())
 
-				entity.addToTile(tile)
+				entity.addToTile(tile, slot)
 
 				world.addEntity(entity)
 			}
@@ -111,6 +111,7 @@ class MapCreator
 			val world = World(map)
 			world.addSystems()
 			world.rng = LightRNG(seed)
+			world.ambientLight.set(0.6f, 0.6f, 0.6f, 1f)
 
 			// setup tiles base
 			for (x in 0 until map.width)

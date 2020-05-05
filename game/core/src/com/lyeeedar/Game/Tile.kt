@@ -36,9 +36,10 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 			lastRenderColData = renderColData
 
 			val prevHash = renderCol.hashCode()
-			renderCol.set(tileCol)
+			renderCol.set(bakedLighting)
+			renderCol.mul(tileCol)
 			renderCol.mul(seen.alpha)
-			renderCol.mul(0.5f + 0.5f * visible.alpha)
+			renderCol.mul(0.3f + 0.7f * visible.alpha)
 
 			if (renderCol.hashCode() != prevHash)
 			{

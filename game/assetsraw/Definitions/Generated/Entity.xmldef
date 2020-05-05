@@ -9,7 +9,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,Dialogue,DirectionalSpriteComponent,EventHandler,MetaRegion,Name,Position,RenderableComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,BakedLight,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -25,6 +25,10 @@
 		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="HitEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
 		<Data Name="FlightEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="BakedLight" Nullable="False" TextColour="204,204,31" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">BakedLight</Const>
+		<Data Name="Light" Keys="Light" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
@@ -59,6 +63,10 @@
 			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
 		</Data>
+	</Definition>
+	<Definition Name="LightComponent" Nullable="False" TextColour="78,230,78" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Light</Const>
+		<Data Name="Light" Keys="Light" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="MetaRegion" Nullable="False" TextColour="31,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">MetaRegion</Const>
