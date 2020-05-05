@@ -110,7 +110,7 @@ class LerpedValue(val duration: Float)
 
 	fun update(delta: Float)
 	{
-		if (currentValue != targetValue)
+		if (currentValue != targetValue || (alpha != 0f && alpha != 1f))
 		{
 			accumulator += delta
 
