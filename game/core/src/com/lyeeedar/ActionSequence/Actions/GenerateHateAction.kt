@@ -46,7 +46,7 @@ class GenerateHateAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					val hateAmount = amount.evaluate(map, state.seed)
+					val hateAmount = amount.evaluate(map, state.rng)
 					hate.addRawHate(source, hateAmount)
 				}
 			}

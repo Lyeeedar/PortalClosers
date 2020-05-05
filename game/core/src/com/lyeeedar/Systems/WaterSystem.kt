@@ -190,6 +190,7 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 
 						(renderable.renderable as? Sprite)?.removeAmount = 0f
 
+						other.task()?.tasks?.clear()
 						other.task()?.tasks?.add(TaskInterrupt.obtain())
 					}
 				}
@@ -217,6 +218,9 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 						otherPos.doMove(dest, other)
 
 						renderable.renderable.animation = MoveAnimation.obtain().set(dest, prev, 0.15f)
+
+						other.task()?.tasks?.clear()
+						other.task()?.tasks?.add(TaskInterrupt.obtain())
 					}
 				}
 			}

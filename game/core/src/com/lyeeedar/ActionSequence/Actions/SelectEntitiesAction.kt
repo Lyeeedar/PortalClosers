@@ -42,10 +42,9 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	val itemSortValueMap = ObjectFloatMap<Any>()
 	//endregion
 
-	private fun createVariables(entity: Entity, state: ActionSequenceState, rng: LightRNG): ObjectFloatMap<String>
+	private fun createVariables(entity: Entity, state: ActionSequenceState): ObjectFloatMap<String>
 	{
 		variables.clear()
-		variables["random"] = rng.nextFloat()
 		variables["dist"] = entity.position()!!.position.dist(state.source.get()!!.position()!!.position).toFloat()
 
 		return variables
@@ -69,7 +68,6 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 		val ye = min(state.world.grid.height, pos.y+radius)
 
 		entities.clear()
-		val rng = Random.obtainTS(state.seed++)
 		itemSortValueMap.clear()
 		for (x in xs until xe)
 		{
@@ -123,7 +121,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 					if (add)
 					{
 						entities.add(entity)
-						val value = condition.evaluate(createVariables(entity, state, rng), state.seed++)
+						val value = condition.evaluate(createVariables(entity, state), state.rng)
 						itemSortValueMap[entity] = value
 					}
 				}
@@ -135,12 +133,11 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 									entities.sortedBy { itemSortValueMap[it, 0f] }.toGdxArray()
 								else
 									entities.sortedByDescending { itemSortValueMap[it, 0f] }.toGdxArray()
-		rng.freeTS()
 
 		variables.clear()
 		variables["count"] = sorted.size.toFloat()
 
-		val numTiles = count.evaluate(variables, state.seed++).round()
+		val numTiles = count.evaluate(variables, state.rng).round()
 		for (i in 0 until numTiles)
 		{
 			if (i == sorted.size) break

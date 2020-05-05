@@ -7,14 +7,14 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,GenerateHate,Heal,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Data Name="Duration" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="(AddBuff),Meta(Repeat),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Animation" Nullable="False" TextColour="35,35,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Animation</Const>
 		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash" SkipIfDefault="False" meta:RefKey="Enum" />
@@ -65,13 +65,26 @@
 		<Const Name="classID">Heal</Const>
 		<Data Name="Amount" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 	</Definition>
+	<Definition Name="Knockback" Nullable="False" TextColour="35,220,220" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Knockback</Const>
+		<Data Name="Type" EnumValues="Move,Leap,Roll,Teleport" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Dist" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
 	<Definition Name="LockEntityTargets" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
+	</Definition>
+	<Definition Name="MoveSource" Nullable="False" TextColour="204,204,66" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">MoveSource</Const>
+		<Data Name="Type" EnumValues="Move,Leap,Roll,Teleport" SkipIfDefault="False" meta:RefKey="Enum" />
 	</Definition>
 	<Definition Name="Permute" Nullable="False" TextColour="247,176,78" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Permute</Const>
 		<Data Name="AppendTargets" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="HitPoints" Default="#" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString"/>
+	</Definition>
+	<Definition Name="Pull" Nullable="False" TextColour="97,206,97" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Pull</Const>
+		<Data Name="Type" EnumValues="Move,Leap,Roll,Teleport" SkipIfDefault="False" meta:RefKey="Enum" />
 	</Definition>
 	<Definition Name="Repeat" Nullable="False" TextColour="255,0,0,255" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Repeat</Const>

@@ -98,7 +98,7 @@ class DamageEquations
 			// add final dam to stuff
 			if (damage.wasCrit)
 			{
-				damage.type.applyCriticalEffect(attacker, defender, damage, world)
+				damage.type.applyCriticalEffect(attacker, defender, damage, world, rng)
 			}
 
 			defenderStats.damage(damage)

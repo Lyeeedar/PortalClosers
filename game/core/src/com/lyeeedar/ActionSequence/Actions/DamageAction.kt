@@ -30,8 +30,6 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	{
 		val source = state.source.get()!!
 
-		val rng = Random.obtainTS(state.seed++)
-
 		hitEntities.clear()
 		for (point in state.targets)
 		{
@@ -53,21 +51,19 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					var damage = damage.evaluate(map, state.seed)
+					var damage = damage.evaluate(map, state.rng)
 					damage += damage * sourceStats.getStat(Statistic.ABILITY_POWER)
 
-					val attackDam = DamageEquations.getAttackDam(rng, damage)
+					val attackDam = DamageEquations.getAttackDam(state.rng, damage)
 
 					val attackType = if (useAttackDamageType) sourceStats.attackDefinition.type else type
 					val attackObj = AttackDamage(attackDam, attackType)
 					attackObj.wasCrit = alwaysCrit
 
-					DamageEquations.doAttack(rng, source, entity, attackObj, state.world)
+					DamageEquations.doAttack(state.rng, source, entity, attackObj, state.world)
 				}
 			}
 		}
-
-		rng.freeTS()
 	}
 
 	//region generated

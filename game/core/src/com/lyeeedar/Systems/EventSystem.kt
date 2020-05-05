@@ -102,7 +102,7 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 					comp.actionSequence = handler.sequence
 
 					val source = if (overrideSource?.get() != null) overrideSource else eventData.source
-					comp.actionSequenceState.set(source, world)
+					comp.actionSequenceState.set(source, world, world.rng.nextLong())
 					comp.actionSequenceState.targets.clear()
 					comp.actionSequenceState.targets.addAll(eventData.targets)
 

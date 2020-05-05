@@ -60,57 +60,57 @@ enum class DamageType constructor(val colour: Colour)
 		val Values = values()
 	}
 
-	fun applyCriticalEffect(attacker: Entity, defender: Entity, attackDamage: AttackDamage, world: World<*>)
+	fun applyCriticalEffect(attacker: Entity, defender: Entity, attackDamage: AttackDamage, world: World<*>, rng: LightRNG)
 	{
 		when (this)
 		{
 			NONE -> { attackDamage.damage *= 1.3f }
 			PURE -> {}
-			FIRE -> applyFire(attacker, defender, attackDamage.damage, world)
-			ICE -> applyIce(attacker, defender, attackDamage.damage, world)
-			LIGHTNING -> applyLightning(attacker, defender, attackDamage.damage, world)
+			FIRE -> applyFire(attacker, defender, attackDamage.damage, world, rng)
+			ICE -> applyIce(attacker, defender, attackDamage.damage, world, rng)
+			LIGHTNING -> applyLightning(attacker, defender, attackDamage.damage, world, rng)
 			VORPAL -> {}
-			POISON -> applyPoison(attacker, defender, attackDamage.damage, world)
-			BLEED -> applyBleed(attacker, defender, attackDamage.damage, world)
-			ACID -> applyAcid(attacker, defender, attackDamage.damage, world)
+			POISON -> applyPoison(attacker, defender, attackDamage.damage, world, rng)
+			BLEED -> applyBleed(attacker, defender, attackDamage.damage, world, rng)
+			ACID -> applyAcid(attacker, defender, attackDamage.damage, world, rng)
 		}
 	}
 
-	private fun applyFire(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyFire(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
-		applyActionSequence("DamageTypes/Fire", attacker, defender, attackDamage, world)
+		applyActionSequence("DamageTypes/Fire", attacker, defender, attackDamage, world, rng)
 	}
 
-	private fun applyIce(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyIce(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
-		applyActionSequence("DamageTypes/Ice", attacker, defender, attackDamage, world)
+		applyActionSequence("DamageTypes/Ice", attacker, defender, attackDamage, world, rng)
 	}
 
-	private fun applyPoison(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyPoison(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
-		applyActionSequence("DamageTypes/Poison", attacker, defender, attackDamage, world)
+		applyActionSequence("DamageTypes/Poison", attacker, defender, attackDamage, world, rng)
 	}
 
-	private fun applyLightning(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyLightning(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
-		applyActionSequence("DamageTypes/Lightning", attacker, defender, attackDamage, world)
+		applyActionSequence("DamageTypes/Lightning", attacker, defender, attackDamage, world, rng)
 	}
 
-	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyAcid(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
 		val buff = Buff.load("DamageTypes/Acid")
 		buff.source = attacker.getRef()
 		defender.statistics()!!.buffs.add(buff)
 	}
 
-	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyBleed(attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
 		val buff = Buff.load("DamageTypes/Bleed")
 		buff.source = attacker.getRef()
 		defender.statistics()!!.buffs.add(buff)
 	}
 
-	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>)
+	private fun applyActionSequence(sequencePath: String, attacker: Entity, defender: Entity, attackDamage: Float, world: World<*>, rng: LightRNG)
 	{
 		val actionSequence = ActionSequence.load(sequencePath)
 
@@ -119,7 +119,7 @@ enum class DamageType constructor(val colour: Colour)
 
 		val actionSequenceState = containerEntity.actionSequence()!!.actionSequenceState
 		actionSequenceState.lockedEntityTargets.add(defender.getRef())
-		actionSequenceState.set(attacker.getRef(), world)
+		actionSequenceState.set(attacker.getRef(), world, rng.nextLong())
 		actionSequenceState.data["damage"] = attackDamage
 
 		world.addEntity(containerEntity)
