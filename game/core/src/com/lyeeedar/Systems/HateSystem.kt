@@ -19,7 +19,7 @@ class HateSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitie
 		if (pos != null)
 		{
 			val vision = entity.addOrGet(ComponentType.Vision) as VisionComponent
-			val points = vision.visionCache.getShadowCast(pos.position.x, pos.position.y, 6)
+			val points = vision.getVision(pos.position.x, pos.position.y)
 
 			for (point in points)
 			{

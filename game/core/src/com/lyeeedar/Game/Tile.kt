@@ -106,15 +106,7 @@ class LerpedValue(val duration: Float)
 
 	var accumulator: Float = 0f
 
-	val alpha: Float
-		get()
-		{
-			val current = if (currentValue) 1f else 0f
-			val target = if (targetValue) 1f else 0f
-			val alpha = min(1f, accumulator / duration)
-
-			return lerp(current, target, alpha)
-		}
+	var alpha: Float = 0f
 
 	fun update(delta: Float)
 	{
@@ -125,6 +117,15 @@ class LerpedValue(val duration: Float)
 			if (accumulator >= duration)
 			{
 				currentValue = targetValue
+				alpha = if (currentValue) 1f else 0f
+			}
+			else
+			{
+				val current = if (currentValue) 1f else 0f
+				val target = if (targetValue) 1f else 0f
+				val alphaRaw = min(1f, accumulator / duration)
+
+				alpha = lerp(current, target, alphaRaw)
 			}
 		}
 	}

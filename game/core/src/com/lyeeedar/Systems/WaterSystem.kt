@@ -100,6 +100,7 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		val water = entity.water()!!
 
 		val tile = world.grid.tryGet(entity.position()!!.position, null) ?: return
+		if (tile.dist(world.player!!.position()!!.position) > 40) return
 
 		for (slot in SpaceSlot.EntityValues)
 		{
