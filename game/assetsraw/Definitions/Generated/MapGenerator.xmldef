@@ -72,9 +72,9 @@
 	</Definition>
 	<Definition Name="Filter" Nullable="False" TextColour="193,49,199" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Filter</Const>
-		<Data Name="Mode" EnumValues="Nocontent,Character,Corner,Edge,Center" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
-		<Data Name="CenterDist" Type="Int" Default="2" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Mode" EnumValues="Empty,Character,Corner,Edge,Center" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' VisibleIf="mode == CHARACTER" meta:RefKey="String" />
+		<Data Name="CenterDist" Type="Int" Default="2" SkipIfDefault="True" VisibleIf="mode == CENTER" meta:RefKey="Number" />
 		<Data Name="Node" Keys="MapGeneratorNode" meta:RefKey="GraphReference" />
 		<Data Name="Remainder" Keys="MapGeneratorNode" meta:RefKey="GraphReference" />
 	</Definition>
@@ -109,7 +109,7 @@
 		<Data Name="OnX" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Size" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="Child" Keys="MapGeneratorNode" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
-		<Data Name="Remainder" Keys="MapGeneratorNode" meta:RefKey="GraphReference" />
+		<Data Name="Remainder" Keys="MapGeneratorNode" VisibleIf="remainderMode == NODE" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="Rotate" Nullable="False" TextColour="135,131,245" Extends="AbstractMapGenerationAction" meta:RefKey="StructDef">
 		<Const Name="classID">Rotate</Const>

@@ -56,4 +56,5 @@
 	<Text ID="rooted">Rooted!</Text>
 	<Text ID="stunned">Stunned!</Text>
 	<Text ID="interrupted">Interrupted!</Text>
+	<Text ID="distracted">Distracted!</Text>
 </Localisation>

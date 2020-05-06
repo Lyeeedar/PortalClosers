@@ -5,9 +5,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.AttackDamage
-import com.lyeeedar.Game.DamageEquations
-import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Game.*
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.SpaceSlot
@@ -66,6 +64,7 @@ class TaskAttack : AbstractTask()
 				eventSystem.addEvent(EventType.ATTACK, e.getRef(), entity)
 			}
 		}
+		e.ability()?.triggerCooldown(AbilityData.CooldownType.ATTACK)
 
 		val diff = tile.getPosDiff(pos.position)
 

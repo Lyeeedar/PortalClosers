@@ -2,32 +2,27 @@ package com.lyeeedar.AI.Tasks
 
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.ability
-import com.lyeeedar.Components.directionalSprite
-import com.lyeeedar.Game.Ability
-import com.lyeeedar.Game.AbilityData
 import com.lyeeedar.Systems.World
 import squidpony.squidmath.LightRNG
 
-class TaskWait(): AbstractTask()
+class TaskChannelAbility : AbstractTask()
 {
 	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
-		e.directionalSprite()?.currentAnim = "wait"
-		e.ability()?.triggerCooldown(AbilityData.CooldownType.WAIT)
+
 	}
 
 	var obtained: Boolean = false
 	companion object
 	{
-		private val pool: Pool<TaskWait> = object : Pool<TaskWait>() {
-			override fun newObject(): TaskWait
+		private val pool: Pool<TaskChannelAbility> = object : Pool<TaskChannelAbility>() {
+			override fun newObject(): TaskChannelAbility
 			{
-				return TaskWait()
+				return TaskChannelAbility()
 			}
 		}
 
-		@JvmStatic fun obtain(): TaskWait
+		@JvmStatic fun obtain(): TaskChannelAbility
 		{
 			val anim = pool.obtain()
 

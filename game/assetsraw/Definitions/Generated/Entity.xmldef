@@ -7,9 +7,28 @@
 		<Const Name="classID">AI</Const>
 		<Data Name="AiPath" StripExtension="True" ResourceType="BehaviourTree" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
+	<Definition Name="Ability" Nullable="False" TextColour="74,74,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Ability</Const>
+		<Data Name="Ability1" Keys="AbilityData" meta:RefKey="Reference" />
+		<Data Name="Ability2" Keys="AbilityData" meta:RefKey="Reference" />
+		<Data Name="Ability3" Keys="AbilityData" meta:RefKey="Reference" />
+		<Data Name="Ability4" Keys="AbilityData" meta:RefKey="Reference" />
+		<Data Name="Ultimate" Keys="AbilityData" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="AbilityData" Nullable="False" TextColour="181,181,240" meta:RefKey="StructDef">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="ActionSequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Cooldown" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="CooldownType" EnumValues="Turn,Wait,Attack,Use_ability" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="SingleUse" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="TargetType" EnumValues="Tile,Empty_tile,Ally,Any_enemy,Target_enemy" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="TargetCondition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,AdditionalRenderable,BakedLight,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">

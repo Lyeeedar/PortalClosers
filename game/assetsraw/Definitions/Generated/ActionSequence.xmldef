@@ -7,14 +7,14 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,Detach,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn,Repeat),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnOneShotParticle,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Data Name="Duration" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="(AddBuff),Meta(Repeat),Renderable(Animation,AttachParticle,FlightParticle,ReplaceSourceRenderable,ScreenShake,SpawnTrackedParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,Detach,GenerateHate,Heal,Knockback,MoveSource,Pull,Stun),Meta(BlockTurn),Permute(LockEntityTargets,Permute,RestoreTargets,SelectEntities,SelectSelf,SelectTiles,SetSourcePoint,StoreTargets),Renderable(SpawnOneShotParticle)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Animation" Nullable="False" TextColour="35,35,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Animation</Const>
 		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash" SkipIfDefault="False" meta:RefKey="Enum" />
@@ -48,6 +48,9 @@
 		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="AlwaysCrit" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="UseAttackDamageType" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Detach" Nullable="False" TextColour="100,100,204" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Detach</Const>
 	</Definition>
 	<Definition Name="FlightParticle" Nullable="False" TextColour="230,9,230" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">FlightParticle</Const>

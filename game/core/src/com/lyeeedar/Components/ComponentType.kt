@@ -3,7 +3,9 @@ package com.lyeeedar.Components
 enum class ComponentType private constructor(val constructor: ()->AbstractComponent)
 {
 	AI({ AIComponent() }),
+	Ability({ AbilityComponent() }),
 	ActionSequence({ ActionSequenceComponent() }),
+	ActiveAbility({ ActiveAbilityComponent() }),
 	AdditionalRenderable({ AdditionalRenderableComponent() }),
 	ArchetypeBuilder({ ArchetypeBuilderComponent() }),
 	BakedLight({ BakedLightComponent() }),
@@ -35,7 +37,9 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 }
 
 inline fun Entity.ai(): AIComponent? = this.components[ComponentType.AI] as AIComponent?
+inline fun Entity.ability(): AbilityComponent? = this.components[ComponentType.Ability] as AbilityComponent?
 inline fun Entity.actionSequence(): ActionSequenceComponent? = this.components[ComponentType.ActionSequence] as ActionSequenceComponent?
+inline fun Entity.activeAbility(): ActiveAbilityComponent? = this.components[ComponentType.ActiveAbility] as ActiveAbilityComponent?
 inline fun Entity.additionalRenderable(): AdditionalRenderableComponent? = this.components[ComponentType.AdditionalRenderable] as AdditionalRenderableComponent?
 inline fun Entity.archetypeBuilder(): ArchetypeBuilderComponent? = this.components[ComponentType.ArchetypeBuilder] as ArchetypeBuilderComponent?
 inline fun Entity.bakedLight(): BakedLightComponent? = this.components[ComponentType.BakedLight] as BakedLightComponent?

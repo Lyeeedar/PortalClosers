@@ -2,6 +2,7 @@ package com.lyeeedar.Systems
 
 import com.lyeeedar.AI.Tasks.AbstractTask
 import com.lyeeedar.AI.Tasks.TaskAttack
+import com.lyeeedar.AI.Tasks.TaskChannelAbility
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Statistic
@@ -68,7 +69,14 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 
 	override fun doEntityAI(entity: Entity)
 	{
-		val ai = entity.ai()!!
-		ai.ai.evaluate(ai.state)
+		if (entity.activeAbility() != null)
+		{
+			entity.task()!!.tasks.add(TaskChannelAbility.obtain())
+		}
+		else
+		{
+			val ai = entity.ai()!!
+			ai.ai.evaluate(ai.state)
+		}
 	}
 }
