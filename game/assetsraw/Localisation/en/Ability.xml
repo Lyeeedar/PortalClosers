@@ -1,4 +1,6 @@
 <Localisation Language="en" xmlns:meta="Editor">
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c">Saurena swings her blade, cutting down all foes in the [GOLD]3[] tiles in front of her, dealing [GOLD]150%[] damage to each.</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce">Cleave</Text>
+	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability2 (AbilityData).Description:9c724585-f9fb-4864-961d-47e08d594af9">Saurena channels unleashes a burst of energy through her blade the moment it connects, dealing [GOLD]120%[] damage. This attack always triggers a critical effect.</Text>
+	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability2 (AbilityData).Name:d07376e6-89f4-457c-9a3c-c006614bf4e3">Arcane Strike</Text>
 </Localisation>

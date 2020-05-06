@@ -84,7 +84,9 @@ class AbilityData : XmlDataClass()
 		TURN,
 		WAIT,
 		ATTACK,
-		USE_ABILITY
+		USE_ABILITY,
+		KILL,
+		PACK_KILL
 	}
 
 	enum class TargetType

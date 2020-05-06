@@ -92,6 +92,45 @@
 				<CooldownType>Attack</CooldownType>
 				<TargetType>Target_enemy</TargetType>
 			</Ability1>
+			<Ability2 meta:RefKey="AbilityData">
+				<Name>Saurena.Entity.Components.[4] Ability.Ability.Ability2 (AbilityData).Name:d07376e6-89f4-457c-9a3c-c006614bf4e3</Name>
+				<Description>Saurena.Entity.Components.[4] Ability.Ability.Ability2 (AbilityData).Description:9c724585-f9fb-4864-961d-47e08d594af9</Description>
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<SpawnOneShotParticle>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>EnemyAttacks/SlashSimple</Name>
+									<Colour>255,0,0,255</Colour>
+								</Particle>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+							</SpawnOneShotParticle>
+							<SpawnOneShotParticle>
+								<Time>0.064796634</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>Shout</Name>
+									<Colour>255,0,0,255</Colour>
+								</Particle>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+							</SpawnOneShotParticle>
+							<Damage>
+								<Time>0.09025245</Time>
+								<classID>Damage</classID>
+								<Damage>source.damage*1.2</Damage>
+								<Type>None</Type>
+								<AlwaysCrit>true</AlwaysCrit>
+								<UseAttackDamageType>true</UseAttackDamageType>
+							</Damage>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<Cooldown>5</Cooldown>
+				<CooldownType>Attack</CooldownType>
+				<TargetType>Target_enemy</TargetType>
+			</Ability2>
 		</Ability>
 	</Components>
 </Entity>

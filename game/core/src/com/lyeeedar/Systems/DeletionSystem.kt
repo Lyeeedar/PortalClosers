@@ -1,6 +1,7 @@
 package com.lyeeedar.Systems
 
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.AbilityData
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.BloodSplatter
@@ -41,10 +42,32 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 					val e = killerTile.contents[slot]?.get() ?: continue
 					val stats = e.statistics() ?: continue
 
-					if (e.isEnemies(entity) && EventSystem.isEventRegistered(EventType.KILL, e))
+					if (e.isEnemies(entity))
 					{
 						// we have our killer!
-						world.eventSystem()?.addEvent(EventType.KILL, e.getRef(), entity.getRef())
+
+						if (EventSystem.isEventRegistered(EventType.KILL, e))
+						{
+							world.eventSystem()?.addEvent(EventType.KILL, e.getRef(), entity.getRef())
+						}
+
+						e.ability()?.triggerCooldown(AbilityData.CooldownType.KILL)
+
+						val pack = e.pack()
+						if (pack != null)
+						{
+							for (otherRef in pack.pack.entities)
+							{
+								val other = otherRef.get() ?: continue
+
+								if (EventSystem.isEventRegistered(EventType.PACK_KILL, other))
+								{
+									world.eventSystem()?.addEvent(EventType.PACK_KILL, other.getRef(), entity.getRef())
+								}
+
+								other.ability()?.triggerCooldown(AbilityData.CooldownType.PACK_KILL)
+							}
+						}
 					}
 				}
 			}
