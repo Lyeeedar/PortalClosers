@@ -134,14 +134,16 @@
 		<Const Name="classID">SpawnOneShotParticle</Const>
 		<Data Name="Particle" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="AlignToVector" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
-		<Data Name="SpawnBehaviour" EnumValues="Immediate,From_source,From_center,Random" Default="Immediate" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="SpawnDuration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="SpawnSingleParticle" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="SpawnBehaviour" EnumValues="Immediate,From_source,From_center,Random" Default="Immediate" SkipIfDefault="False" VisibleIf="SpawnSingleParticle == false" meta:RefKey="Enum" />
+		<Data Name="SpawnDuration" Type="Float" Default="0" SkipIfDefault="True" VisibleIf="SpawnSingleParticle == false &amp;&amp; SpawnBehaviour != Immediate" meta:RefKey="Number" />
 		<Data Name="MakeParticleNonBlocking" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="SpawnTrackedParticle" Nullable="False" TextColour="24,24,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">SpawnTrackedParticle</Const>
 		<Data Name="Particle" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="SpawnSingleParticle" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="AlignToVector" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="StoreTargets" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">StoreTargets</Const>

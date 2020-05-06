@@ -10,6 +10,8 @@ class WorldScreen : AbstractScreen()
 {
 	lateinit var world: World<*>
 
+	var timeMultiplier = 1f
+
 	override fun create()
 	{
 		val player = EntityLoader.load("Entities/player")
@@ -17,10 +19,17 @@ class WorldScreen : AbstractScreen()
 		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 2)
 
 		mainTable.add(RenderSystemWidget(world)).grow()
+
+		debugConsole.register("time", "") { args, _ ->
+
+			timeMultiplier = args[0].toFloat()
+
+			true
+		}
 	}
 
 	override fun doRender(delta: Float)
 	{
-		world.update(delta)
+		world.update(delta * timeMultiplier)
 	}
 }

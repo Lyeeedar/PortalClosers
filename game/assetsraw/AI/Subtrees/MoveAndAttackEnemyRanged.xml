@@ -49,6 +49,10 @@
 			<!--Attack or move to-->
 			<Node>
 				<classID>Node</classID>
+				<Node meta:RefKey="RunAll">1b889f5a-f918-4b1f-a084-0f16d0212600</Node>
+			</Node>
+			<Node>
+				<classID>Node</classID>
 				<Node meta:RefKey="RunAll">28255bb3-f564-4971-940b-7a7a2a48a4eb</Node>
 			</Node>
 			<Node>
@@ -56,7 +60,7 @@
 				<Node meta:RefKey="RunAll">14881f95-65ed-4bce-9467-9091cbf2f0f4</Node>
 			</Node>
 		</RunUntilNotFailed>
-		<RunAll meta:X="1605" meta:Y="315" GUID="28255bb3-f564-4971-940b-7a7a2a48a4eb">
+		<RunAll meta:X="1605" meta:Y="345" GUID="28255bb3-f564-4971-940b-7a7a2a48a4eb">
 			<SetValue>
 				<classID>SetValue</classID>
 				<Key>attackCount</Key>
@@ -86,6 +90,17 @@
 				</OutputMap>
 				<Node meta:RefKey="RunUntilNotCompleted">3196aed8-6dd5-480c-860b-a40655880db9</Node>
 			</SetState>
+		</RunAll>
+		<RunAll meta:X="1605" meta:Y="195" GUID="1b889f5a-f918-4b1f-a084-0f16d0212600">
+			<SetValue>
+				<classID>SetValue</classID>
+				<Key>attackCount</Key>
+				<Value>attackCount+1</Value>
+			</SetValue>
+			<UseAbility>
+				<classID>UseAbility</classID>
+				<Key>enemyPos</Key>
+			</UseAbility>
 		</RunAll>
 	</NodeMap>
 </BehaviourTree>

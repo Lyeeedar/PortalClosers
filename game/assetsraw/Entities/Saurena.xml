@@ -44,5 +44,54 @@
 			</AttackDefinition>
 			<BloodColour>255,0,0,255</BloodColour>
 		</Statistics>
+		<Ability>
+			<classID>Ability</classID>
+			<Ability1 meta:RefKey="AbilityData">
+				<Name>Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce</Name>
+				<Description>Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c</Description>
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<Permute>
+								<classID>Permute</classID>
+								<AppendTargets>true</AppendTargets>
+								<HitPoints>
+									<Line>#@#</Line>
+								</HitPoints>
+							</Permute>
+							<SpawnOneShotParticle>
+								<Time>0.0145294527</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>EnemyAttacks/SlashSimple</Name>
+									<Colour>255,133,133,255</Colour>
+								</Particle>
+								<SpawnSingleParticle>true</SpawnSingleParticle>
+							</SpawnOneShotParticle>
+							<SpawnOneShotParticle>
+								<Time>0.1459962</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>EnemyAttacks/SlashSimple</Name>
+									<Colour>255,133,133,255</Colour>
+									<FlipX>true</FlipX>
+								</Particle>
+								<SpawnSingleParticle>true</SpawnSingleParticle>
+							</SpawnOneShotParticle>
+							<Damage>
+								<Time>0.196090043</Time>
+								<classID>Damage</classID>
+								<Damage>source.damage * 1.5</Damage>
+								<Type>None</Type>
+								<UseAttackDamageType>true</UseAttackDamageType>
+							</Damage>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<Cooldown>4</Cooldown>
+				<CooldownType>Attack</CooldownType>
+				<TargetType>Target_enemy</TargetType>
+			</Ability1>
+		</Ability>
 	</Components>
 </Entity>

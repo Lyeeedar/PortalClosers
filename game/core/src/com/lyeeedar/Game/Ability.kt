@@ -18,6 +18,12 @@ class Ability(val data: AbilityData)
 
 	var justUsed = false
 
+	val name: String
+		get() = Localisation.getText(data.name, "Ability")
+
+	val description: String
+		get() = Localisation.getText(data.description, "Ability")
+
 	fun getValidTargets(entity: Entity, world: World<*>): List<AbstractTile>
 	{
 		val pos = entity.position()!!
@@ -132,8 +138,8 @@ class AbilityData : XmlDataClass()
 		val rangeRaw = xmlData.get("Range", "1,1")!!.split(',')
 		range = Point(rangeRaw[0].trim().toInt(), rangeRaw[1].trim().toInt())
 		targetType = TargetType.valueOf(xmlData.get("TargetType").toUpperCase(Locale.ENGLISH))
-		targetCondition = CompiledExpression(xmlData.get("TargetCondition"))
-		sortCondition = CompiledExpression(xmlData.get("SortCondition"))
+		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
+		sortCondition = CompiledExpression(xmlData.get("SortCondition", "1")!!)
 		selectMinByCondition = xmlData.getBoolean("SelectMinByCondition", true)
 	}
 	//endregion

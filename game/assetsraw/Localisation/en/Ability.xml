@@ -1,0 +1,4 @@
+<Localisation Language="en" xmlns:meta="Editor">
+	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c">Saurena swings her blade, cutting down all foes in the [GOLD]3[] tiles in front of her, dealing [GOLD]150%[] damage to each.</Text>
+	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce">Cleave</Text>
+</Localisation>

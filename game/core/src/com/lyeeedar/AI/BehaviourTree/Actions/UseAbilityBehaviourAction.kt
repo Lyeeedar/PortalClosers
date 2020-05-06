@@ -36,6 +36,7 @@ class UseAbilityBehaviourAction : AbstractBehaviourAction()
 						ability.pickTarget(entity, state.world, state.rng)
 				if (target == null) continue
 				val tile = state.world.grid.tryGet(target, null) as? Tile ?: continue
+				if (tile.dist(pos.position) !in ability.data.range.x..ability.data.range.y) continue
 
 				task.tasks.add(TaskUseAbility.obtain().set(tile, ability))
 

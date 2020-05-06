@@ -17,6 +17,10 @@
 			</Node>
 		</RunUntilNotCompleted>
 		<RunUntilNotFailed meta:X="840" meta:Y="165" GUID="7fcfbc2e-a086-4db8-8e87-ffc4b9c45364">
+			<UseAbility>
+				<classID>UseAbility</classID>
+				<Key>enemyPos</Key>
+			</UseAbility>
 			<Attack>
 				<classID>Attack</classID>
 				<Key>enemyPos</Key>

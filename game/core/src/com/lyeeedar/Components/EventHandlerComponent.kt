@@ -17,7 +17,7 @@ class EventAndCondition() : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		condition = CompiledExpression(xmlData.get("Condition"))
+		condition = CompiledExpression(xmlData.get("Condition", "1")!!)
 		val sequenceEl = xmlData.getChildByName("Sequence")!!
 		sequence = ActionSequence()
 		sequence.load(sequenceEl)
