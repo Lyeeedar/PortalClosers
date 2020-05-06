@@ -82,7 +82,6 @@
 								<Time>0.196090043</Time>
 								<classID>Damage</classID>
 								<Damage>source.damage * 1.5</Damage>
-								<Type>None</Type>
 								<UseAttackDamageType>true</UseAttackDamageType>
 							</Damage>
 						</Timeline>
@@ -120,7 +119,6 @@
 								<Time>0.09025245</Time>
 								<classID>Damage</classID>
 								<Damage>source.damage*1.2</Damage>
-								<Type>None</Type>
 								<AlwaysCrit>true</AlwaysCrit>
 								<UseAttackDamageType>true</UseAttackDamageType>
 							</Damage>
@@ -131,6 +129,139 @@
 				<CooldownType>Attack</CooldownType>
 				<TargetType>Target_enemy</TargetType>
 			</Ability2>
+			<Ability3 meta:RefKey="AbilityData">
+				<Name>Saurena.Entity.Components.[4] Ability.Ability.Ability3 (AbilityData).Name:50bdfceb-f254-41bc-841a-4591bfcbb753</Name>
+				<Description>Saurena.Entity.Components.[4] Ability.Ability.Ability3 (AbilityData).Description:1d34d24d-1373-49d6-b614-70f631733584</Description>
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<SpawnOneShotParticle>
+								<Time>0.00185601774</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>EnemyAttacks/Kick</Name>
+									<Colour>122,116,110,255</Colour>
+								</Particle>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+							</SpawnOneShotParticle>
+							<LockEntityTargets>
+								<Time>0.0228908863</Time>
+								<classID>LockEntityTargets</classID>
+							</LockEntityTargets>
+							<Damage>
+								<Time>0.0525871739</Time>
+								<classID>Damage</classID>
+								<Damage>source.damage * 0.6</Damage>
+								<Type>None</Type>
+							</Damage>
+							<Stun>
+								<Time>0.07238471</Time>
+								<classID>Stun</classID>
+								<Count>3</Count>
+							</Stun>
+							<Knockback>
+								<Time>0.0946569145</Time>
+								<classID>Knockback</classID>
+								<Type>Leap</Type>
+								<Dist>3</Dist>
+							</Knockback>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<Cooldown>7</Cooldown>
+				<CooldownType>Attack</CooldownType>
+				<TargetType>Target_enemy</TargetType>
+			</Ability3>
+			<Ability4 meta:RefKey="AbilityData">
+				<Name>Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Name:68f888b4-7d92-46da-a3d3-3145a24cbba9</Name>
+				<Description>Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Description:81a59100-da24-429d-b3f7-8b92c7883ae2</Description>
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<SelectSelf>
+								<classID>SelectSelf</classID>
+							</SelectSelf>
+							<LockEntityTargets>
+								<Time>0.009707417</Time>
+								<classID>LockEntityTargets</classID>
+							</LockEntityTargets>
+							<Detach>
+								<Time>0.01869865</Time>
+								<classID>Detach</classID>
+							</Detach>
+							<SpawnOneShotParticle>
+								<Time>0.03633807</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>StatusAndEffects/Heal</Name>
+									<Colour>45,255,0,255</Colour>
+								</Particle>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+							</SpawnOneShotParticle>
+							<Heal>
+								<Time>0.04536321</Time>
+								<classID>Heal</classID>
+								<Amount>source.max_hp * 0.1</Amount>
+							</Heal>
+							<BlockTurn>
+								<Time>0.05486336</Time>
+								<classID>BlockTurn</classID>
+							</BlockTurn>
+						</Timeline>
+						<Timeline>
+							<Repeat>
+								<Time>0.0307478718</Time>
+								<Duration LockDuration="False">0.0307471473</Duration>
+								<classID>Repeat</classID>
+								<Count>7</Count>
+							</Repeat>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<Cooldown>8</Cooldown>
+				<CooldownType>Kill</CooldownType>
+				<Range>0,0</Range>
+				<TargetType>Ally</TargetType>
+				<TargetCondition>hp &lt; max_hp*0.5</TargetCondition>
+				<SortCondition>1</SortCondition>
+			</Ability4>
+			<Ultimate meta:RefKey="AbilityData">
+				<Name>Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).Name:de9f4d9b-952f-4e12-97c2-0ee951004a0a</Name>
+				<Description>Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).Description:df0fa06e-1299-4e35-9ff4-d960480c132d</Description>
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<SelectSelf>
+								<classID>SelectSelf</classID>
+							</SelectSelf>
+							<AddBuff>
+								<Time>0.01914557</Time>
+								<Duration LockDuration="False">0.0533755273</Duration>
+								<classID>Buff</classID>
+								<Buff meta:RefKey="Buff">
+									<Name>Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Name:c2bfb761-140f-4085-bc89-fe92245dcfc0</Name>
+									<Description>Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Description:76aa4f8f-63d1-4e6e-bb6f-4861fbdc6d1c</Description>
+									<Icon meta:RefKey="Sprite">
+										<Name>Icons/enrage</Name>
+										<Colour>255,29,29,255</Colour>
+									</Icon>
+									<Duration>8</Duration>
+									<Statistics>
+										<Atk_power>0.2</Atk_power>
+										<Crit_chance>0.2</Crit_chance>
+										<Armour>0.2</Armour>
+									</Statistics>
+									<EventHandlers />
+								</Buff>
+							</AddBuff>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<CooldownType>Kill</CooldownType>
+				<TargetType>Target_enemy</TargetType>
+			</Ultimate>
 		</Ability>
 	</Components>
 </Entity>

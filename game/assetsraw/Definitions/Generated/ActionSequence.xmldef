@@ -44,8 +44,8 @@
 	</Definition>
 	<Definition Name="Damage" Nullable="False" TextColour="204,164,204" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Damage</Const>
-		<Data Name="Damage" SkipIfDefault="False" Default="1" meta:RefKey="String" />
-		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Damage" SkipIfDefault="False" Default="source.damage" meta:RefKey="String" />
+		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" Default="None" SkipIfDefault="False" VisibleIf="UseAttackDamageType == false" meta:RefKey="Enum" />
 		<Data Name="AlwaysCrit" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="UseAttackDamageType" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>

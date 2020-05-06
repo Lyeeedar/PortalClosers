@@ -16,8 +16,12 @@ import java.util.*
 
 class DamageAction : AbstractOneShotActionSequenceAction()
 {
+	@DataCompiledExpression(default = "source.damage")
 	lateinit var damage: CompiledExpression
-	lateinit var type: DamageType
+
+	@DataValue(visibleIf = "UseAttackDamageType == false")
+	var type: DamageType = DamageType.NONE
+
 	var alwaysCrit: Boolean = false
 	var useAttackDamageType: Boolean = false
 
@@ -70,8 +74,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		damage = CompiledExpression(xmlData.get("Damage", "1")!!)
-		type = DamageType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		damage = CompiledExpression(xmlData.get("Damage"))
+		type = DamageType.valueOf(xmlData.get("Type", DamageType.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
 		alwaysCrit = xmlData.getBoolean("AlwaysCrit", false)
 		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", false)
 	}
