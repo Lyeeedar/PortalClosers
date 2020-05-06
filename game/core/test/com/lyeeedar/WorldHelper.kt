@@ -35,7 +35,7 @@ fun createWorld(gridStr: String): TestWorld
 		{
 			endTile = tile
 		}
-		else if (char == 'A' || char == 'a')
+		else if (char == 'A' || char == 'a' || char == 'S')
 		{
 			val entity = Entity()
 			entity.obtained = true
@@ -50,6 +50,10 @@ fun createWorld(gridStr: String): TestWorld
 			if (char == 'a')
 			{
 				entitiesToCountDown.add(entity)
+			}
+			else if (char == 'S')
+			{
+				entity.position()!!.turnsOnTile = 10
 			}
 		}
 
