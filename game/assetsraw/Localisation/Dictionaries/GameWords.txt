@@ -34,3 +34,4 @@ debuff
 debuffs
 vampiric
 Vorpal
+Saurena
