@@ -82,16 +82,38 @@ fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array
 	return tiles
 }
 
-fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity): Boolean
+fun PositionComponent.isValidTile(t: AbstractTile, entity: Entity, checkCanSwap: Boolean = false): Boolean
 {
 	for (x in 0 until size)
 	{
 		for (y in 0 until size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null)
-			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null || (tile.contents.get(slot) != null && tile.contents.get(slot)?.get() != entity))
+			if (tile == null || tile.wall != null || tile.contents.get(SpaceSlot.WALL) != null)
 			{
 				return false
+			}
+			else
+			{
+				val other = tile.contents[slot]?.get()
+				if (other != null)
+				{
+					if (checkCanSwap)
+					{
+						if (canSwap && other.isAllies(entity))
+						{
+
+						}
+						else
+						{
+							return other == entity
+						}
+					}
+					else
+					{
+						return other == entity
+					}
+				}
 			}
 		}
 	}

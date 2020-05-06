@@ -60,7 +60,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			val nextTile = state.world.grid.tryGet(position, dir, null )
 
 			// if next step is impassable then fail
-			if (nextTile == null || !posData.isValidTile(nextTile, entity))
+			if (nextTile == null || !posData.isValidTile(nextTile, entity, true))
 			{
 				return EvaluationState.FAILED
 			}
@@ -94,7 +94,7 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 			val nextTile = state.world.grid.tryGet(path[1], null)
 
 			// if next step is impassable then fail
-			if (nextTile == null || !posData.isValidTile(nextTile, entity))
+			if (nextTile == null || !posData.isValidTile(nextTile, entity, true))
 			{
 				cache.invalidatePath()
 				return EvaluationState.FAILED

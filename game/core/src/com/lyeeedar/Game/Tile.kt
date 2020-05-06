@@ -64,7 +64,11 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 			val obj = contents.get(travelType)?.get()
 			if (obj != null && selfEntity != null && obj != selfEntity)
 			{
-				if (selfEntity.isAllies(obj) && obj.position()!!.turnsOnTile < 3)
+				if (
+					obj.position()!!.moveable && !obj.position()!!.moveLocked &&
+					selfEntity.isAllies(obj) &&
+					(selfEntity.position()!!.canSwap || obj.position()!!.turnsOnTile < 3)
+				)
 				{
 					return true
 				}
@@ -82,7 +86,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		{
 			val selfEntity = self.get()
 			val obj = contents.get(travelType)?.get()
-			if (obj != null && selfEntity != null && obj != selfEntity)
+			if (obj != null && selfEntity != null && obj != selfEntity && !selfEntity.position()!!.canSwap)
 			{
 				return 100
 			}
