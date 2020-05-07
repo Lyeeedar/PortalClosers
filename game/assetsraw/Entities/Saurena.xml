@@ -136,7 +136,6 @@
 					<Actions>
 						<Timeline>
 							<SpawnOneShotParticle>
-								<Time>0.00185601774</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
 									<Name>EnemyAttacks/Kick</Name>
@@ -146,22 +145,22 @@
 								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
 							</SpawnOneShotParticle>
 							<LockEntityTargets>
-								<Time>0.0228908863</Time>
+								<Time>0.0101762442</Time>
 								<classID>LockEntityTargets</classID>
 							</LockEntityTargets>
 							<Damage>
-								<Time>0.0525871739</Time>
+								<Time>0.0398117155</Time>
 								<classID>Damage</classID>
 								<Damage>source.damage * 0.6</Damage>
 								<Type>None</Type>
 							</Damage>
 							<Stun>
-								<Time>0.07238471</Time>
+								<Time>0.0450511724</Time>
 								<classID>Stun</classID>
 								<Count>3</Count>
 							</Stun>
 							<Knockback>
-								<Time>0.0946569145</Time>
+								<Time>0.0509826764</Time>
 								<classID>Knockback</classID>
 								<Type>Leap</Type>
 								<Dist>3</Dist>

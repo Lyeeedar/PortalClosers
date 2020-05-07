@@ -105,7 +105,7 @@ class KnockbackAction() : AbstractOneShotActionSequenceAction()
 
 			for (slot in SpaceSlot.EntityValues)
 			{
-				val entity = srcTile.contents[slot]?.get() ?: continue
+				val entity = targetTile.contents[slot]?.get() ?: continue
 
 				if (entity.isEnemies(source))
 				{
@@ -164,53 +164,35 @@ private fun doMove(src: AbstractTile, dst: AbstractTile, type: MovementType, int
 		}
 	}
 
-	val path = BresenhamLine.lineNoDiag(src.x, src.y, dst.x, dst.y, state.world.grid)
-
-	var actualDst = dst
-
-	if (type == MovementType.ROLL || type == MovementType.MOVE)
+	val moveSlot = when (type)
 	{
-		for (point in path)
+		MovementType.MOVE, MovementType.ROLL -> SpaceSlot.ENTITY
+		MovementType.TELEPORT, MovementType.LEAP -> SpaceSlot.LIGHT
+	}
+	val path = BresenhamLine.lineNoDiag(src.x, src.y, dst.x, dst.y, state.world.grid, true, moveSlot, entity)
+
+	var actualDst: AbstractTile? = null
+	outer@for (point in path.reversed())
+	{
+		val tile = state.world.grid[point]
+		if (pos.isValidTile(tile, entity))
 		{
-			val tile = state.world.grid.tryGet(point, null) ?: break
-
-			if (!pos.isValidTile(tile, entity)) break
-
 			actualDst = tile
+			break
 		}
-	}
-	else
-	{
-		if (!pos.isValidTile(actualDst, entity))
+
+		for (dir in Direction.CardinalValues)
 		{
-			val validTiles = com.badlogic.gdx.utils.Array<AbstractTile>(4)
-			for (dir in Direction.Values)
+			val tile = state.world.grid.tryGet(point, dir, null) ?: continue
+			if (pos.isValidTile(tile, entity))
 			{
-				val tile = state.world.grid.tryGet(actualDst, dir, null) ?: continue
-				if (pos.isValidTile(tile, entity))
-				{
-					validTiles.add(tile)
-				}
-			}
-
-			if (validTiles.size > 0)
-			{
-				actualDst = validTiles.random()
-			}
-			else
-			{
-				for (point in path)
-				{
-					val tile = state.world.grid.tryGet(point, null) ?: break
-
-					if (!pos.isValidTile(tile, entity)) break
-
-					actualDst = tile
-				}
+				actualDst = tile
+				break@outer
 			}
 		}
 	}
 
+	if (actualDst == null) return src
 	if (actualDst == src) return actualDst
 
 	pos.doMove(actualDst, entity)
