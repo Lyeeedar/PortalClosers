@@ -9,8 +9,10 @@ import com.lyeeedar.Components.isEnemies
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.CompiledExpression
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 
+@DataClass(name = "GenHate")
 class GenerateHateAction : AbstractOneShotActionSequenceAction()
 {
 	lateinit var amount: CompiledExpression

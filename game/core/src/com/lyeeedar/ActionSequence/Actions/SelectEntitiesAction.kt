@@ -12,7 +12,7 @@ import java.util.*
 import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
 
-@DataClass(category = "Permute", colour = "212,176,126")
+@DataClass(category = "Permute", colour = "212,176,126", name = "PickEnts")
 class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 {
 	enum class Mode

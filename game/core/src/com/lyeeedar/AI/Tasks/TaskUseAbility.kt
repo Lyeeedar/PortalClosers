@@ -53,7 +53,7 @@ class TaskUseAbility : AbstractTask()
 				return
 			}
 
-			stats.addMessage(ability.name, Colour.WHITE, 1f)
+			stats.addMessage(ability.name, Colour.WHITE, 0.4f)
 		}
 
 		if (EventSystem.isEventRegistered(EventType.USE_ABILITY, e))

@@ -15,10 +15,9 @@ import com.lyeeedar.Renderables.Animation.SpinAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.AbstractTile
-import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.randomOrNull
 import java.util.*
 import squidpony.squidmath.LightRNG
 
@@ -30,6 +29,7 @@ enum class MovementType
 	TELEPORT
 }
 
+@DataClass(name = "Move")
 class MoveSourceAction() : AbstractOneShotActionSequenceAction()
 {
 	lateinit var type: MovementType

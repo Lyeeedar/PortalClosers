@@ -59,7 +59,7 @@
 									<Line>#@#</Line>
 								</HitPoints>
 							</Permute>
-							<SpawnOneShotParticle>
+							<OneShotFX>
 								<Time>0.0145294527</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
@@ -67,8 +67,8 @@
 									<Colour>255,133,133,255</Colour>
 								</Particle>
 								<SpawnSingleParticle>true</SpawnSingleParticle>
-							</SpawnOneShotParticle>
-							<SpawnOneShotParticle>
+							</OneShotFX>
+							<OneShotFX>
 								<Time>0.1459962</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
@@ -77,7 +77,7 @@
 									<FlipX>true</FlipX>
 								</Particle>
 								<SpawnSingleParticle>true</SpawnSingleParticle>
-							</SpawnOneShotParticle>
+							</OneShotFX>
 							<Damage>
 								<Time>0.196090043</Time>
 								<classID>Damage</classID>
@@ -97,15 +97,15 @@
 				<ActionSequence meta:RefKey="ActionSequence">
 					<Actions>
 						<Timeline>
-							<SpawnOneShotParticle>
+							<OneShotFX>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
 									<Name>EnemyAttacks/SlashSimple</Name>
 									<Colour>255,0,0,255</Colour>
 								</Particle>
 								<SpawnBehaviour>Immediate</SpawnBehaviour>
-							</SpawnOneShotParticle>
-							<SpawnOneShotParticle>
+							</OneShotFX>
+							<OneShotFX>
 								<Time>0.064796634</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
@@ -114,7 +114,7 @@
 								</Particle>
 								<SpawnBehaviour>Immediate</SpawnBehaviour>
 								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-							</SpawnOneShotParticle>
+							</OneShotFX>
 							<Damage>
 								<Time>0.09025245</Time>
 								<classID>Damage</classID>
@@ -135,7 +135,7 @@
 				<ActionSequence meta:RefKey="ActionSequence">
 					<Actions>
 						<Timeline>
-							<SpawnOneShotParticle>
+							<OneShotFX>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
 									<Name>EnemyAttacks/Kick</Name>
@@ -143,11 +143,11 @@
 								</Particle>
 								<SpawnBehaviour>Immediate</SpawnBehaviour>
 								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-							</SpawnOneShotParticle>
-							<LockEntityTargets>
+							</OneShotFX>
+							<LockTargets>
 								<Time>0.0101762442</Time>
 								<classID>LockEntityTargets</classID>
-							</LockEntityTargets>
+							</LockTargets>
 							<Damage>
 								<Time>0.0398117155</Time>
 								<classID>Damage</classID>
@@ -178,18 +178,18 @@
 				<ActionSequence meta:RefKey="ActionSequence">
 					<Actions>
 						<Timeline>
-							<SelectSelf>
+							<PickSelf>
 								<classID>SelectSelf</classID>
-							</SelectSelf>
-							<LockEntityTargets>
+							</PickSelf>
+							<LockTargets>
 								<Time>0.009707417</Time>
 								<classID>LockEntityTargets</classID>
-							</LockEntityTargets>
+							</LockTargets>
 							<Detach>
 								<Time>0.01869865</Time>
 								<classID>Detach</classID>
 							</Detach>
-							<SpawnOneShotParticle>
+							<OneShotFX>
 								<Time>0.03633807</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
@@ -198,16 +198,16 @@
 								</Particle>
 								<SpawnBehaviour>Immediate</SpawnBehaviour>
 								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-							</SpawnOneShotParticle>
+							</OneShotFX>
 							<Heal>
 								<Time>0.04536321</Time>
 								<classID>Heal</classID>
 								<Amount>source.max_hp * 0.1</Amount>
 							</Heal>
-							<BlockTurn>
+							<Block>
 								<Time>0.05486336</Time>
 								<classID>BlockTurn</classID>
-							</BlockTurn>
+							</Block>
 						</Timeline>
 						<Timeline>
 							<Repeat>
@@ -232,9 +232,9 @@
 				<ActionSequence meta:RefKey="ActionSequence">
 					<Actions>
 						<Timeline>
-							<SelectSelf>
+							<PickSelf>
 								<classID>SelectSelf</classID>
-							</SelectSelf>
+							</PickSelf>
 							<AddBuff>
 								<Time>0.01914557</Time>
 								<Duration LockDuration="False">0.0533755273</Duration>
@@ -258,7 +258,8 @@
 						</Timeline>
 					</Actions>
 				</ActionSequence>
-				<CooldownType>Kill</CooldownType>
+				<Cooldown>15</Cooldown>
+				<CooldownType>Attack</CooldownType>
 				<TargetType>Target_enemy</TargetType>
 			</Ultimate>
 		</Ability>
