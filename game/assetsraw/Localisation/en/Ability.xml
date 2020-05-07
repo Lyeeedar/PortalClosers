@@ -6,9 +6,7 @@
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability3 (AbilityData).Description:1d34d24d-1373-49d6-b614-70f631733584">Saurena kicks the enemy, dealing [GOLD]60%[] damage and sending them flying backwards, stunning them for [GOLD]3[] turns.</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability3 (AbilityData).Name:50bdfceb-f254-41bc-841a-4591bfcbb753">Power Kick</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Description:81a59100-da24-429d-b3f7-8b92c7883ae2">Saurena drinks a healing potion, restoring [GOLD]10%[] of her max health each round for [GOLD]7[] rounds.</Text>
-	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Description:cb58a6e3-a629-444c-a100-d53e6573d955">Saurena smashes her blade into the ground, damaging all enemies in the shockwave for [GOLD]80%[] damage and stunning them for [GOLD]1[] turn.</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Name:68f888b4-7d92-46da-a3d3-3145a24cbba9">Healing Potion</Text>
-	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability4 (AbilityData).Name:e9868f03-43ad-450e-80d6-912ba8ff8e5c">Earthshaker</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).Description:df0fa06e-1299-4e35-9ff4-d960480c132d">Saurena flies into a deadly rage for [GOLD]8[] turns. Magic infuses her body, raising her attack by [GOLD]20%[], her critical effect chance by [GOLD]20%[], and her armour by [GOLD]20%[].</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).Name:de9f4d9b-952f-4e12-97c2-0ee951004a0a">Bloodrage</Text>
 </Localisation>

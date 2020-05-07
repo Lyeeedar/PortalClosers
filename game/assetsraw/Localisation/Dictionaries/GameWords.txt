@@ -35,3 +35,5 @@ debuffs
 vampiric
 Vorpal
 Saurena
+bloodrage
+shockwave
