@@ -28,6 +28,30 @@ class AbilityModifier : XmlDataClass()
 	@DataGraphReference(elementIsChild = true)
 	val nextTier: Array<AbilityModifier> = Array()
 
+	fun createAbility(template: XmlData): AbilityData
+	{
+		val data = AbilityData()
+		data.load(template)
+
+		if (name.isNotBlank()) data.name = name
+		if (description.isNotBlank()) data.description = description
+		if (icon != null) data.icon = icon
+
+		data.cooldown += cooldownModifier
+		data.range.plusAssign(rangeModifier)
+
+		data.actionSequence = data.actionSequence.loadDuplicate()
+		for (action in data.actionSequence.rawActions)
+		{
+			for (modifier in modifierActions)
+			{
+				modifier.applyTo(action)
+			}
+		}
+
+		return data
+	}
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{

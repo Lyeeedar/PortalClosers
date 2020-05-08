@@ -19,8 +19,7 @@ class EventAndCondition() : XmlDataClass()
 	{
 		condition = CompiledExpression(xmlData.get("Condition", "1")!!)
 		val sequenceEl = xmlData.getChildByName("Sequence")!!
-		sequence = ActionSequence()
-		sequence.load(sequenceEl)
+		sequence = ActionSequence.load(sequenceEl)
 	}
 	//endregion
 }

@@ -139,8 +139,7 @@ class AbilityData : XmlDataClass()
 		description = xmlData.get("Description")
 		icon = AssetManager.tryLoadSprite(xmlData.getChildByName("Icon"))
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
-		actionSequence = ActionSequence()
-		actionSequence.load(actionSequenceEl)
+		actionSequence = ActionSequence.load(actionSequenceEl)
 		cooldown = xmlData.getInt("Cooldown", 10)
 		cooldownType = CooldownType.valueOf(xmlData.get("CooldownType").toUpperCase(Locale.ENGLISH))
 		singleUse = xmlData.getBoolean("SingleUse", false)
@@ -157,17 +156,39 @@ class AbilityData : XmlDataClass()
 @DataFile(colour = "255,179,0", icon = "Sprites/Icons/Firebolt.png")
 class AbilityOrb : XmlDataClass()
 {
-	lateinit var abilityTemplate: AbilityData
+	@DataXml(actualClass = "AbilityData")
+	lateinit var abilityTemplate: XmlData
 
 	@DataGraphReference(elementIsChild = true)
 	lateinit var tier1: AbilityModifier
 
+	fun getAbilities(tier: Int): Array<AbilityData>
+	{
+		val output = Array<AbilityData>()
+		getAbilities(tier, 1, tier1, output)
+		return output
+	}
+
+	private fun getAbilities(tier: Int, currentTier: Int, currentNode: AbilityModifier, output: Array<AbilityData>)
+	{
+		if (tier == currentTier)
+		{
+			val data = currentNode.createAbility(abilityTemplate);
+			output.add(data);
+		}
+		else
+		{
+			for (child in currentNode.nextTier)
+			{
+				getAbilities(tier, currentTier+1, child, output);
+			}
+		}
+	}
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		val abilityTemplateEl = xmlData.getChildByName("AbilityTemplate")!!
-		abilityTemplate = AbilityData()
-		abilityTemplate.load(abilityTemplateEl)
+		abilityTemplate = xmlData.getChildByName("AbilityTemplate")!!
 		val tier1El = xmlData.getChildByName("Tier1")!!
 		tier1 = AbilityModifier()
 		tier1.load(tier1El)
