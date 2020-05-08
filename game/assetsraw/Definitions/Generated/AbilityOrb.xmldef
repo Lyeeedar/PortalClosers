@@ -1,0 +1,38 @@
+<Definitions Colour="255,179,0" Icon="Sprites/Icons/Firebolt.png" xmlns:meta="Editor">
+	<Definition Name="AbilityOrb" Nullable="False" TextColour="204,25,204" meta:RefKey="GraphStruct">
+		<Data Name="AbilityTemplate" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Tier1" Keys="AbilityModifier" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="AbilityModifier" Nullable="False" Background="204,32,32" meta:RefKey="GraphStructDef">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Icon" Keys="Sprite" meta:RefKey="Reference" />
+		<Data Name="CooldownModifier" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="RangeModifier" Type="Int" NumComponents="2" SkipIfDefault="True" Default="0, 0" meta:RefKey="Vector" />
+		<Data Name="ModifierActions" DefKey="AbstractAbilityModifierActionDefs" meta:RefKey="Collection" />
+		<Data Name="NextTier" meta:RefKey="Collection">
+			<Data Name="Node" Keys="AbilityModifier" meta:RefKey="GraphReference"/>
+		</Data>
+	</Definition>
+	<Definition Name="AbstractAbilityModifierAction" Nullable="False" TextColour="215,28,28" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractAbilityModifierActionDefs" Keys="ColourModifier,DamageModifier,HealModifier,RepeatModifier" meta:RefKey="ReferenceDef" />
+	<Definition Name="ColourModifier" Nullable="False" TextColour="216,34,216" Extends="AbstractAbilityModifierAction" meta:RefKey="StructDef">
+		<Const Name="classID">ColourModifier</Const>
+		<Data Name="ColourShift" SkipIfDefault="false" Default="255,255,255" meta:RefKey="Colour" />
+	</Definition>
+	<Definition Name="DamageModifier" Nullable="False" TextColour="204,204,2" Extends="AbstractAbilityModifierAction" meta:RefKey="StructDef">
+		<Const Name="classID">DamageModifier</Const>
+		<Data Name="DamageModifier" SkipIfDefault="True" Default="source.damage" meta:RefKey="String" />
+		<Data Name="Replace" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="HealModifier" Nullable="False" TextColour="223,0,0" Extends="AbstractAbilityModifierAction" meta:RefKey="StructDef">
+		<Const Name="classID">HealModifier</Const>
+		<Data Name="HealModifier" SkipIfDefault="True" Default="source.damage" meta:RefKey="String" />
+		<Data Name="Replace" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="RepeatModifier" Nullable="False" TextColour="240,15,240" Extends="AbstractAbilityModifierAction" meta:RefKey="StructDef">
+		<Const Name="classID">RepeatModifier</Const>
+		<Data Name="CountModifier" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+</Definitions>

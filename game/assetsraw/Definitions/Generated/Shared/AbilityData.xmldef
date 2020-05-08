@@ -1,0 +1,16 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbilityData" Nullable="False" TextColour="181,181,240" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Icon" Keys="Sprite" meta:RefKey="Reference" />
+		<Data Name="ActionSequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Cooldown" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="CooldownType" EnumValues="Turn,Wait,Attack,Use_ability,Kill,Pack_kill" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="SingleUse" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Range" Type="Int" Name1="Min" Name2="Max" NumComponents="2" SkipIfDefault="True" Default="1,1" meta:RefKey="Vector" />
+		<Data Name="TargetType" EnumValues="Tile,Empty_tile,Ally,Any_enemy,Target_enemy" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="TargetCondition" SkipIfDefault="False" Default="1" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile" meta:RefKey="String" />
+		<Data Name="SortCondition" SkipIfDefault="False" Default="1" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile" meta:RefKey="String" />
+		<Data Name="SelectMinByCondition" SkipIfDefault="True" Default="true" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile" meta:RefKey="Boolean" />
+	</Definition>
+</Definitions>

@@ -4,9 +4,11 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Components.*
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import java.util.*
 import ktx.collections.toGdxArray
@@ -23,6 +25,8 @@ class Ability(val data: AbilityData)
 
 	val description: String
 		get() = Localisation.getText(data.description, "Ability")
+
+	var isSelected = false
 
 	fun getValidTargets(entity: Entity, world: World<*>): List<AbstractTile>
 	{
@@ -104,6 +108,8 @@ class AbilityData : XmlDataClass()
 	@DataNeedsLocalisation(file = "Ability")
 	lateinit var description: String
 
+	var icon: Sprite? = null
+
 	lateinit var actionSequence: ActionSequence
 
 	var cooldown: Int = 10
@@ -131,6 +137,7 @@ class AbilityData : XmlDataClass()
 	{
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
+		icon = AssetManager.tryLoadSprite(xmlData.getChildByName("Icon"))
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
 		actionSequence = ActionSequence()
 		actionSequence.load(actionSequenceEl)
@@ -143,6 +150,27 @@ class AbilityData : XmlDataClass()
 		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
 		sortCondition = CompiledExpression(xmlData.get("SortCondition", "1")!!)
 		selectMinByCondition = xmlData.getBoolean("SelectMinByCondition", true)
+	}
+	//endregion
+}
+
+@DataFile(colour = "255,179,0", icon = "Sprites/Icons/Firebolt.png")
+class AbilityOrb : XmlDataClass()
+{
+	lateinit var abilityTemplate: AbilityData
+
+	@DataGraphReference(elementIsChild = true)
+	lateinit var tier1: AbilityModifier
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		val abilityTemplateEl = xmlData.getChildByName("AbilityTemplate")!!
+		abilityTemplate = AbilityData()
+		abilityTemplate.load(abilityTemplateEl)
+		val tier1El = xmlData.getChildByName("Tier1")!!
+		tier1 = AbilityModifier()
+		tier1.load(tier1El)
 	}
 	//endregion
 }
