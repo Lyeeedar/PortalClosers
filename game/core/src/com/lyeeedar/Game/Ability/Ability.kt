@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Components.*
-import com.lyeeedar.Game.AbilityModifier
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World

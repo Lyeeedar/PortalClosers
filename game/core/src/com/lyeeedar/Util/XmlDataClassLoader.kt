@@ -207,7 +207,9 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"Colour" -> com.lyeeedar.Game.Ability.ColourAbilityModifier()
 				"Damage" -> com.lyeeedar.Game.Ability.DamageAbilityModifier()
+				"Repeat" -> com.lyeeedar.Game.Ability.RepeatAbilityModifier()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifier!")
 			}
 		}
@@ -215,19 +217,10 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
+				"ColourKeyframe" -> com.lyeeedar.Game.Ability.ColourKeyframeData()
+				"RepeatKeyframe" -> com.lyeeedar.Game.Ability.RepeatKeyframeData()
 				"DamageKeyframe" -> com.lyeeedar.Game.Ability.DamageKeyframeData()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
-			}
-		}
-		fun loadAbstractAbilityModifierAction(classID: String): com.lyeeedar.Game.AbstractAbilityModifierAction
-		{
-			return when (classID)
-			{
-				"ColourModifier" -> com.lyeeedar.Game.ColourModifierAction()
-				"RepeatModifier" -> com.lyeeedar.Game.RepeatModifierAction()
-				"HealModifier" -> com.lyeeedar.Game.HealModifierAction()
-				"DamageModifier" -> com.lyeeedar.Game.DamageModifierAction()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierAction!")
 			}
 		}
 

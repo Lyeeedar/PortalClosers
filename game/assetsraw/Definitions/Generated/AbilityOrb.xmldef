@@ -7,11 +7,19 @@
 	</Definition>
 	<Definition Name="AbstractAbilityModifier" Nullable="False" TextColour="204,115,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractAbilityModifierDefs" Keys="Damage" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractAbilityModifierDefs" Keys="Colour,Damage,Repeat" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractAbilityModifierKeyframe" Nullable="False" TextColour="0,204,204" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractAbilityModifierKeyframeDefs" Keys="DamageKeyframe" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractAbilityModifierKeyframeDefs" Keys="ColourKeyframe,DamageKeyframe,RepeatKeyframe" meta:RefKey="ReferenceDef" />
+	<Definition Name="Colour" Nullable="False" TextColour="31,250,31" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Colour</Const>
+		<Data Name="Keyframes" Keys="ColourKeyframe" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="ColourKeyframe" Nullable="False" TextColour="3,204,3" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
+		<Const Name="classID">ColourKeyframe</Const>
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+	</Definition>
 	<Definition Name="Damage" Nullable="False" TextColour="204,66,204" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
 		<Const Name="classID">Damage</Const>
 		<Data Name="Keyframes" Keys="DamageKeyframe" meta:RefKey="Timeline" />
@@ -19,5 +27,13 @@
 	<Definition Name="DamageKeyframe" Nullable="False" TextColour="14,247,247" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
 		<Const Name="classID">DamageKeyframe</Const>
 		<Data Name="Multiplier" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Repeat" Nullable="False" TextColour="93,204,204" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Repeat</Const>
+		<Data Name="Keyframes" Keys="RepeatKeyframe" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="RepeatKeyframe" Nullable="False" TextColour="103,204,204" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
+		<Const Name="classID">RepeatKeyframe</Const>
+		<Data Name="CountChange" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

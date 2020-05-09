@@ -5,8 +5,10 @@
 	<Text ID="Firebolt.AbilityModifier.Name:294ee2f8-b613-4e1a-b6b8-f9e3ee624fc6">Firebolt II</Text>
 	<Text ID="Firebolt.AbilityModifier.Name:5a074193-4173-410b-be40-a47c5ffca661">Firebolt III</Text>
 	<Text ID="Firebolt.AbilityModifier.Name:bcbbae23-0e15-48c5-9650-a2b499aa36fd">Firebolt I</Text>
+	<Text ID="Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Description:8391f4c8-a527-473d-a59d-344a8eb68123">Shoot a fireball at a foe within 4 tiles, dealing [ORANGE]{Damage}% Fire[] damage to them.</Text>
 	<Text ID="Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Description:ca1d0b3b-7e89-4158-ac47-8f2e2bb76a56"></Text>
 	<Text ID="Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:94d07577-be76-4b65-af09-9b5ed5a5d963"></Text>
+	<Text ID="Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:dc19cd50-869f-4cca-8579-999e9bd14086">Firebolt</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c">Saurena swings her blade, cutting down all foes in the [GOLD]3[] tiles in front of her, dealing [GOLD]150%[] damage to each.</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability1 (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce">Cleave</Text>
 	<Text ID="Saurena.Entity.Components.[4] Ability.Ability.Ability2 (AbilityData).Description:9c724585-f9fb-4864-961d-47e08d594af9">Saurena channels unleashes a burst of energy through her blade the moment it connects, dealing [GOLD]120%[] damage. This attack always triggers a critical effect.</Text>

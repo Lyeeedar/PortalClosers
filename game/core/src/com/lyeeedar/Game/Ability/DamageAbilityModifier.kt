@@ -1,6 +1,8 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.ActionSequence.Actions.DamageAction
+import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.DataTimeline
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.lerp
@@ -14,6 +16,16 @@ class DamageAbilityModifier : AbstractAbilityModifier<DamageKeyframeData>()
 	{
 		val multiplier = prev.multiplier.lerp(next.multiplier, alpha)
 
+		val asPercent = (multiplier * 100).toInt()
+		ability.description = ability.description.replace("{Damage}", asPercent.toString())
+
+		for (action in ability.actionSequence.rawActions)
+		{
+			if (action is DamageAction)
+			{
+				action.damage = CompiledExpression("source.damage*$multiplier")
+			}
+		}
 	}
 
 	//region generated

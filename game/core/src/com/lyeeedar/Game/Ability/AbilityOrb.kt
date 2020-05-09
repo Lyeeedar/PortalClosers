@@ -1,7 +1,6 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Game.AbilityModifier
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClassLoader

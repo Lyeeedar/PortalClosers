@@ -1,21 +1,23 @@
-<AbilityOrb meta:X="0" meta:Y="0" xmlns:meta="Editor">
+<AbilityOrb xmlns:meta="Editor">
 	<AbilityTemplate meta:RefKey="AbilityData">
-		<Name>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:94d07577-be76-4b65-af09-9b5ed5a5d963</Name>
-		<Description>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Description:ca1d0b3b-7e89-4158-ac47-8f2e2bb76a56</Description>
+		<Name>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:dc19cd50-869f-4cca-8579-999e9bd14086</Name>
+		<Description>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Description:8391f4c8-a527-473d-a59d-344a8eb68123</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Icons/FireboltIII</Name>
+		</Icon>
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>
 				<Timeline>
 					<FlightFX>
-						<Duration LockDuration="False">0.15</Duration>
+						<Duration LockDuration="False">0.098487735</Duration>
 						<classID>FlightParticle</classID>
 						<Particle meta:RefKey="ParticleEffect">
 							<Name>Abilities/FireOrb</Name>
-							<Scale>0.6</Scale>
 						</Particle>
 						<SpawnBehaviour>Immediate</SpawnBehaviour>
 					</FlightFX>
 					<Damage>
-						<Time>0.15</Time>
+						<Time>0.098487735</Time>
 						<classID>Damage</classID>
 						<Damage>source.damage</Damage>
 						<Type>Fire</Type>
@@ -23,54 +25,48 @@
 				</Timeline>
 			</Actions>
 		</ActionSequence>
-		<Cooldown>7</Cooldown>
+		<Cooldown>5</Cooldown>
 		<CooldownType>Attack</CooldownType>
 		<Range>1,4</Range>
 		<TargetType>Target_enemy</TargetType>
 	</AbilityTemplate>
-	<Tier1 meta:X="405" meta:Y="0" meta:RefKey="AbilityModifier">
-		<Name>Firebolt.AbilityModifier.Name:bcbbae23-0e15-48c5-9650-a2b499aa36fd</Name>
-		<Description>Firebolt.AbilityModifier.Description:e14ad50a-f7aa-4df0-bbda-9cd96b8e31c0</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Icons/FireboltI</Name>
-		</Icon>
-		<NextTier>
-			<Node meta:X="724" meta:Y="0" meta:RefKey="AbilityModifier">
-				<Name>Firebolt.AbilityModifier.Name:294ee2f8-b613-4e1a-b6b8-f9e3ee624fc6</Name>
-				<Description>Firebolt.AbilityModifier.Description:b94c3549-7446-4b8e-91b4-2b663859f2c4</Description>
-				<Icon meta:RefKey="Sprite">
-					<Name>Icons/FireboltII</Name>
-				</Icon>
-				<ModifierActions>
-					<DamageModifier>
-						<classID>DamageModifier</classID>
-						<DamageModifier>*1.2</DamageModifier>
-					</DamageModifier>
-					<ColourModifier>
-						<classID>ColourModifier</classID>
-						<ColourShift>252,248,139,255</ColourShift>
-					</ColourModifier>
-				</ModifierActions>
-				<NextTier>
-					<Node meta:X="1065" meta:Y="0" meta:RefKey="AbilityModifier">
-						<Name>Firebolt.AbilityModifier.Name:5a074193-4173-410b-be40-a47c5ffca661</Name>
-						<Description>Firebolt.AbilityModifier.Description:76de6163-7a34-42c1-95e1-3beaab8ddfe9</Description>
-						<Icon meta:RefKey="Sprite">
-							<Name>Icons/FireboltIII</Name>
-						</Icon>
-						<ModifierActions>
-							<DamageModifier>
-								<classID>DamageModifier</classID>
-								<DamageModifier>*1.5</DamageModifier>
-							</DamageModifier>
-							<ColourModifier>
-								<classID>ColourModifier</classID>
-								<ColourShift>242,255,29,255</ColourShift>
-							</ColourModifier>
-						</ModifierActions>
-					</Node>
-				</NextTier>
-			</Node>
-		</NextTier>
-	</Tier1>
+	<Modifiers>
+		<Modifier meta:RefKey="Colour">
+			<classID>Colour</classID>
+			<Keyframes>
+				<ColourKeyframe>
+					<classID>ColourKeyframe</classID>
+					<Colour>255,255,255,255</Colour>
+				</ColourKeyframe>
+				<ColourKeyframe>
+					<Time>10</Time>
+					<classID>ColourKeyframe</classID>
+					<Colour>255,199,84,255</Colour>
+				</ColourKeyframe>
+			</Keyframes>
+		</Modifier>
+		<Modifier meta:RefKey="Damage">
+			<classID>Damage</classID>
+			<Keyframes>
+				<DamageKeyframe>
+					<classID>DamageKeyframe</classID>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>2</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>1.4</Multiplier>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>6</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>3</Multiplier>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>10</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>7</Multiplier>
+				</DamageKeyframe>
+			</Keyframes>
+		</Modifier>
+	</Modifiers>
 </AbilityOrb>
