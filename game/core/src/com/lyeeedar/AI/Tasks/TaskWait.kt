@@ -4,8 +4,7 @@ import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.directionalSprite
-import com.lyeeedar.Game.Ability
-import com.lyeeedar.Game.AbilityData
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Systems.World
 import squidpony.squidmath.LightRNG
 

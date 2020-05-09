@@ -3,7 +3,7 @@ package com.lyeeedar.Systems
 import com.lyeeedar.Components.ComponentType
 import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.actionSequence
-import com.lyeeedar.Game.AbilityData
+import com.lyeeedar.Game.Ability.AbilityData
 
 class AbilitySystem(world: World<*>) : AbstractSystem(world)
 {

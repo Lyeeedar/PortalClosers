@@ -1,9 +1,10 @@
-package com.lyeeedar.Game
+package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.AbilityModifier
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World
@@ -11,7 +12,6 @@ import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import java.util.*
-import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
 
 class Ability(val data: AbilityData)
@@ -37,6 +37,8 @@ class Ability(val data: AbilityData)
 
 		return when (data.targetType)
 		{
+			AbilityData.TargetType.SELF -> listOf(world.grid[pos.position])
+
 			AbilityData.TargetType.TILE -> visibleTiles
 			AbilityData.TargetType.EMPTY_TILE -> visibleTiles.filter { it.getPassable(pos.slot, entity) }
 
@@ -99,7 +101,8 @@ class AbilityData : XmlDataClass()
 		EMPTY_TILE,
 		ALLY,
 		ANY_ENEMY,
-		TARGET_ENEMY
+		TARGET_ENEMY,
+		SELF
 	}
 
 	@DataNeedsLocalisation(file = "Ability")
@@ -149,49 +152,6 @@ class AbilityData : XmlDataClass()
 		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
 		sortCondition = CompiledExpression(xmlData.get("SortCondition", "1")!!)
 		selectMinByCondition = xmlData.getBoolean("SelectMinByCondition", true)
-	}
-	//endregion
-}
-
-@DataFile(colour = "255,179,0", icon = "Sprites/Icons/Firebolt.png")
-class AbilityOrb : XmlDataClass()
-{
-	@DataXml(actualClass = "AbilityData")
-	lateinit var abilityTemplate: XmlData
-
-	@DataGraphReference(elementIsChild = true)
-	lateinit var tier1: AbilityModifier
-
-	fun getAbilities(tier: Int): Array<AbilityData>
-	{
-		val output = Array<AbilityData>()
-		getAbilities(tier, 1, tier1, output)
-		return output
-	}
-
-	private fun getAbilities(tier: Int, currentTier: Int, currentNode: AbilityModifier, output: Array<AbilityData>)
-	{
-		if (tier == currentTier)
-		{
-			val data = currentNode.createAbility(abilityTemplate);
-			output.add(data);
-		}
-		else
-		{
-			for (child in currentNode.nextTier)
-			{
-				getAbilities(tier, currentTier+1, child, output);
-			}
-		}
-	}
-
-	//region generated
-	override fun load(xmlData: XmlData)
-	{
-		abilityTemplate = xmlData.getChildByName("AbilityTemplate")!!
-		val tier1El = xmlData.getChildByName("Tier1")!!
-		tier1 = AbilityModifier()
-		tier1.load(tier1El)
 	}
 	//endregion
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.*
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.SpaceSlot

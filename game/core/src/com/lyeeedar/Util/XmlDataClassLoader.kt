@@ -203,6 +203,22 @@ class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractMapGenerationAction!")
 			}
 		}
+		fun loadAbstractAbilityModifier(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifier<*>
+		{
+			return when (classID)
+			{
+				"Damage" -> com.lyeeedar.Game.Ability.DamageAbilityModifier()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifier!")
+			}
+		}
+		fun loadAbstractAbilityModifierKeyframe(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifierKeyframe
+		{
+			return when (classID)
+			{
+				"DamageKeyframe" -> com.lyeeedar.Game.Ability.DamageKeyframeData()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
+			}
+		}
 		fun loadAbstractAbilityModifierAction(classID: String): com.lyeeedar.Game.AbstractAbilityModifierAction
 		{
 			return when (classID)

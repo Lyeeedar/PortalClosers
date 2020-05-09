@@ -173,6 +173,24 @@ class Pack
 				if (mob.isValid()) yield(mob)
 			}
 		}
+
+	companion object
+	{
+		fun createFrom(leader: EntityReference, mobs: kotlin.Array<EntityReference>)
+		{
+			val pack = Pack()
+			pack.leader = leader
+			for (mob in mobs)
+			{
+				pack.mobs.add(mob)
+			}
+
+			for (entity in pack.entities)
+			{
+				entity.get()?.setPack(pack)
+			}
+		}
+	}
 }
 
 class PackData

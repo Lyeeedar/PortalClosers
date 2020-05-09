@@ -1,7 +1,7 @@
 package com.lyeeedar.Components
 
-import com.lyeeedar.Game.Ability
-import com.lyeeedar.Game.AbilityData
+import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Util.XmlData
 
 class AbilityComponent : DataComponent()

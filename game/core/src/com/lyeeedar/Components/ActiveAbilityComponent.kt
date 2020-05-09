@@ -1,6 +1,6 @@
 package com.lyeeedar.Components
 
-import com.lyeeedar.Game.Ability
+import com.lyeeedar.Game.Ability.Ability
 
 class ActiveAbilityComponent : AbstractComponent()
 {

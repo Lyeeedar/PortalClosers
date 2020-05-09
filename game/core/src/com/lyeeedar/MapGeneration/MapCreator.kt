@@ -4,10 +4,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.Faction
-import com.lyeeedar.Game.Tile
-import com.lyeeedar.Game.addSystems
-import com.lyeeedar.Game.create
+import com.lyeeedar.Game.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*
@@ -165,6 +162,8 @@ class MapCreator
 			julianna.ai()!!.state.set(julianna.getRef(), world, 1)
 			julianna.ai()!!.state.setData("leader", 0, player.getRef())
 			world.addEntity(julianna)
+
+			Pack.createFrom(player.getRef(), arrayOf(saurena.getRef(), julianna.getRef()))
 
 			rng.freeTS()
 

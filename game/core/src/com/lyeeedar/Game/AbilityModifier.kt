@@ -2,6 +2,7 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.Actions.*
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager

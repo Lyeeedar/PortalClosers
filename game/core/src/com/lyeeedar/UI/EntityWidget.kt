@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
-import com.lyeeedar.Game.Ability
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Renderables.Sprite.Sprite
