@@ -9,6 +9,7 @@ import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.AI.Tasks.TaskAttack
 import com.lyeeedar.AI.Tasks.TaskMove
+import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
@@ -34,6 +35,34 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		val pos = entity.position() ?: return EvaluationState.FAILED
 		val task = entity.task() ?: return EvaluationState.FAILED
 		if (task.tasks.size > 0) return EvaluationState.FAILED
+
+		val ability = entity.ability()
+		if (ability != null)
+		{
+			for (ab in ability.abilities)
+			{
+				if (ab.isSelected && ab.remainingCooldown <= 0)
+				{
+					if (RenderSystemWidget.instance.isSelected)
+					{
+						val tile = state.world.grid.tryGet(RenderSystemWidget.instance.selectedPoint, null)
+
+						if (tile != null && ab.getValidTargets(entity, state.world).contains(tile))
+						{
+							if (tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
+
+							task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
+
+							ab.isSelected = false
+
+							return EvaluationState.RUNNING
+						}
+					}
+
+					return EvaluationState.FAILED
+				}
+			}
+		}
 
 		var moveDir: Direction? = null
 		if (RenderSystemWidget.instance.isSelected)

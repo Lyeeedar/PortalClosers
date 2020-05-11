@@ -33,9 +33,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 		val infoButton = Button(Statics.skin, "info")
 		infoButton.setSize(16f, 16f)
-		infoButton.addClickListener {
-
-		}
+		infoButton.addTapToolTip("${ability.name}\n${ability.description}")
 		val infoButtonTable = Table()
 		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)
 
@@ -51,12 +49,21 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 			updateEnabled()
 			HandlerAction.KeepAttached
 		}
+
+		widget.addClickListener {
+			if (isAbilityEnabled())
+			{
+				ability.isSelected = !ability.isSelected
+			}
+		}
 	}
+
+	private fun isAbilityEnabled(): Boolean = ability.remainingCooldown <= 0 && ability.getValidTargets(world.player!!, world).isNotEmpty()
 
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()
 	{
-		if (ability.remainingCooldown <= 0 && ability.getValidTargets(world.player!!, world).isNotEmpty())
+		if (isAbilityEnabled())
 		{
 			colour = Color.WHITE
 		}

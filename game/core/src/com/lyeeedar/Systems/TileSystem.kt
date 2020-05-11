@@ -1,6 +1,7 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.IntSet
+import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.position
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
@@ -34,6 +35,26 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 							itr.remove()
 							action.function.invoke()
 						}
+					}
+				}
+
+				tile.isTargetted = false
+				tile.tileCol = Colour.WHITE
+			}
+		}
+
+		val ability = world.player?.ability()
+		if (ability != null)
+		{
+			for (ab in ability.abilities)
+			{
+				if (ab.isSelected)
+				{
+					for (tile in ab.getValidTargets(world.player!!, world))
+					{
+						val tile = tile as Tile
+						tile.isTargetted = true
+						tile.tileCol = Colour.GOLD
 					}
 				}
 			}

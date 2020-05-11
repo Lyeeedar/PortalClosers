@@ -16,7 +16,11 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	private val seen = LerpedValue(0.3f)
 	private val visible = LerpedValue(0.3f)
 
+	var isTargetted = false
+
 	private var lastRenderColData: Int = 0
+
+	private val cachedRenderCol: Colour = Colour.WHITE.copy()
 
 	fun updateVisibility(delta: Float, isSeen: Boolean, isVisible: Boolean)
 	{
@@ -30,18 +34,31 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 		skipRender = !seen.currentValue && !seen.targetValue
 		skipRenderEntities = !visible.currentValue && !visible.targetValue
 
-		val renderColData = (seen.alpha*255).toInt() + (visible.alpha*255).toInt() + tileCol.hashCode()
+		updateColour()
+	}
+
+	override fun getRenderCol(): Colour
+	{
+		updateColour()
+		return cachedRenderCol
+	}
+
+	fun updateColour()
+	{
+		val seen = seen.alpha
+		val visible = visible.alpha
+		val renderColData = (seen*255).toInt() + (visible*255).toInt() + tileCol.hashCode()
 		if (renderColData != lastRenderColData)
 		{
 			lastRenderColData = renderColData
 
-			val prevHash = renderCol.hashCode()
-			renderCol.set(bakedLighting)
-			renderCol.mul(tileCol)
-			renderCol.mul(seen.alpha)
-			renderCol.mul(0.3f + 0.7f * visible.alpha)
+			val prevHash = cachedRenderCol.hashCode()
+			cachedRenderCol.set(bakedLighting)
+			cachedRenderCol.mul(tileCol)
+			cachedRenderCol.mul(seen)
+			cachedRenderCol.mul(0.3f + 0.7f * visible)
 
-			if (renderCol.hashCode() != prevHash)
+			if (cachedRenderCol.hashCode() != prevHash)
 			{
 				isTileDirty = true
 			}

@@ -37,3 +37,4 @@ Vorpal
 Saurena
 bloodrage
 shockwave
+firebolt

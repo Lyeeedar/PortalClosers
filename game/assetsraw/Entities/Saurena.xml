@@ -60,7 +60,7 @@
 								</HitPoints>
 							</Permute>
 							<OneShotFX>
-								<Time>0.0145294527</Time>
+								<Time>0.014529453</Time>
 								<classID>SpawnOneShotParticle</classID>
 								<Particle meta:RefKey="ParticleEffect">
 									<Name>EnemyAttacks/SlashSimple</Name>
@@ -79,7 +79,7 @@
 								<SpawnSingleParticle>true</SpawnSingleParticle>
 							</OneShotFX>
 							<Damage>
-								<Time>0.196090043</Time>
+								<Time>0.19609004</Time>
 								<classID>Damage</classID>
 								<Damage>source.damage * 1.5</Damage>
 								<UseAttackDamageType>true</UseAttackDamageType>
@@ -145,22 +145,22 @@
 								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
 							</OneShotFX>
 							<LockTargets>
-								<Time>0.0101762442</Time>
+								<Time>0.010176244</Time>
 								<classID>LockEntityTargets</classID>
 							</LockTargets>
 							<Damage>
-								<Time>0.0398117155</Time>
+								<Time>0.039811715</Time>
 								<classID>Damage</classID>
 								<Damage>source.damage * 0.6</Damage>
 								<Type>None</Type>
 							</Damage>
 							<Stun>
-								<Time>0.0450511724</Time>
+								<Time>0.045051172</Time>
 								<classID>Stun</classID>
 								<Count>3</Count>
 							</Stun>
 							<Knockback>
-								<Time>0.0509826764</Time>
+								<Time>0.050982676</Time>
 								<classID>Knockback</classID>
 								<Type>Leap</Type>
 								<Dist>3</Dist>
@@ -211,8 +211,8 @@
 						</Timeline>
 						<Timeline>
 							<Repeat>
-								<Time>0.0307478718</Time>
-								<Duration LockDuration="False">0.0307471473</Duration>
+								<Time>0.030747872</Time>
+								<Duration LockDuration="False">0.030747147</Duration>
 								<classID>Repeat</classID>
 								<Count>7</Count>
 							</Repeat>
@@ -222,7 +222,7 @@
 				<Cooldown>8</Cooldown>
 				<CooldownType>Kill</CooldownType>
 				<Range>0,0</Range>
-				<TargetType>Ally</TargetType>
+				<TargetType>Self</TargetType>
 				<TargetCondition>hp &lt; max_hp*0.5</TargetCondition>
 				<SortCondition>1</SortCondition>
 			</Ability4>
@@ -237,7 +237,7 @@
 							</PickSelf>
 							<AddBuff>
 								<Time>0.01914557</Time>
-								<Duration LockDuration="False">0.0533755273</Duration>
+								<Duration LockDuration="False">0.053375527</Duration>
 								<classID>Buff</classID>
 								<Buff meta:RefKey="Buff">
 									<Name>Saurena.Entity.Components.[4] Ability.Ability.Ultimate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Name:c2bfb761-140f-4085-bc89-fe92245dcfc0</Name>
