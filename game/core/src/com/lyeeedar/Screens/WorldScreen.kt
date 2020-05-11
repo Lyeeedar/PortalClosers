@@ -24,8 +24,10 @@ class WorldScreen : AbstractScreen()
 		val ability = player.addOrGet(ComponentType.Ability) as AbilityComponent
 		val abilityOrb = AbilityOrb()
 		abilityOrb.load(getXml("Abilities/Fire/Firebolt"))
-		val abilities = abilityOrb.getAbilities(1)
-		ability.ability1 = Ability(abilities[0])
+		ability.ability1 = Ability(abilityOrb.getAbility(1))
+		ability.ability2 = Ability(abilityOrb.getAbility(2))
+		ability.ability3 = Ability(abilityOrb.getAbility(3))
+		ability.ability4 = Ability(abilityOrb.getAbility(4))
 
 		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 2)
 

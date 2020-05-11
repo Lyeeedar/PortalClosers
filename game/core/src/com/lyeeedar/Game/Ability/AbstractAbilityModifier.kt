@@ -8,7 +8,7 @@ import com.lyeeedar.Util.XmlDataClassLoader
 abstract class AbstractAbilityModifier<T: AbstractAbilityModifierKeyframe> : XmlDataClass()
 {
 	abstract val keyframes: Array<T>
-	abstract fun applyTo(ability: AbilityData, prev: T, next: T, alpha: Float)
+	protected abstract fun applyTo(ability: AbilityData, prev: T, next: T, alpha: Float)
 
 	fun apply(ability: AbilityData, tier: Float)
 	{

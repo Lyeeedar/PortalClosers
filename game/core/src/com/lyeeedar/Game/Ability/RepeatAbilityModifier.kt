@@ -26,7 +26,7 @@ class RepeatAbilityModifier : AbstractAbilityModifier<RepeatKeyframeData>()
 			}
 		}
 
-		ability.description = ability.description.replace("{Repeat}", actualCount.toString())
+		ability.descriptionTransforms.add { it.replace("{Repeat}", actualCount.toString()) }
 	}
 
 	//region generated

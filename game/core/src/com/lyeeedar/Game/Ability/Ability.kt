@@ -20,12 +20,22 @@ class Ability(val data: AbilityData)
 	var justUsed = false
 
 	val name: String
-		get() = Localisation.getText(data.name, "Ability")
+		get() = transform(Localisation.getText(data.name, "Ability"), data.nameTransforms)
 
 	val description: String
-		get() = Localisation.getText(data.description, "Ability")
+		get() = transform(Localisation.getText(data.description, "Ability"), data.descriptionTransforms)
 
 	var isSelected = false
+
+	fun transform(initial: String, transforms: Array<(String)->String>): String
+	{
+		var current = initial
+		for (transform in transforms)
+		{
+			current = transform.invoke(current)
+		}
+		return current
+	}
 
 	fun getValidTargets(entity: Entity, world: World<*>): List<AbstractTile>
 	{
@@ -131,6 +141,11 @@ class AbilityData : XmlDataClass()
 
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
 	var selectMinByCondition: Boolean = true
+
+	//region non-data
+	val nameTransforms = Array<(String)->String>()
+	val descriptionTransforms = Array<(String)->String>()
+	//endregion
 
 	fun get(): Ability = Ability(this)
 

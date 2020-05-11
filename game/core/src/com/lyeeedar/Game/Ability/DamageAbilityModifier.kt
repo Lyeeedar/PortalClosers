@@ -17,7 +17,7 @@ class DamageAbilityModifier : AbstractAbilityModifier<DamageKeyframeData>()
 		val multiplier = prev.multiplier.lerp(next.multiplier, alpha)
 
 		val asPercent = (multiplier * 100).toInt()
-		ability.description = ability.description.replace("{Damage}", asPercent.toString())
+		ability.descriptionTransforms.add { it.replace("{Damage}", asPercent.toString()) }
 
 		for (action in ability.actionSequence.rawActions)
 		{

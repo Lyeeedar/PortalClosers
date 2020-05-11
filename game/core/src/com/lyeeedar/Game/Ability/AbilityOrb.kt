@@ -13,11 +13,19 @@ class AbilityOrb : XmlDataClass()
 
 	val modifiers: Array<AbstractAbilityModifier<*>> = Array<AbstractAbilityModifier<*>>()
 
-	fun getAbilities(tier: Int): Array<AbilityData>
+	fun getAbility(tier: Int): AbilityData
 	{
-		val output = Array<AbilityData>()
-		//getAbilities(tier, 1, tier1, output)
-		return output
+		val data = AbilityData()
+		data.load(abilityTemplate)
+
+		for (modifier in modifiers)
+		{
+			modifier.apply(data, tier.toFloat())
+		}
+
+		data.nameTransforms.add { "$it ${tier.toRomanNumerals()}" }
+
+		return data
 	}
 
 	//region generated
