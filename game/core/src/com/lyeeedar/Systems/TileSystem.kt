@@ -38,8 +38,12 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					}
 				}
 
-				tile.isTargetted = false
-				tile.tileCol = Colour.WHITE
+				if (tile.isTargetted)
+				{
+					tile.isTargetted = false
+					tile.tileCol = Colour.WHITE
+					tile.isTileDirty = true
+				}
 			}
 		}
 
@@ -55,6 +59,7 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 						val tile = tile as Tile
 						tile.isTargetted = true
 						tile.tileCol = Colour.GOLD
+						tile.isTileDirty = true
 					}
 				}
 			}

@@ -17,6 +17,7 @@ class AbilityOrb : XmlDataClass()
 	{
 		val data = AbilityData()
 		data.load(abilityTemplate)
+		data.actionSequence = data.actionSequence.loadDuplicate()
 
 		for (modifier in modifiers)
 		{

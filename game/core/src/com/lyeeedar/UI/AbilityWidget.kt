@@ -15,8 +15,8 @@ import com.lyeeedar.Util.Statics
 
 class AbilityWidget(val ability: Ability, val world: World<*>, val background: SpriteWidget) : Table()
 {
-	val empty = AssetManager.loadSprite("GUI/power_empty")
-	val full = AssetManager.loadSprite("GUI/power_full")
+	val empty = AssetManager.loadTextureRegion("GUI/power_empty")
+	val full = AssetManager.loadTextureRegion("GUI/power_full")
 	val border = AssetManager.loadTextureRegion("GUI/border")
 
 	val padding = 2
@@ -45,11 +45,6 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 		touchable = Touchable.enabled
 
-		world.onTurnEvent += {
-			updateEnabled()
-			HandlerAction.KeepAttached
-		}
-
 		widget.addClickListener {
 			if (isAbilityEnabled())
 			{
@@ -75,6 +70,8 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
+		updateEnabled()
+
 		if (ability.isSelected)
 		{
 			widget.color = Color.GOLD
@@ -102,9 +99,8 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 		val pipSize = (bounds.width - (ability.data.cooldown+1) * padding) / ability.data.cooldown
 		for (i in 1..ability.data.cooldown)
 		{
-			val sprite = if (i <= (ability.data.cooldown-ability.remainingCooldown)) full else empty
-
-			sprite.render(batch as SpriteBatch, bounds.x + padding * i + (i - 1) * pipSize, bounds.y, pipSize, 7f)
+			val tex = if (i <= (ability.data.cooldown-ability.remainingCooldown)) full else empty
+			batch.draw(tex, x+bounds.x + padding * i + (i - 1) * pipSize, y+bounds.y, pipSize, 7f)
 		}
 	}
 }
