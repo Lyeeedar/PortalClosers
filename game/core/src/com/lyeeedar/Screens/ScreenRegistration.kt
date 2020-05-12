@@ -4,8 +4,6 @@ import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Statics
 import java.util.*
 
-val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = null
-
 enum class ScreenEnum
 {
 	EXAMPLE,
