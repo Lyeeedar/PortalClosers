@@ -50,6 +50,19 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 		return true
 	}
 
+	override fun canEntityExecuteTask(entity: Entity, task: AbstractTask): Boolean
+	{
+		if (task is TaskMove)
+		{
+			val tile = world.grid.tryGet(entity.position()!!.position, null) ?: return true
+			val next = world.grid.tryGet(tile, task.direction, null) ?: return true
+
+			if (tile.tileContainsDelayedAction() || next.tileContainsDelayedAction()) return false
+		}
+
+		return true
+	}
+
 	override fun getPlayerActionAmount(): Float
 	{
 		val player = world.player!!

@@ -77,6 +77,8 @@ class TaskUseAbility : AbstractTask()
 
 		val abilityHolder = e.addOrGet(ComponentType.ActiveAbility) as ActiveAbilityComponent
 		abilityHolder.ability = ability
+
+		sequenceHolder.actionSequence.update(0f, sequenceHolder.actionSequenceState)
 	}
 
 	var obtained: Boolean = false
