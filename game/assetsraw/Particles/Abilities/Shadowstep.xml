@@ -5,7 +5,7 @@
 			<Name>Clouds</Name>
 			<Shape>Cone</Shape>
 			<Angle>90</Angle>
-			<Width>90</Width>
+			<Width>0</Width>
 			<Height>1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
@@ -76,7 +76,7 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.05,0.05</Lifetime>
+					<Lifetime>0.1,0.1</Lifetime>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>

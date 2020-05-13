@@ -101,15 +101,16 @@
 		</Emitter>
 		<Emitter>
 			<Name>debris</Name>
-			<Gravity>-10</Gravity>
+			<Gravity>-15</Gravity>
 			<Shape>Cone</Shape>
-			<Angle>90</Angle>
-			<Width>90</Width>
+			<Angle>45</Angle>
+			<Width>0</Width>
 			<Height>1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
-			<ParticleSpeed>2,3</ParticleSpeed>
+			<Area>Center</Area>
+			<ParticleSpeed>3,5</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0.2840376|10</Keyframe>

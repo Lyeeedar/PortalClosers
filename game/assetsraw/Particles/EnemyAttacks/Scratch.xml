@@ -2,29 +2,32 @@
 	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
-			<Name>scratch</Name>
-			<Width>1</Width>
-			<Height>1</Height>
+			<Width>0</Width>
+			<Height>0</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
-			<ParticleSpeed>0,1</ParticleSpeed>
-			<ParticleRotation>0,360</ParticleRotation>
+			<ParticleSpeed>0,0</ParticleSpeed>
+			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>
 			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>0.3,0.3</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|1|1</Keyframe>
+							<Keyframe>0|0.3|0.6</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
+					<BlendKeyframes>true</BlendKeyframes>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/glow</Keyframe>
+							<Keyframe>0|EffectSprites/Claw/Claw_1</Keyframe>
+							<Keyframe>0.4|EffectSprites/Claw/Claw_2</Keyframe>
+							<Keyframe>0.8|EffectSprites/Claw/Claw_3</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
@@ -34,7 +37,10 @@
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|1</Keyframe>
+							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.07051282|0.5</Keyframe>
+							<Keyframe>0.8363906|0.5</Keyframe>
+							<Keyframe>0.9947731|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>

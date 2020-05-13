@@ -18,10 +18,10 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>0.6,1</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|1|1</Keyframe>
+							<Keyframe>0|0.2|0.4</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<RotationSpeedKeyframes>
@@ -49,8 +49,8 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.04629101|1</Keyframe>
-							<Keyframe>0.6221826|1</Keyframe>
+							<Keyframe>0.04629101|0.6</Keyframe>
+							<Keyframe>0.6221826|0.6</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
@@ -78,11 +78,11 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.6,0.6</Lifetime>
+					<Lifetime>1.5,1.5</Lifetime>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.9846648|1|1</Keyframe>
+							<Keyframe>0.4|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
@@ -100,7 +100,7 @@
 						<Stream>
 							<Keyframe>0|0</Keyframe>
 							<Keyframe>0.1843795|1</Keyframe>
-							<Keyframe>0.8497147|1</Keyframe>
+							<Keyframe>0.4|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>

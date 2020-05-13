@@ -1,58 +1,7 @@
 <Effect xmlns:meta="Editor">
-	<Loop>false</Loop>
+	<Warmup>1</Warmup>
+	<Loop>true</Loop>
 	<Emitters>
-		<Emitter>
-			<Name>Glow</Name>
-			<IsCollisionEmitter>true</IsCollisionEmitter>
-			<IsBlockingEmitter>false</IsBlockingEmitter>
-			<Space>Local</Space>
-			<Width>0</Width>
-			<Height>0</Height>
-			<SizeMultiplier>
-				<Keyframe>0|1</Keyframe>
-			</SizeMultiplier>
-			<ParticleSpeed>0,1</ParticleSpeed>
-			<ParticleRotation>0,360</ParticleRotation>
-			<RateKeyframes>
-				<Keyframe>0|1</Keyframe>
-			</RateKeyframes>
-			<Particles>
-				<Particle>
-					<Lifetime>0,1</Lifetime>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|2|2</Keyframe>
-						</Stream>
-					</SizeKeyframes>
-					<RotationSpeedKeyframes>
-						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-						</Stream>
-					</RotationSpeedKeyframes>
-					<BlendMode>Additive</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/glow</Keyframe>
-						</Stream>
-					</TextureKeyframes>
-					<ColourKeyframes>
-						<Stream>
-							<Keyframe>0|255,234,101,255</Keyframe>
-						</Stream>
-					</ColourKeyframes>
-					<AlphaKeyframes>
-						<Stream>
-							<Keyframe>0|0.3</Keyframe>
-						</Stream>
-					</AlphaKeyframes>
-					<AlphaRefKeyframes>
-						<Stream>
-							<Keyframe>0|0</Keyframe>
-						</Stream>
-					</AlphaRefKeyframes>
-				</Particle>
-			</Particles>
-		</Emitter>
 		<Emitter>
 			<Name>Orb</Name>
 			<KillParticlesOnStop>true</KillParticlesOnStop>
@@ -66,7 +15,7 @@
 			<ParticleSpeed>0,0.1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|5</Keyframe>
+				<Keyframe>0|6</Keyframe>
 			</RateKeyframes>
 			<Particles>
 				<Particle>
@@ -126,15 +75,14 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
-			<Angle>90</Angle>
-			<Width>180</Width>
+			<Angle>180</Angle>
+			<Width>0.2</Width>
 			<Height>0.2</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
-			<Rotation>180</Rotation>
 			<Area>Border</Area>
-			<ParticleSpeed>2,2</ParticleSpeed>
+			<ParticleSpeed>-2,-2</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|10</Keyframe>
@@ -161,7 +109,7 @@
 					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|255,255,255,255</Keyframe>
+							<Keyframe>0|138,38,7,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
@@ -180,4 +128,15 @@
 			</Particles>
 		</Emitter>
 	</Emitters>
+	<Light>
+		<Colour>
+			<Keyframe>0|189,181,8,255</Keyframe>
+		</Colour>
+		<Brightness>
+			<Keyframe>0|1</Keyframe>
+		</Brightness>
+		<Range>
+			<Keyframe>0|1</Keyframe>
+		</Range>
+	</Light>
 </Effect>

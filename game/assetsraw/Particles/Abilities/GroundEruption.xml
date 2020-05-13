@@ -102,8 +102,8 @@
 			<Name>Debris</Name>
 			<Gravity>-5</Gravity>
 			<Shape>Cone</Shape>
-			<Angle>90</Angle>
-			<Width>45</Width>
+			<Angle>45</Angle>
+			<Width>0</Width>
 			<Height>1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>

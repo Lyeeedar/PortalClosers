@@ -55,4 +55,15 @@
 			</Particles>
 		</Emitter>
 	</Emitters>
+	<Light>
+		<Colour>
+			<Keyframe>0|235,225,7,255</Keyframe>
+		</Colour>
+		<Brightness>
+			<Keyframe>0|0.3</Keyframe>
+		</Brightness>
+		<Range>
+			<Keyframe>0|1.5</Keyframe>
+		</Range>
+	</Light>
 </Effect>

@@ -73,7 +73,7 @@
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
 			<Angle>90</Angle>
-			<Width>90</Width>
+			<Width>0.1</Width>
 			<Height>0.1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
