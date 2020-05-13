@@ -55,6 +55,11 @@ class MapGenerationPreviewScreen : AbstractScreen()
 
 class MapGenRenderSystem(world: World<*>, val screen: MapGenerationPreviewScreen) : AbstractRenderSystem(world)
 {
+	init
+	{
+		doStaticRender = false
+	}
+
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
 
