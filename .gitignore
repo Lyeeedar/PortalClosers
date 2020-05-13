@@ -26,3 +26,5 @@ game/assetsraw/error.log
 game/assetsraw/Layout.xml
 game/assetsraw/Settings.xml
 game/assets/*.jar
+*.pdb
+*.deps.json

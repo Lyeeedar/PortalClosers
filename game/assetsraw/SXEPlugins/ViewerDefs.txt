@@ -1,0 +1,2 @@
+particlePreviewDist,Effect,particleViewer,particle.xml
+mapGenerationPreviewDist,MapGenerator,mapViewer,map.xml
