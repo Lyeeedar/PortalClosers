@@ -6,9 +6,9 @@ import java.util.*
 
 enum class ScreenEnum
 {
-	EXAMPLE,
 	WORLD,
 	PARTICLEEDITOR,
+	MAPGENERATIONPREVIEW,
 	INVALID
 }
 
@@ -19,6 +19,7 @@ fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 	if (!Statics.android)
 	{
 		screens[ScreenEnum.PARTICLEEDITOR] = ParticleEditorScreen()
+		screens[ScreenEnum.MAPGENERATIONPREVIEW] = MapGenerationPreviewScreen()
 	}
 
 	return screens
@@ -28,7 +29,6 @@ fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 {
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
-	screens[ScreenEnum.EXAMPLE] = ExampleScreen()
 	screens[ScreenEnum.WORLD] = WorldScreen()
 
 	return screens

@@ -106,7 +106,6 @@ class MapCreator
 
 			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 			val world = World(map)
-			world.addSystems()
 			world.rng = LightRNG(seed)
 			world.ambientLight.set(0.6f, 0.6f, 0.6f, 1f)
 

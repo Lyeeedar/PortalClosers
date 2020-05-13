@@ -24,6 +24,8 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
+		val renderer = renderer
+
 		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
 		val stats = entity.statistics()

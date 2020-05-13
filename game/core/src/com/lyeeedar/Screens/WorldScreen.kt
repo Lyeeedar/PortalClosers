@@ -4,6 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityOrb
+import com.lyeeedar.Game.Tile
+import com.lyeeedar.Game.addSystems
 import com.lyeeedar.MapGeneration.MapCreator
 import com.lyeeedar.Systems.World
 import com.lyeeedar.UI.EntityWidget
@@ -13,7 +15,7 @@ import com.lyeeedar.Util.getXml
 
 class WorldScreen : AbstractScreen()
 {
-	lateinit var world: World<*>
+	lateinit var world: World<Tile>
 
 	var timeMultiplier = 1f
 
@@ -30,6 +32,7 @@ class WorldScreen : AbstractScreen()
 		ability.ability4 = Ability(abilityOrb.getAbility(4))
 
 		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 2)
+		world.addSystems()
 
 		val topBarTable = Table()
 		val packTable = Table()
