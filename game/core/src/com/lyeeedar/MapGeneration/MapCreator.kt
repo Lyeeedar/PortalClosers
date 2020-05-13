@@ -37,6 +37,7 @@ class MapCreator
 		{
 			val set = ObjectSet<Tile>()
 			floodFill(set, source, source, dist, world)
+			set.remove(source)
 
 			return set.toGdxArray()
 		}
@@ -77,10 +78,15 @@ class MapCreator
 				val tiles = floodFill(tile, 4, world)
 
 				val leader = pack.leader.get()!!
+
+				var tile = tile
+				if (tile.contents[leader.position()!!.slot] != null)
+				{
+					tile = tiles.removeRandom(rng)
+				}
+
 				leader.addToTile(tile)
 				world.addEntity(leader)
-
-				tiles.removeValue(tile, true)
 
 				for (mob in pack.mobs)
 				{
@@ -94,10 +100,14 @@ class MapCreator
 
 		fun generateWorld(path: String, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
 		{
+			val xml = getXml(path)
+			return generateWorld(xml, faction, player, level, seed)
+		}
+
+		fun generateWorld(xml: XmlData, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+		{
 			val rng = Random.obtainTS(seed)
 			val faction = Faction.load(faction)
-
-			val xml = getXml(path)
 
 			val generator = MapGenerator()
 			generator.load(xml)
