@@ -6,6 +6,7 @@ import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
+import java.lang.StringBuilder
 import java.util.*
 
 class Symbol: XmlDataClass(), IMapGeneratorSymbol
@@ -102,6 +103,27 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 	override fun getInfluence(travelType: SpaceSlot, self: Any?): Int
 	{
 		return 0
+	}
+
+	fun toStringFull(): String
+	{
+		val builder = StringBuilder()
+		builder.append(char)
+		builder.append(if (floor != null) "1" else "0")
+		builder.append(if (wall != null) "1" else "0")
+		for (slot in SpaceSlot.Values)
+		{
+			builder.append(if (contents[slot] != null) "1" else "0")
+		}
+		builder.append(if (enemyDescription != null) "1" else "0")
+		builder.append(if (packDescription != null) "1" else "0")
+
+		return builder.toString()
+	}
+
+	override fun toString(): String
+	{
+		return char.toString()
 	}
 
 	//region generated

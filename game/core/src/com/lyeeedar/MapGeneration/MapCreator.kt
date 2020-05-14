@@ -1,6 +1,7 @@
 package com.lyeeedar.MapGeneration
 
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
@@ -15,7 +16,7 @@ class MapCreator
 {
 	companion object
 	{
-		fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>)
+		private fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>)
 		{
 			if (foundSet.contains(current)) return
 			if (current.dist(source) > dist) return
@@ -33,7 +34,7 @@ class MapCreator
 			}
 		}
 
-		fun floodFill(source: Tile, dist: Int, world: World<*>): Array<Tile>
+		private fun floodFill(source: Tile, dist: Int, world: World<*>): Array<Tile>
 		{
 			val set = ObjectSet<Tile>()
 			floodFill(set, source, source, dist, world)
@@ -42,7 +43,7 @@ class MapCreator
 			return set.toGdxArray()
 		}
 
-		fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
+		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
 		{
 			for (slot in SpaceSlot.Values)
 			{
@@ -106,13 +107,18 @@ class MapCreator
 
 		fun generateWorld(xml: XmlData, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
 		{
-			val rng = Random.obtainTS(seed)
-			val faction = Faction.load(faction)
-
 			val generator = MapGenerator()
 			generator.load(xml)
 
 			val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
+
+			return generateWorld(symbolGrid, generator.namedAreas, faction, player, level, seed)
+		}
+
+		fun generateWorld(symbolGrid: Array2D<Symbol>, namedAreas: ObjectMap<String, Array<Area>>, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+		{
+			val rng = Random.obtainTS(seed)
+			val faction = Faction.load(faction)
 
 			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 			val world = World(map)
@@ -146,7 +152,7 @@ class MapCreator
 			}
 
 			// add player
-			val playerSpawnArea = generator.namedAreas["playerspawn"][0]
+			val playerSpawnArea = namedAreas["playerspawn"][0]
 			val playerStartTile = map[playerSpawnArea.getAllPoints()[0].toPoint()]
 			val startRoomPoints = floodFill(playerStartTile, 4, world)
 
