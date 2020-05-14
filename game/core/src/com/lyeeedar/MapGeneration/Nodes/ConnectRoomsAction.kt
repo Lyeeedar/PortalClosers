@@ -39,7 +39,7 @@ class ConnectRoomsAction : AbstractMapGenerationAction()
 		for (i in 0 until rooms.size)
 		{
 			val room = rooms[i]
-			val clearTile = room.getAllPoints().filter { room[it]!!.getPassable(SpaceSlot.ENTITY, null) }.random(generator.ran)
+			val clearTile = room.getAllPoints().filter { room[it]!!.getPassable(SpaceSlot.ENTITY, null) }.random(rng)
 			val world = room.localToWorld(clearTile)
 			points[(i*2)+0] = world.x.toFloat()
 			points[(i*2)+1] = world.y.toFloat()
