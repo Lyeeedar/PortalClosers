@@ -53,6 +53,7 @@ class AbilityData : XmlDataClass()
 	lateinit var targetCondition: CompiledExpression
 
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
+	@DataCompiledExpression(default = "dist")
 	lateinit var sortCondition: CompiledExpression
 
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
@@ -80,7 +81,7 @@ class AbilityData : XmlDataClass()
 		range = Point(rangeRaw[0].trim().toInt(), rangeRaw[1].trim().toInt())
 		targetType = TargetType.valueOf(xmlData.get("TargetType").toUpperCase(Locale.ENGLISH))
 		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
-		sortCondition = CompiledExpression(xmlData.get("SortCondition", "1")!!)
+		sortCondition = CompiledExpression(xmlData.get("SortCondition", "dist")!!)
 		selectMinByCondition = xmlData.getBoolean("SelectMinByCondition", true)
 	}
 	//endregion

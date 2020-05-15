@@ -68,6 +68,10 @@ class Ability(val data: AbilityData)
 		{
 			return validTargets.random(rng)
 		}
+		else if (data.targetType == AbilityData.TargetType.SELF)
+		{
+			return world.grid[entity.position()!!.position]
+		}
 
 		val pos = entity.position()!!
 

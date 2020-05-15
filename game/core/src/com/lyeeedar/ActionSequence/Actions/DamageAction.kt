@@ -74,7 +74,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		damage = CompiledExpression(xmlData.get("Damage"))
+		damage = CompiledExpression(xmlData.get("Damage", "source.damage")!!)
 		type = DamageType.valueOf(xmlData.get("Type", DamageType.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
 		alwaysCrit = xmlData.getBoolean("AlwaysCrit", false)
 		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", false)

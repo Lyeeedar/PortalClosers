@@ -1,0 +1,66 @@
+<AbilityOrb xmlns:meta="Editor">
+	<AbilityTemplate meta:RefKey="AbilityData">
+		<Name>IceShard.AbilityOrb.AbilityTemplate (AbilityData).Name:fdad4008-55a9-4a63-a847-c6b73c6f0f54</Name>
+		<Description>IceShard.AbilityOrb.AbilityTemplate (AbilityData).Description:481045b8-6981-4b76-a9df-1f7421b22f51</Description>
+		<ActionSequence meta:RefKey="ActionSequence">
+			<Actions>
+				<Timeline>
+					<FlightFX>
+						<Duration LockDuration="False">0.15708433</Duration>
+						<classID>FlightParticle</classID>
+						<Particle meta:RefKey="ParticleEffectTemplate">
+							<Base meta:RefKey="ParticleEffect">
+								<Name>Ranged/FlightParticle</Name>
+								<Scale>0.7</Scale>
+							</Base>
+							<Overrides>
+								<OverrideTexture>
+									<Name>white</Name>
+									<Texture meta:RefKey="Texture">
+										<File>EffectSprites/IceShard/IceShard_0</File>
+									</Texture>
+								</OverrideTexture>
+							</Overrides>
+						</Particle>
+						<SpawnBehaviour>Immediate</SpawnBehaviour>
+					</FlightFX>
+					<Damage>
+						<Time>0.15708433</Time>
+						<classID>Damage</classID>
+						<Damage>source.damage</Damage>
+						<Type>Ice</Type>
+					</Damage>
+				</Timeline>
+			</Actions>
+		</ActionSequence>
+		<Cooldown>7</Cooldown>
+		<CooldownType>Turn</CooldownType>
+		<Range>0,4</Range>
+		<TargetType>Target_enemy</TargetType>
+	</AbilityTemplate>
+	<Modifiers>
+		<Modifier meta:RefKey="Damage">
+			<classID>Damage</classID>
+			<Keyframes>
+				<DamageKeyframe>
+					<classID>DamageKeyframe</classID>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>2</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>1.4</Multiplier>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>6</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>3</Multiplier>
+				</DamageKeyframe>
+				<DamageKeyframe>
+					<Time>10</Time>
+					<classID>DamageKeyframe</classID>
+					<Multiplier>7</Multiplier>
+				</DamageKeyframe>
+			</Keyframes>
+		</Modifier>
+	</Modifiers>
+</AbilityOrb>

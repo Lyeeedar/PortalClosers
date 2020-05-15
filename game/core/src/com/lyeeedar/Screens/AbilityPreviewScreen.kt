@@ -6,14 +6,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.lyeeedar.Components.*
+import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.AbilityOrb
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.*
+import ktx.collections.gdxArrayOf
 import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
 import java.lang.RuntimeException
+import java.lang.StringBuilder
 
 class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 {
@@ -26,6 +29,8 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		LONG
 	}
 	lateinit var rangeBox: SelectBox<Range>
+
+	lateinit var directionBox: SelectBox<Direction>
 
 	override fun addOptions(table: Table)
 	{
@@ -42,6 +47,21 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 		table.add(Label("Range", Statics.skin))
 		table.add(rangeBox)
+		table.row()
+
+		directionBox = SelectBox<Direction>(Statics.skin)
+		directionBox.setItems(gdxArrayOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST))
+		directionBox.selected = Direction.NORTH
+		directionBox.addListener(object : ChangeListener()
+		                     {
+			                     override fun changed(event: ChangeEvent?, actor: Actor?)
+			                     {
+				                     lastSeed = 0L
+			                     }
+		                     })
+
+		table.add(Label("Direction", Statics.skin))
+		table.add(directionBox)
 		table.row()
 
 		val playbackSpeedBox = SelectBox<Float>(Statics.skin)
@@ -70,11 +90,12 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 	override fun loadResource(xmlData: XmlData): World<Tile>
 	{
-		val gridStr = when(rangeBox.selected)
+		var gridStr = when(rangeBox.selected)
 		{
 			Range.CLOSE -> closeGrid
 			Range.LONG -> farGrid
 		}
+		gridStr = rotateGrid(directionBox.selected, gridStr)
 
 		val world = loadAbilityTestWorld(gridStr)
 
@@ -89,10 +110,12 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 		sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
 		turnTime = 0f
+		turn = 0
 
 		return world
 	}
 
+	var turn = 0
 	var turnTime = 0f
 	override fun doRender(delta: Float)
 	{
@@ -112,10 +135,43 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 				else
 				{
 					world?.onTurn()
+					turn++
 				}
 			}
 		}
+
+		stage.batch.begin()
+		font.draw(stage.batch, "Turn: $turn", 20f, Statics.resolution.y - 20f)
+		stage.batch.end()
 	}
+}
+
+fun rotateGrid(direction: Direction, gridStr: String): String
+{
+	if (direction == Direction.NORTH) return gridStr
+
+	val originalLines = gridStr.split("\n")
+	val grid = Array2D<Char>(originalLines[0].length, originalLines.size) { x,y -> originalLines[y][x] }
+
+	val output = StringBuilder()
+
+	for (y in 0 until grid.height)
+	{
+		for (x in 0 until grid.width)
+		{
+			val c = when (direction)
+			{
+				Direction.SOUTH -> grid[x, grid.height-y-1]
+				Direction.EAST -> grid[y,grid.width-x-1]
+				Direction.WEST -> grid[y,x]
+				else -> throw RuntimeException("Unhandled direction $direction")
+			}
+			output.append(c)
+		}
+		output.append("\n")
+	}
+
+	return output.toString().trim()
 }
 
 fun loadAbilityTestGrid(gridStr: String): Array2D<Tile>
@@ -258,9 +314,9 @@ fun addAbilityToWorld(abilityOrb: AbilityOrb, world: World<Tile>, seed: Long)
 val closeGrid = """
 	..e.......
 	....a...e.
-	..........
-	.e...e.e..
-	....e.....
+	..e.e.e...
+	.e.e.e.e..
+	...eee.e..
 	....@...a.
 	....a.....
 	..a.......

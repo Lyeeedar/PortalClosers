@@ -86,7 +86,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 		super.load(xmlData)
 		input = xmlData.get("Input")
 		output = xmlData.get("Output")
-		condition = CompiledExpression(xmlData.get("Condition"))
+		condition = CompiledExpression(xmlData.get("Condition", "dist")!!)
 		minimum = xmlData.getBoolean("Minimum", true)
 	}
 	override val classID: String = "PickOneFrom"

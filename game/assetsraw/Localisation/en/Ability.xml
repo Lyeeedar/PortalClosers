@@ -9,6 +9,8 @@
 	<Text ID="Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:dc19cd50-869f-4cca-8579-999e9bd14086">Firebolt</Text>
 	<Text ID="HealingPotion.AbilityOrb.AbilityTemplate (AbilityData).Description:81a59100-da24-429d-b3f7-8b92c7883ae2">Saurena drinks a healing potion, restoring [GOLD]10%[] of her max health each round for [GOLD]7[] rounds.</Text>
 	<Text ID="HealingPotion.AbilityOrb.AbilityTemplate (AbilityData).Name:68f888b4-7d92-46da-a3d3-3145a24cbba9">Healing Potion</Text>
+	<Text ID="IceShard.AbilityOrb.AbilityTemplate (AbilityData).Description:481045b8-6981-4b76-a9df-1f7421b22f51">Shoot a shard of ice at a foe within [GOLD]4[] tiles, dealing [CYAN]{Damage}% Ice[] damage to them.</Text>
+	<Text ID="IceShard.AbilityOrb.AbilityTemplate (AbilityData).Name:fdad4008-55a9-4a63-a847-c6b73c6f0f54">Ice Shard</Text>
 	<Text ID="PowerKick.AbilityOrb.AbilityTemplate (AbilityData).Description:1d34d24d-1373-49d6-b614-70f631733584">Saurena kicks the enemy, dealing [GOLD]60%[] damage and sending them flying backwards, stunning them for [GOLD]3[] turns.</Text>
 	<Text ID="PowerKick.AbilityOrb.AbilityTemplate (AbilityData).Name:50bdfceb-f254-41bc-841a-4591bfcbb753">Power Kick</Text>
 </Localisation>
