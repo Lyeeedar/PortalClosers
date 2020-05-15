@@ -142,6 +142,14 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 		stage.batch.begin()
 		font.draw(stage.batch, "Turn: $turn", 20f, Statics.resolution.y - 20f)
+
+		val stats = world?.player?.statistics()
+		if (stats != null)
+		{
+			font.draw(stage.batch, "Damage: ${stats.damageDealt}", 20f, Statics.resolution.y - 40f)
+			font.draw(stage.batch, "Healing: ${stats.healingDone}", 20f, Statics.resolution.y - 60f)
+		}
+
 		stage.batch.end()
 	}
 }

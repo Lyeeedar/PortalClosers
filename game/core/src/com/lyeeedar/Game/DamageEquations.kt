@@ -125,7 +125,7 @@ class DamageEquations
 			if (stolenLife > 0f)
 			{
 				attackerStats.heal(stolenLife)
-				attackerStats.healing += stolenLife
+				attackerStats.healingDone += stolenLife
 
 				if (EventSystem.isEventRegistered(EventType.HEALED, attacker))
 				{

@@ -55,10 +55,10 @@ class HealAction : AbstractOneShotActionSequenceAction()
 
 					targetstats.heal(healing)
 
-					sourceStats.healing += healing
+					sourceStats.healingDone += healing
 					if (sourceStats.summoner != null)
 					{
-						sourceStats.summoner!!.statistics()!!.healing += healing
+						sourceStats.summoner!!.statistics()!!.healingDone += healing
 					}
 
 					if (EventSystem.isEventRegistered(EventType.HEALED, entity))

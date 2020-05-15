@@ -112,7 +112,6 @@ class StatisticsComponent : DataComponent()
 	var lostHp = 0f
 	var maxLostHp = 0f
 	var totalHpLost = 0f
-	var healing = 0f
 
 	var blocking = false
 	var invulnerable = false
@@ -138,6 +137,7 @@ class StatisticsComponent : DataComponent()
 	var abilityDamageDealt = 0f
 	val damageDealt: Float
 		get() = attackDamageDealt + abilityDamageDealt
+	var healingDone: Float = 0f
 	//endregion
 
 	override fun reset()
@@ -155,9 +155,9 @@ class StatisticsComponent : DataComponent()
 		lastHitSource = Point()
 		attackDamageDealt = 0f
 		abilityDamageDealt = 0f
+		healingDone = 0f
 		messagesToShow.clear()
 		totalHpLost = 0f
-		healing = 0f
 		buffs.clear()
 	}
 
