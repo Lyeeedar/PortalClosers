@@ -25,9 +25,9 @@ class MapGenerationTest
 			{
 				System.out.println("Generating $path")
 
-				for (i in 0 until 5)
+				for (i in 0 until 3)
 				{
-					testLoadFile(path, i.toLong(), 2)
+					testLoadFile(path, i.toLong(), 1)
 				}
 
 				total++

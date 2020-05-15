@@ -113,7 +113,10 @@ class DamageEquations
 
 			if (damage.wasCrit || Random.random(Random.sharedRandom) < 0.5f)
 			{
-				BloodSplatter.splatter(attackerPos, defenderPos, 1f, world, defenderStats.bloodColour)
+				if (world.bloodSystem() != null)
+				{
+					BloodSplatter.splatter(attackerPos, defenderPos, 1f, world, defenderStats.bloodColour)
+				}
 			}
 			defenderStats.lastHitSource = attackerPos
 

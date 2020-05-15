@@ -12,6 +12,7 @@ import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
+import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.sqrt
 
@@ -322,10 +323,35 @@ class StatisticsComponent : DataComponent()
 
 		for (stat in Statistic.Values)
 		{
-			variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), getStat(stat))
+			val statVal = getStat(stat)
+			if (statVal != 0f)
+			{
+				variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), statVal)
+			}
 		}
 
 		return variableMap
+	}
+
+	override fun toShortString(): String
+	{
+		val stats = StringBuilder()
+		for (stat in Statistic.Values)
+		{
+			val statVal = getStat(stat)
+			if (statVal != 0f)
+			{
+				stats.append(",").append(stat.toString().toLowerCase(Locale.ENGLISH), statVal)
+			}
+		}
+
+		val buffs = StringBuilder()
+		for (buff in this.buffs)
+		{
+			buffs.append(",").append(buff.name)
+		}
+
+		return super.toShortString() + "($faction,hp:$hp$stats$buffs)"
 	}
 
 	companion object

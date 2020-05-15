@@ -6,6 +6,7 @@ import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.round
 
+fun World<*>.bloodSystem() = systems.filterIsInstance<BloodSystem>().firstOrNull()
 class BloodSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.Blood).get())
 {
 	override fun updateEntity(entity: Entity, deltaTime: Float)
