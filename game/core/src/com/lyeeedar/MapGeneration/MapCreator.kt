@@ -16,7 +16,7 @@ class MapCreator
 {
 	companion object
 	{
-		private fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>)
+		private fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>, slot: SpaceSlot)
 		{
 			if (foundSet.contains(current)) return
 			if (current.dist(source) > dist) return
@@ -28,19 +28,19 @@ class MapCreator
 
 				if (tile.wall != null) continue
 				if (tile.contents[SpaceSlot.WALL] != null) continue
-				if (tile.contents[SpaceSlot.ENTITY] != null) continue
+				if (tile.contents[slot] != null) continue
 
-				floodFill(foundSet, tile, source, dist, world)
+				floodFill(foundSet, tile, source, dist, world, slot)
 			}
 		}
 
-		private fun floodFill(source: Tile, dist: Int, world: World<*>): Array<Tile>
+		private fun floodFill(source: Tile, dist: Int, world: World<*>, slot: SpaceSlot): Array<Tile>
 		{
 			val set = ObjectSet<Tile>()
-			floodFill(set, source, source, dist, world)
+			floodFill(set, source, source, dist, world, slot)
 			set.remove(source)
 
-			return set.toGdxArray()
+			return set.sorted().toGdxArray()
 		}
 
 		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
@@ -76,23 +76,17 @@ class MapCreator
 				val faction = if (packDesc.faction != null) Faction.load(packDesc.faction!!) else faction
 				val pack = faction.getPack(rng, rng.nextInt(packDesc.size.x, packDesc.size.y+1), packDesc.isBoss).create(level+(packDesc.difficulty-1), world, rng.nextLong())
 
-				val tiles = floodFill(tile, 4, world)
-
 				val leader = pack.leader.get()!!
-
-				var tile = tile
-				if (tile.contents[leader.position()!!.slot] != null)
-				{
-					tile = tiles.removeRandom(rng)
-				}
-
 				leader.addToTile(tile)
 				world.addEntity(leader)
 
 				for (mob in pack.mobs)
 				{
-					val tile = tiles.removeRandom(rng)
 					val mob = mob.get()!!
+
+					val tiles = floodFill(tile, 4, world, mob.position()!!.slot)
+					val tile = tiles.random(rng)
+
 					mob.addToTile(tile)
 					world.addEntity(mob)
 				}
@@ -154,7 +148,7 @@ class MapCreator
 			// add player
 			val playerSpawnArea = namedAreas["playerspawn"][0]
 			val playerStartTile = map[playerSpawnArea.getAllPoints()[0].toPoint()]
-			val startRoomPoints = floodFill(playerStartTile, 4, world)
+			val startRoomPoints = floodFill(playerStartTile, 4, world, SpaceSlot.ENTITY)
 
 			player.addToTile(playerStartTile)
 			player.ai()!!.state.set(player.getRef(), world, 0)

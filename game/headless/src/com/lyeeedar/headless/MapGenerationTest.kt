@@ -8,7 +8,7 @@ import com.lyeeedar.MapGeneration.MapGenerator
 import com.lyeeedar.MapGeneration.Symbol
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Test
 import java.util.Random
 
@@ -60,16 +60,44 @@ class MapGenerationTest
 		fun testLoadFile(file: String, seed: Long, numIterations: Int)
 		{
 			testSymbolGridGeneration(file, seed, numIterations)
-
-			testWorldCreation(file, seed)
+			testWorldCreation(file, seed, numIterations)
 		}
 
-		fun testWorldCreation(file: String, seed: Long)
+		fun testWorldCreation(file: String, seed: Long, numIterations: Int)
 		{
 			val player = EntityLoader.load("Entities/player")
 			player.statistics()!!.calculateStatistics(1)
 
 			val world = MapCreator.generateWorld(file, "Factions/Rats", player, 1, seed)
+
+			for (n in 0 until numIterations)
+			{
+				val player2 = EntityLoader.load("Entities/player")
+				player2.statistics()!!.calculateStatistics(1)
+
+				val world2 = MapCreator.generateWorld(file, "Factions/Rats", player2, 1, seed)
+
+				for (x in 0 until world.grid.width)
+				{
+					for (y in 0 until world.grid.height)
+					{
+						val tile1 = world.grid[x,y]
+						val tile2 = world2.grid[x,y]
+
+						if (tile1.floor == null) assertNull(tile2.floor)
+						else assertNotNull(tile2.floor)
+
+						if (tile1.wall == null) assertNull(tile2.wall)
+						else assertNotNull(tile2.wall)
+
+						for (slot in SpaceSlot.Values)
+						{
+							if (tile1.contents[slot] == null) assertNull(tile2.contents[slot])
+							else assertNotNull(tile2.contents[slot])
+						}
+					}
+				}
+			}
 		}
 
 		fun testSymbolGridGeneration(file: String, seed: Long, numIterations: Int)
