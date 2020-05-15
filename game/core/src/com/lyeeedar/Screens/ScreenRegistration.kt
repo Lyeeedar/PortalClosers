@@ -9,6 +9,7 @@ enum class ScreenEnum
 	WORLD,
 	PARTICLEEDITOR,
 	MAPGENERATIONPREVIEW,
+	ABILITYPREVIEW,
 	INVALID
 }
 
@@ -20,6 +21,7 @@ fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 	{
 		screens[ScreenEnum.PARTICLEEDITOR] = ParticleEditorScreen()
 		screens[ScreenEnum.MAPGENERATIONPREVIEW] = MapGenerationPreviewScreen()
+		screens[ScreenEnum.ABILITYPREVIEW] = AbilityPreviewScreen()
 	}
 
 	return screens

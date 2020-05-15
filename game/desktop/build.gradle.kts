@@ -10,3 +10,12 @@ tasks.register<Jar>("mapGenerationPreviewDist") {
 		attributes["Main-Class"] = "com.lyeeedar.desktop.MapGenerationPreviewLauncher"
 	}
 }
+
+tasks.register<Jar>("abilityPreviewDist") {
+	from(files(project.the<SourceSetContainer>()["main"].output.classesDirs))
+	from(configurations["runtimeClasspath"].map { if (it.isDirectory) it else zipTree(it) })
+
+	manifest {
+		attributes["Main-Class"] = "com.lyeeedar.desktop.AbilityPreviewLauncher"
+	}
+}

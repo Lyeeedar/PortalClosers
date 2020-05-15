@@ -1,2 +1,3 @@
 particlePreviewDist,Effect,particleViewer,particle.xml
 mapGenerationPreviewDist,MapGenerator,mapViewer,map.xml
+abilityPreviewDist,AbilityOrb,abilityViewer,ability.xml
