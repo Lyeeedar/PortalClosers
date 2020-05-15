@@ -16,7 +16,7 @@ class MapCreator
 {
 	companion object
 	{
-		private fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>, slot: SpaceSlot)
+		private fun floodFill(foundSet: ObjectSet<Tile>, current: Tile, source: Tile, dist: Int, world: World<*>)
 		{
 			if (foundSet.contains(current)) return
 			if (current.dist(source) > dist) return
@@ -28,19 +28,18 @@ class MapCreator
 
 				if (tile.wall != null) continue
 				if (tile.contents[SpaceSlot.WALL] != null) continue
-				if (tile.contents[slot] != null) continue
 
-				floodFill(foundSet, tile, source, dist, world, slot)
+				floodFill(foundSet, tile, source, dist, world)
 			}
 		}
 
 		private fun floodFill(source: Tile, dist: Int, world: World<*>, slot: SpaceSlot): Array<Tile>
 		{
 			val set = ObjectSet<Tile>()
-			floodFill(set, source, source, dist, world, slot)
+			floodFill(set, source, source, dist, world)
 			set.remove(source)
 
-			return set.sorted().toGdxArray()
+			return set.filter { it.contents[slot] == null }.sorted().toGdxArray()
 		}
 
 		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
@@ -85,10 +84,14 @@ class MapCreator
 					val mob = mob.get()!!
 
 					val tiles = floodFill(tile, 4, world, mob.position()!!.slot)
-					val tile = tiles.random(rng)
 
-					mob.addToTile(tile)
-					world.addEntity(mob)
+					if (tiles.size > 0)
+					{
+						val tile = tiles.random(rng)
+
+						mob.addToTile(tile)
+						world.addEntity(mob)
+					}
 				}
 			}
 		}

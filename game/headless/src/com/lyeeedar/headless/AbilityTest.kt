@@ -70,6 +70,7 @@ class AbilityTest
 				for (i in 0 until 10)
 				{
 					val grid = genRandomGrid()
+					println(grid)
 					for (i in 0 until 10)
 					{
 						testAbility(orb, grid, ran.nextLong(), 4)
@@ -117,7 +118,7 @@ class AbilityTest
 				output.append("\n")
 			}
 
-			return output.toString()
+			return output.toString().trim()
 		}
 
 		fun testAbility(abilityOrb: AbilityOrb, grid: String, seed: Long, numIterations: Int)
