@@ -160,6 +160,7 @@ class MapCreator
 
 			val saurena = EntityLoader.load("Entities/Saurena")
 			saurena.addToTile(startRoomPoints.removeRandom(rng))
+			saurena.ability()?.createAbilities(1)
 			saurena.statistics()!!.calculateStatistics(level)
 			saurena.ai()!!.state.set(saurena.getRef(), world, 1)
 			saurena.ai()!!.state.setData("leader", 0, player.getRef())
@@ -167,6 +168,7 @@ class MapCreator
 
 			val julianna = EntityLoader.load("Entities/Julianna")
 			julianna.addToTile(startRoomPoints.removeRandom(rng))
+			julianna.ability()?.createAbilities(1)
 			julianna.statistics()!!.calculateStatistics(level)
 			julianna.ai()!!.state.set(julianna.getRef(), world, 1)
 			julianna.ai()!!.state.setData("leader", 0, player.getRef())

@@ -430,7 +430,7 @@ class MessageData()
 class AttackDefinition : XmlDataClass()
 {
 	var damage: Float = 1f
-	lateinit var type: DamageType
+	var type: DamageType = DamageType.NONE
 	var range: Int = 1
 	var hitEffect: ParticleEffectDescription? = null
 	var flightEffect: ParticleEffectDescription? = null
@@ -439,7 +439,7 @@ class AttackDefinition : XmlDataClass()
 	override fun load(xmlData: XmlData)
 	{
 		damage = xmlData.getFloat("Damage", 1f)
-		type = DamageType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		type = DamageType.valueOf(xmlData.get("Type", DamageType.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
 		range = xmlData.getInt("Range", 1)
 		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
 		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))

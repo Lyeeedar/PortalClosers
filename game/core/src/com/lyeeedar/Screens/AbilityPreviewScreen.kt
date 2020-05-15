@@ -170,6 +170,7 @@ fun loadAbilityTestGrid(gridStr: String): Array2D<Tile>
 					stats.baseStatistics[Statistic.MAX_HP] = 200f
 					stats.baseStatistics[Statistic.ATK_POWER] = 100f
 					stats.baseStatistics[Statistic.ARMOUR] = 100f
+					stats.baseStatistics[Statistic.CRIT_CHANCE] = 0.2f
 					stats.calculateStatistics(1)
 
 					if (c == '@')

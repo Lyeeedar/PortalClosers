@@ -134,8 +134,6 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 
 			loadFailureLabel.setText(sStackTrace)
 			loadFailureLabel.isVisible = true
-
-			throw ex
 		}
 	}
 
@@ -158,8 +156,23 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 
 	override fun doRender(delta: Float)
 	{
-		tryLoad()
-		world?.update(delta)
+		try
+		{
+			tryLoad()
+			world?.update(delta)
+		}
+		catch (ex: Exception)
+		{
+			val sw = StringWriter()
+			val pw = PrintWriter(sw)
+			ex.printStackTrace(pw)
+			val sStackTrace: String = sw.toString()
+
+			loadFailureLabel.setText(sStackTrace)
+			loadFailureLabel.isVisible = true
+
+			world = null
+		}
 	}
 }
 

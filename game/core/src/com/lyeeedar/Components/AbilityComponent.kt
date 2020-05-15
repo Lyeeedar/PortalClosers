@@ -2,17 +2,27 @@ package com.lyeeedar.Components
 
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
+import com.lyeeedar.Game.Ability.AbilityOrb
+import com.lyeeedar.Util.DataFileReference
 import com.lyeeedar.Util.XmlData
 
 class AbilityComponent : DataComponent()
 {
 	override val type: ComponentType = ComponentType.Ability
 
+	var ability1Orb: AbilityOrb? = null
 	var ability1: Ability? = null
+
+	var ability2Orb: AbilityOrb? = null
 	var ability2: Ability? = null
+
+	var ability3Orb: AbilityOrb? = null
 	var ability3: Ability? = null
+
+	var ability4Orb: AbilityOrb? = null
 	var ability4: Ability? = null
 
+	var ultimateOrb: AbilityOrb? = null
 	var ultimate: Ability? = null
 
 	val abilities: Sequence<Ability>
@@ -38,66 +48,63 @@ class AbilityComponent : DataComponent()
 	override fun reset()
 	{
 		ability1 = null
+		ability1Orb = null
 		ability2 = null
+		ability2Orb = null
 		ability3 = null
+		ability3Orb = null
 		ability4 = null
+		ability4Orb = null
 		ultimate = null
+		ultimateOrb = null
+	}
+
+	fun createAbilities(tier: Int)
+	{
+		ability1 = ability1Orb?.getAbility(tier)?.get()
+		ability2 = ability2Orb?.getAbility(tier)?.get()
+		ability3 = ability3Orb?.getAbility(tier)?.get()
+		ability4 = ability4Orb?.getAbility(tier)?.get()
+		ultimate = ultimateOrb?.getAbility(tier)?.get()
 	}
 
 	override fun initialiseFrom(data: AbstractComponentData)
 	{
 		val data = data as AbilityComponentData
-		ability1 = data.ability1?.get()
-		ability2 = data.ability2?.get()
-		ability3 = data.ability3?.get()
-		ability4 = data.ability4?.get()
-		ultimate = data.ultimate?.get()
+		ability1Orb = AbilityOrb.tryLoad(data.ability1)
+		ability2Orb = AbilityOrb.tryLoad(data.ability2)
+		ability3Orb = AbilityOrb.tryLoad(data.ability3)
+		ability4Orb = AbilityOrb.tryLoad(data.ability4)
+		ultimateOrb = AbilityOrb.tryLoad(data.ultimate)
 	}
 }
 
 class AbilityComponentData : AbstractComponentData()
 {
-	var ability1: AbilityData? = null
-	var ability2: AbilityData? = null
-	var ability3: AbilityData? = null
-	var ability4: AbilityData? = null
+	@DataFileReference(resourceType = "AbilityOrb")
+	var ability1: String? = null
 
-	var ultimate: AbilityData? = null
+	@DataFileReference(resourceType = "AbilityOrb")
+	var ability2: String? = null
+
+	@DataFileReference(resourceType = "AbilityOrb")
+	var ability3: String? = null
+
+	@DataFileReference(resourceType = "AbilityOrb")
+	var ability4: String? = null
+
+	@DataFileReference(resourceType = "AbilityOrb")
+	var ultimate: String? = null
 
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		val ability1El = xmlData.getChildByName("Ability1")
-		if (ability1El != null)
-		{
-			ability1 = AbilityData()
-			ability1!!.load(ability1El)
-		}
-		val ability2El = xmlData.getChildByName("Ability2")
-		if (ability2El != null)
-		{
-			ability2 = AbilityData()
-			ability2!!.load(ability2El)
-		}
-		val ability3El = xmlData.getChildByName("Ability3")
-		if (ability3El != null)
-		{
-			ability3 = AbilityData()
-			ability3!!.load(ability3El)
-		}
-		val ability4El = xmlData.getChildByName("Ability4")
-		if (ability4El != null)
-		{
-			ability4 = AbilityData()
-			ability4!!.load(ability4El)
-		}
-		val ultimateEl = xmlData.getChildByName("Ultimate")
-		if (ultimateEl != null)
-		{
-			ultimate = AbilityData()
-			ultimate!!.load(ultimateEl)
-		}
+		ability1 = xmlData.get("Ability1", null)
+		ability2 = xmlData.get("Ability2", null)
+		ability3 = xmlData.get("Ability3", null)
+		ability4 = xmlData.get("Ability4", null)
+		ultimate = xmlData.get("Ultimate", null)
 	}
 	override val classID: String = "Ability"
 	//endregion

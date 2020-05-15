@@ -29,6 +29,20 @@ class AbilityOrb : XmlDataClass()
 		return data
 	}
 
+	companion object
+	{
+		fun tryLoad(path: String?): AbilityOrb?
+		{
+			if (path == null) return null
+
+			val xml = getXml(path)
+			val orb = AbilityOrb()
+			orb.load(xml)
+
+			return orb
+		}
+	}
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{

@@ -155,6 +155,7 @@ fun EntityData.create(difficulty: Int, world: World<*>, seed: Long): Entity
 {
 	val entity = create()
 	entity.statistics()?.calculateStatistics(difficulty)
+	entity.ability()?.createAbilities(1)
 	entity.ai()?.state?.set(entity.getRef(), world, seed)
 
 	return entity

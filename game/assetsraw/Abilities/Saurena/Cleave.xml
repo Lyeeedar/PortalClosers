@@ -1,0 +1,47 @@
+<AbilityOrb xmlns:meta="Editor">
+	<AbilityTemplate meta:RefKey="AbilityData">
+		<Name>Cleave.AbilityOrb.AbilityTemplate (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce</Name>
+		<Description>Cleave.AbilityOrb.AbilityTemplate (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c</Description>
+		<ActionSequence meta:RefKey="ActionSequence">
+			<Actions>
+				<Timeline>
+					<Permute>
+						<classID>Permute</classID>
+						<AppendTargets>true</AppendTargets>
+						<HitPoints>
+							<Line>#@#</Line>
+						</HitPoints>
+					</Permute>
+					<OneShotFX>
+						<Time>0.014529453</Time>
+						<classID>SpawnOneShotParticle</classID>
+						<Particle meta:RefKey="ParticleEffect">
+							<Name>EnemyAttacks/SlashSimple</Name>
+							<Colour>255,133,133,255</Colour>
+						</Particle>
+						<SpawnSingleParticle>true</SpawnSingleParticle>
+					</OneShotFX>
+					<OneShotFX>
+						<Time>0.1459962</Time>
+						<classID>SpawnOneShotParticle</classID>
+						<Particle meta:RefKey="ParticleEffect">
+							<Name>EnemyAttacks/SlashSimple</Name>
+							<Colour>255,133,133,255</Colour>
+							<FlipX>true</FlipX>
+						</Particle>
+						<SpawnSingleParticle>true</SpawnSingleParticle>
+					</OneShotFX>
+					<Damage>
+						<Time>0.19609004</Time>
+						<classID>Damage</classID>
+						<Damage>source.damage * 1.5</Damage>
+						<UseAttackDamageType>true</UseAttackDamageType>
+					</Damage>
+				</Timeline>
+			</Actions>
+		</ActionSequence>
+		<Cooldown>4</Cooldown>
+		<CooldownType>Attack</CooldownType>
+		<TargetType>Target_enemy</TargetType>
+	</AbilityTemplate>
+</AbilityOrb>
