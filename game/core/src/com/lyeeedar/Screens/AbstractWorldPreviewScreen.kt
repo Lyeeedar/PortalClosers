@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Systems.AbstractRenderSystem
+import com.lyeeedar.Systems.RenderSystem
 import com.lyeeedar.Systems.World
+import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.Statics
@@ -25,6 +27,8 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 	lateinit var loadFailureLabel: Label
 
 	var seed = 1L
+
+	val worldTable = Table()
 
 	override fun create()
 	{
@@ -61,7 +65,7 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 		mainTable.row()
 		mainTable.add(loadFailureLabel).growX()
 		mainTable.row()
-		mainTable.add(Table()).grow()
+		mainTable.add(worldTable).grow()
 
 		tryLoad()
 	}
@@ -115,6 +119,9 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 					}
 
 					loadFailureLabel.isVisible = false
+
+					worldTable.clear()
+					worldTable.add(RenderSystemWidget(world))
 				}
 			}
 		}
@@ -156,19 +163,14 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 	}
 }
 
-class WorldPreviewRenderSystem(world: World<*>, val screen: AbstractWorldPreviewScreen) : AbstractRenderSystem(world)
+class WorldPreviewRenderSystem(world: World<*>, val screen: AbstractWorldPreviewScreen) : RenderSystem(world)
 {
 	init
 	{
 		doStaticRender = false
 	}
 
-	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
-	{
-
-	}
-
-	override fun getPlayerPosition(deltaTime: Float): Vector2
+	override fun getPlayerPosition(deltaTime: Float?): Vector2
 	{
 		return screen.viewPos
 	}

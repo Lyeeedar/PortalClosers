@@ -91,30 +91,33 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 			p.addToWorld(world, pos.position)
 		}
 
-		for (message in stats.messagesToShow)
+		if (RenderSystemWidget.instance != null)
 		{
-			val offset = Vector2(world.tileSize / 2f + Random.random(Random.sharedRandom, -2, 2).toFloat(), world.tileSize + Random.random(Random.sharedRandom, -2, 2).toFloat())
+			for (message in stats.messagesToShow)
+			{
+				val offset = Vector2(world.tileSize / 2f + Random.random(Random.sharedRandom, -5, 5).toFloat(), world.tileSize*2.2f + Random.random(Random.sharedRandom, -5, 5).toFloat())
 
-			val label = Label(message.text, Statics.skin, "popup")
-			label.color = message.colour.color()
-			label.setFontScale(message.size)
-			label.rotation = -60f
-			label.setPosition(offset.x - label.prefWidth / 2f, offset.y)
+				val label = Label(message.text, Statics.skin, "popup")
+				label.color = message.colour.color()
+				label.setFontScale(message.size)
+				label.rotation = -60f
+				label.setPosition(offset.x - label.prefWidth / 2f, offset.y)
 
-			val sequence =
-				Actions.alpha(0f) then
-					Actions.fadeIn(0.1f) then
-					Actions.parallel(
-						Actions.moveBy(2f, 3f, 1f),
-						Actions.sequence(Actions.delay(0.5f), Actions.fadeOut(0.5f))) then
-					lambda { messageList.removeValue(label, true) } then
-					Actions.removeActor()
+				val sequence =
+					Actions.alpha(0f) then
+						Actions.fadeIn(0.1f) then
+						Actions.parallel(
+							Actions.moveBy(2f, 3f, 1f),
+							Actions.sequence(Actions.delay(0.5f), Actions.fadeOut(0.5f))) then
+						lambda { messageList.removeValue(label, true) } then
+						Actions.removeActor()
 
-			label.addAction(sequence)
+				label.addAction(sequence)
 
-			messageList.add(label)
-			Statics.stage.addActor(label)
-			RenderSystemWidget.instance.addAttachedToEntityWidget(entity.getRef(), label)
+				messageList.add(label)
+				Statics.stage.addActor(label)
+				RenderSystemWidget.instance!!.addAttachedToEntityWidget(entity.getRef(), label)
+			}
 		}
 
 		for (message in stats.messagesToShow)

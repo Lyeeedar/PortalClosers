@@ -43,9 +43,9 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			{
 				if (ab.isSelected && ab.remainingCooldown <= 0)
 				{
-					if (RenderSystemWidget.instance.isSelected)
+					if (RenderSystemWidget.instance!!.isSelected)
 					{
-						val tile = state.world.grid.tryGet(RenderSystemWidget.instance.selectedPoint, null)
+						val tile = state.world.grid.tryGet(RenderSystemWidget.instance!!.selectedPoint, null)
 
 						if (tile != null && ab.getValidTargets(entity, state.world).contains(tile))
 						{
@@ -65,9 +65,9 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		}
 
 		var moveDir: Direction? = null
-		if (RenderSystemWidget.instance.isSelected)
+		if (RenderSystemWidget.instance!!.isSelected)
 		{
-			val tile = RenderSystemWidget.instance.selectedPoint
+			val tile = RenderSystemWidget.instance!!.selectedPoint
 
 			if (tile == pos.position)
 			{

@@ -12,7 +12,7 @@ import ktx.collections.set
 
 fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
 const val numHpPips = 10
-class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
+open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 {
 	val allyHpCol = Colour.GREEN.copy()
 	val enemyHpCol = Colour.RED.copy()
@@ -91,12 +91,12 @@ class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	}
 
 	private val playerPosVec = Vector2()
-	override fun getPlayerPosition(deltaTime: Float): Vector2
+	override fun getPlayerPosition(deltaTime: Float?): Vector2
 	{
 		val entity = world.player!!
 		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
-		renderer.update(renderable, deltaTime)
+		if (deltaTime != null) renderer.update(renderable, deltaTime)
 
 		val px = pos.position.xFloat + pos.offset.x
 		val py = pos.position.yFloat + pos.offset.y

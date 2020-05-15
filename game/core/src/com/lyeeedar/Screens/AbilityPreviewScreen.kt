@@ -1,6 +1,10 @@
 package com.lyeeedar.Screens
 
+import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Ability.AbilityOrb
@@ -9,10 +13,8 @@ import com.lyeeedar.Game.Tile
 import com.lyeeedar.Game.addSystems
 import com.lyeeedar.Systems.*
 import com.lyeeedar.UI.RenderSystemWidget
-import com.lyeeedar.Util.Array2D
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
+import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
 import java.lang.RuntimeException
 
@@ -20,23 +22,40 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 {
 	var sequences: EntitySignature? = null
 
-	val widgetTable = Table()
+	enum class Range
+	{
+		CLOSE,
+		LONG
+	}
+	lateinit var rangeBox: SelectBox<Range>
 
 	override fun addOptions(table: Table)
 	{
+		rangeBox = SelectBox<Range>(Statics.skin)
+		rangeBox.setItems(Range.values().toGdxArray())
+		rangeBox.selected = Range.CLOSE
+		rangeBox.addListener(object : ChangeListener()
+		                     {
+			                     override fun changed(event: ChangeEvent?, actor: Actor?)
+			                     {
+				                     lastSeed = 0L
+			                     }
+		                     })
 
-	}
-
-	override fun create()
-	{
-		super.create()
-
-		mainTable.add(widgetTable).grow()
+		table.add(Label("Range", Statics.skin))
+		table.add(rangeBox)
+		table.row()
 	}
 
 	override fun loadResource(xmlData: XmlData): World<Tile>
 	{
-		val grid = loadGrid(closeGrid)
+		val gridStr = when(rangeBox.selected)
+		{
+			Range.CLOSE -> closeGrid
+			Range.LONG -> farGrid
+		}
+
+		val grid = loadGrid(gridStr)
 
 		val world = World<Tile>(grid)
 		for (tile in grid)
@@ -74,7 +93,7 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		sequenceHolder.actionSequence = ability.data.actionSequence
 		sequenceHolder.actionSequenceState.set(player.getRef(), world, seed)
 		sequenceHolder.actionSequenceState.targets.clear()
-		sequenceHolder.actionSequenceState.targets.add(target)
+		if (target != null) sequenceHolder.actionSequenceState.targets.add(target)
 
 		val abilityHolder = player.addOrGet(ComponentType.ActiveAbility) as ActiveAbilityComponent
 		abilityHolder.ability = ability
@@ -91,15 +110,11 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		world.systems.add(BloodSystem(world))
 		world.systems.add(DialogueSystem(world))
 		world.systems.add(DirectionalSpriteSystem(world))
-		world.systems.add(RenderSystem(world))
 
 		// cleanup
 		world.systems.add(DeletionSystem(world))
 
 		sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
-
-		widgetTable.clear()
-		widgetTable.add(RenderSystemWidget(world))
 
 		return world
 	}
@@ -135,7 +150,9 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 						val renderable =  entity.addOrGet(ComponentType.Renderable) as RenderableComponent
 
 						stats.faction = "enemy"
-						stats.baseStatistics[Statistic.MAX_HP] = 100f
+						stats.baseStatistics[Statistic.MAX_HP] = 200f
+						stats.baseStatistics[Statistic.ATK_POWER] = 100f
+						stats.baseStatistics[Statistic.ARMOUR] = 100f
 						stats.calculateStatistics(1)
 
 						renderable.renderable = AssetManager.loadSprite("Oryx/uf_split/uf_heroes/rat")
@@ -151,7 +168,9 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 						val renderable =  entity.addOrGet(ComponentType.Renderable) as RenderableComponent
 
 						stats.faction = "ally"
-						stats.baseStatistics[Statistic.MAX_HP] = 100f
+						stats.baseStatistics[Statistic.MAX_HP] = 200f
+						stats.baseStatistics[Statistic.ATK_POWER] = 100f
+						stats.baseStatistics[Statistic.ARMOUR] = 100f
 						stats.calculateStatistics(1)
 
 						if (c == '@')
@@ -183,7 +202,7 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		super.doRender(delta)
 
 		turnTime += delta
-		if (turnTime > 2f)
+		if (turnTime > 4f)
 		{
 			turnTime = 0f
 
@@ -206,7 +225,7 @@ val closeGrid = """
 	..e.......
 	....a...e.
 	..........
-	.e.....e..
+	.e...e.e..
 	....e.....
 	....@...a.
 	....a.....
@@ -219,7 +238,7 @@ val farGrid = """
 	..e.......
 	....a...e.
 	..........
-	.e.....e..
+	.e...e.e..
 	..........
 	....@...a.
 	..........
