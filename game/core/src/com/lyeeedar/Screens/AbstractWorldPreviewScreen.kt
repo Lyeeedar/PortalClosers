@@ -1,9 +1,11 @@
 package com.lyeeedar.Screens
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Systems.AbstractRenderSystem
@@ -11,10 +13,7 @@ import com.lyeeedar.Systems.RenderSystem
 import com.lyeeedar.Systems.World
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getRawXml
+import com.lyeeedar.Util.*
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -35,6 +34,7 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 		drawFPS = false
 
 		val options = Table()
+		options.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0.4f, 0.4f, 0.4f, 0.4f))
 		options.defaults().pad(5f).growX()
 
 		val newSeedButton = TextButton("New Seed", Statics.skin)
