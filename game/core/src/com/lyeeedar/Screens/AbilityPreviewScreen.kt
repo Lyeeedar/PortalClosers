@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
+import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityOrb
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
@@ -22,6 +24,7 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 {
 	var deltaMultiplier = 1f
 	var sequences: EntitySignature? = null
+	var ability: Ability? = null
 
 	enum class Range
 	{
@@ -29,8 +32,8 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		LONG
 	}
 	lateinit var rangeBox: SelectBox<Range>
-
 	lateinit var directionBox: SelectBox<Direction>
+	lateinit var tierBox: SelectBox<Int>
 
 	override fun addOptions(table: Table)
 	{
@@ -64,6 +67,20 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		table.add(directionBox)
 		table.row()
 
+		tierBox = SelectBox(Statics.skin)
+		tierBox.setItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+		tierBox.selected = 1
+		tierBox.addListener(object : ChangeListener()
+		                                {
+			                                override fun changed(event: ChangeEvent?, actor: Actor?)
+			                                {
+				                                lastSeed = 0L
+			                                }
+		                                })
+		table.add(Label("Tier", Statics.skin))
+		table.add(tierBox)
+		table.row()
+
 		val playbackSpeedBox = SelectBox<Float>(Statics.skin)
 		playbackSpeedBox.setItems(0.01f, 0.05f, 0.1f, 0.25f, 0.5f, 0.75f, 1f, 1.5f, 2f, 3f, 4f, 5f)
 		playbackSpeedBox.selected = 1f
@@ -90,6 +107,8 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 	override fun loadResource(xmlData: XmlData): World<Tile>
 	{
+		this.ability = null
+
 		var gridStr = when(rangeBox.selected)
 		{
 			Range.CLOSE -> closeGrid
@@ -106,7 +125,11 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		val abilityDef = AbilityOrb()
 		abilityDef.load(xmlData)
 
-		addAbilityToWorld(abilityDef, world, seed)
+		val abilityData = abilityDef.getAbility(tierBox.selected)
+		val ability = abilityData.get()
+		this.ability = ability
+
+		addAbilityToWorld(ability, world, seed)
 
 		sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
 		turnTime = 0f
@@ -141,13 +164,34 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		}
 
 		stage.batch.begin()
-		font.draw(stage.batch, "Turn: $turn", 20f, Statics.resolution.y - 20f)
+
+		var y = 20f
+		font.draw(stage.batch, "Turn: $turn", 20f, Statics.resolution.y - y)
+		y += 20f
 
 		val stats = world?.player?.statistics()
 		if (stats != null)
 		{
-			font.draw(stage.batch, "Damage: ${stats.damageDealt}", 20f, Statics.resolution.y - 40f)
-			font.draw(stage.batch, "Healing: ${stats.healingDone}", 20f, Statics.resolution.y - 60f)
+			font.draw(stage.batch, "Damage: ${stats.damageDealt}", 20f, Statics.resolution.y - y)
+			y += 20f
+
+			font.draw(stage.batch, "Healing: ${stats.healingDone}", 20f, Statics.resolution.y - y)
+			y += 20f
+		}
+
+		if (ability != null)
+		{
+			font.draw(stage.batch, "Name: ${ability!!.name}", 20f, Statics.resolution.y - y)
+			y += 20f
+
+			font.draw(stage.batch, "Description: ${ability!!.description}", 20f, Statics.resolution.y - y, stage.width-40f, Align.left, true)
+			y += 20f
+
+			val icon = ability!!.data.icon
+			if (icon != null)
+			{
+				stage.batch.draw(icon.currentTexture, 0f, 0f, 32f, 32f)
+			}
 		}
 
 		stage.batch.end()
@@ -300,6 +344,11 @@ fun addAbilityToWorld(abilityOrb: AbilityOrb, world: World<Tile>, seed: Long)
 	val abilityData = abilityOrb.getAbility(1)
 	val ability = abilityData.get()
 
+	addAbilityToWorld(ability, world, seed)
+}
+
+fun addAbilityToWorld(ability: Ability, world: World<Tile>, seed: Long)
+{
 	val player = world.player!!
 	for (target in ability.getValidTargets(player, world))
 	{
