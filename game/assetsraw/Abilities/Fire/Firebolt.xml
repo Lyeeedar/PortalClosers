@@ -2,8 +2,21 @@
 	<AbilityTemplate meta:RefKey="AbilityData">
 		<Name>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Name:dc19cd50-869f-4cca-8579-999e9bd14086</Name>
 		<Description>Firebolt.AbilityOrb.AbilityTemplate (AbilityData).Description:8391f4c8-a527-473d-a59d-344a8eb68123</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Icons/FireboltIII</Name>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<Layers>
+				<Layer>
+					<Name>Icons/OrbBase</Name>
+					<Tint>94,3,3,255</Tint>
+				</Layer>
+				<Layer>
+					<Name>Icons/goo-spurt</Name>
+					<Clip>true</Clip>
+					<Tint>255,208,0,255</Tint>
+				</Layer>
+				<Layer>
+					<Name>Icons/OrbSparkle</Name>
+				</Layer>
+			</Layers>
 		</Icon>
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>

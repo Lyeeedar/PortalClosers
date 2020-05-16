@@ -36,7 +36,8 @@ class AbilityData : XmlDataClass()
 	@DataNeedsLocalisation(file = "Ability")
 	lateinit var description: String
 
-	var icon: Sprite? = null
+	@DataLayeredSprite
+	lateinit var icon: Sprite
 
 	lateinit var actionSequence: ActionSequence
 
@@ -71,7 +72,7 @@ class AbilityData : XmlDataClass()
 	{
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
-		icon = AssetManager.tryLoadSprite(xmlData.getChildByName("Icon"))
+		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
 		actionSequence = ActionSequence.load(actionSequenceEl)
 		cooldown = xmlData.getInt("Cooldown", 10)

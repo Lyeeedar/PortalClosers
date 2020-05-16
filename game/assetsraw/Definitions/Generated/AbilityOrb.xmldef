@@ -8,7 +8,7 @@
 	<Definition Name="AbilityData" Nullable="False" TextColour="181,181,240" meta:RefKey="StructDef">
 		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="Icon" Keys="Sprite" meta:RefKey="Reference" />
+		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="ActionSequence" Keys="ActionSequence" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Cooldown" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="CooldownType" EnumValues="Turn,Wait,Attack,Use_ability,Kill,Pack_kill" SkipIfDefault="False" meta:RefKey="Enum" />

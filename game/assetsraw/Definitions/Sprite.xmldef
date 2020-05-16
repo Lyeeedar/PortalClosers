@@ -97,6 +97,8 @@
 			<Data Name="Layer" meta:RefKey="Struct">
 				<Data Name="Name" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
 				<Data Name="DrawActualSize" meta:RefKey="Boolean" />
+				<Data Name="Clip" meta:RefKey="Boolean" />
+				<Data Name="Tint" meta:RefKey="Colour" />
 			</Data>
 		</Data>
 		<Data Name="Light" Keys="Light" meta:RefKey="Reference" />
