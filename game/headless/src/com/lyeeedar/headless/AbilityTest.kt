@@ -34,11 +34,11 @@ class AbilityTest
 				orb.load(getXml(path))
 				for (i in 0 until 3)
 				{
-					testAbility(orb, closeGrid, i.toLong(), 2)
+					testAbility(orb, closeGrid, i.toLong(), 2, path)
 				}
 				for (i in 0 until 3)
 				{
-					testAbility(orb, farGrid, i.toLong(), 2)
+					testAbility(orb, farGrid, i.toLong(), 2, path)
 				}
 
 				total++
@@ -61,11 +61,11 @@ class AbilityTest
 				orb.load(getXml(path))
 				for (i in 0 until 10)
 				{
-					testAbility(orb, closeGrid, ran.nextLong(), 4)
+					testAbility(orb, closeGrid, ran.nextLong(), 4, path)
 				}
 				for (i in 0 until 10)
 				{
-					testAbility(orb, farGrid, ran.nextLong(), 4)
+					testAbility(orb, farGrid, ran.nextLong(), 4, path)
 				}
 				for (i in 0 until 10)
 				{
@@ -73,7 +73,7 @@ class AbilityTest
 					println(grid)
 					for (i in 0 until 10)
 					{
-						testAbility(orb, grid, ran.nextLong(), 4)
+						testAbility(orb, grid, ran.nextLong(), 4, path)
 					}
 				}
 
@@ -121,50 +121,22 @@ class AbilityTest
 			return output.toString().trim()
 		}
 
-		fun testAbility(abilityOrb: AbilityOrb, grid: String, seed: Long, numIterations: Int)
+		fun testAbility(abilityOrb: AbilityOrb, grid: String, seed: Long, numIterations: Int, fileName: String)
 		{
-			val world = loadAbilityTestWorld(grid)
-			addAbilityToWorld(abilityOrb, world, seed)
-
-			val sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
-
-			val stateHistory = Array<String>()
-			while (true)
-			{
-				for (i in 0 until 10)
-				{
-					world.update(0.5f)
-					stateHistory.add(worldToString(world))
-				}
-
-				if (sequences.entities.size == 0)
-				{
-					break
-				}
-				else
-				{
-					world.onTurn()
-				}
-			}
-
-			for (n in 0 until numIterations)
+			try
 			{
 				val world = loadAbilityTestWorld(grid)
 				addAbilityToWorld(abilityOrb, world, seed)
 
 				val sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
 
-				var hi = 0
+				val stateHistory = Array<String>()
 				while (true)
 				{
 					for (i in 0 until 10)
 					{
 						world.update(0.5f)
-
-						val state = worldToString(world)
-						val message = "Diverged at update $hi"
-
-						assertEquals(message, stateHistory[hi++], state)
+						stateHistory.add(worldToString(world))
 					}
 
 					if (sequences.entities.size == 0)
@@ -177,7 +149,43 @@ class AbilityTest
 					}
 				}
 
-				assertEquals(stateHistory.size, hi)
+				for (n in 0 until numIterations)
+				{
+					val world = loadAbilityTestWorld(grid)
+					addAbilityToWorld(abilityOrb, world, seed)
+
+					val sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
+
+					var hi = 0
+					while (true)
+					{
+						for (i in 0 until 10)
+						{
+							world.update(0.5f)
+
+							val state = worldToString(world)
+							val message = "Diverged at update $hi"
+
+							assertEquals(message, stateHistory[hi++], state)
+						}
+
+						if (sequences.entities.size == 0)
+						{
+							break
+						}
+						else
+						{
+							world.onTurn()
+						}
+					}
+
+					assertEquals(stateHistory.size, hi)
+				}
+			}
+			catch (ex: Exception)
+			{
+				ex.printStackTrace()
+				throw RuntimeException("$fileName:$seed failed with " + ex.message)
 			}
 		}
 

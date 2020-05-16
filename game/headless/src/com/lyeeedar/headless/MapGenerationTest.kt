@@ -27,7 +27,7 @@ class MapGenerationTest
 
 				for (i in 0 until 3)
 				{
-					testLoadFile(path, i.toLong(), 1)
+					testLoadFile(path, i.toLong(), 1, path)
 				}
 
 				total++
@@ -49,7 +49,7 @@ class MapGenerationTest
 				for (i in 0 until 50)
 				{
 					val seed = ran.nextLong()
-					testLoadFile(path, seed, 4)
+					testLoadFile(path, seed, 4, path)
 				}
 
 				total++
@@ -57,10 +57,18 @@ class MapGenerationTest
 			}
 		}
 
-		fun testLoadFile(file: String, seed: Long, numIterations: Int)
+		fun testLoadFile(file: String, seed: Long, numIterations: Int, fileName: String)
 		{
-			testSymbolGridGeneration(file, seed, numIterations)
-			testWorldCreation(file, seed, numIterations)
+			try
+			{
+				testSymbolGridGeneration(file, seed, numIterations)
+				testWorldCreation(file, seed, numIterations)
+			}
+			catch (ex: Exception)
+			{
+				ex.printStackTrace()
+				throw RuntimeException("$fileName:$seed failed with " + ex.message)
+			}
 		}
 
 		fun testWorldCreation(file: String, seed: Long, numIterations: Int)
