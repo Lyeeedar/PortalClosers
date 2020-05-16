@@ -72,10 +72,24 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 
 	abstract fun addOptions(table: Table)
 
+	var lastDataChange = 0L
 	var lastModified = 0L
 	var lastSeed = 0L
 	fun tryLoad()
 	{
+		try
+		{
+			val modified = getLastModified(File("."))
+			if (modified != lastDataChange)
+			{
+				lastDataChange = modified
+
+				AssetManager.invalidate()
+
+				lastModified = 0L
+			}
+		} catch (ex: Exception) {}
+
 		val wasNull = world == null
 
 		try
@@ -138,6 +152,13 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 	}
 
 	abstract fun loadResource(xmlData: XmlData): World<Tile>
+
+	fun getLastModified(directory: File): Long
+	{
+		val files = directory.listFiles()!!
+		if (files.isEmpty()) return directory.lastModified()
+		return files.map { it.lastModified() }.max()!!
+	}
 
 	override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean
 	{

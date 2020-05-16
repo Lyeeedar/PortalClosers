@@ -6,12 +6,12 @@
 			<Layers>
 				<Layer>
 					<Name>Icons/OrbBase</Name>
-					<Tint>94,3,3,255</Tint>
+					<Tint>189,6,6,255</Tint>
 				</Layer>
 				<Layer>
-					<Name>Icons/goo-spurt</Name>
+					<Name>GameIconsRaw/fire/blaster</Name>
 					<Clip>true</Clip>
-					<Tint>255,208,0,255</Tint>
+					<Tint>247,237,0,152</Tint>
 				</Layer>
 				<Layer>
 					<Name>Icons/OrbSparkle</Name>
