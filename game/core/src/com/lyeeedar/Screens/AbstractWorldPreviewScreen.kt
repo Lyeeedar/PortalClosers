@@ -132,6 +132,7 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 						viewPos.set(world.grid.width * 0.5f, world.grid.height * 0.5f)
 					}
 
+					loadFailureLabel.setText("")
 					loadFailureLabel.isVisible = false
 
 					worldTable.clear()
