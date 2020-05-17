@@ -1,12 +1,12 @@
 <Localisation Language="en" xmlns:meta="Editor">
-	<Text ID="Acid.Buff.Description:3363abff-fe5e-4a22-9ce2-b2fddde844bd">Acid is eating away at your armour.</Text>
-	<Text ID="Acid.Buff.Name:820e2713-059a-4850-8e3a-c5c83f9557fd">Acid</Text>
-	<Text ID="Bleed.Buff.Description:a6eeda50-43c9-4d57-be16-c859f5506997">You bleed whenever you move.</Text>
-	<Text ID="Bleed.Buff.Name:b702a6b4-4298-4f50-9153-825b080b5584">Bleed</Text>
-	<Text ID="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Description:76aa4f8f-63d1-4e6e-bb6f-4861fbdc6d1c">Saurena flies into a deadly rage for [GOLD]8[] turns. Magic infuses her body, raising her attack by [GOLD]20%[], her critical effect chance by [GOLD]20%[], and her armour by [GOLD]20%[].</Text>
-	<Text ID="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Name:c2bfb761-140f-4085-bc89-fe92245dcfc0">Bloodrage</Text>
-	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:bdbaf651-2629-49cf-bc1f-833982de07f1">You are burning.</Text>
-	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:2676c048-90e8-4c65-b8f3-b3dd1bc90bfe">Ignited</Text>
-	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:25f299b0-3339-411b-bfa3-33a74a97363e">You are poisoned.</Text>
-	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:62588d34-8424-416a-b20a-8e6802c50b10">Poisoned</Text>
+	<Text ID="Acid.Buff.Description:3363abff-fe5e-4a22-9ce2-b2fddde844bd" Context="">Acid is eating away at your armour.</Text>
+	<Text ID="Acid.Buff.Name:820e2713-059a-4850-8e3a-c5c83f9557fd" Context="">Acid</Text>
+	<Text ID="Bleed.Buff.Description:a6eeda50-43c9-4d57-be16-c859f5506997" Context="">You bleed whenever you move.</Text>
+	<Text ID="Bleed.Buff.Name:b702a6b4-4298-4f50-9153-825b080b5584" Context="">Bleed</Text>
+	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:bdbaf651-2629-49cf-bc1f-833982de07f1" Context="">You are burning.</Text>
+	<Text ID="Fire.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:2676c048-90e8-4c65-b8f3-b3dd1bc90bfe" Context="">Ignited</Text>
+	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Description:25f299b0-3339-411b-bfa3-33a74a97363e" Context="">You are poisoned.</Text>
+	<Text ID="Poison.ActionSequence.Actions.[3] Timeline.Timeline.AddBuff.Buff (Buff).Name:62588d34-8424-416a-b20a-8e6802c50b10" Context="">Poisoned</Text>
+	<Text ID="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Description:76aa4f8f-63d1-4e6e-bb6f-4861fbdc6d1c" Context="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Description">Saurena flies into a deadly rage for [GOLD]8[] turns. Magic infuses her body, raising her attack by [GOLD]20%[], her critical effect chance by [GOLD]20%[], and her armour by [GOLD]20%[].</Text>
+	<Text ID="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Name:c2bfb761-140f-4085-bc89-fe92245dcfc0" Context="Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).ActionSequence (ActionSequence).Actions.[0] Timeline.Timeline.AddBuff.Buff (Buff).Name">Bloodrage</Text>
 </Localisation>

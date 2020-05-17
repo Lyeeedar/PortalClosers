@@ -1,45 +1,52 @@
 <AbilityOrb xmlns:meta="Editor">
 	<AbilityTemplate meta:RefKey="AbilityData">
 		<Name>PowerKick.AbilityOrb.AbilityTemplate (AbilityData).Name:50bdfceb-f254-41bc-841a-4591bfcbb753</Name>
-				<Description>PowerKick.AbilityOrb.AbilityTemplate (AbilityData).Description:1d34d24d-1373-49d6-b614-70f631733584</Description>
-				<ActionSequence meta:RefKey="ActionSequence">
-					<Actions>
-						<Timeline>
-							<OneShotFX>
-								<classID>SpawnOneShotParticle</classID>
-								<Particle meta:RefKey="ParticleEffect">
-									<Name>EnemyAttacks/Kick</Name>
-									<Colour>122,116,110,255</Colour>
-								</Particle>
-								<SpawnBehaviour>Immediate</SpawnBehaviour>
-								<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-							</OneShotFX>
-							<LockTargets>
-								<Time>0.010176244</Time>
-								<classID>LockEntityTargets</classID>
-							</LockTargets>
-							<Damage>
-								<Time>0.039811715</Time>
-								<classID>Damage</classID>
-								<Damage>source.damage * 0.6</Damage>
-								<Type>None</Type>
-							</Damage>
-							<Stun>
-								<Time>0.045051172</Time>
-								<classID>Stun</classID>
-								<Count>3</Count>
-							</Stun>
-							<Knockback>
-								<Time>0.050982676</Time>
-								<classID>Knockback</classID>
-								<Type>Leap</Type>
-								<Dist>3</Dist>
-							</Knockback>
-						</Timeline>
-					</Actions>
-				</ActionSequence>
-				<Cooldown>7</Cooldown>
-				<CooldownType>Attack</CooldownType>
-				<TargetType>Target_enemy</TargetType>
+		<Description>PowerKick.AbilityOrb.AbilityTemplate (AbilityData).Description:1d34d24d-1373-49d6-b614-70f631733584</Description>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<Layers>
+				<Layer>
+					<Name>white</Name>
+				</Layer>
+			</Layers>
+		</Icon>
+		<ActionSequence meta:RefKey="ActionSequence">
+			<Actions>
+				<Timeline>
+					<OneShotFX>
+						<classID>SpawnOneShotParticle</classID>
+						<Particle meta:RefKey="ParticleEffect">
+							<Name>EnemyAttacks/Kick</Name>
+							<Colour>122,116,110,255</Colour>
+						</Particle>
+						<SpawnBehaviour>Immediate</SpawnBehaviour>
+						<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+					</OneShotFX>
+					<LockTargets>
+						<Time>0.010176244</Time>
+						<classID>LockEntityTargets</classID>
+					</LockTargets>
+					<Damage>
+						<Time>0.039811715</Time>
+						<classID>Damage</classID>
+						<Damage>source.damage * 0.6</Damage>
+						<Type>None</Type>
+					</Damage>
+					<Stun>
+						<Time>0.045051172</Time>
+						<classID>Stun</classID>
+						<Count>3</Count>
+					</Stun>
+					<Knockback>
+						<Time>0.050982676</Time>
+						<classID>Knockback</classID>
+						<Type>Leap</Type>
+						<Dist>3</Dist>
+					</Knockback>
+				</Timeline>
+			</Actions>
+		</ActionSequence>
+		<Cooldown>7</Cooldown>
+		<CooldownType>Attack</CooldownType>
+		<TargetType>Target_enemy</TargetType>
 	</AbilityTemplate>
 </AbilityOrb>

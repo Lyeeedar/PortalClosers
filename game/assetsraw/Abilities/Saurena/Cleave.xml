@@ -2,6 +2,13 @@
 	<AbilityTemplate meta:RefKey="AbilityData">
 		<Name>Cleave.AbilityOrb.AbilityTemplate (AbilityData).Name:50a5f642-d18f-426f-9213-ca305215fbce</Name>
 		<Description>Cleave.AbilityOrb.AbilityTemplate (AbilityData).Description:a9ae6ef0-82c8-4f6f-9758-897a808d229c</Description>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<Layers>
+				<Layer>
+					<Name>white</Name>
+				</Layer>
+			</Layers>
+		</Icon>
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>
 				<Timeline>

@@ -2,6 +2,23 @@
 	<AbilityTemplate meta:RefKey="AbilityData">
 		<Name>IceShard.AbilityOrb.AbilityTemplate (AbilityData).Name:fdad4008-55a9-4a63-a847-c6b73c6f0f54</Name>
 		<Description>IceShard.AbilityOrb.AbilityTemplate (AbilityData).Description:481045b8-6981-4b76-a9df-1f7421b22f51</Description>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<Layers>
+				<Layer>
+					<Name>Icons/OrbBase</Name>
+					<Tint>161,132,7,255</Tint>
+				</Layer>
+				<Layer>
+					<Name>GameIconsRaw/ice/ice-spear</Name>
+					<Clip>true</Clip>
+					<Tint>226,245,238,190</Tint>
+					<Scale>0.8</Scale>
+				</Layer>
+				<Layer>
+					<Name>Icons/OrbSparkle</Name>
+				</Layer>
+			</Layers>
+		</Icon>
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>
 				<Timeline>

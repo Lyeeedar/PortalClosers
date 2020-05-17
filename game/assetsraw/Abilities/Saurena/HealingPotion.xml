@@ -10,7 +10,8 @@
 				</Layer>
 				<Layer>
 					<Name>GameIconsRaw/chemical/bubbling-flask</Name>
-					<Tint>147,255,164,196</Tint>
+					<Tint>211,255,126,196</Tint>
+					<Scale>0.7</Scale>
 				</Layer>
 				<Layer>
 					<Name>Icons/OrbSparkle</Name>

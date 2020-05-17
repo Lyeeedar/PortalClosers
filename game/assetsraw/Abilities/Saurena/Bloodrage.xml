@@ -2,6 +2,13 @@
 	<AbilityTemplate meta:RefKey="AbilityData">
 		<Name>Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).Name:de9f4d9b-952f-4e12-97c2-0ee951004a0a</Name>
 		<Description>Bloodrage.AbilityOrb.AbilityTemplate (AbilityData).Description:df0fa06e-1299-4e35-9ff4-d960480c132d</Description>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<Layers>
+				<Layer>
+					<Name>white</Name>
+				</Layer>
+			</Layers>
+		</Icon>
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>
 				<Timeline>
