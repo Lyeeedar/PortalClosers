@@ -42,7 +42,7 @@ class MapCreator
 			return set.filter { it.contents[slot] == null }.sorted().toGdxArray()
 		}
 
-		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG)
+		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG, deferredActions: Array<()->Unit>)
 		{
 			for (slot in SpaceSlot.Values)
 			{
@@ -79,18 +79,20 @@ class MapCreator
 				leader.addToTile(tile)
 				world.addEntity(leader)
 
-				for (mob in pack.mobs)
-				{
-					val mob = mob.get()!!
-
-					val tiles = floodFill(tile, 4, world, mob.position()!!.slot)
-
-					if (tiles.size > 0)
+				deferredActions.add {
+					for (mob in pack.mobs)
 					{
-						val tile = tiles.random(rng)
+						val mob = mob.get()!!
 
-						mob.addToTile(tile)
-						world.addEntity(mob)
+						val tiles = floodFill(tile, 4, world, mob.position()!!.slot)
+
+						if (tiles.size > 0)
+						{
+							val tile = tiles.random(rng)
+
+							mob.addToTile(tile)
+							world.addEntity(mob)
+						}
 					}
 				}
 			}
@@ -137,6 +139,7 @@ class MapCreator
 			}
 
 			// add entities
+			val deferredActions = Array<()->Unit>()
 			for (x in 0 until map.width)
 			{
 				for (y in 0 until map.height)
@@ -144,8 +147,12 @@ class MapCreator
 					val symbol = symbolGrid[x, y]
 					val tile = map[x, y]
 
-					processSymbol(symbol, tile, faction, level, world, rng)
+					processSymbol(symbol, tile, faction, level, world, rng, deferredActions)
 				}
+			}
+			for (action in deferredActions)
+			{
+				action.invoke()
 			}
 
 			// add player
