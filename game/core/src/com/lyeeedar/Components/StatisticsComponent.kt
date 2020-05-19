@@ -183,9 +183,9 @@ class StatisticsComponent : DataComponent()
 		val rating = difficultyRating
 		if (rating != null)
 		{
-			statistics[Statistic.ATK_POWER] = statistics[Statistic.ATK_POWER] + rating.calculateAttack(level)
-			statistics[Statistic.ARMOUR] = statistics[Statistic.ARMOUR] + rating.calculateArmour(level)
-			statistics[Statistic.MAX_HP] = statistics[Statistic.MAX_HP] + rating.calculateHP(level, statistics)
+			statistics[Statistic.ATK_POWER] = statistics[Statistic.ATK_POWER, 0f] + rating.calculateAttack(level)
+			statistics[Statistic.ARMOUR] = statistics[Statistic.ARMOUR, 0f] + rating.calculateArmour(level)
+			statistics[Statistic.MAX_HP] = statistics[Statistic.MAX_HP, 0f] + rating.calculateHP(level, statistics)
 		}
 
 		resetHP()

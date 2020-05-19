@@ -36,7 +36,7 @@ class BloodSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			}
 			else
 			{
-				if (tile.contents.any { it?.get()?.water() != null })
+				if (tile.contents.values.any { it.get()?.water() != null })
 				{
 					blood.remainingTurns -= 25
 					if (blood.remainingTurns < 0) blood.remainingTurns = 0

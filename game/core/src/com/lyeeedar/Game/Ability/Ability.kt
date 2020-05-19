@@ -78,7 +78,7 @@ class Ability(val data: AbilityData)
 		values.clear()
 		for (target in validTargets)
 		{
-			val other = target.contents[pos.slot].get()!!
+			val other = target.contents[pos.slot]!!.get()!!
 
 			tempVariableMap.clear()
 			other.statistics()!!.write(tempVariableMap)
