@@ -40,7 +40,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 
 			for (slot in SpaceSlot.Values)
 			{
-				contents[slot] = contents[slot] ?: sym.contents[slot]!!
+				contents[slot] = contents[slot] ?: sym.contents[slot]
 			}
 		}
 	}
@@ -63,7 +63,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 		{
 			for (slot in SpaceSlot.Values)
 			{
-				contents[slot] = data.contents[slot] ?: contents[slot]!!
+				contents[slot] = data.contents[slot] ?: contents[slot]
 			}
 
 			floor = data.floor ?: floor
