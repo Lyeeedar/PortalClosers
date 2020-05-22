@@ -76,17 +76,17 @@
 								<RenderableComponent>
 									<classID>Renderable</classID>
 									<Renderable meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
+										<Name>Oryx/uf_split/uf_terrain/water_teal</Name>
 									</Renderable>
 								</RenderableComponent>
-								<BakedLight>
-									<classID>BakedLight</classID>
+								<LightComponent>
+									<classID>Light</classID>
 									<Light meta:RefKey="Light">
-										<Colour>10,212,240,255</Colour>
-										<Brightness>0.2</Brightness>
-										<Range>3</Range>
+										<Colour>11,204,190,255</Colour>
+										<Brightness>0.15</Brightness>
+										<Range>2</Range>
 									</Light>
-								</BakedLight>
+								</LightComponent>
 							</Components>
 						</Floor>
 					</Contents>
@@ -180,8 +180,8 @@
 									<classID>Light</classID>
 									<Light meta:RefKey="Light">
 										<Colour>254,255,68,255</Colour>
-										<Brightness>0.4</Brightness>
-										<Range>3</Range>
+										<Brightness>0.5</Brightness>
+										<Range>4</Range>
 									</Light>
 								</LightComponent>
 							</Components>
