@@ -46,7 +46,7 @@ class TaskUseAbility : AbstractTask()
 				}
 
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
-				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
+				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)
 
 				stats.addMessage(Localisation.getText("distracted", "UI"), Colour.YELLOW, 0.4f)
 

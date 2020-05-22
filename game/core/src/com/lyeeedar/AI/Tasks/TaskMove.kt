@@ -38,7 +38,7 @@ class TaskMove : AbstractTask()
 			if (root > 0f && Random.random(rng) < root)
 			{
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
-				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f))
+				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)
 
 				stats.addMessage(Localisation.getText("rooted", "UI"), Colour.YELLOW, 0.4f)
 
