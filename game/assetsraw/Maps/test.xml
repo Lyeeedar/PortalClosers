@@ -95,6 +95,7 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
+					<Extends>.</Extends>
 					<Char>#</Char>
 					<Wall>Sprites/Defs/Trees</Wall>
 					<Contents />

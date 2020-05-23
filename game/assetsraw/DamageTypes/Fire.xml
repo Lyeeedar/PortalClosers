@@ -1,14 +1,14 @@
 <ActionSequence xmlns:meta="Editor">
 	<Actions>
 		<Timeline>
-			<AttachParticle>
+			<AttachFX>
 				<Duration LockDuration="False">0.233333334</Duration>
 				<classID>AttachParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
 					<Name>Abilities/Fire</Name>
 				</Particle>
 				<Key>fire</Key>
-			</AttachParticle>
+			</AttachFX>
 		</Timeline>
 		<Timeline>
 			<Repeat>
@@ -19,10 +19,10 @@
 			</Repeat>
 		</Timeline>
 		<Timeline>
-			<BlockTurn>
+			<Block>
 				<Time>0.08094021</Time>
 				<classID>BlockTurn</classID>
-			</BlockTurn>
+			</Block>
 			<Damage>
 				<Time>0.109669842</Time>
 				<classID>Damage</classID>

@@ -1,10 +1,10 @@
 <ActionSequence xmlns:meta="Editor">
 	<Actions>
 		<Timeline>
-			<SetSourcePoint>
+			<SetSource>
 				<classID>SetSourcePoint</classID>
-			</SetSourcePoint>
-			<SelectEntities>
+			</SetSource>
+			<PickEnts>
 				<Time>0.006560651</Time>
 				<classID>SelectEntities</classID>
 				<Mode>Enemies</Mode>
@@ -13,8 +13,8 @@
 				<Minimum>false</Minimum>
 				<AllowSelf>false</AllowSelf>
 				<AllowCurrent>false</AllowCurrent>
-			</SelectEntities>
-			<FlightParticle>
+			</PickEnts>
+			<FlightFX>
 				<Time>0.0245842</Time>
 				<Duration LockDuration="False">0.113335833</Duration>
 				<classID>FlightParticle</classID>
@@ -32,7 +32,7 @@
 					</Overrides>
 				</Particle>
 				<SpawnBehaviour>Immediate</SpawnBehaviour>
-			</FlightParticle>
+			</FlightFX>
 			<Damage>
 				<Time>0.151016563</Time>
 				<classID>Damage</classID>
@@ -41,14 +41,14 @@
 			</Damage>
 		</Timeline>
 		<Timeline>
-			<SpawnOneShotParticle>
+			<OneShotFX>
 				<Time>0.10625162</Time>
 				<classID>SpawnOneShotParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
 					<Name>Abilities/LightningBurst</Name>
 				</Particle>
 				<SpawnBehaviour>Immediate</SpawnBehaviour>
-			</SpawnOneShotParticle>
+			</OneShotFX>
 		</Timeline>
 	</Actions>
 </ActionSequence>

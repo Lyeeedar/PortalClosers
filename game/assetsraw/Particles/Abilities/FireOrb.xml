@@ -136,7 +136,8 @@
 			<Keyframe>0|1</Keyframe>
 		</Brightness>
 		<Range>
-			<Keyframe>0|1</Keyframe>
+			<Keyframe>0|2</Keyframe>
 		</Range>
+		<HasShadows>true</HasShadows>
 	</Light>
 </Effect>

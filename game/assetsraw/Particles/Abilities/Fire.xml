@@ -134,5 +134,6 @@
 		<Range>
 			<Keyframe>0|3</Keyframe>
 		</Range>
+		<HasShadows>true</HasShadows>
 	</Light>
 </Effect>
