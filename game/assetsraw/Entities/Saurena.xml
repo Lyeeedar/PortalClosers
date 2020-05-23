@@ -52,5 +52,13 @@
 			<Ability4>Abilities/Saurena/HealingPotion</Ability4>
 			<Ultimate>Abilities/Saurena/Bloodrage</Ultimate>
 		</Ability>
+		<LightComponent>
+			<classID>Light</classID>
+			<Light meta:RefKey="Light">
+				<Colour>255,255,255,255</Colour>
+				<Brightness>0.2</Brightness>
+				<Range>3</Range>
+			</Light>
+		</LightComponent>
 	</Components>
 </Entity>
