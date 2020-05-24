@@ -2,6 +2,7 @@ package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.IntSet
 import com.lyeeedar.Components.ability
+import com.lyeeedar.Components.ai
 import com.lyeeedar.Components.position
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
@@ -106,6 +107,15 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 				{
 					isVisible = visionSet.contains(tileHash)
 					isSeen = tile.isSeen or seenSet.contains(tileHash)
+				}
+
+				if (!tile.isSeen && isSeen)
+				{
+					for (slot in SpaceSlot.EntityValues)
+					{
+						val entity = tile.contents[slot]?.get() ?: continue
+						entity.ai()?.activate(entity)
+					}
 				}
 
 				tile.updateVisibility(deltaTime, isSeen, isVisible)

@@ -89,7 +89,11 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 		else
 		{
 			val ai = entity.ai()!!
-			ai.ai.evaluate(ai.state)
+
+			if (ai.isActive)
+			{
+				ai.ai.evaluate(ai.state)
+			}
 		}
 	}
 }

@@ -11,6 +11,8 @@ class AIComponentData : AbstractComponentData()
 	@DataFileReference(resourceType = "BehaviourTree")
 	lateinit var aiPath: String
 
+	var activeOnLoad = false
+
 	//region non-data
 	lateinit var ai: BehaviourTree
 	//endregion
@@ -42,15 +44,35 @@ class AIComponent : DataComponent()
 
 	val state = BehaviourTreeState()
 
+	var isActive = false
+
+	fun activate(entity: Entity)
+	{
+		if (!isActive)
+		{
+			val pack = entity.pack()
+			if (pack != null)
+			{
+				for (entity in pack.pack.entities)
+				{
+					entity.get()?.ai()?.isActive = true
+				}
+			}
+
+			isActive = true
+		}
+	}
+
 	override fun reset()
 	{
-
+		isActive = false
 	}
 
 	override fun initialiseFrom(data: AbstractComponentData)
 	{
 		val data = data as AIComponentData
 		ai = data.ai
+		isActive = data.activeOnLoad
 	}
 
 	override fun onAddedToEntity(entity: Entity)
