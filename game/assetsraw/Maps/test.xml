@@ -60,6 +60,7 @@
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
 					<Char>~</Char>
+					<Floor>Sprites/Defs/water_teal</Floor>
 					<Contents>
 						<Floor meta:RefKey="Entity">
 							<Components>
@@ -73,12 +74,6 @@
 									<FlowDir>East</FlowDir>
 									<Depth>0.4</Depth>
 								</Water>
-								<RenderableComponent>
-									<classID>Renderable</classID>
-									<Renderable meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_teal</Name>
-									</Renderable>
-								</RenderableComponent>
 								<LightComponent>
 									<classID>Light</classID>
 									<Light meta:RefKey="Light">
@@ -113,7 +108,6 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
-					<Extends>.</Extends>
 					<Char>!</Char>
 					<Contents />
 					<PackDescription meta:RefKey="PackDescription" />
