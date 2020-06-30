@@ -20,6 +20,7 @@ class BuffAction : AbstractDurationActionSequenceAction()
 	lateinit var buff: XmlData
 
 	var isBuff: Boolean = true
+	var removeOnExit: Boolean = true
 
 	override fun onTurn(state: ActionSequenceState): ActionState
 	{
@@ -28,7 +29,7 @@ class BuffAction : AbstractDurationActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState)
 	{
-		var createdBuffs = Array<Pair<EntityReference, Buff>>()
+		val createdBuffs = Array<Pair<EntityReference, Buff>>()
 		for (target in state.targets)
 		{
 			val tile = state.world.grid.tryGet(target, null) ?: continue
@@ -60,23 +61,34 @@ class BuffAction : AbstractDurationActionSequenceAction()
 					buff.source = state.source
 
 					entity.statistics()!!.buffs.add(buff)
+
+					if (removeOnExit)
+					{
+						createdBuffs.add(Pair(entityRef, buff))
+					}
 				}
 			}
 		}
 
-		val key = "buffs${state.uid}"
-		state.data[key] = createdBuffs
+		if (removeOnExit)
+		{
+			val key = "buffs${state.uid}"
+			state.data[key] = createdBuffs
+		}
 	}
 
 	override fun exit(state: ActionSequenceState): ActionState
 	{
-		val key = "buffs${state.uid}"
-		val buffs = state.data[key] as Array<Pair<EntityReference, Buff>>
-
-		for (buff in buffs)
+		if (removeOnExit)
 		{
-			val entity = buff.first.get() ?: continue
-			entity.statistics()!!.buffs.removeValue(buff.second, true)
+			val key = "buffs${state.uid}"
+			val buffs = state.data[key] as Array<Pair<EntityReference, Buff>>
+
+			for (buff in buffs)
+			{
+				val entity = buff.first.get() ?: continue
+				entity.statistics()!!.buffs.removeValue(buff.second, true)
+			}
 		}
 
 		return ActionState.Completed
@@ -88,6 +100,7 @@ class BuffAction : AbstractDurationActionSequenceAction()
 		super.load(xmlData)
 		buff = xmlData.getChildByName("Buff")!!
 		isBuff = xmlData.getBoolean("IsBuff", true)
+		removeOnExit = xmlData.getBoolean("RemoveOnExit", true)
 	}
 	override val classID: String = "Buff"
 	//endregion

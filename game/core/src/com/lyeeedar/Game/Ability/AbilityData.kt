@@ -10,16 +10,6 @@ import java.util.*
 
 class AbilityData : XmlDataClass()
 {
-	enum class CooldownType
-	{
-		TURN,
-		WAIT,
-		ATTACK,
-		USE_ABILITY,
-		KILL,
-		PACK_KILL
-	}
-
 	enum class TargetType
 	{
 		TILE,
@@ -41,10 +31,9 @@ class AbilityData : XmlDataClass()
 
 	lateinit var actionSequence: ActionSequence
 
-	var cooldown: Int = 10
-	lateinit var cooldownType: CooldownType
+	var manaCost: Int = 200
 
-	var singleUse: Boolean = false
+	var usages: Int = -1
 
 	@DataVector(name1 = "Min", name2 = "Max")
 	var range: Point = Point(1, 1)
@@ -75,9 +64,8 @@ class AbilityData : XmlDataClass()
 		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
 		actionSequence = ActionSequence.load(actionSequenceEl)
-		cooldown = xmlData.getInt("Cooldown", 10)
-		cooldownType = CooldownType.valueOf(xmlData.get("CooldownType").toUpperCase(Locale.ENGLISH))
-		singleUse = xmlData.getBoolean("SingleUse", false)
+		manaCost = xmlData.getInt("ManaCost", 200)
+		usages = xmlData.getInt("Usages", -1)
 		val rangeRaw = xmlData.get("Range", "1, 1")!!.split(',')
 		range = Point(rangeRaw[0].trim().toInt(), rangeRaw[1].trim().toInt())
 		targetType = TargetType.valueOf(xmlData.get("TargetType").toUpperCase(Locale.ENGLISH))

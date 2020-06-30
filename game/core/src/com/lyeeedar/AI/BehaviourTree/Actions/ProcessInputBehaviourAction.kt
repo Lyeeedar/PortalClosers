@@ -41,7 +41,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		{
 			for (ab in ability.abilities)
 			{
-				if (ab.isSelected && ab.remainingCooldown <= 0)
+				if (ab.isSelected && ab.mana >= ab.data.manaCost && ab.remainingUsages != 0)
 				{
 					if (RenderSystemWidget.instance!!.isSelected)
 					{

@@ -28,7 +28,7 @@ class DamageEquations
 			return mitigation
 		}
 
-		// FinalDamage = AttackDam * ArmourMitigation * DR * LevelSuppression
+		// FinalDamage = AttackDam * ArmourMitigation * DR
 		fun calculateFinalDamage(defenderStats: StatisticsComponent, damage: AttackDamage)
 		{
 			if (damage.type == DamageType.PURE)

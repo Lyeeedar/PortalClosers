@@ -27,7 +27,7 @@ class UseAbilityBehaviourAction : AbstractBehaviourAction()
 
 		for (ability in abilityHolder.abilities)
 		{
-			if (ability.remainingCooldown <= 0)
+			if (ability.mana >= ability.data.manaCost && ability.remainingUsages != 0)
 			{
 				val target =
 					if (ability.data.targetType == AbilityData.TargetType.TARGET_ENEMY)

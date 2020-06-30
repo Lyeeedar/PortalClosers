@@ -27,21 +27,18 @@ class AbilityComponent : DataComponent()
 
 	val abilities: Sequence<Ability>
 		get() = sequence {
+			if (ultimate != null) yield(ultimate!!)
 			if (ability1 != null) yield(ability1!!)
 			if (ability2 != null) yield(ability2!!)
 			if (ability3 != null) yield(ability3!!)
 			if (ability4 != null) yield(ability4!!)
-			if (ultimate != null) yield(ultimate!!)
 		}
 
-	fun triggerCooldown(type: AbilityData.CooldownType)
+	fun gainMana(amount: Int)
 	{
 		for (ability in abilities)
 		{
-			if (ability.data.cooldownType == type)
-			{
-				ability.remainingCooldown -= 1
-			}
+			ability.mana += amount
 		}
 	}
 

@@ -132,7 +132,10 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 		val stats = entity.statistics()!!
 
 		val maxHP = stats.getStat(Statistic.MAX_HP)
+		val manaRegen = stats.getStat(Statistic.MANA_REGEN)
 		val regen = stats.getStat(Statistic.REGENERATION)
+
+		entity.ability()?.gainMana(manaRegen.toInt())
 
 		if (regen > 0f)
 		{

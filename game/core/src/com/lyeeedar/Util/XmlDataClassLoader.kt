@@ -11,6 +11,7 @@ class XmlDataClassLoader
 			{
 				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Knockback" -> com.lyeeedar.ActionSequence.Actions.KnockbackAction()
+				"Mana" -> com.lyeeedar.ActionSequence.Actions.ManaAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
 				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
@@ -44,6 +45,7 @@ class XmlDataClassLoader
 			{
 				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Knockback" -> com.lyeeedar.ActionSequence.Actions.KnockbackAction()
+				"Mana" -> com.lyeeedar.ActionSequence.Actions.ManaAction()
 				"MoveSource" -> com.lyeeedar.ActionSequence.Actions.MoveSourceAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()

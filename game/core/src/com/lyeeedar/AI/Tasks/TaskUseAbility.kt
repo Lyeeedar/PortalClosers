@@ -39,11 +39,7 @@ class TaskUseAbility : AbstractTask()
 			val distract = stats.getStat(Statistic.DISTRACTION)
 			if (distract > 0f && Random.random(rng) < distract)
 			{
-				if (!ability.data.singleUse) // dont consume use of single use ability
-				{
-					// reset cooldown, but only to half of normal
-					ability.remainingCooldown = ability.data.cooldown.toFloat() / 2f
-				}
+				ability.mana /= 2f
 
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)
@@ -63,10 +59,13 @@ class TaskUseAbility : AbstractTask()
 
 		pos.facing = Direction.getCardinalDirection(tile, pos.position)
 
-		e.ability()?.triggerCooldown(AbilityData.CooldownType.USE_ABILITY)
-
-		ability.remainingCooldown = ability.data.cooldown.toFloat()
+		ability.mana = 0f
 		ability.justUsed = true
+
+		if (ability.remainingUsages > 0)
+		{
+			ability.remainingUsages--
+		}
 
 		val sequenceHolder = e.addOrGet(ComponentType.ActionSequence) as ActionSequenceComponent
 		sequenceHolder.actionSequence = ability.data.actionSequence

@@ -13,7 +13,6 @@ class TaskWait(): AbstractTask()
 	override fun execute(e: Entity, world: World<*>, rng: LightRNG)
 	{
 		e.directionalSprite()?.currentAnim = "wait"
-		e.ability()?.triggerCooldown(AbilityData.CooldownType.WAIT)
 	}
 
 	var obtained: Boolean = false

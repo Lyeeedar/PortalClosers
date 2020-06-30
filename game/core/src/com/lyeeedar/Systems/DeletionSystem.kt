@@ -54,8 +54,6 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 							world.eventSystem()?.addEvent(EventType.KILL, e.getRef(), entity.getRef())
 						}
 
-						e.ability()?.triggerCooldown(AbilityData.CooldownType.KILL)
-
 						val pack = e.pack()
 						if (pack != null)
 						{
@@ -67,8 +65,6 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 								{
 									world.eventSystem()?.addEvent(EventType.PACK_KILL, other.getRef(), entity.getRef())
 								}
-
-								other.ability()?.triggerCooldown(AbilityData.CooldownType.PACK_KILL)
 							}
 						}
 					}

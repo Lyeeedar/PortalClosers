@@ -15,7 +15,8 @@ import squidpony.squidmath.LightRNG
 
 class Ability(val data: AbilityData)
 {
-	var remainingCooldown = data.cooldown.toFloat()
+	var mana = 0f
+	var remainingUsages = data.usages
 
 	var justUsed = false
 

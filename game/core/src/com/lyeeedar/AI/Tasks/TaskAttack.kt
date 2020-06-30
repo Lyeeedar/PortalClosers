@@ -65,7 +65,6 @@ class TaskAttack : AbstractTask()
 				eventSystem.addEvent(EventType.ATTACK, e.getRef(), entity)
 			}
 		}
-		e.ability()?.triggerCooldown(AbilityData.CooldownType.ATTACK)
 
 		val diff = tile.getPosDiff(pos.position)
 

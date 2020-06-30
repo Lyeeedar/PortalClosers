@@ -104,6 +104,7 @@
 		<Data Name="BaseStatistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->
 			<Data Name="Max_hp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Mana_regen" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Offense-->
 			<Data Name="Atk_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Ability_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />

@@ -12,6 +12,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 {
 	// Base
 	MAX_HP(1f, Float.MAX_VALUE, false),
+	MANA_REGEN(1f, Float.MAX_VALUE, false),
 
 	// Offense
 	ATK_POWER(1f, Float.MAX_VALUE, false),
@@ -41,6 +42,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 			return when(this)
 			{
 				MAX_HP -> Localisation.getText("statistic.health", "UI")
+				MANA_REGEN -> Localisation.getText("statistic.manaregen", "UI")
 
 				ATK_POWER -> Localisation.getText("statistic.attackpower", "UI")
 				ABILITY_POWER -> Localisation.getText("statistic.abilitypower", "UI")
@@ -68,6 +70,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 			return when(this)
 			{
 				MAX_HP -> Localisation.getText("statistic.health.description", "UI")
+				MANA_REGEN -> Localisation.getText("statistic.manaregen.description", "UI")
 
 				ATK_POWER -> Localisation.getText("statistic.attackpower.description", "UI")
 				ABILITY_POWER -> Localisation.getText("statistic.abilitypower.description", "UI")
@@ -92,8 +95,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	companion object
 	{
 		val Values = Statistic.values()
-		val BaseValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER)
-		val CoreValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
+		val BaseValues = arrayOf(MAX_HP, MANA_REGEN, ARMOUR, ATK_POWER)
+		val CoreValues = arrayOf(MAX_HP, MANA_REGEN, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
 		val AttackValues = arrayOf(ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
 		val DefenseValues = arrayOf(ARMOUR, DR, REGENERATION, LIFESTEAL, AEGIS)
 		val SpeedValues = arrayOf(HASTE, FLEET_FOOT, DERVISH)

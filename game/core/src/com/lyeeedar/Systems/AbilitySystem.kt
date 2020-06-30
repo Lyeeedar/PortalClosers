@@ -23,9 +23,6 @@ class AbilitySystem(world: World<*>) : AbstractSystem(world)
 
 	override fun onTurn()
 	{
-		for (entity in abilities.entities)
-		{
-			entity.ability()!!.triggerCooldown(AbilityData.CooldownType.TURN)
-		}
+
 	}
 }
