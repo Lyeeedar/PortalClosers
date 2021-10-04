@@ -28,7 +28,7 @@ jobs:
       run: echo "PROJECT_HASH=${{ hashFiles('**/*.kt') }}-${{ hashFiles('**/*.xml') }}-${{ hashFiles('**/*.kts') }}"  >> $GITHUB_ENV
 
     - name: Restore resource cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: Game/game/caches
         key: resourceCache-${{ env.PROJECT_HASH }}
