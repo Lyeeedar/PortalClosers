@@ -34,14 +34,6 @@ class AbilityComponent : DataComponent()
 			if (ability4 != null) yield(ability4!!)
 		}
 
-	fun gainMana(amount: Int)
-	{
-		for (ability in abilities)
-		{
-			ability.mana += amount
-		}
-	}
-
 	override fun reset()
 	{
 		ability1 = null

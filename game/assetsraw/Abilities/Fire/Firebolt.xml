@@ -22,7 +22,12 @@
 		<ActionSequence meta:RefKey="ActionSequence">
 			<Actions>
 				<Timeline>
+					<MarkAndWait>
+						<classID>MarkAndWaitForPlayer</classID>
+						<Turns>2</Turns>
+					</MarkAndWait>
 					<FlightFX>
+						<Time>0.0011221413</Time>
 						<Duration LockDuration="False">0.098487735</Duration>
 						<classID>FlightParticle</classID>
 						<Particle meta:RefKey="ParticleEffect">
@@ -31,7 +36,7 @@
 						<SpawnBehaviour>Immediate</SpawnBehaviour>
 					</FlightFX>
 					<Damage>
-						<Time>0.098487735</Time>
+						<Time>5</Time>
 						<classID>Damage</classID>
 						<Damage>source.damage</Damage>
 						<Type>Fire</Type>
@@ -39,8 +44,6 @@
 				</Timeline>
 			</Actions>
 		</ActionSequence>
-		<Cooldown>5</Cooldown>
-		<CooldownType>Attack</CooldownType>
 		<Range>1,4</Range>
 		<TargetType>Target_enemy</TargetType>
 	</AbilityTemplate>

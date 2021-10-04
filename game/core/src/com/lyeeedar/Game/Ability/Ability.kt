@@ -15,7 +15,7 @@ import squidpony.squidmath.LightRNG
 
 class Ability(val data: AbilityData)
 {
-	var mana = 0f
+	var cooldown = 0
 	var remainingUsages = data.usages
 
 	var justUsed = false
@@ -92,7 +92,7 @@ class Ability(val data: AbilityData)
 			}
 		}
 
-		val sorted = if (data.selectMinByCondition) values.sortedBy { it.second } else values.sortedByDescending { it.second }
+		val sorted = if (data.pickSortedMin) values.sortedBy { it.second } else values.sortedByDescending { it.second }
 		return sorted.firstOrNull()?.first
 	}
 }

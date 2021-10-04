@@ -60,7 +60,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 					val attackDam = DamageEquations.getAttackDam(state.rng, damage)
 
-					val attackType = if (useAttackDamageType) sourceStats.attackDefinition.type else type
+					val attackType = type
 					val attackObj = AttackDamage(attackDam, attackType)
 					attackObj.wasCrit = alwaysCrit
 

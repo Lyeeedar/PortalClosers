@@ -31,7 +31,7 @@ class AbilityData : XmlDataClass()
 
 	lateinit var actionSequence: ActionSequence
 
-	var manaCost: Int = 200
+	var cooldown: Int = 0
 
 	var usages: Int = -1
 
@@ -47,7 +47,7 @@ class AbilityData : XmlDataClass()
 	lateinit var sortCondition: CompiledExpression
 
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
-	var selectMinByCondition: Boolean = true
+	var pickSortedMin: Boolean = true
 
 	//region non-data
 	val nameTransforms = Array<(String)->String>()
@@ -64,14 +64,14 @@ class AbilityData : XmlDataClass()
 		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
 		actionSequence = ActionSequence.load(actionSequenceEl)
-		manaCost = xmlData.getInt("ManaCost", 200)
+		cooldown = xmlData.getInt("Cooldown", 0)
 		usages = xmlData.getInt("Usages", -1)
 		val rangeRaw = xmlData.get("Range", "1, 1")!!.split(',')
 		range = Point(rangeRaw[0].trim().toInt(), rangeRaw[1].trim().toInt())
 		targetType = TargetType.valueOf(xmlData.get("TargetType").toUpperCase(Locale.ENGLISH))
 		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
 		sortCondition = CompiledExpression(xmlData.get("SortCondition", "dist")!!)
-		selectMinByCondition = xmlData.getBoolean("SelectMinByCondition", true)
+		pickSortedMin = xmlData.getBoolean("PickSortedMin", true)
 	}
 	//endregion
 }

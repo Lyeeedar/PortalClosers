@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
 import com.lyeeedar.AI.BehaviourTree.EvaluationState
 import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
-import com.lyeeedar.AI.Tasks.TaskAttack
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.AI.Tasks.TaskWait
@@ -41,7 +40,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		{
 			for (ab in ability.abilities)
 			{
-				if (ab.isSelected && ab.mana >= ab.data.manaCost && ab.remainingUsages != 0)
+				if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
 				{
 					if (RenderSystemWidget.instance!!.isSelected)
 					{
@@ -118,61 +117,14 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val attack = entity.statistics()!!.attackDefinition
-				potentialTargets.clear()
-
-				if (attack.range <= 1)
+				val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
+				if (targetTile != null && (pos.isValidTile(targetTile, entity) || targetTile.contents[pos.slot]?.get()?.isAllies(entity) == true))
 				{
-					val tile = state.world.grid.tryGet(pos.position, moveDir, null) as? Tile ?: return EvaluationState.FAILED
-					potentialTargets.add(tile)
+					task.tasks.add(TaskMove.obtain().set(moveDir))
 				}
 				else
 				{
-					for (point in Direction.buildCone(moveDir, pos.position, attack.range))
-					{
-						val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
-						if (tile.skipRender || tile.skipRenderEntities) continue
-						potentialTargets.add(tile)
-					}
-				}
-
-				var enemyTile: Tile? = null
-				var enemyTileDist: Int = Int.MAX_VALUE
-				outer@for (tile in potentialTargets)
-				{
-					for (slot in SpaceSlot.EntityValues)
-					{
-						val other = tile.contents[slot]?.get() ?: continue
-						if (other.isEnemies(entity))
-						{
-							val dist = pos.position.dist(tile)
-							if (dist < enemyTileDist)
-							{
-								enemyTile = tile
-								enemyTileDist = dist
-							}
-
-							break
-						}
-					}
-				}
-
-				if (enemyTile != null)
-				{
-					val attack = entity.statistics()!!.attackDefinition
-					task.tasks.add(TaskAttack.obtain().set(enemyTile, attack))
-				}
-				else
-				{
-					val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
-					if (targetTile != null && (pos.isValidTile(targetTile, entity) || targetTile.contents[pos.slot]?.get()?.isAllies(entity) == true))
-					{
-						task.tasks.add(TaskMove.obtain().set(moveDir))
-					}
-					else
-					{
-						return EvaluationState.FAILED
-					}
+					return EvaluationState.FAILED
 				}
 			}
 		}

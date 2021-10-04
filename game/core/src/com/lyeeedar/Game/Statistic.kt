@@ -28,11 +28,9 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 	// Buff
 	HASTE(-1f, 1f, true),
 	FLEET_FOOT(-1f, 1f, true),
-	DERVISH(-1f, 1f, true),
 
 	// Negative
 	ROOT(0f, 1f, true),
-	FUMBLE(0f, 1f, true),
 	DISTRACTION(0f, 1f, true);
 
 	val niceName: String
@@ -54,10 +52,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 
 				HASTE -> Localisation.getText("statistic.haste", "UI")
 				FLEET_FOOT -> Localisation.getText("statistic.fleetfoot", "UI")
-				DERVISH -> Localisation.getText("statistic.dervish", "UI")
 
 				ROOT -> Localisation.getText("statistic.root", "UI")
-				FUMBLE -> Localisation.getText("statistic.fumble", "UI")
 				DISTRACTION -> Localisation.getText("statistic.distraction", "UI")
 			}
 		}
@@ -81,10 +77,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 
 				HASTE -> Localisation.getText("statistic.haste.description", "UI")
 				FLEET_FOOT -> Localisation.getText("statistic.fleetfoot.description", "UI")
-				DERVISH -> Localisation.getText("statistic.dervish.description", "UI")
 
 				ROOT -> Localisation.getText("statistic.root.description", "UI")
-				FUMBLE -> Localisation.getText("statistic.fumble.description", "UI")
 				DISTRACTION -> Localisation.getText("statistic.distraction.description", "UI")
 			}
 		}
@@ -96,8 +90,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 		val CoreValues = arrayOf(MAX_HP, ARMOUR, ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
 		val AttackValues = arrayOf(ATK_POWER, ABILITY_POWER, CRIT_CHANCE)
 		val DefenseValues = arrayOf(ARMOUR, DR, REGENERATION, LIFESTEAL, AEGIS)
-		val SpeedValues = arrayOf(HASTE, FLEET_FOOT, DERVISH)
-		val NegativeValues = arrayOf(ROOT, FUMBLE, DISTRACTION)
+		val SpeedValues = arrayOf(HASTE, FLEET_FOOT)
+		val NegativeValues = arrayOf(ROOT, DISTRACTION)
 
 		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Float>)
 		{

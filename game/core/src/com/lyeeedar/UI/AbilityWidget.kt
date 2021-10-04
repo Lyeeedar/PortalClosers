@@ -53,7 +53,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 		}
 	}
 
-	private fun isAbilityEnabled(): Boolean = ability.mana >= ability.data.manaCost && ability.remainingUsages != 0 && ability.getValidTargets(world.player!!, world).isNotEmpty()
+	private fun isAbilityEnabled(): Boolean = ability.cooldown == 0 && ability.remainingUsages != 0 && ability.getValidTargets(world.player!!, world).isNotEmpty()
 
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()
@@ -86,7 +86,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 		super.draw(batch, parentAlpha)
 
-		if (ability.mana < ability.data.manaCost)
+		if (ability.cooldown == 0)
 		{
 			batch!!.color = Color.WHITE
 		}
@@ -96,10 +96,10 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 		}
 
 		val bounds = background.getBounds()
-		val pipSize = (bounds.width - (ability.data.manaCost+1) * padding) / ability.data.manaCost
-		for (i in 1..ability.data.manaCost)
+		val pipSize = (bounds.width - (ability.data.cooldown+1) * padding) / ability.data.cooldown
+		for (i in 1..ability.data.cooldown)
 		{
-			val tex = if (i <= (ability.data.manaCost-ability.mana)) full else empty
+			val tex = if (i <= (ability.data.cooldown-ability.cooldown)) full else empty
 			batch.draw(tex, x+bounds.x + padding * i + (i - 1) * pipSize, y+bounds.y, pipSize, 7f)
 		}
 	}

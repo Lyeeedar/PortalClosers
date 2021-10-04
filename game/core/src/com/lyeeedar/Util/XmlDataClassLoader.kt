@@ -27,6 +27,7 @@ actual class XmlDataClassLoader
 				"Damage" -> com.lyeeedar.ActionSequence.Actions.DamageAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
 				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
+				"MarkAndWaitForPlayer" -> com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction()
 				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
@@ -54,6 +55,7 @@ actual class XmlDataClassLoader
 				"Pull" -> com.lyeeedar.ActionSequence.Actions.PullAction()
 				"Damage" -> com.lyeeedar.ActionSequence.Actions.DamageAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
+				"MarkAndWaitForPlayer" -> com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
@@ -87,7 +89,6 @@ actual class XmlDataClassLoader
 				"RunUntilNotFailed" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotFailedBehaviourNode()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
-				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
 				"PickOneFrom" -> com.lyeeedar.AI.BehaviourTree.Actions.PickOneFromBehaviourAction()
 				"Wait" -> com.lyeeedar.AI.BehaviourTree.Actions.WaitBehaviourAction()
@@ -109,7 +110,6 @@ actual class XmlDataClassLoader
 		{
 			return when (classID)
 			{
-				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()

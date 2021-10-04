@@ -7,12 +7,11 @@ import com.lyeeedar.Game.Ability.AbilityData
 
 class AbilitySystem(world: World<*>) : AbstractSystem(world)
 {
-	val abilities = world.getEntitiesFor().all(ComponentType.Ability).get()
-	val activeAbilities = world.getEntitiesFor().all(ComponentType.ActiveAbility).get()
+	private val abilities = world.getEntitiesFor().all(ComponentType.Ability).get()
 
 	override fun doUpdate(deltaTime: Float)
 	{
-		for (entity in activeAbilities.entities)
+		for (entity in abilities.entities)
 		{
 			if (entity.actionSequence() == null)
 			{
@@ -23,6 +22,15 @@ class AbilitySystem(world: World<*>) : AbstractSystem(world)
 
 	override fun onTurn()
 	{
-
+		for (entity in abilities.entities)
+		{
+			for (ability in entity.ability()!!.abilities)
+			{
+				if (ability.cooldown > 0)
+				{
+					ability.cooldown--
+				}
+			}
+		}
 	}
 }

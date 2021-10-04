@@ -19,15 +19,12 @@
 			<!--Buff-->
 			<Data Name="Haste" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Fleet_foot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Dervish" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Negative-->
 			<Data Name="Root" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Fumble" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Distraction" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		</Data>
 		<Data Name="EventHandlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Actions-->
-			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Use_ability" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<!--Self events-->

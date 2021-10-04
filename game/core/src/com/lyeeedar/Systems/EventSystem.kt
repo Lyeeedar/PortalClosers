@@ -12,7 +12,6 @@ import com.lyeeedar.Util.set
 enum class EventType
 {
 	// Actions
-	ATTACK,
 	MOVE,
 	USE_ABILITY,
 

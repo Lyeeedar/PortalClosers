@@ -1,7 +1,6 @@
 package com.lyeeedar.Systems
 
 import com.lyeeedar.AI.Tasks.AbstractTask
-import com.lyeeedar.AI.Tasks.TaskAttack
 import com.lyeeedar.AI.Tasks.TaskChannelAbility
 import com.lyeeedar.AI.Tasks.TaskMove
 import com.lyeeedar.Components.*
@@ -22,11 +21,6 @@ class TaskSystem(world: World<*>) : AbstractTaskSystem(world)
 			{
 				val fleet = stats.getStat(Statistic.FLEET_FOOT)
 				speed += fleet
-			}
-			else if (task is TaskAttack)
-			{
-				val dervish = stats.getStat(Statistic.DERVISH)
-				speed += dervish
 			}
 		}
 

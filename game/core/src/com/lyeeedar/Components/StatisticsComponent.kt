@@ -20,7 +20,6 @@ class StatisticsComponentData : AbstractComponentData()
 {
 	val baseStatistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 	var faction: String = ""
-	lateinit var attackDefinition: AttackDefinition
 	var difficultyRating: DifficultyRating? = null
 	var bloodColour: Colour = Colour.RED
 
@@ -38,9 +37,6 @@ class StatisticsComponentData : AbstractComponentData()
 			}
 		}
 		faction = xmlData.get("Faction", "")!!
-		val attackDefinitionEl = xmlData.getChildByName("AttackDefinition")!!
-		attackDefinition = AttackDefinition()
-		attackDefinition.load(attackDefinitionEl)
 		val difficultyRatingEl = xmlData.getChildByName("DifficultyRating")
 		if (difficultyRatingEl != null)
 		{
@@ -63,7 +59,6 @@ class StatisticsComponent : DataComponent()
 	var difficultyRating: DifficultyRating? = null
 
 	var faction: String = ""
-	var attackDefinition = AttackDefinition()
 
 	//region hp and damage
 	var hp: Float = 0f
@@ -167,7 +162,6 @@ class StatisticsComponent : DataComponent()
 
 		baseStatistics.addAll(data.baseStatistics)
 		faction = data.faction
-		attackDefinition = data.attackDefinition
 		difficultyRating = data.difficultyRating
 		bloodColour = data.bloodColour
 	}
@@ -259,7 +253,7 @@ class StatisticsComponent : DataComponent()
 		}
 		else if (key == "damage")
 		{
-			return getStat(Statistic.ATK_POWER) * attackDefinition.damage
+			return getStat(Statistic.ATK_POWER)
 		}
 
 		for (stat in Statistic.Values)
@@ -318,7 +312,7 @@ class StatisticsComponent : DataComponent()
 		variableMap.put(prefix + "hp", hp)
 		variableMap.put(prefix + "level", level.toFloat())
 
-		val attack = getStat(Statistic.ATK_POWER) * attackDefinition.damage
+		val attack = getStat(Statistic.ATK_POWER)
 		variableMap.put(prefix + "damage", attack)
 
 		for (stat in Statistic.Values)
@@ -357,7 +351,7 @@ class StatisticsComponent : DataComponent()
 	companion object
 	{
 		val defaultVariables: ObjectFloatMap<String> by lazy { writeDefaultVariables(ObjectFloatMap<String>()) }
-		fun writeDefaultVariables(variableMap: ObjectFloatMap<String>, prefixName: String? = null): ObjectFloatMap<String>
+		private fun writeDefaultVariables(variableMap: ObjectFloatMap<String>, prefixName: String? = null): ObjectFloatMap<String>
 		{
 			val prefix = if (prefixName != null) "$prefixName." else ""
 
@@ -427,26 +421,6 @@ class MessageData()
 	fun free() { if (obtained) { pool.free(this); obtained = false } }
 }
 
-class AttackDefinition : XmlDataClass()
-{
-	var damage: Float = 1f
-	var type: DamageType = DamageType.NONE
-	var range: Int = 1
-	var hitEffect: ParticleEffectDescription? = null
-	var flightEffect: ParticleEffectDescription? = null
-
-	//region generated
-	override fun load(xmlData: XmlData)
-	{
-		damage = xmlData.getFloat("Damage", 1f)
-		type = DamageType.valueOf(xmlData.get("Type", DamageType.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
-		range = xmlData.getInt("Range", 1)
-		hitEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("HitEffect"))
-		flightEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("FlightEffect"))
-	}
-	//endregion
-}
-
 class DifficultyRating : XmlDataClass()
 {
 	// Equations:
@@ -478,7 +452,7 @@ class DifficultyRating : XmlDataClass()
 	fun calculateHP(level: Int, statistics: FastEnumMap<Statistic, Float>): Float
 	{
 		val raw = calculateRaw(level)
-		val dr = 1f - (statistics.get(Statistic.DR) ?: 0f)
+		val dr = 1f - (statistics[Statistic.DR] ?: 0f)
 		val armour = calculateArmour(level)
 
 		return (dr * raw * raw * timeToKill) / (armour + raw)

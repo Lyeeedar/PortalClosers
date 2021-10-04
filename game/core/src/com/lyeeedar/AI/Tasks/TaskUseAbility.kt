@@ -2,6 +2,7 @@ package com.lyeeedar.AI.Tasks
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
@@ -39,17 +40,15 @@ class TaskUseAbility : AbstractTask()
 			val distract = stats.getStat(Statistic.DISTRACTION)
 			if (distract > 0f && Random.random(rng) < distract)
 			{
-				ability.mana /= 2f
-
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)
+
+				ability.cooldown = ability.data.cooldown / 2
 
 				stats.addMessage(Localisation.getText("distracted", "UI"), Colour.YELLOW, 0.4f)
 
 				return
 			}
-
-			stats.addMessage(ability.name, Colour.WHITE, 0.4f)
 		}
 
 		if (EventSystem.isEventRegistered(EventType.USE_ABILITY, e))
@@ -59,7 +58,7 @@ class TaskUseAbility : AbstractTask()
 
 		pos.facing = Direction.getCardinalDirection(tile, pos.position)
 
-		ability.mana = 0f
+		ability.cooldown = ability.data.cooldown
 		ability.justUsed = true
 
 		if (ability.remainingUsages > 0)
@@ -74,10 +73,10 @@ class TaskUseAbility : AbstractTask()
 		sequenceHolder.actionSequenceState.targets.add(tile)
 		sequenceHolder.actionSequenceState.facing = pos.facing
 
+		sequenceHolder.actionSequence.update(0f, sequenceHolder.actionSequenceState)
+
 		val abilityHolder = e.addOrGet(ComponentType.ActiveAbility) as ActiveAbilityComponent
 		abilityHolder.ability = ability
-
-		sequenceHolder.actionSequence.update(0f, sequenceHolder.actionSequenceState)
 	}
 
 	var obtained: Boolean = false

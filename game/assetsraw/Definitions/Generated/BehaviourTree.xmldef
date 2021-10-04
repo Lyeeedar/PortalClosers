@@ -4,15 +4,11 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="(UseAbility),Action(Attack,Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="(UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="(UseAbility),Action(Attack,Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState),Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
-	<Definition Name="Attack" Nullable="False" TextColour="19,214,214" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
-		<Const Name="classID">Attack</Const>
-		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
-	</Definition>
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="(UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState),Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Branch" Nullable="False" TextColour="238,94,94" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Branch</Const>
 		<Data Name="Branches" Keys="ConditionAndNode" meta:RefKey="Collection" />

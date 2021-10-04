@@ -7,14 +7,14 @@
 	<Definition Name="AbstractActionSequenceAction" Nullable="False" TextColour="204,204,0" meta:RefKey="StructDef">
 		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,TrackedFX)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,TrackedFX)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractDurationActionSequenceAction" Nullable="False" TextColour="142,204,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 		<Data Name="Duration" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractDurationActionSequenceActionDefs" Keys="(AddBuff),Meta(Repeat),Renderable(Anim,AttachFX,FlightFX,ReplaceSprite,ScreenShake,TrackedFX)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractOneShotActionSequenceAction" Nullable="False" TextColour="21,21,204" Extends="AbstractActionSequenceAction" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(OneShotFX)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractOneShotActionSequenceActionDefs" Keys="(Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(OneShotFX)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Anim" Nullable="False" TextColour="35,35,204" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Animation</Const>
 		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash" SkipIfDefault="False" meta:RefKey="Enum" />
@@ -72,6 +72,10 @@
 	</Definition>
 	<Definition Name="LockTargets" Nullable="False" TextColour="252,102,9" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
+	</Definition>
+	<Definition Name="MarkAndWait" Nullable="False" TextColour="199,18,117" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">MarkAndWaitForPlayer</Const>
+		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="Move" Nullable="False" TextColour="204,204,66" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">MoveSource</Const>

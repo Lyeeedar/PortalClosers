@@ -19,7 +19,6 @@ class TaskInterrupt : AbstractTask()
 		{
 			activeAbility.actionSequence.cancel(activeAbility.actionSequenceState)
 			e.removeComponent(ComponentType.ActionSequence)
-			e.removeComponent(ComponentType.ActiveAbility)
 
 			interrupted = true
 		}

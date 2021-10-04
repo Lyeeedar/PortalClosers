@@ -362,9 +362,6 @@ fun addAbilityToWorld(ability: Ability, world: World<Tile>, seed: Long)
 	sequenceHolder.actionSequenceState.targets.clear()
 	if (target != null) sequenceHolder.actionSequenceState.targets.add(target)
 
-	val abilityHolder = player.addOrGet(ComponentType.ActiveAbility) as ActiveAbilityComponent
-	abilityHolder.ability = ability
-
 	sequenceHolder.actionSequence.update(0f, sequenceHolder.actionSequenceState)
 }
 

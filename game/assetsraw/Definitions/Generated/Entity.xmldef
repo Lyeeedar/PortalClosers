@@ -27,13 +27,6 @@
 			<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
-	<Definition Name="AttackDefinition" Nullable="False" TextColour="48,204,48" meta:RefKey="StructDef">
-		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" Default="None" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="HitEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
-		<Data Name="FlightEffect" Keys="ParticleEffect,ParticleEffectTemplate" meta:RefKey="Reference" />
-	</Definition>
 	<Definition Name="BakedLight" Nullable="False" TextColour="204,204,31" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">BakedLight</Const>
 		<Data Name="Light" Keys="Light" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
@@ -56,7 +49,6 @@
 		<Const Name="classID">EventHandler</Const>
 		<Data Name="Handlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Actions-->
-			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Use_ability" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<!--Self events-->
@@ -115,14 +107,11 @@
 			<!--Buff-->
 			<Data Name="Haste" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Fleet_foot" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Dervish" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Negative-->
 			<Data Name="Root" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Fumble" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Distraction" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		</Data>
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
-		<Data Name="AttackDefinition" Keys="AttackDefinition" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="DifficultyRating" Keys="DifficultyRating" meta:RefKey="Reference" />
 		<Data Name="BloodColour" SkipIfDefault="false" Default="255,0,0" meta:RefKey="Colour" />
 	</Definition>
