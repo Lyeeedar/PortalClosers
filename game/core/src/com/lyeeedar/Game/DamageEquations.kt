@@ -102,7 +102,6 @@ class DamageEquations
 			}
 
 			defenderStats.damage(damage)
-			defender.hate()?.addDamageHate(attacker, defender, damage.damage)
 			defender.ai()?.activate(defender)
 
 			attackerStats.attackDamageDealt += damage.damage

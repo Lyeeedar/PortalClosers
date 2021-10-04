@@ -1,15 +1,15 @@
 package com.lyeeedar.Game
 
-import com.lyeeedar.ScreenEnum
+import com.lyeeedar.Screens.ScreenEnum
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
 
-fun save() {
+actual fun save() {
 
 }
 
-fun newGame() {
+actual fun newGame() {
 	Statics.settings = Settings()
 
 	Statics.game.switchScreen(ScreenEnum.WORLD)
@@ -17,7 +17,7 @@ fun newGame() {
 	Statics.analytics.tutorialBegin()
 }
 
-fun load(): Boolean {
+actual fun load(): Boolean {
 	return false
 }
 
@@ -29,7 +29,6 @@ fun World<Tile>.addSystems()
 	systems.add(StatisticsSystem(this))
 	systems.add(TileSystem(this))
 	systems.add(WaterSystem(this))
-	systems.add(HateSystem(this))
 	systems.add(EventSystem(this))
 	systems.add(AbilitySystem(this))
 

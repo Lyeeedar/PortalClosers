@@ -1,6 +1,6 @@
 package com.lyeeedar.Components
 
-enum class ComponentType private constructor(val constructor: ()->AbstractComponent)
+actual enum class ComponentType private constructor(val constructor: ()->AbstractComponent)
 {
 	AI({ AIComponent() }),
 	Ability({ AbilityComponent() }),
@@ -14,13 +14,11 @@ enum class ComponentType private constructor(val constructor: ()->AbstractCompon
 	DirectionalSprite({ DirectionalSpriteComponent() }),
 	Event({ EventComponent() }),
 	EventHandler({ EventHandlerComponent() }),
-	Hate({ HateComponent() }),
 	Light({ LightComponent() }),
 	LoadData({ LoadDataComponent() }),
 	MarkedForDeletion({ MarkedForDeletionComponent() }),
 	MetaRegion({ MetaRegionComponent() }),
 	Name({ NameComponent() }),
-	Pack({ PackComponent() }),
 	Position({ PositionComponent() }),
 	Renderable({ RenderableComponent() }),
 	Statistics({ StatisticsComponent() }),
@@ -48,13 +46,11 @@ inline fun Entity.dialogue(): DialogueComponent? = this.components[ComponentType
 inline fun Entity.directionalSprite(): DirectionalSpriteComponent? = this.components[ComponentType.DirectionalSprite.ordinal] as DirectionalSpriteComponent?
 inline fun Entity.event(): EventComponent? = this.components[ComponentType.Event.ordinal] as EventComponent?
 inline fun Entity.eventHandler(): EventHandlerComponent? = this.components[ComponentType.EventHandler.ordinal] as EventHandlerComponent?
-inline fun Entity.hate(): HateComponent? = this.components[ComponentType.Hate.ordinal] as HateComponent?
 inline fun Entity.light(): LightComponent? = this.components[ComponentType.Light.ordinal] as LightComponent?
 inline fun Entity.loadData(): LoadDataComponent? = this.components[ComponentType.LoadData.ordinal] as LoadDataComponent?
 inline fun Entity.markedForDeletion(): MarkedForDeletionComponent? = this.components[ComponentType.MarkedForDeletion.ordinal] as MarkedForDeletionComponent?
 inline fun Entity.metaRegion(): MetaRegionComponent? = this.components[ComponentType.MetaRegion.ordinal] as MetaRegionComponent?
 inline fun Entity.name(): NameComponent? = this.components[ComponentType.Name.ordinal] as NameComponent?
-inline fun Entity.pack(): PackComponent? = this.components[ComponentType.Pack.ordinal] as PackComponent?
 inline fun Entity.position(): PositionComponent? = this.components[ComponentType.Position.ordinal] as PositionComponent?
 inline fun Entity.renderable(): RenderableComponent? = this.components[ComponentType.Renderable.ordinal] as RenderableComponent?
 inline fun Entity.statistics(): StatisticsComponent? = this.components[ComponentType.Statistics.ordinal] as StatisticsComponent?

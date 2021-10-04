@@ -35,17 +35,8 @@ class WorldScreen : AbstractScreen()
 		world.addSystems()
 
 		val topBarTable = Table()
-		val packTable = Table()
 
-		val pack = player.pack()!!
-		for (ent in pack.pack.mobs)
-		{
-			val widget = EntityWidget(ent, world)
-			packTable.add(widget).size(48f).pad(5f)
-			packTable.row()
-		}
 		topBarTable.add(Table()).grow()
-		topBarTable.add(packTable).width(48f)
 		mainTable.add(topBarTable).growX()
 		mainTable.row()
 

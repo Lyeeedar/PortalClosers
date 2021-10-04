@@ -1,10 +1,9 @@
-package com.lyeeedar
+package com.lyeeedar.Screens
 
-import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Statics
 import java.util.*
 
-enum class ScreenEnum
+actual enum class ScreenEnum
 {
 	WORLD,
 	PARTICLEEDITOR,
@@ -13,7 +12,7 @@ enum class ScreenEnum
 	INVALID
 }
 
-fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
+actual fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 {
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
@@ -27,7 +26,7 @@ fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 	return screens
 }
 
-fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
+actual fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 {
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 

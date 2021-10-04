@@ -185,11 +185,6 @@ class Pack
 			{
 				pack.mobs.add(mob)
 			}
-
-			for (entity in pack.entities)
-			{
-				entity.get()?.setPack(pack)
-			}
 		}
 	}
 }
@@ -205,12 +200,10 @@ class PackData
 
 		val pack = Pack()
 		pack.leader = leader.create(difficulty, world, seedRng.nextLong()).getRef()
-		pack.leader.entity.setPack(pack)
 
 		for (mobData in mobs)
 		{
 			val mob = mobData.create(difficulty, world, seedRng.nextLong()).getRef()
-			mob.entity.setPack(pack)
 			pack.mobs.add(mob)
 
 			mob.entity.ai()!!.state.setData("leader", 0, pack.leader)

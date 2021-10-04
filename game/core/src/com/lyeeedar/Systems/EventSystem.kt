@@ -23,7 +23,6 @@ enum class EventType
 	CRIT,
 	BLOCK,
 	KILL,
-	PACK_KILL,
 	AGRO_CHANGED,
 
 	// General events

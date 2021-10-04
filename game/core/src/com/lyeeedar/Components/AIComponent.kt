@@ -50,15 +50,6 @@ class AIComponent : DataComponent()
 	{
 		if (!isActive)
 		{
-			val pack = entity.pack()
-			if (pack != null)
-			{
-				for (entity in pack.pack.entities)
-				{
-					entity.get()?.ai()?.isActive = true
-				}
-			}
-
 			isActive = true
 		}
 	}

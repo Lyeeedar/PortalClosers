@@ -1,7 +1,7 @@
 package com.lyeeedar.Util
 
 
-class XmlDataClassLoader
+actual class XmlDataClassLoader
 {
 	companion object
 	{
@@ -9,9 +9,7 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
-				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Knockback" -> com.lyeeedar.ActionSequence.Actions.KnockbackAction()
-				"Mana" -> com.lyeeedar.ActionSequence.Actions.ManaAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
 				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()
@@ -43,9 +41,7 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
-				"GenerateHate" -> com.lyeeedar.ActionSequence.Actions.GenerateHateAction()
 				"Knockback" -> com.lyeeedar.ActionSequence.Actions.KnockbackAction()
-				"Mana" -> com.lyeeedar.ActionSequence.Actions.ManaAction()
 				"MoveSource" -> com.lyeeedar.ActionSequence.Actions.MoveSourceAction()
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"SelectEntities" -> com.lyeeedar.ActionSequence.Actions.SelectEntitiesAction()
@@ -84,7 +80,6 @@ class XmlDataClassLoader
 		{
 			return when (classID)
 			{
-				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"UseAbility" -> com.lyeeedar.AI.BehaviourTree.Actions.UseAbilityBehaviourAction()
@@ -116,7 +111,6 @@ class XmlDataClassLoader
 			{
 				"Attack" -> com.lyeeedar.AI.BehaviourTree.Actions.AttackBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
-				"GetAgro" -> com.lyeeedar.AI.BehaviourTree.Actions.GetAgroBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"ProcessInput" -> com.lyeeedar.AI.BehaviourTree.Actions.ProcessInputBehaviourAction()
