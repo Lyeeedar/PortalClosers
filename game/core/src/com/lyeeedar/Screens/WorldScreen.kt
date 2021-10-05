@@ -28,14 +28,17 @@ class WorldScreen : AbstractScreen()
 		world = MapCreator.generateWorld("Maps/test", player, 1, 2)
 		world.addSystems()
 
-		val rat = EntityLoader.load("Entities/rat")
-		rat.statistics()!!.calculateStatistics(1)
-		rat.statistics()!!.faction = "enemy"
-		rat.ai()!!.state.set(rat.getRef(), world, 0)
-		rat.addComponent(ComponentType.Task)
-		rat.position()!!.position = world.grid.random()!!
-		rat.position()!!.addToTile(rat)
-		world.addEntity(rat)
+		for (i in 0 until 5)
+		{
+			val rat = EntityLoader.load("Entities/rat")
+			rat.statistics()!!.calculateStatistics(1)
+			rat.statistics()!!.faction = "enemy"
+			rat.ai()!!.state.set(rat.getRef(), world, 0)
+			rat.addComponent(ComponentType.Task)
+			rat.position()!!.position = world.grid.random()!!
+			rat.position()!!.addToTile(rat)
+			world.addEntity(rat)
+		}
 
 		val topBarTable = Table()
 

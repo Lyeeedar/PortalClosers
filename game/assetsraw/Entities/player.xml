@@ -36,13 +36,6 @@
 				<Armour>100</Armour>
 			</BaseStatistics>
 			<Faction>player</Faction>
-			<AttackDefinition meta:RefKey="AttackDefinition">
-				<Type>Ice</Type>
-				<Range>3</Range>
-				<FlightEffect meta:RefKey="ParticleEffect">
-					<Name>Ranged/Bolt</Name>
-				</FlightEffect>
-			</AttackDefinition>
 			<BloodColour>255,0,0,255</BloodColour>
 		</Statistics>
 		<LightComponent>
@@ -53,5 +46,32 @@
 				<Range>3</Range>
 			</Light>
 		</LightComponent>
+		<Ability>
+			<classID>Ability</classID>
+			<Abilities>
+				<AbilityData>
+					<ActionSequence meta:RefKey="ActionSequence">
+						<Actions>
+							<Timeline>
+								<OneShotFX>
+									<classID>SpawnOneShotParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>EnemyAttacks/slash</Name>
+									</Particle>
+									<SpawnBehaviour>Immediate</SpawnBehaviour>
+								</OneShotFX>
+								<Damage>
+									<Time>0.115900554</Time>
+									<classID>Damage</classID>
+									<Damage>300</Damage>
+									<Type>None</Type>
+								</Damage>
+							</Timeline>
+						</Actions>
+					</ActionSequence>
+					<TargetType>Tile</TargetType>
+				</AbilityData>
+			</Abilities>
+		</Ability>
 	</Components>
 </Entity>

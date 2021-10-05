@@ -44,7 +44,7 @@
 									<SpawnBehaviour>Immediate</SpawnBehaviour>
 								</OneShotFX>
 								<Damage>
-									<Time>0.29695216</Time>
+									<Time>0.19387548</Time>
 									<classID>Damage</classID>
 									<Damage>1</Damage>
 									<Type>None</Type>

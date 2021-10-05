@@ -14,9 +14,7 @@ import com.lyeeedar.Game.Tile
 import com.lyeeedar.Pathfinding.PathfindCache
 import com.lyeeedar.Pathfinding.Pathfinder
 import com.lyeeedar.Systems.AbstractTile
-import com.lyeeedar.Util.Array2D
-import com.lyeeedar.Util.DataClass
-import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 
 @DataClass(category = "Action")
@@ -55,7 +53,10 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 		// if going away, just go directly away
 		if (!towards)
 		{
-			val dir = Direction.getCardinalDirection(position, target)
+			val dir = if (Statics.supportsDiagonals)
+				Direction.getDirection(target, position)
+			else
+				Direction.getCardinalDirection(position, target)
 
 			val nextTile = state.world.grid.tryGet(position, dir, null )
 
@@ -100,7 +101,10 @@ class MoveToBehaviourAction : AbstractBehaviourAction()
 				return EvaluationState.FAILED
 			}
 
-			val dir = Direction.getCardinalDirection(path[1], path[0])
+			val dir = if (Statics.supportsDiagonals)
+				Direction.getDirection(path[0], path[1])
+			else
+				Direction.getCardinalDirection(path[1], path[0])
 
 			if (dir == Direction.CENTER )
 			{

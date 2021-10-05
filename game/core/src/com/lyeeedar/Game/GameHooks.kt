@@ -15,6 +15,8 @@ actual fun newGame() {
 	Statics.game.switchScreen(ScreenEnum.WORLD)
 
 	Statics.analytics.tutorialBegin()
+
+	//Statics.supportsDiagonals = true
 }
 
 actual fun load(): Boolean {

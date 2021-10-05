@@ -77,7 +77,14 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				moveDir = Direction.getCardinalDirection(tile, pos.position)
+				if (Statics.supportsDiagonals)
+				{
+					moveDir = Direction.getDirection(pos.position, tile)
+				}
+				else
+				{
+					moveDir = Direction.getCardinalDirection(tile, pos.position)
+				}
 			}
 		}
 		else
@@ -117,14 +124,60 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
-				if (targetTile != null && (pos.isValidTile(targetTile, entity) || targetTile.contents[pos.slot]?.get()?.isAllies(entity) == true))
+				val attack = entity.ability()!!.abilities[0]
+				potentialTargets.clear()
+
+				if (attack.data.range.y == 1)
 				{
-					task.tasks.add(TaskMove.obtain().set(moveDir))
+					val tile = state.world.grid.tryGet(pos.position, moveDir, null) as? Tile ?: return EvaluationState.FAILED
+					potentialTargets.add(tile)
 				}
 				else
 				{
-					return EvaluationState.FAILED
+					for (point in Direction.buildCone(moveDir, pos.position, attack.data.range.y))
+					{
+						val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
+						if (tile.skipRender || tile.skipRenderEntities) continue
+						potentialTargets.add(tile)
+					}
+				}
+
+				var enemyTile: Tile? = null
+				var enemyTileDist: Int = Int.MAX_VALUE
+				outer@for (tile in potentialTargets)
+				{
+					for (slot in SpaceSlot.EntityValues)
+					{
+						val other = tile.contents[slot]?.get() ?: continue
+						if (other.isEnemies(entity))
+						{
+							val dist = pos.position.dist(tile)
+							if (dist < enemyTileDist)
+							{
+								enemyTile = tile
+								enemyTileDist = dist
+							}
+
+							break
+						}
+					}
+				}
+
+				if (enemyTile != null)
+				{
+					task.tasks.add(TaskUseAbility.obtain().set(enemyTile, attack))
+				}
+				else
+				{
+					val targetTile = state.world.grid.tryGet(pos.position, moveDir, null)
+					if (targetTile != null && (pos.isValidTile(targetTile, entity) || targetTile.contents[pos.slot]?.get()?.isAllies(entity) == true))
+					{
+						task.tasks.add(TaskMove.obtain().set(moveDir))
+					}
+					else
+					{
+						return EvaluationState.FAILED
+					}
 				}
 			}
 		}
