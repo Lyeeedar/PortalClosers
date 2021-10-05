@@ -168,12 +168,13 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 		return true
 	}
 
-	override fun scrolled(amount: Int): Boolean
+	override fun scrolled(amountX: Float, amountY: Float): Boolean
 	{
+		val amount = max(amountX, amountY)
 		val world = world
 		if (world != null) world.tileSize -= amount
 
-		return super.scrolled(amount)
+		return super.scrolled(amountX, amountY)
 	}
 
 	override fun doRender(delta: Float)
