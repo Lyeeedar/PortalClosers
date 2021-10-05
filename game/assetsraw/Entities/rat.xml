@@ -36,7 +36,7 @@
 									<classID>MarkAndWaitForPlayer</classID>
 								</MarkAndWait>
 								<OneShotFX>
-									<Time>0.028688574</Time>
+									<Time>0.023116862</Time>
 									<classID>SpawnOneShotParticle</classID>
 									<Particle meta:RefKey="ParticleEffect">
 										<Name>EnemyAttacks/Bite</Name>
@@ -44,7 +44,7 @@
 									<SpawnBehaviour>Immediate</SpawnBehaviour>
 								</OneShotFX>
 								<Damage>
-									<Time>0.13258663</Time>
+									<Time>0.29695216</Time>
 									<classID>Damage</classID>
 									<Damage>1</Damage>
 									<Type>None</Type>

@@ -22,11 +22,6 @@ class BuffAction : AbstractDurationActionSequenceAction()
 	var isBuff: Boolean = true
 	var removeOnExit: Boolean = true
 
-	override fun onTurn(state: ActionSequenceState): ActionState
-	{
-		return ActionState.Completed
-	}
-
 	override fun enter(state: ActionSequenceState)
 	{
 		val createdBuffs = Array<Pair<EntityReference, Buff>>()
@@ -77,7 +72,7 @@ class BuffAction : AbstractDurationActionSequenceAction()
 		}
 	}
 
-	override fun exit(state: ActionSequenceState): ActionState
+	override fun exit(state: ActionSequenceState)
 	{
 		if (removeOnExit)
 		{
@@ -90,8 +85,6 @@ class BuffAction : AbstractDurationActionSequenceAction()
 				entity.statistics()!!.buffs.removeValue(buff.second, true)
 			}
 		}
-
-		return ActionState.Completed
 	}
 
 	//region generated

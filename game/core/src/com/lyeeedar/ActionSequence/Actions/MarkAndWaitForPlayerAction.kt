@@ -12,10 +12,10 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 	val key = "waitForPlayer"
 	var turns: Int = 1
 
-	override fun onTurn(state: ActionSequenceState): ActionState
+	override fun isBlocked(state: ActionSequenceState): Boolean
 	{
-		val counter = state.data[key] as Int
-		return if (counter <= 0) ActionState.Completed else ActionState.Blocked
+		val counter = state.data[key] as Int? ?: 0
+		return counter > 0
 	}
 
 	override fun enter(state: ActionSequenceState)
@@ -30,7 +30,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		}
 	}
 
-	override fun exit(state: ActionSequenceState): ActionState
+	override fun exit(state: ActionSequenceState)
 	{
 		val counter = state.data[key] as Int
 
@@ -44,11 +44,6 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			}
 
 			state.data.remove(key)
-			return ActionState.Completed
-		}
-		else
-		{
-			return ActionState.Blocked
 		}
 	}
 
