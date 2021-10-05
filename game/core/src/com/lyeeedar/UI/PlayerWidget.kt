@@ -27,17 +27,6 @@ class PlayerWidget(val world: World<*>) : Table()
 		val hp = HealthBarWidget(player)
 		add(hp).growX().height(10f).pad(3f)
 		row()
-
-		val ability = player.ability()!!
-
-		val abilitiesTable = Table()
-		addAbility(ability.ability1, abilitiesTable)
-		addAbility(ability.ability2, abilitiesTable)
-		addAbility(ability.ability3, abilitiesTable)
-		addAbility(ability.ability4, abilitiesTable)
-		addAbility(ability.ultimate, abilitiesTable)
-
-		add(abilitiesTable).growX()
 	}
 
 	private fun addAbility(ability: Ability?, table: Table)

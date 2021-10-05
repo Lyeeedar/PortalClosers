@@ -21,10 +21,6 @@
 				<classID>UseAbility</classID>
 				<Key>enemyPos</Key>
 			</UseAbility>
-			<Attack>
-				<classID>Attack</classID>
-				<Key>enemyPos</Key>
-			</Attack>
 			<MoveTo>
 				<classID>MoveTo</classID>
 				<Dst>1</Dst>

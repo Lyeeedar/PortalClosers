@@ -21,7 +21,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 	val padding = 2
 
-	val widget = SpriteWidget(ability.data.icon!!.copy(), 32f, 32f)
+	val widget = SpriteWidget(AssetManager.loadSprite("white"), 32f, 32f)
 
 	init
 	{
@@ -33,7 +33,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 		val infoButton = Button(Statics.skin, "info")
 		infoButton.setSize(16f, 16f)
-		infoButton.addTapToolTip("${ability.name}\n${ability.description}")
+		//infoButton.addTapToolTip("${ability.name}\n${ability.description}")
 		val infoButtonTable = Table()
 		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)
 

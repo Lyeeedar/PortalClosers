@@ -147,13 +147,6 @@ class EntityWidget(var entity: EntityReference, val world: World<*>) : Widget()
 					batch.setColor(whiteColour)
 					batch.draw(background, abx, aby-i*spacing, size, size)
 
-					val icon = ab.data.icon
-					if (icon != null)
-					{
-						batch.setColor(icon.colour)
-						batch.draw(icon.currentTexture, abx, aby - i * spacing, size, size)
-					}
-
 					val abilityAvailable = ab.cooldown == 0 && ab.remainingUsages != 0
 
 					if (abilityAvailable)

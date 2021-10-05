@@ -1,13 +1,24 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClassLoader
 
 @DataFile(colour = "255,179,0", icon = "Sprites/Icons/Firebolt.png")
 class AbilityOrb : XmlDataClass()
 {
+	@DataNeedsLocalisation(file = "Ability")
+	lateinit var name: String
+
+	@DataNeedsLocalisation(file = "Ability")
+	lateinit var description: String
+
+	@DataLayeredSprite
+	lateinit var icon: Sprite
+
 	@DataXml(actualClass = "AbilityData")
 	lateinit var abilityTemplate: XmlData
 
@@ -46,6 +57,9 @@ class AbilityOrb : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
+		name = xmlData.get("Name")
+		description = xmlData.get("Description")
+		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 		abilityTemplate = xmlData.getChildByName("AbilityTemplate")!!
 		val modifiersEl = xmlData.getChildByName("Modifiers")
 		if (modifiersEl != null)

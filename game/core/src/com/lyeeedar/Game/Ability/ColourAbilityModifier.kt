@@ -43,7 +43,7 @@ class ColourAbilityModifier : AbstractAbilityModifier<ColourKeyframeData>()
 		}
 
 		tempCol.lerp(Colour.WHITE, 0.7f)
-		ability.icon.colour = ability.icon.colour.copy().mul(tempCol)
+		//ability.icon.colour = ability.icon.colour.copy().mul(tempCol)
 	}
 
 	//region generated

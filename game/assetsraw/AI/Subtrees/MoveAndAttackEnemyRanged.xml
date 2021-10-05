@@ -60,17 +60,6 @@
 				<Node meta:RefKey="RunAll">14881f95-65ed-4bce-9467-9091cbf2f0f4</Node>
 			</Node>
 		</RunUntilNotFailed>
-		<RunAll meta:X="1605" meta:Y="345" GUID="28255bb3-f564-4971-940b-7a7a2a48a4eb">
-			<SetValue>
-				<classID>SetValue</classID>
-				<Key>attackCount</Key>
-				<Value>attackCount+1</Value>
-			</SetValue>
-			<Attack>
-				<classID>Attack</classID>
-				<Key>enemyPos</Key>
-			</Attack>
-		</RunAll>
 		<RunAll meta:X="1605" meta:Y="495" GUID="14881f95-65ed-4bce-9467-9091cbf2f0f4">
 			<MoveTo>
 				<classID>MoveTo</classID>

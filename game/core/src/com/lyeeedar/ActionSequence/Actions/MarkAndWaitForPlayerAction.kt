@@ -1,6 +1,7 @@
 package com.lyeeedar.ActionSequence.Actions
 
 import com.lyeeedar.ActionSequence.ActionSequenceState
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
@@ -22,6 +23,11 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		state.data[key] = turns
 
 		// also mark the tiles
+		for (point in state.targets)
+		{
+			val tile = state.world.grid[point] ?: continue
+			tile.tileCol = Colour.RED
+		}
 	}
 
 	override fun exit(state: ActionSequenceState): ActionState
@@ -31,6 +37,11 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		if (counter <= 0)
 		{
 			// remove tile mark
+			for (point in state.targets)
+			{
+				val tile = state.world.grid[point] ?: continue
+				tile.tileCol = Colour.WHITE
+			}
 
 			state.data.remove(key)
 			return ActionState.Completed

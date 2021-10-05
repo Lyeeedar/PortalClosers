@@ -30,6 +30,6 @@ class MapGenerationPreviewScreen : AbstractWorldPreviewScreen("map")
 		val player = EntityLoader.load("Entities/player")
 		player.statistics()!!.calculateStatistics(1)
 
-		return MapCreator.generateWorld(xmlData, "Factions/Rats", player, 1, seed)
+		return MapCreator.generateWorld(xmlData, player, 1, seed)
 	}
 }

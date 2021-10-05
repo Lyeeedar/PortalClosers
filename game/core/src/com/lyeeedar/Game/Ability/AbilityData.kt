@@ -20,15 +20,6 @@ class AbilityData : XmlDataClass()
 		SELF
 	}
 
-	@DataNeedsLocalisation(file = "Ability")
-	lateinit var name: String
-
-	@DataNeedsLocalisation(file = "Ability")
-	lateinit var description: String
-
-	@DataLayeredSprite
-	lateinit var icon: Sprite
-
 	lateinit var actionSequence: ActionSequence
 
 	var cooldown: Int = 0
@@ -59,9 +50,6 @@ class AbilityData : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		name = xmlData.get("Name")
-		description = xmlData.get("Description")
-		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 		val actionSequenceEl = xmlData.getChildByName("ActionSequence")!!
 		actionSequence = ActionSequence.load(actionSequenceEl)
 		cooldown = xmlData.getInt("Cooldown", 0)

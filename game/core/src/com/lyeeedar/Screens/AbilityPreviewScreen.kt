@@ -181,17 +181,17 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 
 		if (ability != null)
 		{
-			font.draw(stage.batch, "Name: ${ability!!.name}", 20f, Statics.resolution.y - y)
+			//font.draw(stage.batch, "Name: ${ability!!.name}", 20f, Statics.resolution.y - y)
 			y += 20f
 
-			font.draw(stage.batch, "Description: ${ability!!.description}", 20f, Statics.resolution.y - y, stage.width-40f, Align.left, true)
+			//font.draw(stage.batch, "Description: ${ability!!.description}", 20f, Statics.resolution.y - y, stage.width-40f, Align.left, true)
 			y += 20f
 
-			val icon = ability!!.data.icon
-			if (icon != null)
-			{
-				stage.batch.draw(icon.currentTexture, 0f, 0f, 32f, 32f)
-			}
+			//val icon = ability!!.data.icon
+			//if (icon != null)
+			//{
+			//	stage.batch.draw(icon.currentTexture, 0f, 0f, 32f, 32f)
+			//}
 		}
 
 		stage.batch.end()

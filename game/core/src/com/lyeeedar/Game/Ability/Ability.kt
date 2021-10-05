@@ -20,12 +20,6 @@ class Ability(val data: AbilityData)
 
 	var justUsed = false
 
-	val name: String
-		get() = transform(Localisation.getText(data.name, "Ability"), data.nameTransforms)
-
-	val description: String
-		get() = transform(Localisation.getText(data.description, "Ability"), data.descriptionTransforms)
-
 	var isSelected = false
 
 	fun transform(initial: String, transforms: Array<(String)->String>): String

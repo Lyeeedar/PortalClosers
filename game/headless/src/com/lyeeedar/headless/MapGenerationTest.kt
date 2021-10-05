@@ -76,14 +76,14 @@ class MapGenerationTest
 			val player = EntityLoader.load("Entities/player")
 			player.statistics()!!.calculateStatistics(1)
 
-			val world = MapCreator.generateWorld(file, "Factions/Rats", player, 1, seed)
+			val world = MapCreator.generateWorld(file, player, 1, seed)
 
 			for (n in 0 until numIterations)
 			{
 				val player2 = EntityLoader.load("Entities/player")
 				player2.statistics()!!.calculateStatistics(1)
 
-				val world2 = MapCreator.generateWorld(file, "Factions/Rats", player2, 1, seed)
+				val world2 = MapCreator.generateWorld(file, player2, 1, seed)
 
 				for (x in 0 until world.grid.width)
 				{

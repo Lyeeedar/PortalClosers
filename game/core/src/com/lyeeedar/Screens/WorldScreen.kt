@@ -12,6 +12,7 @@ import com.lyeeedar.UI.EntityWidget
 import com.lyeeedar.UI.PlayerWidget
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.random
 
 class WorldScreen : AbstractScreen()
 {
@@ -23,16 +24,18 @@ class WorldScreen : AbstractScreen()
 	{
 		val player = EntityLoader.load("Entities/player")
 		player.statistics()!!.calculateStatistics(1)
-		val ability = player.addOrGet(ComponentType.Ability) as AbilityComponent
-		val abilityOrb = AbilityOrb()
-		abilityOrb.load(getXml("Abilities/Fire/Firebolt"))
-		ability.ability1 = Ability(abilityOrb.getAbility(1))
-		ability.ability2 = Ability(abilityOrb.getAbility(2))
-		ability.ability3 = Ability(abilityOrb.getAbility(3))
-		ability.ability4 = Ability(abilityOrb.getAbility(4))
 
-		world = MapCreator.generateWorld("Maps/test", "Factions/Rats", player, 1, 2)
+		world = MapCreator.generateWorld("Maps/test", player, 1, 2)
 		world.addSystems()
+
+		val rat = EntityLoader.load("Entities/rat")
+		rat.statistics()!!.calculateStatistics(1)
+		rat.statistics()!!.faction = "enemy"
+		rat.ai()!!.state.set(rat.getRef(), world, 0)
+		rat.addComponent(ComponentType.Task)
+		rat.position()!!.position = world.grid.random()!!
+		rat.position()!!.addToTile(rat)
+		world.addEntity(rat)
 
 		val topBarTable = Table()
 

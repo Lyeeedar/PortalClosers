@@ -1,0 +1,60 @@
+<Entity xmlns:meta="Editor">
+	<Components>
+		<Position>
+			<classID>Position</classID>
+			<Slot>Entity</Slot>
+		</Position>
+		<Statistics>
+			<classID>Statistics</classID>
+			<BaseStatistics />
+			<DifficultyRating meta:RefKey="DifficultyRating">
+				<TimeToKill>15</TimeToKill>
+				<ArmourFactor>0.3</ArmourFactor>
+				<Damage>0.9</Damage>
+			</DifficultyRating>
+			<BloodColour>255,0,0,255</BloodColour>
+		</Statistics>
+		<AI>
+			<classID>AI</classID>
+			<AiPath>AI/MeleeAI</AiPath>
+		</AI>
+		<RenderableComponent>
+			<classID>Renderable</classID>
+			<Renderable meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/rat</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Renderable>
+		</RenderableComponent>
+		<Ability>
+			<classID>Ability</classID>
+			<Abilities>
+				<AbilityData>
+					<ActionSequence meta:RefKey="ActionSequence">
+						<Actions>
+							<Timeline>
+								<MarkAndWait>
+									<classID>MarkAndWaitForPlayer</classID>
+								</MarkAndWait>
+								<OneShotFX>
+									<Time>0.028688574</Time>
+									<classID>SpawnOneShotParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>EnemyAttacks/Bite</Name>
+									</Particle>
+									<SpawnBehaviour>Immediate</SpawnBehaviour>
+								</OneShotFX>
+								<Damage>
+									<Time>0.13258663</Time>
+									<classID>Damage</classID>
+									<Damage>1</Damage>
+									<Type>None</Type>
+								</Damage>
+							</Timeline>
+						</Actions>
+					</ActionSequence>
+					<TargetType>Target_enemy</TargetType>
+				</AbilityData>
+			</Abilities>
+		</Ability>
+	</Components>
+</Entity>

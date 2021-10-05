@@ -42,82 +42,38 @@ class MapCreator
 			return set.filter { it.contents[slot] == null }.sorted().toGdxArray()
 		}
 
-		private fun processSymbol(symbol: Symbol, tile: Tile, faction: Faction, level: Int, world: World<*>, rng: LightRNG, deferredActions: Array<()->Unit>)
+		private fun processSymbol(symbol: Symbol, tile: Tile, level: Int, world: World<*>, rng: LightRNG, deferredActions: Array<()->Unit>)
 		{
 			for (slot in SpaceSlot.Values)
 			{
 				val entityData = symbol.contents[slot] ?: continue
-				val entity = entityData.create(level, world, rng.nextLong())
+				val entity = entityData.create()
 
 				entity.addToTile(tile, slot)
 
 				world.addEntity(entity)
 			}
-
-			val enemyDesc = symbol.enemyDescription
-			if (enemyDesc != null)
-			{
-				val faction = if (enemyDesc.faction != null) Faction.load(enemyDesc.faction!!) else faction
-
-				val sourcePool = if (enemyDesc.isBoss) faction.bosses else faction.mobs
-
-				val entityData = sourcePool.random(rng)
-				val entity = entityData.entity.create(level+(enemyDesc.difficulty-1), world, rng.nextLong())
-
-				entity.addToTile(tile)
-
-				world.addEntity(entity)
-			}
-
-			val packDesc = symbol.packDescription
-			if (packDesc != null)
-			{
-				val faction = if (packDesc.faction != null) Faction.load(packDesc.faction!!) else faction
-				val pack = faction.getPack(rng, rng.nextInt(packDesc.size.x, packDesc.size.y+1), packDesc.isBoss).create(level+(packDesc.difficulty-1), world, rng.nextLong())
-
-				val leader = pack.leader.get()!!
-				leader.addToTile(tile)
-				world.addEntity(leader)
-
-				deferredActions.add {
-					for (mob in pack.mobs)
-					{
-						val mob = mob.get()!!
-
-						val tiles = floodFill(tile, 4, world, mob.position()!!.slot)
-
-						if (tiles.size > 0)
-						{
-							val tile = tiles.random(rng)
-
-							mob.addToTile(tile)
-							world.addEntity(mob)
-						}
-					}
-				}
-			}
 		}
 
-		fun generateWorld(path: String, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+		fun generateWorld(path: String, player: Entity, level: Int, seed: Long): World<Tile>
 		{
 			val xml = getXml(path)
-			return generateWorld(xml, faction, player, level, seed)
+			return generateWorld(xml, player, level, seed)
 		}
 
-		fun generateWorld(xml: XmlData, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+		fun generateWorld(xml: XmlData, player: Entity, level: Int, seed: Long): World<Tile>
 		{
 			val generator = MapGenerator()
 			generator.load(xml)
 
 			val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
 
-			return generateWorld(symbolGrid, generator.namedAreas, faction, player, level, seed)
+			return generateWorld(symbolGrid, generator.namedAreas, player, level, seed)
 		}
 
-		fun generateWorld(symbolGrid: Array2D<Symbol>, namedAreas: ObjectMap<String, Array<Area>>, faction: String, player: Entity, level: Int, seed: Long): World<Tile>
+		fun generateWorld(symbolGrid: Array2D<Symbol>, namedAreas: ObjectMap<String, Array<Area>>, player: Entity, level: Int, seed: Long): World<Tile>
 		{
 			val rng = Random.obtainTS(seed)
-			val faction = Faction.load(faction)
 
 			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 			val world = World(map)
@@ -147,7 +103,7 @@ class MapCreator
 					val symbol = symbolGrid[x, y]
 					val tile = map[x, y]
 
-					processSymbol(symbol, tile, faction, level, world, rng, deferredActions)
+					processSymbol(symbol, tile, level, world, rng, deferredActions)
 				}
 			}
 			for (action in deferredActions)
@@ -167,24 +123,6 @@ class MapCreator
 
 			world.player = player
 			world.addEntity(player)
-
-			val saurena = EntityLoader.load("Entities/Saurena")
-			saurena.addToTile(startRoomPoints.removeRandom(rng))
-			saurena.ability()?.createAbilities(1)
-			saurena.statistics()!!.calculateStatistics(level)
-			saurena.ai()!!.state.set(saurena.getRef(), world, 1)
-			saurena.ai()!!.state.setData("leader", 0, player.getRef())
-			world.addEntity(saurena)
-
-			val julianna = EntityLoader.load("Entities/Julianna")
-			julianna.addToTile(startRoomPoints.removeRandom(rng))
-			julianna.ability()?.createAbilities(1)
-			julianna.statistics()!!.calculateStatistics(level)
-			julianna.ai()!!.state.set(julianna.getRef(), world, 1)
-			julianna.ai()!!.state.setData("leader", 0, player.getRef())
-			world.addEntity(julianna)
-
-			Pack.createFrom(player.getRef(), arrayOf(saurena.getRef(), julianna.getRef()))
 
 			rng.freeTS()
 
