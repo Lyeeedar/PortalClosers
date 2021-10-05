@@ -7,7 +7,7 @@
 	</Icon>
 	<Statistics />
 	<EventHandlers>
-		<Attack>
+		<Use_Ability>
 			<EventAndCondition>
 				<Condition>1</Condition>
 				<Sequence meta:RefKey="ActionSequence">
@@ -32,7 +32,7 @@
 					</Actions>
 				</Sequence>
 			</EventAndCondition>
-		</Attack>
+		</Use_Ability>
 		<Move>
 			<EventAndCondition>
 				<Condition>1</Condition>
