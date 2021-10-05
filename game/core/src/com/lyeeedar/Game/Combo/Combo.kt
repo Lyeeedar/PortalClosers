@@ -2,7 +2,10 @@ package com.lyeeedar.Game.Combo
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.ActionSequence.ActionSequence
+import com.lyeeedar.ActionSequence.Actions.BlockTurnAction
 import com.lyeeedar.ActionSequence.Actions.DamageAction
+import com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction
 import com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
@@ -95,7 +98,22 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 
 	val next: Array<ComboStep> = Array<ComboStep>()
 
-	abstract fun getAsAbility(): Ability
+	@Transient
+	var actual: Ability? = null
+
+	fun getAsAbility(): Ability
+	{
+		if (actual == null)
+		{
+			val data = getAbilityData()
+			data.cooldown = cooldown
+			actual = Ability(data)
+		}
+
+		return actual!!
+	}
+
+	abstract fun getAbilityData(): AbilityData
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -130,6 +148,8 @@ class AbilityComboStep : AbstractComboStep()
 {
 	lateinit var ability: AbilityData
 
+	override fun getAbilityData(): AbilityData = ability
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
@@ -152,6 +172,23 @@ class MeleeAttackComboStep : AbstractComboStep()
 {
 	lateinit var effect: SpawnOneShotParticleAction
 	lateinit var damage: DamageAction
+
+	override fun getAbilityData(): AbilityData
+	{
+		val data = AbilityData()
+		data.targetType = AbilityData.TargetType.SELF
+		data.actionSequence = ActionSequence(XmlData())
+
+		effect.time = 0.01f
+		damage.time = 0.01f + effect.particle.getParticleEffect().blockinglifetime * 0.7f
+
+		data.actionSequence.rawActions.add(MarkAndWaitForPlayerAction())
+		data.actionSequence.rawActions.add(effect)
+		data.actionSequence.rawActions.add(damage)
+		data.actionSequence.afterLoad()
+
+		return data
+	}
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -177,6 +214,21 @@ class MeleeAttackComboStep : AbstractComboStep()
 class WaitComboStep : AbstractComboStep()
 {
 	var turns: Int = 1
+
+	override fun getAbilityData(): AbilityData
+	{
+		val data = AbilityData()
+		data.targetType = AbilityData.TargetType.SELF
+		data.actionSequence = ActionSequence(XmlData())
+
+		for (i in 1 until turns)
+		{
+			data.actionSequence.rawActions.add(BlockTurnAction())
+		}
+		data.actionSequence.afterLoad()
+
+		return data
+	}
 
 	//region generated
 	override fun load(xmlData: XmlData)

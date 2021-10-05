@@ -37,7 +37,7 @@ class ComboBehaviourAction : AbstractBehaviourAction()
 				val step = next.next ?: continue
 				val ability = step.getAsAbility()
 
-				if (step.cooldown == 0) continue
+				if (ability.cooldown == 0) continue
 				if (ability.remainingUsages == 0) continue
 				if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
 
@@ -63,7 +63,7 @@ class ComboBehaviourAction : AbstractBehaviourAction()
 				val step = root.next ?: continue
 				val ability = step.getAsAbility()
 
-				if (step.cooldown == 0) continue
+				if (ability.cooldown == 0) continue
 				if (ability.remainingUsages == 0) continue
 				if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
 

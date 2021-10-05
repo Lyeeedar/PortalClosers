@@ -30,14 +30,14 @@ class AbilityData : XmlDataClass()
 	var range: Point = Point(1, 1)
 	lateinit var targetType: TargetType
 
-	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
+	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile && TargetType != Self")
 	lateinit var targetCondition: CompiledExpression
 
-	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
+	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile && TargetType != Self")
 	@DataCompiledExpression(default = "dist")
 	lateinit var sortCondition: CompiledExpression
 
-	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile")
+	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile && TargetType != Self")
 	var pickSortedMin: Boolean = true
 
 	//region non-data

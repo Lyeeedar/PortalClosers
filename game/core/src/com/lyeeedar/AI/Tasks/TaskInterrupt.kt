@@ -22,6 +22,15 @@ class TaskInterrupt : AbstractTask()
 
 			interrupted = true
 		}
+		val combo = e.combo()
+		if (combo?.currentStep != null)
+		{
+			combo.currentStep = null
+			combo.lastTarget = null
+			combo.fixedDirection = null
+
+			interrupted = true
+		}
 
 		val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 		stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)

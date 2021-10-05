@@ -82,7 +82,7 @@ class TaskCombo(): AbstractTask()
 			}
 		}
 
-
+		val ability = comboStep.getAsAbility()
 		var canUseAbility = true
 		if (stats != null)
 		{
@@ -92,7 +92,7 @@ class TaskCombo(): AbstractTask()
 				val stunParticle = AssetManager.loadParticleEffect("StatusAndEffects/Stunned").getParticleEffect()
 				stunParticle.addToWorld(world, e.position()!!.position, Vector2(0f, 0.8f), isBlocking = false)
 
-				comboStep.cooldown = comboStep.cooldown / 2
+				ability.cooldown = ability.data.cooldown / 2
 
 				stats.addMessage(Localisation.getText("distracted", "UI"), Colour.YELLOW, 0.4f)
 
@@ -102,8 +102,6 @@ class TaskCombo(): AbstractTask()
 
 		if (canUseAbility)
 		{
-			val ability = comboStep.getAsAbility()
-
 			if (EventSystem.isEventRegistered(EventType.USE_ABILITY, e))
 			{
 				world.eventSystem()?.addEvent(EventType.USE_ABILITY, e.getRef(), e.getRef())
