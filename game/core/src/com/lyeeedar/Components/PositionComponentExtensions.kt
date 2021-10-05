@@ -1,9 +1,12 @@
 package com.lyeeedar.Components
 
+import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
+import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.AbstractTile
+import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.Point
 
 var PositionComponent.tile: Tile?
@@ -165,4 +168,41 @@ fun PositionComponent.doMove(t: AbstractTile, entity: Entity)
 	position = t
 
 	addToTile(entity)
+}
+
+fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: World<*>)
+{
+	val prev = world.grid.tryGet(this.position, null) ?: return
+	val next = world.grid.tryGet(prev, direction, null) ?: return
+
+	if (this.isValidTile(next, e))
+	{
+		this.doMove(next, e)
+		e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+	}
+	else if (this.canSwap)
+	{
+		val contents = next.contents[this.slot]?.get()
+		if (contents != null && e.isAllies(contents))
+		{
+			val opos = contents.position()!!
+			if (opos.moveable && !opos.moveLocked)
+			{
+				val task = contents.task()
+				if (task != null)
+				{
+					task.tasks.clear()
+					task.tasks.add(TaskWait.obtain())
+				}
+
+				opos.removeFromTile(contents)
+
+				this.doMove(next, e)
+				e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+
+				opos.doMove(prev, contents)
+				contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+			}
+		}
+	}
 }

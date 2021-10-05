@@ -350,11 +350,11 @@ fun addAbilityToWorld(abilityOrb: AbilityOrb, world: World<Tile>, seed: Long)
 fun addAbilityToWorld(ability: Ability, world: World<Tile>, seed: Long)
 {
 	val player = world.player!!
-	for (target in ability.getValidTargets(player, world))
+	for (target in ability.getValidTargets(player, world, null))
 	{
 		target.tileCol = Colour.YELLOW
 	}
-	val target = ability.pickTarget(player, world, LightRNG(seed))
+	val target = ability.pickTarget(player, world, LightRNG(seed), null)
 
 	val sequenceHolder = player.addOrGet(ComponentType.ActionSequence) as ActionSequenceComponent
 	sequenceHolder.actionSequence = ability.data.actionSequence

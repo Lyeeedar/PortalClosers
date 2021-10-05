@@ -87,6 +87,7 @@ actual class XmlDataClassLoader
 				"UseAbility" -> com.lyeeedar.AI.BehaviourTree.Actions.UseAbilityBehaviourAction()
 				"ProcessInput" -> com.lyeeedar.AI.BehaviourTree.Actions.ProcessInputBehaviourAction()
 				"RunUntilNotFailed" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunUntilNotFailedBehaviourNode()
+				"Combo" -> com.lyeeedar.AI.BehaviourTree.Actions.ComboBehaviourAction()
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
 				"RunOneRandomly" -> com.lyeeedar.AI.BehaviourTree.Nodes.RunOneRandomlyBehaviourNode()
 				"Datascope" -> com.lyeeedar.AI.BehaviourTree.Actions.DatascopeBehaviourAction()
@@ -111,6 +112,7 @@ actual class XmlDataClassLoader
 			return when (classID)
 			{
 				"ClearValue" -> com.lyeeedar.AI.BehaviourTree.Actions.ClearValueBehaviourAction()
+				"Combo" -> com.lyeeedar.AI.BehaviourTree.Actions.ComboBehaviourAction()
 				"Import" -> com.lyeeedar.AI.BehaviourTree.Actions.ImportBehaviourAction()
 				"Node" -> com.lyeeedar.AI.BehaviourTree.Actions.NodeBehaviourAction()
 				"ProcessInput" -> com.lyeeedar.AI.BehaviourTree.Actions.ProcessInputBehaviourAction()
@@ -150,6 +152,7 @@ actual class XmlDataClassLoader
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
 				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
 				"Water" -> com.lyeeedar.Components.WaterComponentData()
+				"Combo" -> com.lyeeedar.Components.ComboComponentData()
 				"BakedLight" -> com.lyeeedar.Components.BakedLightComponentData()
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
@@ -217,6 +220,16 @@ actual class XmlDataClassLoader
 				"RepeatKeyframe" -> com.lyeeedar.Game.Ability.RepeatKeyframeData()
 				"DamageKeyframe" -> com.lyeeedar.Game.Ability.DamageKeyframeData()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
+			}
+		}
+		fun loadAbstractComboStep(classID: String): com.lyeeedar.Game.Combo.AbstractComboStep
+		{
+			return when (classID)
+			{
+				"Wait" -> com.lyeeedar.Game.Combo.WaitComboStep()
+				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboStep()
+				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboStep()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboStep!")
 			}
 		}
 

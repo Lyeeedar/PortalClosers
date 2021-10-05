@@ -4,6 +4,8 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Components.*
+import com.lyeeedar.Direction
+import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World
@@ -32,12 +34,17 @@ class Ability(val data: AbilityData)
 		return current
 	}
 
-	fun getValidTargets(entity: Entity, world: World<*>): List<AbstractTile>
+	fun getValidTargets(entity: Entity, world: World<*>, fixedDirection: Direction?): List<AbstractTile>
 	{
 		val pos = entity.position()!!
 		val vision = entity.addOrGet(ComponentType.Vision) as VisionComponent
 		val visiblePoints = vision.getVision(pos.x, pos.y)
-		val visibleTiles = visiblePoints.filter { it.dist(pos.position) in data.range.x..data.range.y }.mapNotNull { world.grid.tryGet(it, null) }
+		var visibleTiles = visiblePoints.filter { it.dist(pos.position) in data.range.x..data.range.y }.mapNotNull { world.grid.tryGet(it, null) }
+
+		if (fixedDirection != null)
+		{
+			visibleTiles = visibleTiles.filter { Direction.getCardinalDirection(it, pos.position) == fixedDirection }
+		}
 
 		return when (data.targetType)
 		{
@@ -52,11 +59,25 @@ class Ability(val data: AbilityData)
 		}
 	}
 
+	fun getValidTile(entity: Entity, world: World<*>, rng: LightRNG, targetTile: Point?, fixedDirection: Direction?): Tile?
+	{
+		val target =
+			if (data.targetType == AbilityData.TargetType.TARGET_ENEMY)
+				targetTile
+			else
+				pickTarget(entity, world, rng, fixedDirection)
+		if (target == null) return null
+		val tile = world.grid.tryGet(target, null) as? Tile ?: return null
+		if (tile.dist(entity.position()!!.position) !in data.range.x..data.range.y) return null
+
+		return tile
+	}
+
 	private val tempVariableMap = ObjectFloatMap<String>()
 	private val values: Array<Pair<AbstractTile, Float>> = Array()
-	fun pickTarget(entity: Entity, world: World<*>, rng: LightRNG): AbstractTile?
+	fun pickTarget(entity: Entity, world: World<*>, rng: LightRNG, fixedDirection: Direction?): AbstractTile?
 	{
-		val validTargets = getValidTargets(entity, world)
+		val validTargets = getValidTargets(entity, world, fixedDirection)
 		if (validTargets.isEmpty()) return null
 
 		if (data.targetType == AbilityData.TargetType.TILE || data.targetType == AbilityData.TargetType.EMPTY_TILE)

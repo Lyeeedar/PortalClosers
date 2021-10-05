@@ -29,14 +29,7 @@ class UseAbilityBehaviourAction : AbstractBehaviourAction()
 		{
 			if (ability.cooldown == 0 && ability.remainingUsages != 0)
 			{
-				val target =
-					if (ability.data.targetType == AbilityData.TargetType.TARGET_ENEMY)
-						storedTarget
-					else
-						ability.pickTarget(entity, state.world, state.rng)
-				if (target == null) continue
-				val tile = state.world.grid.tryGet(target, null) as? Tile ?: continue
-				if (tile.dist(pos.position) !in ability.data.range.x..ability.data.range.y) continue
+				val tile = ability.getValidTile(entity, state.world, state.rng, storedTarget, null) ?: continue
 
 				task.tasks.add(TaskUseAbility.obtain().set(tile, ability))
 

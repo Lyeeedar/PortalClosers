@@ -4,11 +4,11 @@
 	</Definition>
 	<Definition Name="AbstractBehaviourAction" Nullable="False" TextColour="111,204,111" Extends="AbstractBehaviourTreeItem" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourActionDefs" Keys="(UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourActionDefs" Keys="(Combo,UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourNodeDefs" Keys="Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractBehaviourTreeItem" Nullable="False" TextColour="210,210,100" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="(UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState),Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractBehaviourTreeItemDefs" Keys="(Combo,UseAbility),Action(Kill,MoveTo,ProcessInput,Wait),Data(ClearValue,ConvertToPosition,Datascope,PickOneFrom,SetValue),Debug(Breakpoint),Entity(GetAllVisible),Flow Control(Branch,Import,Node,SetState),Other(RunAll,RunOneRandomly),Until(RunUntilNotCompleted,RunUntilNotFailed,RunUntilState)" meta:RefKey="ReferenceDef" />
 	<Definition Name="Branch" Nullable="False" TextColour="238,94,94" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">Branch</Const>
 		<Data Name="Branches" Keys="ConditionAndNode" meta:RefKey="Collection" />
@@ -19,6 +19,10 @@
 	</Definition>
 	<Definition Name="ClearValue" Nullable="False" TextColour="250,250,39" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
 		<Const Name="classID">ClearValue</Const>
+		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Combo" Nullable="False" TextColour="220,95,220" Extends="AbstractBehaviourAction" meta:RefKey="StructDef">
+		<Const Name="classID">Combo</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="ConditionAndNode" Nullable="False" TextColour="204,204,4" meta:RefKey="StructDef">
