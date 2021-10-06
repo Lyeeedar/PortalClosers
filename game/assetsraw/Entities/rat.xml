@@ -56,5 +56,9 @@
 				</AbilityData>
 			</Abilities>
 		</Ability>
+		<Combo>
+			<classID>Combo</classID>
+			<ComboPath>Entities/ratCombo</ComboPath>
+		</Combo>
 	</Components>
 </Entity>

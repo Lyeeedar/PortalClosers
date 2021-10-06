@@ -183,7 +183,7 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 	else if (this.canSwap)
 	{
 		val contents = next.contents[this.slot]?.get()
-		if (contents != null && e.isAllies(contents))
+		if (contents != null && e.isAllies(contents) && e.activeAbility() == null && e.combo()?.currentStep == null)
 		{
 			val opos = contents.position()!!
 			if (opos.moveable && !opos.moveLocked)
