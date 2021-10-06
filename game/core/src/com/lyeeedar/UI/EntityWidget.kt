@@ -156,7 +156,7 @@ class EntityWidget(var entity: EntityReference, val world: World<*>) : Widget()
 						batch.draw(white, abx, aby-i*spacing, size, size * alpha)
 					}
 
-					if (abilityAvailable || ab.getValidTargets(entity.entity, world).isEmpty())
+					if (abilityAvailable || ab.getValidTargets(entity.entity, world, null).isEmpty())
 					{
 						batch.setColor(lightGray)
 					}

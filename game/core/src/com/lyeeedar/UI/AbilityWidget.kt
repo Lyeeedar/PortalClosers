@@ -53,7 +53,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 		}
 	}
 
-	private fun isAbilityEnabled(): Boolean = ability.cooldown == 0 && ability.remainingUsages != 0 && ability.getValidTargets(world.player!!, world).isNotEmpty()
+	private fun isAbilityEnabled(): Boolean = ability.cooldown == 0 && ability.remainingUsages != 0 && ability.getValidTargets(world.player!!, world, null).isNotEmpty()
 
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()

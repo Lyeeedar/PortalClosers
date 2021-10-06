@@ -11,10 +11,7 @@ import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Systems.eventSystem
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Localisation
-import com.lyeeedar.Util.Random
+import com.lyeeedar.Util.*
 import squidpony.squidmath.LightRNG
 
 class TaskCombo(): AbstractTask()
@@ -53,8 +50,6 @@ class TaskCombo(): AbstractTask()
 
 		if (comboStep.stepForward && !pos.moveLocked)
 		{
-			comboHolder.lastTarget!! += direction
-
 			var canMove = true
 			if (stats != null)
 			{
@@ -78,9 +73,15 @@ class TaskCombo(): AbstractTask()
 					world.eventSystem()?.addEvent(EventType.MOVE, ref, ref)
 				}
 
-				pos.moveInDirection(direction, e, world)
+				val didMove = pos.moveInDirection(direction, e, world)
+
+				if (didMove)
+				{
+					tile = world.grid.getClamped(tile, direction) as Tile
+				}
 			}
 		}
+		comboHolder.lastTarget = tile
 
 		val ability = comboStep.getAsAbility()
 		var canUseAbility = true

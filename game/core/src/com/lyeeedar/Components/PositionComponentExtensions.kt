@@ -170,15 +170,16 @@ fun PositionComponent.doMove(t: AbstractTile, entity: Entity)
 	addToTile(entity)
 }
 
-fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: World<*>)
+fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: World<*>): Boolean
 {
-	val prev = world.grid.tryGet(this.position, null) ?: return
-	val next = world.grid.tryGet(prev, direction, null) ?: return
+	val prev = world.grid.tryGet(this.position, null) ?: return false
+	val next = world.grid.tryGet(prev, direction, null) ?: return false
 
 	if (this.isValidTile(next, e))
 	{
 		this.doMove(next, e)
 		e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+		return true
 	}
 	else if (this.canSwap)
 	{
@@ -202,7 +203,11 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 
 				opos.doMove(prev, contents)
 				contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+
+				return true
 			}
 		}
 	}
+
+	return false
 }

@@ -31,50 +31,57 @@ class ComboBehaviourAction : AbstractBehaviourAction()
 
 		if (comboHolder.currentStep != null)
 		{
-			// execute next step
-			for (next in comboHolder.currentStep!!.next)
+			if (comboHolder.currentStep!!.next.size == 0)
 			{
-				val step = next.next ?: continue
-				val ability = step.getAsAbility()
-
-				if (ability.cooldown == 0) continue
-				if (ability.remainingUsages == 0) continue
-				if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
-
-				var tile = ability.getValidTile(entity, state.world, state.rng, storedTarget, comboHolder.fixedDirection)
-
-				if (tile == null && !comboHolder.currentStep!!.canStop)
+				comboHolder.currentStep = null
+				comboHolder.lastTarget = null
+				comboHolder.fixedDirection = null
+			}
+			else
+			{
+				// execute next step
+				for (next in comboHolder.currentStep!!.next)
 				{
-					tile = state.world.grid.tryGet(comboHolder.lastTarget!!, null) as? Tile
+					val step = next.next ?: continue
+					val ability = step.getAsAbility()
+
+					if (ability.cooldown > 0) continue
+					if (ability.remainingUsages == 0) continue
+					if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
+
+					var tile = ability.getValidTile(entity, state.world, state.rng, storedTarget, comboHolder.fixedDirection)
+
+					if (tile == null && !comboHolder.currentStep!!.canStop)
+					{
+						tile = state.world.grid.tryGet(comboHolder.lastTarget!!, null) as? Tile
+					}
+
+					if (tile == null) continue
+
+					task.tasks.add(TaskCombo.obtain().set(tile, step))
+
+					return EvaluationState.RUNNING
 				}
-
-				if (tile == null) continue
-
-				task.tasks.add(TaskCombo.obtain().set(tile, step))
-
-				return EvaluationState.RUNNING
 			}
 		}
-		else
+
+		// Try to start the combo
+		for (root in comboHolder.combo.roots)
 		{
-			// Try to start the combo
-			for (root in comboHolder.combo.roots)
-			{
-				val step = root.next ?: continue
-				val ability = step.getAsAbility()
+			val step = root.next ?: continue
+			val ability = step.getAsAbility()
 
-				if (ability.cooldown == 0) continue
-				if (ability.remainingUsages == 0) continue
-				if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
+			if (ability.cooldown > 0) continue
+			if (ability.remainingUsages == 0) continue
+			if (step.chance.evaluate(state.getVariables(), state.rng) == 0f) continue
 
-				val tile = ability.getValidTile(entity, state.world, state.rng, storedTarget, null) ?: continue
-				comboHolder.currentStep = step
-				comboHolder.lastTarget = tile
+			val tile = ability.getValidTile(entity, state.world, state.rng, storedTarget, null) ?: continue
+			comboHolder.currentStep = step
+			comboHolder.lastTarget = tile
 
-				task.tasks.add(TaskUseAbility.obtain().set(tile, ability))
+			task.tasks.add(TaskCombo.obtain().set(tile, step))
 
-				return EvaluationState.RUNNING
-			}
+			return EvaluationState.RUNNING
 		}
 
 		return EvaluationState.FAILED

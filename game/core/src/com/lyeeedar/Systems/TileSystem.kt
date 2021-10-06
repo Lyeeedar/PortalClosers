@@ -55,7 +55,7 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 			{
 				if (ab.isSelected)
 				{
-					for (tile in ab.getValidTargets(world.player!!, world))
+					for (tile in ab.getValidTargets(world.player!!, world, null))
 					{
 						val tile = tile as Tile
 						tile.isTargetted = true

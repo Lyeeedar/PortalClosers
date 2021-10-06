@@ -63,7 +63,10 @@ class Ability(val data: AbilityData)
 	{
 		val target =
 			if (data.targetType == AbilityData.TargetType.TARGET_ENEMY)
-				targetTile
+				if (fixedDirection != null)
+					entity.position()!!.position + fixedDirection
+				else
+					targetTile
 			else
 				pickTarget(entity, world, rng, fixedDirection)
 		if (target == null) return null

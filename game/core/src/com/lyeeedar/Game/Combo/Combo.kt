@@ -120,6 +120,9 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 	{
 		cooldown = xmlData.getInt("Cooldown", 0)
 		chance = CompiledExpression(xmlData.get("Chance", "1")!!)
+		canStop = xmlData.getBoolean("CanStop", false)
+		stepForward = xmlData.getBoolean("StepForward", false)
+		canTurn = xmlData.getBoolean("CanTurn", false)
 		val nextEl = xmlData.getChildByName("Next")
 		if (nextEl != null)
 		{
@@ -157,8 +160,6 @@ class AbilityComboStep : AbstractComboStep()
 		val abilityEl = xmlData.getChildByName("Ability")!!
 		ability = AbilityData()
 		ability.load(abilityEl)
-		stepForward = xmlData.getBoolean("StepForward", false)
-		canTurn = xmlData.getBoolean("CanTurn", false)
 	}
 	override val classID: String = "Ability"
 	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
@@ -176,7 +177,7 @@ class MeleeAttackComboStep : AbstractComboStep()
 	override fun getAbilityData(): AbilityData
 	{
 		val data = AbilityData()
-		data.targetType = AbilityData.TargetType.SELF
+		data.targetType = AbilityData.TargetType.TARGET_ENEMY
 		data.actionSequence = ActionSequence(XmlData())
 
 		effect.time = 0.01f
@@ -200,8 +201,6 @@ class MeleeAttackComboStep : AbstractComboStep()
 		val damageEl = xmlData.getChildByName("Damage")!!
 		damage = DamageAction()
 		damage.load(damageEl)
-		stepForward = xmlData.getBoolean("StepForward", false)
-		canTurn = xmlData.getBoolean("CanTurn", false)
 	}
 	override val classID: String = "MeleeAttack"
 	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)

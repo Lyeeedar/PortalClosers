@@ -25,37 +25,6 @@
 				<DrawActualSize>true</DrawActualSize>
 			</Renderable>
 		</RenderableComponent>
-		<Ability>
-			<classID>Ability</classID>
-			<Abilities>
-				<AbilityData>
-					<ActionSequence meta:RefKey="ActionSequence">
-						<Actions>
-							<Timeline>
-								<MarkAndWait>
-									<classID>MarkAndWaitForPlayer</classID>
-								</MarkAndWait>
-								<OneShotFX>
-									<Time>0.023116862</Time>
-									<classID>SpawnOneShotParticle</classID>
-									<Particle meta:RefKey="ParticleEffect">
-										<Name>EnemyAttacks/Bite</Name>
-									</Particle>
-									<SpawnBehaviour>Immediate</SpawnBehaviour>
-								</OneShotFX>
-								<Damage>
-									<Time>0.19387548</Time>
-									<classID>Damage</classID>
-									<Damage>1</Damage>
-									<Type>None</Type>
-								</Damage>
-							</Timeline>
-						</Actions>
-					</ActionSequence>
-					<TargetType>Target_enemy</TargetType>
-				</AbilityData>
-			</Abilities>
-		</Ability>
 		<Combo>
 			<classID>Combo</classID>
 			<ComboPath>Entities/ratCombo</ComboPath>

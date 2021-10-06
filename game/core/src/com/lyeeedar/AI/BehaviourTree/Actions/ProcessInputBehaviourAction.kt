@@ -46,7 +46,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 					{
 						val tile = state.world.grid.tryGet(RenderSystemWidget.instance!!.selectedPoint, null)
 
-						if (tile != null && ab.getValidTargets(entity, state.world).contains(tile))
+						if (tile != null && ab.getValidTargets(entity, state.world, null).contains(tile))
 						{
 							if (tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
 

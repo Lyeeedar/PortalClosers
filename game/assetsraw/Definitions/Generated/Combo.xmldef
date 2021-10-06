@@ -5,12 +5,13 @@
 	<Definition Name="Ability" Nullable="False" Background="219,159,219" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
 		<Const Name="classID">Ability</Const>
 		<Data Name="Ability" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="StepForward" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
-		<Data Name="CanTurn" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="AbstractComboStep" Nullable="False" Background="2,207,2" meta:RefKey="GraphStructDef">
 		<Data Name="Cooldown" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Chance" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="CanStop" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="StepForward" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="CanTurn" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="Next" Keys="ComboStep" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="AbstractComboStepDefs" Keys="Ability,MeleeAttack,Wait" meta:RefKey="ReferenceDef" />
@@ -21,8 +22,6 @@
 		<Const Name="classID">MeleeAttack</Const>
 		<Data Name="Effect" Keys="OneShotFX" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Damage" Keys="Damage" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="StepForward" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
-		<Data Name="CanTurn" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="Wait" Nullable="False" Background="206,21,21" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
 		<Const Name="classID">Wait</Const>

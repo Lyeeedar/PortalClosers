@@ -82,6 +82,10 @@
 				<Key>attackCount</Key>
 				<Value>attackCount+1</Value>
 			</SetValue>
+			<Combo>
+				<classID>Combo</classID>
+				<Key>enemyPos</Key>
+			</Combo>
 			<UseAbility>
 				<classID>UseAbility</classID>
 				<Key>enemyPos</Key>
