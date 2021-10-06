@@ -49,7 +49,7 @@
 	</Definition>
 	<Definition Name="Anim" Nullable="False" TextColour="35,35,204" IsGlobal="True" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Animation</Const>
-		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Anim" EnumValues="Expand,Spin,Fade,Flash,Bump" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="StartSize" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == Expand" meta:RefKey="Number" />
 		<Data Name="EndSize" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="anim == Expand" meta:RefKey="Number" />
 		<Data Name="OneWay" SkipIfDefault="True" Default="true" VisibleIf="anim == Expand" meta:RefKey="Boolean" />

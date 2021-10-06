@@ -3,14 +3,12 @@ package com.lyeeedar.Game.Combo
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.ActionSequence.ActionSequence
-import com.lyeeedar.ActionSequence.Actions.BlockTurnAction
-import com.lyeeedar.ActionSequence.Actions.DamageAction
-import com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction
-import com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction
+import com.lyeeedar.ActionSequence.Actions.*
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Combo.AbstractComboStep
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.UI.BumpAction
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClassLoader
@@ -183,8 +181,14 @@ class MeleeAttackComboStep : AbstractComboStep()
 		effect.time = 0.01f
 		damage.time = 0.01f + effect.particle.getParticleEffect().blockinglifetime * 0.7f
 
+		val bump = AnimationAction()
+		bump.anim = AnimationAction.Animation.BUMP
+		bump.time = 0.01f
+		bump.duration = 0.1f
+
 		data.actionSequence.rawActions.add(MarkAndWaitForPlayerAction())
 		data.actionSequence.rawActions.add(effect)
+		data.actionSequence.rawActions.add(bump)
 		data.actionSequence.rawActions.add(damage)
 		data.actionSequence.afterLoad()
 
