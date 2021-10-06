@@ -6,9 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
-import com.lyeeedar.Components.Entity
 import com.lyeeedar.Game.Tile
-import com.lyeeedar.Systems.AbstractRenderSystem
 import com.lyeeedar.Systems.RenderSystem
 import com.lyeeedar.Systems.World
 import com.lyeeedar.UI.RenderSystemWidget

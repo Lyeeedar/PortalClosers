@@ -6,12 +6,7 @@ import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.ActionSequence.Actions.*
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
-import com.lyeeedar.Game.Combo.AbstractComboStep
-import com.lyeeedar.Renderables.Particle.ParticleEffect
-import com.lyeeedar.UI.BumpAction
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.XmlDataClassLoader
 import ktx.collections.set
 
 @DataFile(colour="121,252,121", icon="Sprites/Icons/CardIcon.png")

@@ -1,7 +1,6 @@
 package com.lyeeedar.Systems
 
 import com.lyeeedar.Components.*
-import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.BloodSplatter

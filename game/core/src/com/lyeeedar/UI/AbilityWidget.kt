@@ -2,7 +2,6 @@ package com.lyeeedar.UI
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
@@ -10,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.HandlerAction
 import com.lyeeedar.Util.Statics
 
 class AbilityWidget(val ability: Ability, val world: World<*>, val background: SpriteWidget) : Table()

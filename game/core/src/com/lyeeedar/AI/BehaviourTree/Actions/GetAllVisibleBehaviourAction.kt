@@ -9,8 +9,8 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
-import java.util.*
 import ktx.collections.toGdxArray
+import java.util.*
 
 @DataClass(category = "Entity")
 class GetAllVisibleBehaviourAction : AbstractBehaviourAction()

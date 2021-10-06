@@ -8,8 +8,6 @@ import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
-import com.lyeeedar.Game.Ability.AbilityData
-import com.lyeeedar.Game.Tile
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
 

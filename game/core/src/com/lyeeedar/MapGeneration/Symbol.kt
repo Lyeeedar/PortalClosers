@@ -2,11 +2,8 @@ package com.lyeeedar.MapGeneration
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.EntityData
-import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.XmlData
-import java.lang.StringBuilder
 import java.util.*
 
 class Symbol: XmlDataClass(), IMapGeneratorSymbol

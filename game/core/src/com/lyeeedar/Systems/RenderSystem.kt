@@ -1,16 +1,13 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
-import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
-import ktx.collections.set
 
 fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
 const val numHpPips = 10

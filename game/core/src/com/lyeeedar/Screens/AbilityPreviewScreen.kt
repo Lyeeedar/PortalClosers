@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
-import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
@@ -17,8 +16,6 @@ import com.lyeeedar.Util.*
 import ktx.collections.gdxArrayOf
 import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
-import java.lang.RuntimeException
-import java.lang.StringBuilder
 
 class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 {

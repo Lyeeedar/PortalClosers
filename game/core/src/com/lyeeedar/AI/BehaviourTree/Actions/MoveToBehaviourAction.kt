@@ -10,12 +10,9 @@ import com.lyeeedar.Components.isValidTile
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.Tile
 import com.lyeeedar.Pathfinding.PathfindCache
-import com.lyeeedar.Pathfinding.Pathfinder
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.XmlData
 
 @DataClass(category = "Action")
 class MoveToBehaviourAction : AbstractBehaviourAction()

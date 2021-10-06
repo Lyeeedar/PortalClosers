@@ -2,7 +2,10 @@ package com.lyeeedar.Game
 
 import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.*
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.BloodSplatter
+import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Random
+import com.lyeeedar.Util.randomWeighted
 import squidpony.squidmath.LightRNG
 
 class DamageEquations

@@ -3,8 +3,6 @@ package com.lyeeedar.Components
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
-import com.lyeeedar.Game.Ability.AbilityOrb
-import com.lyeeedar.Util.DataFileReference
 import com.lyeeedar.Util.XmlData
 
 class AbilityComponent : DataComponent()

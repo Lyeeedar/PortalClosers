@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Statistic

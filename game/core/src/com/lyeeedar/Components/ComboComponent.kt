@@ -3,9 +3,10 @@ package com.lyeeedar.Components
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Combo.AbstractComboStep
 import com.lyeeedar.Game.Combo.Combo
-import com.lyeeedar.Game.Tile
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.DataFileReference
+import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.getXml
 
 class ComboComponentData : AbstractComponentData()
 {

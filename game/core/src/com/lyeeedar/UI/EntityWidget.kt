@@ -4,7 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Components.*
+import com.lyeeedar.Components.EntityReference
+import com.lyeeedar.Components.ability
+import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic

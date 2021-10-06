@@ -3,9 +3,12 @@ package com.lyeeedar.MapGeneration
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Components.*
+import com.lyeeedar.Components.ComponentType
+import com.lyeeedar.Components.Entity
+import com.lyeeedar.Components.addToTile
+import com.lyeeedar.Components.ai
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.*
+import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.*

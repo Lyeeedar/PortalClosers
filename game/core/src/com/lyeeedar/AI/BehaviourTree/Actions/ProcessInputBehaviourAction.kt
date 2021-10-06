@@ -1,7 +1,6 @@
 package com.lyeeedar.AI.BehaviourTree.Actions
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.AI.BehaviourTree.BehaviourTreeState
@@ -14,7 +13,6 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
-import com.lyeeedar.Systems.renderSystem
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Controls
 import com.lyeeedar.Util.DataClass

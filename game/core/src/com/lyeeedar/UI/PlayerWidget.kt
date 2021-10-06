@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Value
-import com.lyeeedar.Components.ability
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager

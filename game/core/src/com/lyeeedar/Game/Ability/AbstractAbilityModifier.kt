@@ -1,9 +1,10 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.DataNumericRange
+import com.lyeeedar.Util.DataValue
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.XmlDataClassLoader
+import com.lyeeedar.Util.XmlDataClass
 
 abstract class AbstractAbilityModifier<T: AbstractAbilityModifierKeyframe> : XmlDataClass()
 {

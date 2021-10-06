@@ -6,8 +6,6 @@ import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
 import java.util.*
 
 @DataFile(icon = "Sprites/GUI/Buff.png")
