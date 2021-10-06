@@ -98,7 +98,8 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		val tile = tile as Tile
 		if (tile.predictedAttacksFrom.size > 0)
 		{
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = Colour.RED, scaleX = 0.95f, scaleY = 0.95f)
+			val rotation = (tile.x + tile.y).rem(3) * 90f
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = Colour.RED, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation)
 		}
 	}
 
