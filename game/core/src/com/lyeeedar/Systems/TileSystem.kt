@@ -45,6 +45,20 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					tile.tileCol = Colour.WHITE
 					tile.isTileDirty = true
 				}
+
+				if (tile.predictedAttacksFrom.size > 0)
+				{
+					val itr = tile.predictedAttacksFrom.iterator()
+					while (itr.hasNext())
+					{
+						val attack = itr.next()
+						if (!attack.isValid())
+						{
+							itr.remove()
+							tile.isTileDirty = true
+						}
+					}
+				}
 			}
 		}
 

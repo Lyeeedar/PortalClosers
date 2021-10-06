@@ -5,7 +5,9 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import ktx.collections.set
@@ -21,6 +23,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 	val white = AssetManager.loadTextureRegion("Sprites/white.png")!!
 	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
+	val attack = AssetManager.loadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
 
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
@@ -87,6 +90,15 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, pos.slot.ordinal, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour)
 			}
+		}
+	}
+
+	override fun drawExtraTile(tile: AbstractTile)
+	{
+		val tile = tile as Tile
+		if (tile.predictedAttacksFrom.size > 0)
+		{
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = Colour.RED, scaleX = 0.95f, scaleY = 0.95f)
 		}
 	}
 

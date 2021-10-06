@@ -1,6 +1,7 @@
 package com.lyeeedar.ActionSequence.Actions
 
 import com.lyeeedar.ActionSequence.ActionSequenceState
+import com.lyeeedar.Game.Tile
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
@@ -25,8 +26,9 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		// also mark the tiles
 		for (point in state.targets)
 		{
-			val tile = state.world.grid[point] ?: continue
-			tile.tileCol = Colour.RED
+			val tile = state.world.grid[point] as? Tile ?: continue
+			tile.predictedAttacksFrom.add(state.getRef())
+			tile.isTileDirty = true
 		}
 	}
 
@@ -39,8 +41,9 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			// remove tile mark
 			for (point in state.targets)
 			{
-				val tile = state.world.grid[point] ?: continue
-				tile.tileCol = Colour.WHITE
+				val tile = state.world.grid[point] as? Tile ?: continue
+				tile.predictedAttacksFrom.remove(state.getRef())
+				tile.isTileDirty = false
 			}
 
 			state.data.remove(key)

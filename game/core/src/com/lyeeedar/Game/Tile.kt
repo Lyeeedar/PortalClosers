@@ -1,10 +1,10 @@
 package com.lyeeedar.Game
 
 import com.badlogic.gdx.math.MathUtils.lerp
-import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.EntityReference
-import com.lyeeedar.Components.isAllies
-import com.lyeeedar.Components.position
+import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.ActionSequence.ActionSequenceReference
+import com.lyeeedar.ActionSequence.ActionSequenceState
+import com.lyeeedar.Components.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Util.Colour
@@ -17,6 +17,8 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	private val visible = LerpedValue(0.3f)
 
 	var isTargetted = false
+
+	val predictedAttacksFrom = ObjectSet<ActionSequenceReference>()
 
 	private var lastRenderColData: Int = 0
 
