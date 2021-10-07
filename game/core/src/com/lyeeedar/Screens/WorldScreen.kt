@@ -25,9 +25,11 @@ class WorldScreen : AbstractScreen()
 		val atlas = TextureAtlas(Gdx.files.internal("NewProject_1.atlas"))
 		val json = SkeletonJson(atlas) // This loads skeleton JSON data, which is stateless.
 
-		json.scale = 0.2f // Load the skeleton at 60% the size it was in Spine.
+		var skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
 
-		val skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
+		json.scale = 96 / skeletonData.height
+
+		skeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
 
 		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (bone positions, slot attachments, etc).
 
