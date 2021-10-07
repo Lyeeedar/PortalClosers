@@ -13,6 +13,7 @@ import com.lyeeedar.Direction
 import com.lyeeedar.Pathfinding.PathfindCache
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.XmlData
 
 @DataClass(category = "Action")
 class MoveToBehaviourAction : AbstractBehaviourAction()

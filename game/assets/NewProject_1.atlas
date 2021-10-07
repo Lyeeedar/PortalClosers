@@ -1,0 +1,69 @@
+
+NewProject_1.png
+size: 2571,1791
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arml
+  rotate: false
+  xy: 1, 896
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+legl
+  rotate: false
+  xy: 1029, 896
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+legr
+  rotate: false
+  xy: 515, 1
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+torso
+  rotate: false
+  xy: 515, 896
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+waistl
+  rotate: false
+  xy: 2057, 1
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+waistr
+  rotate: false
+  xy: 1543, 896
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+armr
+  rotate: false
+  xy: 1543, 1
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+pauldronr
+  rotate: false
+  xy: 1029, 1
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 1, 1
+  size: 512, 893
+  orig: 512, 893
+  offset: 0, 0
+  index: -1

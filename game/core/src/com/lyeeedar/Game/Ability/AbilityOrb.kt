@@ -3,6 +3,8 @@ package com.lyeeedar.Game.Ability
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.XmlData
 
 @DataFile(colour = "255,179,0", icon = "Sprites/Icons/Firebolt.png")
 class AbilityOrb : XmlDataClass()

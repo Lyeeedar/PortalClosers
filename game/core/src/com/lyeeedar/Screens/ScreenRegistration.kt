@@ -8,6 +8,7 @@ actual enum class ScreenEnum
 	PARTICLEEDITOR,
 	MAPGENERATIONPREVIEW,
 	ABILITYPREVIEW,
+	TEST,
 	INVALID
 }
 
@@ -20,6 +21,7 @@ actual fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 		screens[ScreenEnum.PARTICLEEDITOR] = ParticleEditorScreen()
 		screens[ScreenEnum.MAPGENERATIONPREVIEW] = MapGenerationPreviewScreen()
 		screens[ScreenEnum.ABILITYPREVIEW] = AbilityPreviewScreen()
+		screens[ScreenEnum.TEST] = AnimationTestScreen()
 	}
 
 	return screens

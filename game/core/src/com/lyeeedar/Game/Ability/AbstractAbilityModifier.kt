@@ -5,6 +5,7 @@ import com.lyeeedar.Util.DataNumericRange
 import com.lyeeedar.Util.DataValue
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClass
+import com.lyeeedar.Util.XmlDataClassLoader
 
 abstract class AbstractAbilityModifier<T: AbstractAbilityModifierKeyframe> : XmlDataClass()
 {

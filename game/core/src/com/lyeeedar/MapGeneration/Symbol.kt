@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.EntityData
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.XmlData
 import java.util.*
 
 class Symbol: XmlDataClass(), IMapGeneratorSymbol

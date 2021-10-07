@@ -10,6 +10,7 @@ import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.XmlData
 
 @DataClass(category = "Data")
 class PickOneFromBehaviourAction : AbstractBehaviourAction()

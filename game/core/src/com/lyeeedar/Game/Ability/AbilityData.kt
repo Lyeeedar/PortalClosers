@@ -3,6 +3,7 @@ package com.lyeeedar.Game.Ability
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.XmlData
 import java.util.*
 
 class AbilityData : XmlDataClass()
