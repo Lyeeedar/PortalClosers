@@ -1,30 +1,26 @@
 
 buildscript {
-	extra["appVersionCode"] = 1
-	extra["appVersion"] = "0.0.1"
-	extra["applicationId"] = "com.lyeeedar.portalclosers"
+	val androidPluginVersion: String by project
+	val kotlinVersion: String by project
 
-	rootProject.apply(from = rootProject.file("engine/versions.gradle.kts"))
+	val googleServicesVersion: String by project
+	val fabricToolsVersion: String by project
+	val firebasePerfPluginVersion: String by project
 
 	repositories {
+		mavenLocal()
+		mavenCentral()
 		gradlePluginPortal()
 		google()
-		mavenCentral()
-		jcenter()
-		maven("https://oss.sonatype.org/content/repositories/snapshots/")
-		maven("https://maven.fabric.io/public")
 	}
 
 	dependencies {
-		classpath("com.android.tools.build:gradle:" + extra["androidToolsVersion"] as String)
-
-		classpath(kotlin("gradle-plugin", extra["kotlinVersion"] as String))
+		classpath("com.android.tools.build:gradle:$androidPluginVersion")
+		classpath(kotlin("gradle-plugin", kotlinVersion))
 
 		classpath("com.lyeeedar.gradle-plugins:gradle-plugins")
 
-		classpath("com.google.gms:google-services:" + extra["googleServicesVersion"] as String)
-		classpath("io.fabric.tools:gradle:" + extra["fabricToolsVersion"] as String)
-		classpath("com.google.firebase:perf-plugin:" + extra["firebasePerfPluginVersion"] as String)
+		classpath("com.google.gms:google-services:$googleServicesVersion")
 	}
 }
 
@@ -39,5 +35,10 @@ allprojects {
 		mavenCentral()
 		maven("https://oss.sonatype.org/content/repositories/snapshots/")
 		maven("https://oss.sonatype.org/content/repositories/releases/")
+		maven("https://maven.google.com")
 	}
+}
+
+tasks.clean {
+	delete(buildDir)
 }

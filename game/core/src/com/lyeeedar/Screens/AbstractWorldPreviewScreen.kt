@@ -156,7 +156,7 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 	{
 		val files = directory.listFiles()!!
 		if (files.isEmpty()) return directory.lastModified()
-		return files.map { it.lastModified() }.max()!!
+		return files.map { it.lastModified() }.maxOrNull()!!
 	}
 
 	override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean

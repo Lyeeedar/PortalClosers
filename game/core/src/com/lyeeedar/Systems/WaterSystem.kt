@@ -144,7 +144,8 @@ class WaterSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 		var direction = water.flowDir
 		if (water.flowTowards != null)
 		{
-			val closest = metaRegions.entities.filter { it.metaRegion()!!.keys.contains(water.flowTowards!!) }.minBy { it.position()!!.position.dist(tile) } ?: return
+			val closest = metaRegions.entities.filter { it.metaRegion()!!.keys.contains(water.flowTowards!!) }
+				.minByOrNull { it.position()!!.position.dist(tile) } ?: return
 			direction = Direction.getDirection(tile, closest.position()!!.position)
 		}
 

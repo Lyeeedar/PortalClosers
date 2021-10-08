@@ -5,6 +5,36 @@ actual class XmlDataClassLoader
 {
 	companion object
 	{
+		fun loadAbstractAbilityModifier(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifier<*>
+		{
+			return when (classID)
+			{
+				"Colour" -> com.lyeeedar.Game.Ability.ColourAbilityModifier()
+				"Damage" -> com.lyeeedar.Game.Ability.DamageAbilityModifier()
+				"Repeat" -> com.lyeeedar.Game.Ability.RepeatAbilityModifier()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifier!")
+			}
+		}
+		fun loadAbstractAbilityModifierKeyframe(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifierKeyframe
+		{
+			return when (classID)
+			{
+				"ColourKeyframe" -> com.lyeeedar.Game.Ability.ColourKeyframeData()
+				"RepeatKeyframe" -> com.lyeeedar.Game.Ability.RepeatKeyframeData()
+				"DamageKeyframe" -> com.lyeeedar.Game.Ability.DamageKeyframeData()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
+			}
+		}
+		fun loadAbstractComboStep(classID: String): com.lyeeedar.Game.Combo.AbstractComboStep
+		{
+			return when (classID)
+			{
+				"Wait" -> com.lyeeedar.Game.Combo.WaitComboStep()
+				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboStep()
+				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboStep()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboStep!")
+			}
+		}
 		fun loadAbstractActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractActionSequenceAction
 		{
 			return when (classID)
@@ -29,8 +59,8 @@ actual class XmlDataClassLoader
 				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
 				"MarkAndWaitForPlayer" -> com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction()
 				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
-				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
+				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
 				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
@@ -56,8 +86,8 @@ actual class XmlDataClassLoader
 				"Damage" -> com.lyeeedar.ActionSequence.Actions.DamageAction()
 				"BlockTurn" -> com.lyeeedar.ActionSequence.Actions.BlockTurnAction()
 				"MarkAndWaitForPlayer" -> com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction()
-				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
+				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractOneShotActionSequenceAction!")
@@ -200,36 +230,6 @@ actual class XmlDataClassLoader
 				"SetNamedArea" -> com.lyeeedar.MapGeneration.Nodes.SetNamedAreaAction()
 				"SquidlibSectionGenerator" -> com.lyeeedar.MapGeneration.Nodes.SquidlibSectionGeneratorAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractMapGenerationAction!")
-			}
-		}
-		fun loadAbstractAbilityModifier(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifier<*>
-		{
-			return when (classID)
-			{
-				"Colour" -> com.lyeeedar.Game.Ability.ColourAbilityModifier()
-				"Damage" -> com.lyeeedar.Game.Ability.DamageAbilityModifier()
-				"Repeat" -> com.lyeeedar.Game.Ability.RepeatAbilityModifier()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifier!")
-			}
-		}
-		fun loadAbstractAbilityModifierKeyframe(classID: String): com.lyeeedar.Game.Ability.AbstractAbilityModifierKeyframe
-		{
-			return when (classID)
-			{
-				"ColourKeyframe" -> com.lyeeedar.Game.Ability.ColourKeyframeData()
-				"RepeatKeyframe" -> com.lyeeedar.Game.Ability.RepeatKeyframeData()
-				"DamageKeyframe" -> com.lyeeedar.Game.Ability.DamageKeyframeData()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
-			}
-		}
-		fun loadAbstractComboStep(classID: String): com.lyeeedar.Game.Combo.AbstractComboStep
-		{
-			return when (classID)
-			{
-				"Wait" -> com.lyeeedar.Game.Combo.WaitComboStep()
-				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboStep()
-				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboStep()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboStep!")
 			}
 		}
 

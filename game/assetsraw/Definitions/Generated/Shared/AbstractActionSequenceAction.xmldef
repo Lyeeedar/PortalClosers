@@ -117,12 +117,12 @@
 		<Data Name="BlendDuration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="RestoreOriginal" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
+	<Definition Name="Detach" Nullable="False" TextColour="100,100,204" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">Detach</Const>
+	</Definition>
 	<Definition Name="RestoreTargets" Nullable="False" TextColour="252,102,9" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">RestoreTargets</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
-	</Definition>
-	<Definition Name="Detach" Nullable="False" TextColour="100,100,204" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
-		<Const Name="classID">Detach</Const>
 	</Definition>
 	<Definition Name="Heal" Nullable="False" TextColour="151,151,211" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Heal</Const>
