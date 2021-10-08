@@ -1,6 +1,7 @@
 package com.lyeeedar.ActionSequence.Actions
 
 import com.lyeeedar.ActionSequence.ActionSequenceState
+import com.lyeeedar.Components.position
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
@@ -14,6 +15,20 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 	override fun isBlocked(state: ActionSequenceState): Boolean
 	{
+		if (!state.detached && state.source.isValid())
+		{
+			// check if the source entity is being acted on
+			val pos = state.source.get()?.position()?.position
+			if (pos != null)
+			{
+				val tile = state.world.grid.tryGet(pos, null)
+				if (tile != null)
+				{
+					return tile.tileContainsDelayedAction()
+				}
+			}
+		}
+
 		val counter = state.data[key] as Int? ?: 0
 		return counter > 0
 	}
@@ -37,15 +52,25 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 		if (counter <= 0)
 		{
-			// remove tile mark
-			for (point in state.targets)
-			{
-				val tile = state.world.grid[point] as? Tile ?: continue
-				tile.predictedAttacksFrom.remove(state.getRef())
-				tile.isTileDirty = false
-			}
+			removeTileMark(state)
 
 			state.data.remove(key)
+		}
+	}
+
+	override fun cancel(state: ActionSequenceState)
+	{
+		removeTileMark(state)
+	}
+
+	private fun removeTileMark(state: ActionSequenceState)
+	{
+		// remove tile mark
+		for (point in state.targets)
+		{
+			val tile = state.world.grid[point] as? Tile ?: continue
+			tile.predictedAttacksFrom.remove(state.getRef())
+			tile.isTileDirty = true
 		}
 	}
 

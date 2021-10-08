@@ -121,7 +121,7 @@ enum class DamageType constructor(val colour: Colour)
 
 		val actionSequenceState = containerEntity.actionSequence()!!.actionSequenceState
 		actionSequenceState.lockedEntityTargets.add(defender.getRef())
-		actionSequenceState.set(attacker.getRef(), world, rng.nextLong())
+		actionSequenceState.set(attacker.getRef(), actionSequence, world, rng.nextLong())
 		actionSequenceState.data["damage"] = attackDamage
 
 		world.addEntity(containerEntity)

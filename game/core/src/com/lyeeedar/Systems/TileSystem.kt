@@ -1,6 +1,7 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.IntSet
+import com.lyeeedar.Components.ComponentType
 import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.ai
 import com.lyeeedar.Components.position

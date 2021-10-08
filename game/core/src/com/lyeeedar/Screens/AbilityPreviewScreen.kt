@@ -355,7 +355,7 @@ fun addAbilityToWorld(ability: Ability, world: World<Tile>, seed: Long)
 
 	val sequenceHolder = player.addOrGet(ComponentType.ActionSequence) as ActionSequenceComponent
 	sequenceHolder.actionSequence = ability.data.actionSequence
-	sequenceHolder.actionSequenceState.set(player.getRef(), world, seed)
+	sequenceHolder.actionSequenceState.set(player.getRef(), sequenceHolder.actionSequence, world, seed)
 	sequenceHolder.actionSequenceState.targets.clear()
 	if (target != null) sequenceHolder.actionSequenceState.targets.add(target)
 

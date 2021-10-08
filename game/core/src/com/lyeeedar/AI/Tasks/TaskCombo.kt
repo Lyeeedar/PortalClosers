@@ -121,7 +121,7 @@ class TaskCombo(): AbstractTask()
 
 			val sequenceHolder = e.addOrGet(ComponentType.ActionSequence) as ActionSequenceComponent
 			sequenceHolder.actionSequence = ability.data.actionSequence
-			sequenceHolder.actionSequenceState.set(e.getRef(), world, rng.nextLong())
+			sequenceHolder.actionSequenceState.set(e.getRef(), sequenceHolder.actionSequence, world, rng.nextLong())
 			sequenceHolder.actionSequenceState.targets.clear()
 			sequenceHolder.actionSequenceState.targets.add(tile)
 			sequenceHolder.actionSequenceState.facing = pos.facing

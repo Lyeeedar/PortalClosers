@@ -28,6 +28,7 @@ class DetachAction : AbstractOneShotActionSequenceAction()
 		}
 
 		state.world.addEntity(entity)
+		state.detached = true
 	}
 
 	//region generated

@@ -67,10 +67,7 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 		}
 
 		val activeAbility = entity.actionSequence()
-		if (activeAbility != null)
-		{
-			activeAbility.actionSequence.cancel(activeAbility.actionSequenceState)
-		}
+		activeAbility?.actionSequence?.cancel(activeAbility.actionSequenceState)
 
 		world.removeEntity(entity)
 		entity.free()

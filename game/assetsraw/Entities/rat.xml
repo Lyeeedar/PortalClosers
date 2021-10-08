@@ -10,7 +10,7 @@
 			<DifficultyRating meta:RefKey="DifficultyRating">
 				<TimeToKill>15</TimeToKill>
 				<ArmourFactor>0.3</ArmourFactor>
-				<Damage>0.9</Damage>
+				<Damage>4</Damage>
 			</DifficultyRating>
 			<BloodColour>255,0,0,255</BloodColour>
 		</Statistics>

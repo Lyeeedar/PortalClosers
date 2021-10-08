@@ -107,6 +107,12 @@ class DamageEquations
 			defenderStats.damage(damage)
 			defender.ai()?.activate(defender)
 
+			if (defenderStats.hp <= 0)
+			{
+				val activeAbility = defender.actionSequence()
+				activeAbility?.actionSequence?.cancel(activeAbility.actionSequenceState)
+			}
+
 			attackerStats.attackDamageDealt += damage.damage
 			if (attackerStats.summoner != null)
 			{
