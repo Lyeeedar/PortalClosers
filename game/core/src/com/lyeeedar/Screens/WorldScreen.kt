@@ -11,6 +11,7 @@ import com.lyeeedar.MapGeneration.MapCreator
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Systems.World
+import com.lyeeedar.Systems.renderSystem
 import com.lyeeedar.UI.PlayerWidget
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.random
@@ -60,6 +61,8 @@ class WorldScreen : AbstractScreen()
 
 		world = MapCreator.generateWorld("Maps/test", player, 1, 4)
 		world.addSystems()
+
+		world.tileSize = 50f
 
 		setSkeleton(player)
 
