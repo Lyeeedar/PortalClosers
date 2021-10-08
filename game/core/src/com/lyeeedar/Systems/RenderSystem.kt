@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
@@ -62,6 +63,11 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				val region = renderable.currentTexture
 				val height = region.regionHeight
 				val ratio = height / 32f
+				overhead *= ratio
+			}
+			else if (renderable is SkeletonRenderable)
+			{
+				val ratio = 48f / 32f
 				overhead *= ratio
 			}
 

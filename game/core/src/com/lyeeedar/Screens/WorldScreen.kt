@@ -8,6 +8,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Game.addSystems
 import com.lyeeedar.MapGeneration.MapCreator
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Systems.World
 import com.lyeeedar.UI.PlayerWidget
@@ -27,8 +28,6 @@ class WorldScreen : AbstractScreen()
 
 		var skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
 
-		json.scale = 96 / skeletonData.height
-
 		skeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
 
 		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (bone positions, slot attachments, etc).
@@ -39,9 +38,6 @@ class WorldScreen : AbstractScreen()
 		stateData.setMix("walk", "idle", 0.2f)
 
 		val state = AnimationState(stateData) // Holds the animation state for a skeleton (current animation, time, etc).
-
-		state.setTimeScale(0.5f) // Slow all animations down to 50% speed.
-
 
 		// Queue animations on track 0.
 

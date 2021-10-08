@@ -12,7 +12,7 @@ import com.esotericsoftware.spine.*
 class AnimationTestScreen : AbstractScreen()
 {
 	lateinit var batch: PolygonSpriteBatch
-	lateinit var renderer: SkeletonMeshRenderer
+	lateinit var renderer: SkeletonRenderer
 	lateinit var debugRenderer: SkeletonRendererDebug
 
 	lateinit var atlas: TextureAtlas
@@ -22,7 +22,7 @@ class AnimationTestScreen : AbstractScreen()
 	override fun create()
 	{
 		batch = PolygonSpriteBatch()
-		renderer = SkeletonMeshRenderer()
+		renderer = SkeletonRenderer()
 		//renderer.setPremultipliedAlpha(true) // PMA results in correct blending without outlines.
 
 		debugRenderer = SkeletonRendererDebug()
