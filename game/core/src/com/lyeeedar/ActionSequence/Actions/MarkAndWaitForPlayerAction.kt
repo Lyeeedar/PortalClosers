@@ -13,7 +13,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 	val key = "waitForPlayer"
 	var turns: Int = 1
 
-	override fun isBlocked(state: ActionSequenceState): Boolean
+	override fun isDelayed(state: ActionSequenceState): Boolean
 	{
 		if (!state.detached && state.source.isValid())
 		{
@@ -24,11 +24,19 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 				val tile = state.world.grid.tryGet(pos, null)
 				if (tile != null)
 				{
-					return tile.tileContainsDelayedAction()
+					if (tile.tileContainsDelayedAction())
+					{
+						return true
+					}
 				}
 			}
 		}
 
+		return false
+	}
+
+	override fun isBlocked(state: ActionSequenceState): Boolean
+	{
 		val counter = state.data[key] as Int? ?: 0
 		return counter > 0
 	}
@@ -48,7 +56,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 	override fun exit(state: ActionSequenceState)
 	{
-		val counter = state.data[key] as Int
+		val counter = state.data[key] as Int? ?: 0
 
 		if (counter <= 0)
 		{
