@@ -4,6 +4,7 @@ import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Animation.MoveAnimation
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World
@@ -179,6 +180,13 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 	{
 		this.doMove(next, e)
 		e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+
+		var renderable = e.renderable()?.renderable
+		if (renderable is SkeletonRenderable)
+		{
+			renderable.setAnimation("walk", 0.2f)
+		}
+
 		return true
 	}
 	else if (this.canSwap)
@@ -201,8 +209,20 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 				this.doMove(next, e)
 				e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
 
+				var renderable = e.renderable()?.renderable
+				if (renderable is SkeletonRenderable)
+				{
+					renderable.setAnimation("walk", 0.2f)
+				}
+
 				opos.doMove(prev, contents)
 				contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+
+				renderable = contents.renderable()?.renderable
+				if (renderable is SkeletonRenderable)
+				{
+					renderable.setAnimation("walk", 0.2f)
+				}
 
 				return true
 			}

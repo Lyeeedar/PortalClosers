@@ -35,20 +35,16 @@ class WorldScreen : AbstractScreen()
 
 		val stateData = AnimationStateData(skeletonData) // Defines mixing (crossfading) between animations.
 
-		stateData.setMix("idle", "walk", 0.2f)
-		stateData.setMix("walk", "idle", 0.2f)
+		//stateData.setMix("idle", "walk", 0f)
+		stateData.setMix("walk", "idle", 0.1f)
 
 		val state = AnimationState(stateData) // Holds the animation state for a skeleton (current animation, time, etc).
+		state.timeScale = 2f
 
 		// Queue animations on track 0.
 
 		// Queue animations on track 0.
 		state.setAnimation(0, "idle", true)
-		state.addAnimation(0, "walk", false, 2f) // Jump after 2 seconds.
-
-		state.addAnimation(0, "idle", true, 0f) // Run after the jump.
-
-		state.addAnimation(0, "walk", true, 6f) // Jump after 2 seconds.
 
 		entity.removeComponent(ComponentType.DirectionalSprite)
 		entity.renderable()!!.renderable = SkeletonRenderable(skeleton, state)
