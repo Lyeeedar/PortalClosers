@@ -24,12 +24,14 @@ class WorldScreen : AbstractScreen()
 
 	fun setSkeleton(entity: Entity)
 	{
-		val atlas = TextureAtlas(Gdx.files.internal("NewProject_1.atlas"))
+		val atlas = TextureAtlas(Gdx.files.internal("goblin.atlas"))
 		val json = SkeletonJson(atlas) // This loads skeleton JSON data, which is stateless.
 
-		var skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
+		var skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("goblin.json"))
 
-		skeletonData = json.readSkeletonData(Gdx.files.internal("NewProject_1.json"))
+		json.scale = 48f / 512f
+
+		skeletonData = json.readSkeletonData(Gdx.files.internal("goblin.json"))
 
 		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (bone positions, slot attachments, etc).
 
@@ -39,7 +41,7 @@ class WorldScreen : AbstractScreen()
 		stateData.setMix("walk", "idle", 0.1f)
 
 		val state = AnimationState(stateData) // Holds the animation state for a skeleton (current animation, time, etc).
-		state.timeScale = 2f
+		//state.timeScale = 2f
 
 		// Queue animations on track 0.
 
