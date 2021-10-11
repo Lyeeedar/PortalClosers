@@ -51,6 +51,7 @@ class TaskCombo(): AbstractTask()
 			comboHolder.fixedDirection = null
 		}
 
+		var delay = 0f
 		if (comboStep.stepForward && !pos.moveLocked)
 		{
 			var canMove = true
@@ -81,6 +82,7 @@ class TaskCombo(): AbstractTask()
 				if (didMove)
 				{
 					tile = world.grid.getClamped(tile, direction) as Tile
+					delay = 0.4f
 				}
 			}
 		}
@@ -125,6 +127,7 @@ class TaskCombo(): AbstractTask()
 			sequenceHolder.actionSequenceState.targets.clear()
 			sequenceHolder.actionSequenceState.targets.add(tile)
 			sequenceHolder.actionSequenceState.facing = pos.facing
+			sequenceHolder.actionSequenceState.delay = delay
 
 			sequenceHolder.actionSequence.update(0f, sequenceHolder.actionSequenceState)
 

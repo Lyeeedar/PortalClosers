@@ -74,6 +74,8 @@ class WorldScreen : AbstractScreen()
 			rat.position()!!.position = world.grid.random()!!
 			rat.position()!!.addToTile(rat)
 			world.addEntity(rat)
+
+			setSkeleton(rat)
 		}
 
 		val topBarTable = Table()
