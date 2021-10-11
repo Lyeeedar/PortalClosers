@@ -22,6 +22,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	val white = AssetManager.loadTextureRegion("Sprites/white.png")!!
 	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
 	val attack = AssetManager.loadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
+	val shadow = AssetManager.loadTextureRegion("Sprites/Oryx/Custom/heroes/entity_shadow.png")!!
 
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
@@ -43,6 +44,8 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				ax += offset[0]
 				ay += offset[1]
 			}
+
+			renderer.queueTexture(shadow, ax+0.5f, ay+0.5f, SpaceSlot.BELOWENTITY.ordinal, 0)
 
 			val hpColour = if (world.player!!.isAllies(entity)) allyHpCol else enemyHpCol
 

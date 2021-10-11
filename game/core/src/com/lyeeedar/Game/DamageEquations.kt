@@ -1,6 +1,9 @@
 package com.lyeeedar.Game
 
 import com.lyeeedar.Components.*
+import com.lyeeedar.Renderables.Animation.BlinkAnimation
+import com.lyeeedar.Renderables.Animation.ColourChangeAnimation
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.BloodSplatter
 import com.lyeeedar.Util.Colour
@@ -173,6 +176,12 @@ class DamageEquations
 					Pair("damage", damage.damage),
 					Pair("dist", attackerPos.dist(defenderPos).toFloat())))
 			}
+
+			if (defender.renderable()?.renderable is SkeletonRenderable)
+			{
+				(defender.renderable()?.renderable as SkeletonRenderable).layerAnimation("hit")
+			}
+			defender.renderable()?.renderable?.animation = BlinkAnimation.obtain().set(Colour.WHITE, Colour.RED, 0.2f)
 		}
 	}
 }

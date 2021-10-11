@@ -179,12 +179,12 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 	if (this.isValidTile(next, e))
 	{
 		this.doMove(next, e)
-		e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+		e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.4f)
 
 		var renderable = e.renderable()?.renderable
 		if (renderable is SkeletonRenderable)
 		{
-			renderable.setAnimation("walk", 0.2f)
+			renderable.setAnimation("walk", 0.5f)
 		}
 
 		return true
@@ -207,21 +207,21 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 				opos.removeFromTile(contents)
 
 				this.doMove(next, e)
-				e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.2f)
+				e.renderable()?.renderable?.animation = MoveAnimation.obtain().set(next, prev, 0.4f)
 
 				var renderable = e.renderable()?.renderable
 				if (renderable is SkeletonRenderable)
 				{
-					renderable.setAnimation("walk", 0.2f)
+					renderable.setAnimation("walk", 0.5f)
 				}
 
 				opos.doMove(prev, contents)
-				contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.2f)
+				contents.renderable()?.renderable?.animation = MoveAnimation.obtain().set(prev, next, 0.4f)
 
 				renderable = contents.renderable()?.renderable
 				if (renderable is SkeletonRenderable)
 				{
-					renderable.setAnimation("walk", 0.2f)
+					renderable.setAnimation("walk", 0.5f)
 				}
 
 				return true
