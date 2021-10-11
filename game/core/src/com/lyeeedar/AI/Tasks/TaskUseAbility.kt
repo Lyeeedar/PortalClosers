@@ -6,6 +6,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Systems.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
@@ -75,6 +76,11 @@ class TaskUseAbility : AbstractTask()
 
 		val abilityHolder = e.addOrGet(ComponentType.ActiveAbility) as ActiveAbilityComponent
 		abilityHolder.ability = ability
+
+		if (e.renderable()?.renderable is SkeletonRenderable)
+		{
+			(e.renderable()!!.renderable as SkeletonRenderable).setAnimation("attack", 0.5f)
+		}
 	}
 
 	var obtained: Boolean = false

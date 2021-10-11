@@ -64,7 +64,7 @@ class WorldScreen : AbstractScreen()
 
 		setSkeleton(player)
 
-		for (i in 0 until 1)
+		for (i in 0 until 5)
 		{
 			val rat = EntityLoader.load("Entities/rat")
 			rat.statistics()!!.calculateStatistics(1)
