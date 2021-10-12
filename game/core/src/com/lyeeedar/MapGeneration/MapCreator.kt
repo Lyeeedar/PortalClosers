@@ -122,7 +122,6 @@ class MapCreator
 			player.addToTile(playerStartTile)
 			player.ai()!!.state.set(player.getRef(), world, 0)
 			player.addComponent(ComponentType.Task)
-			player.addComponent(ComponentType.Renderable)
 
 			world.player = player
 			world.addEntity(player)

@@ -33,7 +33,7 @@ class WorldScreen : AbstractScreen()
 
 		skeletonData = json.readSkeletonData(Gdx.files.internal("goblin.json"))
 
-		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (bone positions, slot attachments, etc).
+		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (boneskins = {Array@2566} "[default]" positions, slot attachments, etc).
 
 		val stateData = AnimationStateData(skeletonData) // Defines mixing (crossfading) between animations.
 
@@ -50,6 +50,7 @@ class WorldScreen : AbstractScreen()
 
 		entity.removeComponent(ComponentType.DirectionalSprite)
 		entity.renderable()!!.renderable = SkeletonRenderable(skeleton, state)
+		entity.renderable()!!.renderable.colour.set(1f, 2f, 1f, 1f)
 	}
 
 	override fun create()
@@ -62,7 +63,7 @@ class WorldScreen : AbstractScreen()
 
 		world.tileSize = 50f
 
-		setSkeleton(player)
+		//setSkeleton(player)
 
 		for (i in 0 until 5)
 		{
@@ -94,6 +95,9 @@ class WorldScreen : AbstractScreen()
 
 			true
 		}
+
+		drawFPS = false
+		world.ambientLight.set(0.8f, 0.8f, 0.8f, 1f)
 	}
 
 	override fun doRender(delta: Float)

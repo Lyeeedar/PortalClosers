@@ -22,7 +22,7 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
-					<Floor>Sprites/Defs/DungeonTile</Floor>
+					<Floor>Sprites/Defs/Grass</Floor>
 					<Contents />
 				</SymbolDef>
 			</DefineSymbol>

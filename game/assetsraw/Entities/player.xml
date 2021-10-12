@@ -4,24 +4,6 @@
 			<classID>AI</classID>
 			<AiPath>AI/player</AiPath>
 		</AI>
-		<DirectionalSpriteComponent>
-			<classID>DirectionalSprite</classID>
-			<DirectionalSprite meta:RefKey="DirectionalSprite">
-				<Animations>
-					<Animation>
-						<Name>idle</Name>
-						<Up meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
-							<DrawActualSize>true</DrawActualSize>
-						</Up>
-						<Down meta:RefKey="Sprite">
-							<Name>Oryx/Custom/heroes/ruffletop</Name>
-							<DrawActualSize>true</DrawActualSize>
-						</Down>
-					</Animation>
-				</Animations>
-			</DirectionalSprite>
-		</DirectionalSpriteComponent>
 		<Position>
 			<classID>Position</classID>
 			<Slot>Entity</Slot>
@@ -73,5 +55,12 @@
 				</AbilityData>
 			</Abilities>
 		</Ability>
+		<RenderableComponent>
+			<classID>Renderable</classID>
+			<Renderable meta:RefKey="Skeleton">
+				<Path>goblin</Path>
+				<Scale>0.5</Scale>
+			</Renderable>
+		</RenderableComponent>
 	</Components>
 </Entity>

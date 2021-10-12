@@ -113,7 +113,7 @@
 	</Definition>
 	<Definition Name="ReplaceSprite" Nullable="False" TextColour="246,55,246" IsGlobal="True" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">ReplaceSourceRenderable</Const>
-		<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect,Skeleton" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="BlendDuration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="RestoreOriginal" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
