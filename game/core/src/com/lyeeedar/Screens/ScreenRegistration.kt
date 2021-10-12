@@ -9,6 +9,7 @@ actual enum class ScreenEnum
 	MAPGENERATIONPREVIEW,
 	ABILITYPREVIEW,
 	TEST,
+	PORTAL,
 	INVALID
 }
 
@@ -32,6 +33,7 @@ actual fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
 	screens[ScreenEnum.WORLD] = WorldScreen()
+	screens[ScreenEnum.PORTAL] = PortalScreen()
 
 	return screens
 }
