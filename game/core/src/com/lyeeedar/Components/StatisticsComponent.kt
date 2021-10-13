@@ -178,7 +178,7 @@ class StatisticsComponent : DataComponent()
 		val rating = difficultyRating
 		if (rating != null)
 		{
-			statistics[Statistic.ATK_POWER] = statistics[Statistic.ATK_POWER, 0f] + rating.calculateAttack(level)
+			statistics[Statistic.POWER] = statistics[Statistic.POWER, 0f] + rating.calculateAttack(level)
 			statistics[Statistic.ARMOUR] = statistics[Statistic.ARMOUR, 0f] + rating.calculateArmour(level)
 			statistics[Statistic.MAX_HP] = statistics[Statistic.MAX_HP, 0f] + rating.calculateHP(level, statistics)
 		}
@@ -249,7 +249,7 @@ class StatisticsComponent : DataComponent()
 		}
 		else if (key == "damage")
 		{
-			return getStat(Statistic.ATK_POWER)
+			return getStat(Statistic.POWER)
 		}
 
 		for (stat in Statistic.Values)
@@ -308,7 +308,7 @@ class StatisticsComponent : DataComponent()
 		variableMap.put(prefix + "hp", hp)
 		variableMap.put(prefix + "level", level.toFloat())
 
-		val attack = getStat(Statistic.ATK_POWER)
+		val attack = getStat(Statistic.POWER)
 		variableMap.put(prefix + "damage", attack)
 
 		for (stat in Statistic.Values)

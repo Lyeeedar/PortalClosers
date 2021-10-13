@@ -93,10 +93,7 @@
 		<Data Name="BaseStatistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Base-->
 			<Data Name="Max_hp" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<!--Offense-->
-			<Data Name="Atk_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Ability_power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-			<Data Name="Crit_chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+			<Data Name="Power" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<!--Defense-->
 			<Data Name="Armour" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 			<Data Name="Regeneration" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />

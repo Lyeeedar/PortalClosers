@@ -255,7 +255,7 @@ fun loadAbilityTestGrid(gridStr: String): Array2D<Tile>
 
 					stats.faction = "enemy"
 					stats.baseStatistics[Statistic.MAX_HP] = 200f
-					stats.baseStatistics[Statistic.ATK_POWER] = 100f
+					stats.baseStatistics[Statistic.POWER] = 100f
 					stats.baseStatistics[Statistic.ARMOUR] = 100f
 					stats.calculateStatistics(1)
 
@@ -273,9 +273,8 @@ fun loadAbilityTestGrid(gridStr: String): Array2D<Tile>
 
 					stats.faction = "ally"
 					stats.baseStatistics[Statistic.MAX_HP] = 200f
-					stats.baseStatistics[Statistic.ATK_POWER] = 100f
+					stats.baseStatistics[Statistic.POWER] = 100f
 					stats.baseStatistics[Statistic.ARMOUR] = 100f
-					stats.baseStatistics[Statistic.CRIT_CHANCE] = 0.2f
 					stats.calculateStatistics(1)
 
 					if (c == '@')
