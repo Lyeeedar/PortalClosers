@@ -1,0 +1,36 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="RenderedLayeredSprite" Nullable="False" TextColour="238,238,30" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Layers" Keys="ImageLayer" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="AbstractImageModifier" Nullable="False" TextColour="129,204,129" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractImageModifierDefs" Keys="Gradient,Grayscale,Stroke,Tint" meta:RefKey="ReferenceDef" />
+	<Definition Name="GradientColour" Nullable="False" TextColour="138,204,138" meta:RefKey="StructDef">
+		<Data Name="Time" Min="0" Max="1" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+	</Definition>
+	<Definition Name="Gradient" Nullable="False" TextColour="229,51,51" Extends="AbstractImageModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Gradient</Const>
+		<Data Name="Type" EnumValues="Internal,Radial,Vertical,Horizontal" Default="Internal" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Colours" Keys="GradientColour" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="Grayscale" Nullable="False" TextColour="47,47,204" Extends="AbstractImageModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Grayscale</Const>
+	</Definition>
+	<Definition Name="ImageLayer" Nullable="False" TextColour="150,150,207" meta:RefKey="StructDef">
+		<Data Name="Path" BasePath="Sprites" StripExtension="true" AllowedFileTypes="png" SkipIfDefault="True" Default="white" meta:RefKey="File" />
+		<Data Name="DrawActualSize" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Clip" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Scale" Min="0" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Modifiers" DefKey="AbstractImageModifierDefs" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="Stroke" Nullable="False" TextColour="214,214,48" Extends="AbstractImageModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Stroke</Const>
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+		<Data Name="Thickness" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Tint" Nullable="False" TextColour="204,204,147" Extends="AbstractImageModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Tint</Const>
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+	</Definition>
+</Definitions>

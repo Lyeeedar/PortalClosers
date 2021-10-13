@@ -5,8 +5,10 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import java.util.*
 import squidpony.squidmath.LightRNG
@@ -119,6 +121,9 @@ class MoveVariant : XmlDataClass()
 
 	lateinit var ability: AbilityData
 
+	@DataLayeredSprite
+	lateinit var icon: Sprite
+
 	@Transient
 	var actualAbility: Ability? = null
 
@@ -138,6 +143,7 @@ class MoveVariant : XmlDataClass()
 		val abilityEl = xmlData.getChildByName("Ability")!!
 		ability = AbilityData()
 		ability.load(abilityEl)
+		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 	}
 	//endregion
 }

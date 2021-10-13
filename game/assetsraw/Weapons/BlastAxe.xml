@@ -32,13 +32,33 @@
 										<Time>0.16948155</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage</Damage>
-										<Type>None</Type>
 									</Damage>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
 						<TargetType>Target_enemy</TargetType>
 					</Ability>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<Layers>
+							<ImageLayer>
+								<Path>Icons/Active</Path>
+							</ImageLayer>
+							<ImageLayer>
+								<Path>GameIconsRaw/explosion/meteor-impact</Path>
+								<Modifiers>
+									<Tint>
+										<classID>Tint</classID>
+										<Colour>153,102,32,255</Colour>
+									</Tint>
+									<Stroke>
+										<classID>Stroke</classID>
+										<Colour>237,178,24,255</Colour>
+										<Thickness>5</Thickness>
+									</Stroke>
+								</Modifiers>
+							</ImageLayer>
+						</Layers>
+					</Icon>
 				</MoveVariant>
 				<MoveVariant>
 					<AvailableCondition>1</AvailableCondition>
@@ -57,13 +77,18 @@
 										<Time>0.09990387</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage</Damage>
-										<Type>None</Type>
 									</Damage>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
 						<TargetType>Target_enemy</TargetType>
 					</Ability>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<Layers>
+							<ImageLayer />
+							<ImageLayer />
+						</Layers>
+					</Icon>
 				</MoveVariant>
 			</Variants>
 		</WeaponMove>
@@ -84,6 +109,37 @@
 						</ActionSequence>
 						<TargetType>Self</TargetType>
 					</Ability>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<Layers>
+							<ImageLayer>
+								<Path>Icons/Active</Path>
+							</ImageLayer>
+							<ImageLayer>
+								<Path>GameIconsRaw/weapon/chaingun</Path>
+								<Modifiers>
+									<Gradient>
+										<classID>Gradient</classID>
+										<Type>Radial</Type>
+										<Colours>
+											<GradientColour>
+												<Time>0.0031117012</Time>
+												<Colour>71,71,62,255</Colour>
+											</GradientColour>
+											<GradientColour>
+												<Time>0.994514</Time>
+												<Colour>219,172,50,255</Colour>
+											</GradientColour>
+										</Colours>
+									</Gradient>
+									<Stroke>
+										<classID>Stroke</classID>
+										<Colour>222,232,48,255</Colour>
+										<Thickness>3</Thickness>
+									</Stroke>
+								</Modifiers>
+							</ImageLayer>
+						</Layers>
+					</Icon>
 				</MoveVariant>
 			</Variants>
 		</WeaponMove>
@@ -116,8 +172,6 @@
 										<Time>0.07580982</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage</Damage>
-										<Type>None</Type>
-										<AlwaysCrit>true</AlwaysCrit>
 									</Damage>
 									<ConsumeResources>
 										<Time>0.1074929</Time>
@@ -130,9 +184,43 @@
 						<Cooldown>5</Cooldown>
 						<TargetType>Tile</TargetType>
 					</Ability>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<Layers>
+							<ImageLayer>
+								<Path>Icons/Active</Path>
+							</ImageLayer>
+							<ImageLayer>
+								<Path>GameIconsRaw/explosion/corner-explosion</Path>
+								<Modifiers>
+									<Gradient>
+										<classID>Gradient</classID>
+										<Type>Internal</Type>
+										<Colours>
+											<GradientColour>
+												<Colour>171,95,37,255</Colour>
+											</GradientColour>
+											<GradientColour>
+												<Time>0.4061897</Time>
+												<Colour>224,154,38,255</Colour>
+											</GradientColour>
+											<GradientColour>
+												<Time>0.9307164</Time>
+												<Colour>252,243,11,255</Colour>
+											</GradientColour>
+											<GradientColour>
+												<Time>1</Time>
+												<Colour>255,249,108,255</Colour>
+											</GradientColour>
+										</Colours>
+									</Gradient>
+								</Modifiers>
+							</ImageLayer>
+						</Layers>
+					</Icon>
 				</MoveVariant>
 			</Variants>
 		</WeaponMove>
 	</Moves>
 	<DefaultResources>5</DefaultResources>
+	<Handlers />
 </Weapon>
