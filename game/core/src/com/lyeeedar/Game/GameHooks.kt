@@ -12,7 +12,7 @@ actual fun save() {
 actual fun newGame() {
 	Statics.settings = Settings()
 
-	Statics.game.switchScreen(ScreenEnum.CITY)
+	Statics.game.switchScreen(ScreenEnum.WORLD)
 
 	Statics.analytics.tutorialBegin()
 
@@ -33,6 +33,7 @@ fun World<Tile>.addSystems()
 	systems.add(WaterSystem(this))
 	systems.add(EventSystem(this))
 	systems.add(AbilitySystem(this))
+	systems.add(WeaponSystem(this))
 
 	// render
 	systems.add(BloodSystem(this))

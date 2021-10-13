@@ -34,29 +34,14 @@ class DamageEquations
 			return mitigation
 		}
 
-		// FinalDamage = AttackDam * ArmourMitigation * DR
+		// FinalDamage = AttackDam * ArmourMitigation * DR * elementalBonus
 		fun calculateFinalDamage(defenderStats: StatisticsComponent, damage: AttackDamage)
 		{
-			if (damage.type == DamageType.PURE)
-			{
-				return
-			}
-
-			var armourMitigation = calculateArmourMitigation(defenderStats, damage)
-			if (damage.type == DamageType.VORPAL && damage.wasCrit)
-			{
-				armourMitigation = 1f
-			}
-
+			val armourMitigation = calculateArmourMitigation(defenderStats, damage)
 			val dr = defenderStats.getStat(Statistic.DR)
+			val elementalBonus = damage.type.getDamageAgainst(defenderStats.elementalType)
 
-			damage.damage = damage.damage * armourMitigation * (1f - dr)
-		}
-
-		fun wasCrit(rng: LightRNG, attackerStats: StatisticsComponent): Boolean
-		{
-			val critChance = attackerStats.getStat(Statistic.CRIT_CHANCE)
-			return rng.nextFloat() < critChance
+			damage.damage = damage.damage * armourMitigation * (1f - dr) * elementalBonus
 		}
 
 		fun checkAegis(rng: LightRNG, defenderStats: StatisticsComponent): Boolean
@@ -79,13 +64,8 @@ class DamageEquations
 
 			val eventSystem = world.eventSystem()!!
 
-			if (wasCrit(rng, attackerStats))
-			{
-				damage.wasCrit = true
-			}
-
-			// try blocking, only if not pure
-			if (damage.type != DamageType.PURE && checkAegis(rng, defenderStats))
+			// try blocking
+			if (checkAegis(rng, defenderStats))
 			{
 				if (EventSystem.isEventRegistered(EventType.BLOCK, defender))
 				{
@@ -101,11 +81,6 @@ class DamageEquations
 
 			// apply modified dam
 			calculateFinalDamage(defenderStats, damage)
-			// add final dam to stuff
-			if (damage.wasCrit)
-			{
-				damage.type.applyCriticalEffect(attacker, defender, damage, world, rng)
-			}
 
 			defenderStats.damage(damage)
 			defender.ai()?.activate(defender)
@@ -122,7 +97,7 @@ class DamageEquations
 				attackerStats.summoner!!.statistics()!!.attackDamageDealt += damage.damage
 			}
 
-			if (damage.wasCrit || Random.random(Random.sharedRandom) < 0.5f)
+			if (Random.random(Random.sharedRandom) < 0.5f)
 			{
 				if (world.bloodSystem() != null)
 				{
@@ -150,17 +125,6 @@ class DamageEquations
 
 			// do damage events
 
-			// crit
-			if (damage.wasCrit)
-			{
-				if (EventSystem.isEventRegistered(EventType.CRIT, attacker))
-				{
-					eventSystem.addEvent(EventType.CRIT, attacker.getRef(), defender.getRef(), mapOf(
-						Pair("damage", damage.damage),
-						Pair("dist", attackerPos.dist(defenderPos).toFloat())))
-				}
-			}
-
 			// deal damage
 			if (EventSystem.isEventRegistered(EventType.DEAL_DAMAGE, attacker))
 			{
@@ -186,7 +150,4 @@ class DamageEquations
 	}
 }
 
-class AttackDamage(var damage: Float, var type: DamageType)
-{
-	var wasCrit: Boolean = false
-}
+class AttackDamage(var damage: Float, var type: Elements)

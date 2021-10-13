@@ -108,9 +108,9 @@ class TaskCombo(): AbstractTask()
 
 		if (canUseAbility)
 		{
-			if (EventSystem.isEventRegistered(EventType.USE_ABILITY, e))
+			if (EventSystem.isEventRegistered(EventType.ATTACK, e))
 			{
-				world.eventSystem()?.addEvent(EventType.USE_ABILITY, e.getRef(), e.getRef())
+				world.eventSystem()?.addEvent(EventType.ATTACK, e.getRef(), e.getRef())
 			}
 
 			ability.cooldown = ability.data.cooldown

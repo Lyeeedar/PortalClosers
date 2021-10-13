@@ -19,6 +19,7 @@
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<BloodColour>255,0,0,255</BloodColour>
+			<Element>None</Element>
 		</Statistics>
 		<LightComponent>
 			<classID>Light</classID>
@@ -28,33 +29,6 @@
 				<Range>3</Range>
 			</Light>
 		</LightComponent>
-		<Ability>
-			<classID>Ability</classID>
-			<Abilities>
-				<AbilityData>
-					<ActionSequence meta:RefKey="ActionSequence">
-						<Actions>
-							<Timeline>
-								<OneShotFX>
-									<classID>SpawnOneShotParticle</classID>
-									<Particle meta:RefKey="ParticleEffect">
-										<Name>EnemyAttacks/slash</Name>
-									</Particle>
-									<SpawnBehaviour>Immediate</SpawnBehaviour>
-								</OneShotFX>
-								<Damage>
-									<Time>0.115900554</Time>
-									<classID>Damage</classID>
-									<Damage>300</Damage>
-									<Type>None</Type>
-								</Damage>
-							</Timeline>
-						</Actions>
-					</ActionSequence>
-					<TargetType>Tile</TargetType>
-				</AbilityData>
-			</Abilities>
-		</Ability>
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
@@ -62,5 +36,9 @@
 				<Scale>0.5</Scale>
 			</Renderable>
 		</RenderableComponent>
+		<Weapon>
+			<classID>Weapon</classID>
+			<Weapon>Weapons/BlastAxe</Weapon>
+		</Weapon>
 	</Components>
 </Entity>

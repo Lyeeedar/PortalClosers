@@ -17,6 +17,7 @@ class Ability(val data: AbilityData)
 {
 	var cooldown = 0
 	var remainingUsages = data.usages
+	var available = true
 
 	var justUsed = false
 

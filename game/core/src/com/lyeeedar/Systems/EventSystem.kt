@@ -12,16 +12,14 @@ enum class EventType
 {
 	// Actions
 	MOVE,
-	USE_ABILITY,
+	ATTACK,
 
 	// Self events
 	DEAL_DAMAGE,
 	TAKE_DAMAGE,
 	HEALED,
-	CRIT,
 	BLOCK,
 	KILL,
-	AGRO_CHANGED,
 
 	// General events
 	DEATH,
@@ -29,7 +27,7 @@ enum class EventType
 }
 
 fun World<*>.eventSystem() = systems.filterIsInstance<EventSystem>().firstOrNull()
-class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.EventHandler).get())
+class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().any(ComponentType.EventHandler, ComponentType.Statistics, ComponentType.Weapon).get())
 {
 	private val queuedEvents = Array<EventData>()
 	private val executingArray = Array<EventData>()
@@ -78,6 +76,12 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			if (eventHandler != null)
 			{
 				checkHandlers(event, eventHandler.handlers)
+			}
+
+			val weapon = source.weapon()
+			if (weapon != null)
+			{
+				checkHandlers(event, weapon.weapon.handlers)
 			}
 
 			event.free()
@@ -145,6 +149,15 @@ class EventSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntiti
 			if (eventHandler != null)
 			{
 				if ((eventHandler.handlers[type]?.size ?: 0) > 0)
+				{
+					return true
+				}
+			}
+
+			val weapon = entity.weapon()
+			if (weapon != null)
+			{
+				if ((weapon.weapon.handlers[type]?.size ?: 0) > 0)
 				{
 					return true
 				}

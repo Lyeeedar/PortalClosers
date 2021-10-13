@@ -93,9 +93,8 @@
 	<Definition Name="Damage" Nullable="False" TextColour="204,164,204" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Damage</Const>
 		<Data Name="Damage" SkipIfDefault="False" Default="source.damage" meta:RefKey="String" />
-		<Data Name="Type" EnumValues="None,Pure,Fire,Ice,Lightning,Vorpal,Poison,Bleed,Acid" Default="None" SkipIfDefault="False" VisibleIf="UseAttackDamageType == false" meta:RefKey="Enum" />
-		<Data Name="AlwaysCrit" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
-		<Data Name="UseAttackDamageType" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Type" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Poison,Acid,Prismatic,Necrotic,Cosmic,Vorpal" Default="None" SkipIfDefault="False" VisibleIf="UseAttackDamageType == false" meta:RefKey="Enum" />
+		<Data Name="UseAttackDamageType" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="Block" Nullable="False" TextColour="199,18,117" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">BlockTurn</Const>
@@ -128,6 +127,10 @@
 		<Const Name="classID">Heal</Const>
 		<Data Name="Amount" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 	</Definition>
+	<Definition Name="BuildResources" Nullable="False" TextColour="222,137,222" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">BuildResources</Const>
+		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
 	<Definition Name="LockTargets" Nullable="False" TextColour="252,102,9" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
 	</Definition>
@@ -146,5 +149,9 @@
 		<Data Name="Above" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="KillOnEnd" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="ConsumeResources" Nullable="False" TextColour="149,227,227" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">ConsumeResources</Const>
+		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

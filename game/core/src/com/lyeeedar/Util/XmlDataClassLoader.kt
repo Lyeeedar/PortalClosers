@@ -62,9 +62,11 @@ actual class XmlDataClassLoader
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
+				"BuildResources" -> com.lyeeedar.ActionSequence.Actions.BuildResourcesAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
 				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
 				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
+				"ConsumeResources" -> com.lyeeedar.ActionSequence.Actions.ConsumeResourcesAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
 		}
@@ -89,7 +91,9 @@ actual class XmlDataClassLoader
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
 				"RestoreTargets" -> com.lyeeedar.ActionSequence.Actions.RestoreTargetsAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
+				"BuildResources" -> com.lyeeedar.ActionSequence.Actions.BuildResourcesAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
+				"ConsumeResources" -> com.lyeeedar.ActionSequence.Actions.ConsumeResourcesAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractOneShotActionSequenceAction!")
 			}
 		}
@@ -187,6 +191,7 @@ actual class XmlDataClassLoader
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()
 				"Name" -> com.lyeeedar.Components.NameComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
+				"Weapon" -> com.lyeeedar.Components.WeaponComponentData()
 				"Position" -> com.lyeeedar.Components.PositionComponentData()
 				"Ability" -> com.lyeeedar.Components.AbilityComponentData()
 				"AI" -> com.lyeeedar.Components.AIComponentData()

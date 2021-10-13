@@ -24,6 +24,7 @@ class AbilityData : XmlDataClass()
 
 	var usages: Int = -1
 
+	@DataValue(visibleIf = "TargetType != Self")
 	@DataVector(name1 = "Min", name2 = "Max")
 	var range: Point = Point(1, 1)
 	lateinit var targetType: TargetType

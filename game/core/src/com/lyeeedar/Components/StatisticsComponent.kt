@@ -4,10 +4,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.Pool
-import com.lyeeedar.Game.AttackDamage
-import com.lyeeedar.Game.Buff
-import com.lyeeedar.Game.DamageType
-import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Game.*
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
@@ -20,6 +17,7 @@ class StatisticsComponentData : AbstractComponentData()
 	var faction: String = ""
 	var difficultyRating: DifficultyRating? = null
 	var bloodColour: Colour = Colour.RED
+	var element: Elements = Elements.NONE
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -42,6 +40,7 @@ class StatisticsComponentData : AbstractComponentData()
 			difficultyRating!!.load(difficultyRatingEl)
 		}
 		bloodColour = AssetManager.tryLoadColour(xmlData.getChildByName("BloodColour"))!!
+		element = Elements.valueOf(xmlData.get("Element", Elements.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
 	}
 	override val classID: String = "Statistics"
 	//endregion
@@ -53,6 +52,8 @@ class StatisticsComponent : DataComponent()
 
 	val baseStatistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
 	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap(Statistic::class.java)
+
+	var elementalType: Elements = Elements.NONE
 
 	var difficultyRating: DifficultyRating? = null
 
@@ -152,6 +153,7 @@ class StatisticsComponent : DataComponent()
 		messagesToShow.clear()
 		totalHpLost = 0f
 		buffs.clear()
+		elementalType = Elements.NONE
 	}
 
 	override fun initialiseFrom(data: AbstractComponentData)
@@ -162,6 +164,7 @@ class StatisticsComponent : DataComponent()
 		faction = data.faction
 		difficultyRating = data.difficultyRating
 		bloodColour = data.bloodColour
+		elementalType = data.element
 	}
 
 	fun calculateStatistics(level: Int)
@@ -194,8 +197,9 @@ class StatisticsComponent : DataComponent()
 
 	fun damage(damage: Float)
 	{
-		damage(AttackDamage(damage, DamageType.NONE))
+		damage(AttackDamage(damage, elementalType))
 	}
+
 	fun damage(damage: AttackDamage)
 	{
 		if (damage.damage == 0f) return
@@ -207,15 +211,9 @@ class StatisticsComponent : DataComponent()
 		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
 
 		var message = ""
-		if (damage.wasCrit)
-		{
-			message += damage.type.niceName + ": "
-		}
-
 		message += damage.damage.ciel().toString()
 
-		val colour = if (damage.wasCrit) damage.type.colour else DamageType.NONE.colour
-		addMessage(message, colour, size)
+		addMessage(message, Colour.RED, size)
 	}
 
 	fun heal(amount: Float)

@@ -1,0 +1,138 @@
+<Weapon xmlns:meta="Editor">
+	<Moves>
+		<WeaponMove>
+			<Variants>
+				<MoveVariant>
+					<AvailableCondition>resources &gt; 0</AvailableCondition>
+					<Ability meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<ConsumeResources>
+										<classID>ConsumeResources</classID>
+									</ConsumeResources>
+									<OneShotFX>
+										<Time>0.0207088</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>EnemyAttacks/slash</Name>
+										</Particle>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
+									</OneShotFX>
+									<OneShotFX>
+										<Time>0.1501962</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>Abilities/GroundEruption</Name>
+										</Particle>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
+										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+									</OneShotFX>
+									<Damage>
+										<Time>0.16948155</Time>
+										<classID>Damage</classID>
+										<Damage>source.damage</Damage>
+										<Type>None</Type>
+									</Damage>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<TargetType>Target_enemy</TargetType>
+					</Ability>
+				</MoveVariant>
+				<MoveVariant>
+					<AvailableCondition>1</AvailableCondition>
+					<Ability meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<OneShotFX>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>EnemyAttacks/slash</Name>
+										</Particle>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
+									</OneShotFX>
+									<Damage>
+										<Time>0.09990387</Time>
+										<classID>Damage</classID>
+										<Damage>source.damage</Damage>
+										<Type>None</Type>
+									</Damage>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<TargetType>Target_enemy</TargetType>
+					</Ability>
+				</MoveVariant>
+			</Variants>
+		</WeaponMove>
+		<WeaponMove>
+			<Variants>
+				<MoveVariant>
+					<AvailableCondition>1</AvailableCondition>
+					<Ability meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<BuildResources>
+										<classID>BuildResources</classID>
+										<Count>5</Count>
+									</BuildResources>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<TargetType>Self</TargetType>
+					</Ability>
+				</MoveVariant>
+			</Variants>
+		</WeaponMove>
+		<WeaponMove>
+			<Variants>
+				<MoveVariant>
+					<AvailableCondition>1</AvailableCondition>
+					<Ability meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<Permute>
+										<classID>Permute</classID>
+										<AppendTargets>true</AppendTargets>
+										<HitPoints>
+											<Line>###</Line>
+											<Line>.@.</Line>
+										</HitPoints>
+									</Permute>
+									<OneShotFX>
+										<Time>0.022086326</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>Abilities/Fireburst</Name>
+										</Particle>
+										<SpawnBehaviour>From_source</SpawnBehaviour>
+										<SpawnDuration>0.1</SpawnDuration>
+									</OneShotFX>
+									<Damage>
+										<Time>0.07580982</Time>
+										<classID>Damage</classID>
+										<Damage>source.damage</Damage>
+										<Type>None</Type>
+										<AlwaysCrit>true</AlwaysCrit>
+									</Damage>
+									<ConsumeResources>
+										<Time>0.1074929</Time>
+										<classID>ConsumeResources</classID>
+										<Count>5</Count>
+									</ConsumeResources>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<Cooldown>5</Cooldown>
+						<TargetType>Tile</TargetType>
+					</Ability>
+				</MoveVariant>
+			</Variants>
+		</WeaponMove>
+	</Moves>
+	<DefaultResources>5</DefaultResources>
+</Weapon>

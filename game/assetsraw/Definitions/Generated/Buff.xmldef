@@ -26,15 +26,13 @@
 		<Data Name="EventHandlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Actions-->
 			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
-			<Data Name="Use_ability" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<!--Self events-->
 			<Data Name="Deal_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Take_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Healed" Keys="EventAndCondition" meta:RefKey="Collection" />
-			<Data Name="Crit" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
-			<Data Name="Agro_changed" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<!--General events-->
 			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />

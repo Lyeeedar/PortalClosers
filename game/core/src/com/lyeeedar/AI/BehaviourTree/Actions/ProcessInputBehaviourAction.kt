@@ -122,7 +122,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val attack = entity.ability()!!.abilities[0]
+				val attack = entity.weapon()!!.weapon.moves[0].getAsAbility()
 				potentialTargets.clear()
 
 				if (attack.data.range.y == 1)

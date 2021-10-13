@@ -1,0 +1,29 @@
+<Definitions Colour="154,186,114" Icon="Sprites/Oryx/uf_split/uf_items/weapon_axe_exotic1.png" xmlns:meta="Editor">
+	<Definition Name="Weapon" Nullable="False" TextColour="79,79,204" meta:RefKey="Struct">
+		<Data Name="Moves" Keys="WeaponMove" meta:RefKey="Collection" />
+		<Data Name="DefaultResources" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="MinResources" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="MaxResources" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Handlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
+			<!--Actions-->
+			<Data Name="Move" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Attack" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--Self events-->
+			<Data Name="Deal_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Take_damage" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Healed" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Block" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="Kill" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<!--General events-->
+			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
+			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
+		</Data>
+	</Definition>
+	<Definition Name="MoveVariant" Nullable="False" TextColour="204,11,11" meta:RefKey="StructDef">
+		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" ToolTip="Known variables: resources" meta:RefKey="String" />
+		<Data Name="Ability" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="WeaponMove" Nullable="False" TextColour="204,204,9" meta:RefKey="StructDef">
+		<Data Name="Variants" Keys="MoveVariant" meta:RefKey="Collection" />
+	</Definition>
+</Definitions>

@@ -6,10 +6,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.isEnemies
 import com.lyeeedar.Components.statistics
-import com.lyeeedar.Game.AttackDamage
-import com.lyeeedar.Game.DamageEquations
-import com.lyeeedar.Game.DamageType
-import com.lyeeedar.Game.Statistic
+import com.lyeeedar.Game.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.DataCompiledExpression
@@ -23,10 +20,9 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	lateinit var damage: CompiledExpression
 
 	@DataValue(visibleIf = "UseAttackDamageType == false")
-	var type: DamageType = DamageType.NONE
+	var type: Elements = Elements.NONE
 
-	var alwaysCrit: Boolean = false
-	var useAttackDamageType: Boolean = false
+	var useAttackDamageType: Boolean = true
 
 	//region non-data
 	val hitEntities = ObjectSet<Entity>()
@@ -65,7 +61,6 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 
 					val attackType = type
 					val attackObj = AttackDamage(attackDam, attackType)
-					attackObj.wasCrit = alwaysCrit
 
 					DamageEquations.doAttack(state.rng, source, entity, attackObj, state.world)
 				}
@@ -78,9 +73,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		damage = CompiledExpression(xmlData.get("Damage", "source.damage")!!)
-		type = DamageType.valueOf(xmlData.get("Type", DamageType.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
-		alwaysCrit = xmlData.getBoolean("AlwaysCrit", false)
-		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", false)
+		type = Elements.valueOf(xmlData.get("Type", Elements.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
+		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", true)
 	}
 	override val classID: String = "Damage"
 	//endregion
