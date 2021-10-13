@@ -208,12 +208,20 @@ class StatisticsComponent : DataComponent()
 
 		val maxHP = getStat(Statistic.MAX_HP)
 		val alpha = damage.damage / maxHP
-		val size = MathUtils.lerp(0.25f, 1f, MathUtils.clamp(alpha, 0f, 1f))
+		val size = MathUtils.lerp(0.6f, 1.3f, MathUtils.clamp(alpha, 0f, 1.3f))
 
 		var message = ""
 		message += damage.damage.ciel().toString()
 
-		addMessage(message, Colour.RED, size)
+		val effectiveness = damage.type.getDamageAgainst(elementalType)
+		val colour = when
+		{
+			effectiveness > 1.2f -> Colour.RED
+			effectiveness > 1f -> Colour.ORANGE
+			else -> Colour.LIGHT_GRAY
+		}
+
+		addMessage(message, colour, size)
 	}
 
 	fun heal(amount: Float)

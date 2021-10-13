@@ -13,6 +13,7 @@
 				<Damage>4</Damage>
 			</DifficultyRating>
 			<BloodColour>255,0,0,255</BloodColour>
+			<Element>Lightning</Element>
 		</Statistics>
 		<AI>
 			<classID>AI</classID>

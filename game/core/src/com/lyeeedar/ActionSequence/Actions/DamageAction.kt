@@ -55,11 +55,10 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					state.writeVariables(map)
 
 					var damage = damage.evaluate(map, state.rng)
-					damage += damage * sourceStats.getStat(Statistic.POWER)
 
 					val attackDam = DamageEquations.getAttackDam(state.rng, damage)
 
-					val attackType = type
+					val attackType = if (type == Elements.NONE) sourceStats.elementalType else type
 					val attackObj = AttackDamage(attackDam, attackType)
 
 					DamageEquations.doAttack(state.rng, source, entity, attackObj, state.world)
