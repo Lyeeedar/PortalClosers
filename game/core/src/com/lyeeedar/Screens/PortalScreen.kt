@@ -49,7 +49,7 @@ class PortalScreen : AbstractScreen()
 						{
 							val next = SpriteWidget(AssetManager.loadSprite("Oryx/Custom/terrain/flag_combat", drawActualSize = true))
 							next.addClickListener {
-								var fullscreenTable: FullscreenTable? = null
+								var fullscreenTable: Table? = null
 								fullscreenTable = FullscreenTable.createCloseable(scene2d.table {
 									label("Fight some stuff", skin = Statics.skin)
 									row()
