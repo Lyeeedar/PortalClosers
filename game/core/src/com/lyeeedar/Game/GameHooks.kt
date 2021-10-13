@@ -12,7 +12,7 @@ actual fun save() {
 actual fun newGame() {
 	Statics.settings = Settings()
 
-	Statics.game.switchScreen(ScreenEnum.PORTAL)
+	Statics.game.switchScreen(ScreenEnum.CITY)
 
 	Statics.analytics.tutorialBegin()
 

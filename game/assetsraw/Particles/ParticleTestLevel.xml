@@ -1,52 +1,61 @@
-<Data>
-    <Symbols>
-        <Symbol>
-            <Char>.</Char>
-            <Sprite RefKey="Sprite">
-                <Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
-            </Sprite>
-        </Symbol>
-        <Symbol IsWall="true">
-            <Char>#</Char>
-            <TilingSprite RefKey="TilingSprite">
-                <Name>Wall</Name>
-                <Front RefKey="Sprite">
-                    <Name>Oryx/uf_split/uf_terrain/wall_dungeon_14</Name>
-                </Front>
-                <Top RefKey="Sprite">
-                    <Name>Oryx/uf_split/uf_terrain/wall_dungeon_7</Name>
-                </Top>
-                <Overhang RefKey="Sprite">
-                    <Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
-                </Overhang>
-            </TilingSprite>
-        </Symbol>
-        <Symbol>
-            <Char>~</Char>
-            <Sprite RefKey="Sprite">
-                <Name>Oryx/uf_split/uf_terrain/water_green</Name>
-            </Sprite>
-        </Symbol>
-        <Symbol>
-            <Char>!</Char>
-            <Sprite RefKey="Sprite">
-                <Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
-            </Sprite>
-            <Sprite RefKey="Sprite">
-                <Name>Oryx/uf_split/uf_heroes/rat</Name>
-                <DrawActualSize>true</DrawActualSize>
-            </Sprite>
-        </Symbol>
-    </Symbols>
-    <Rows>
-        <Line>########..#</Line>
-        <Line>#~~~......#</Line>
-        <Line>#~~~......#</Line>
-        <Line>#~~~......#</Line>
-        <Line>#~~~......#</Line>
-        <Line>#......!###</Line>
-        <Line>#..!....~~#</Line>
-        <Line>#......!~~#</Line>
-        <Line>#.......~~#</Line>
-    </Rows>
-</Data>
+<ParticleTestLevel xmlns:meta="Editor">
+	<Symbols>
+		<ParticleEditorSymbol>
+			<Char>.</Char>
+			<Sprites>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
+				</Sprite>
+			</Sprites>
+		</ParticleEditorSymbol>
+		<ParticleEditorSymbol>
+			<Char>#</Char>
+			<Sprites>
+				<Sprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_14</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_7</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
+					</Overhang>
+				</Sprite>
+			</Sprites>
+			<IsWall>true</IsWall>
+		</ParticleEditorSymbol>
+		<ParticleEditorSymbol>
+			<Char>~</Char>
+			<Sprites>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/water_green</Name>
+				</Sprite>
+			</Sprites>
+		</ParticleEditorSymbol>
+		<ParticleEditorSymbol>
+			<Char>!</Char>
+			<Sprites>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
+				</Sprite>
+				<Sprite meta:RefKey="Skeleton">
+					<Path>goblin</Path>
+					<Scale>0.5</Scale>
+				</Sprite>
+			</Sprites>
+		</ParticleEditorSymbol>
+	</Symbols>
+	<Grid>
+		<Line>########..#</Line>
+		<Line>#~~~......#</Line>
+		<Line>#~~~......#</Line>
+		<Line>#~~~......#</Line>
+		<Line>#......!###</Line>
+		<Line>#..!....~~#</Line>
+		<Line>#......!~~#</Line>
+		<Line>#.......~~#</Line>
+	</Grid>
+</ParticleTestLevel>

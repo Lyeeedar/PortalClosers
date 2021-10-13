@@ -1,18 +1,13 @@
 package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.IntMap
-import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.ciel
-import com.lyeeedar.Util.floor
 
 class Portal
 {
 	val encounters = Array<Array<Encounter>>()
 	var current: Encounter? = null
 
-	val connectionMap = mapOf<String, kotlin.Array<IntArray>>(
+	private val connectionMap = mapOf(
 			"2to3" to arrayOf(intArrayOf(0,1), intArrayOf(1,2)),
 			"3to4" to arrayOf(intArrayOf(0,1), intArrayOf(1,2), intArrayOf(2,3)),
 			"4to3" to arrayOf(intArrayOf(0), intArrayOf(0,1), intArrayOf(1,2), intArrayOf(2)),
@@ -65,7 +60,7 @@ class Portal
 		}
 	}
 
-	fun generateEncounters(count: Int): Array<Encounter>
+	private fun generateEncounters(count: Int): Array<Encounter>
 	{
 		val output = Array<Encounter>()
 		for (i in 0 until count)

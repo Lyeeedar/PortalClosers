@@ -10,6 +10,7 @@ actual enum class ScreenEnum
 	ABILITYPREVIEW,
 	TEST,
 	PORTAL,
+	CITY,
 	INVALID
 }
 
@@ -34,6 +35,7 @@ actual fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 
 	screens[ScreenEnum.WORLD] = WorldScreen()
 	screens[ScreenEnum.PORTAL] = PortalScreen()
+	screens[ScreenEnum.CITY] = CityScreen()
 
 	return screens
 }

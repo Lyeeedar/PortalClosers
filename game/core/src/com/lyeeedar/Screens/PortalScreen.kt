@@ -2,15 +2,21 @@ package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Game.Encounter
 import com.lyeeedar.Game.Portal
+import com.lyeeedar.UI.FullscreenTable
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.UI.tint
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
+import ktx.scene2d.label
 import ktx.scene2d.scene2d
 import ktx.scene2d.table
+import ktx.scene2d.textButton
 
 class PortalScreen : AbstractScreen()
 {
@@ -43,8 +49,20 @@ class PortalScreen : AbstractScreen()
 						{
 							val next = SpriteWidget(AssetManager.loadSprite("Oryx/Custom/terrain/flag_combat", drawActualSize = true))
 							next.addClickListener {
-								portal.completeEncounter(encounter)
-								update()
+								var fullscreenTable: FullscreenTable? = null
+								fullscreenTable = FullscreenTable.createCloseable(scene2d.table {
+									label("Fight some stuff", skin = Statics.skin)
+									row()
+									add(SpriteWidget(AssetManager.loadSprite("Oryx/Custom/terrain/flag_enemy")))
+									row()
+									textButton("Fight", skin = Statics.skin) {
+										this.addClickListener {
+											portal.completeEncounter(encounter)
+											update()
+											fullscreenTable?.remove()
+										}
+									}
+								})
 							}
 							add(next)
 						}

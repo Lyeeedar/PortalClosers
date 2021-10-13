@@ -30,6 +30,9 @@ tasks.register<Jar>("mapGenerationPreviewDist") {
 	from(files(sourceSets.main.get().output.classesDirs))
 	from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 
+	destinationDir = file("$rootDir/game/caches")
+	archiveFileName.set("mapViewer.jar")
+
 	manifest {
 		attributes["Main-Class"] = "com.lyeeedar.desktop.MapGenerationPreviewLauncher"
 	}
@@ -48,6 +51,9 @@ tasks.register<Jar>("dist") {
 tasks.register<Jar>("particlePreviewDist") {
 	from(files(sourceSets.main.get().output.classesDirs))
 	from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+
+	destinationDir = file("$rootDir/game/caches")
+	archiveFileName.set("particleViewer.jar")
 
 	manifest {
 		attributes["Main-Class"] = "com.lyeeedar.desktop.ParticlePreviewLauncher"
@@ -69,6 +75,9 @@ tasks.register<JavaExec>("run") {
 tasks.register<Jar>("abilityPreviewDist") {
 	from(files(sourceSets.main.get().output.classesDirs))
 	from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+
+	destinationDir = file("$rootDir/game/caches")
+	archiveFileName.set("abilityViewer.jar")
 
 	manifest {
 		attributes["Main-Class"] = "com.lyeeedar.desktop.AbilityPreviewLauncher"

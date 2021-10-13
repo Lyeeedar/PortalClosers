@@ -1,0 +1,13 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="ParticleTestLevel" Nullable="False" TextColour="249,101,101" meta:RefKey="Struct">
+		<Data Name="Symbols" Keys="ParticleEditorSymbol" meta:RefKey="Collection" />
+		<Data Name="Grid" Default="." ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString"/>
+	</Definition>
+	<Definition Name="ParticleEditorSymbol" Nullable="False" TextColour="204,66,66" meta:RefKey="StructDef">
+		<Data Name="Char" SkipIfDefault="True" MaxLength="1" Default=' ' meta:RefKey="String" />
+		<Data Name="Sprites" meta:RefKey="Collection">
+			<Data Name="Sprite" Keys="Sprite,TilingSprite,ParticleEffect,Skeleton" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="IsWall" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+</Definitions>

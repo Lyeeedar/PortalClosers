@@ -103,6 +103,9 @@ tasks.register<Jar>("compilerDist") {
 		.exclude("**/languagetool/**")
 		.exclude("**/scala/**")
 
+	destinationDir = file("$rootDir/game/caches")
+	archiveFileName.set("compiler.jar")
+
 	manifest {
 		attributes["Main-Class"] = "com.lyeeedar.headless.CompilerRunner"
 	}
