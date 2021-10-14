@@ -11,6 +11,7 @@ import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.UI.RenderSystemWidget
@@ -33,11 +34,12 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		val task = entity.task() ?: return EvaluationState.FAILED
 		if (task.tasks.size > 0) return EvaluationState.FAILED
 
-		val ability = entity.ability()
-		if (ability != null)
+		val weapon = entity.weapon()
+		if (weapon != null)
 		{
-			for (ab in ability.abilities)
+			for (move in weapon.weapon.moves)
 			{
+				val ab = move.getAsAbility()
 				if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
 				{
 					if (RenderSystemWidget.instance!!.isSelected)
@@ -46,7 +48,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 
 						if (tile != null && ab.getValidTargets(entity, state.world, null).contains(tile))
 						{
-							if (tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
+							if (ab.data.targetType != AbilityData.TargetType.SELF && tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
 
 							task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
 

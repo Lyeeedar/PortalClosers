@@ -6,12 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.lyeeedar.Components.Entity
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.WeaponMove
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Statics
 
-class AbilityWidget(val ability: Ability, val world: World<*>, val background: SpriteWidget) : Table()
+class MoveWidget(val move: WeaponMove, val world: World<*>) : Table()
 {
 	val empty = AssetManager.loadTextureRegion("GUI/power_empty")
 	val full = AssetManager.loadTextureRegion("GUI/power_full")
@@ -20,6 +22,9 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 	val padding = 2
 
 	val widget = SpriteWidget(AssetManager.loadSprite("white"), 32f, 32f)
+
+	val ability: Ability
+		get() = move.getAsAbility()
 
 	init
 	{
@@ -31,7 +36,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 		val infoButton = Button(Statics.skin, "info")
 		infoButton.setSize(16f, 16f)
-		//infoButton.addTapToolTip("${ability.name}\n${ability.description}")
+		infoButton.addTapToolTip{ "${move.getAsAbility().name}\n${move.getAsAbility().description}" }
 		val infoButtonTable = Table()
 		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)
 
@@ -68,6 +73,8 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
+		widget.drawable = move.getAsAbility().icon!!
+
 		updateEnabled()
 
 		if (ability.isSelected)
@@ -93,7 +100,7 @@ class AbilityWidget(val ability: Ability, val world: World<*>, val background: S
 			batch!!.color = Color.DARK_GRAY
 		}
 
-		val bounds = background.getBounds()
+		val bounds = widget.getBounds()
 		val pipSize = (bounds.width - (ability.data.cooldown+1) * padding) / ability.data.cooldown
 		for (i in 1..ability.data.cooldown)
 		{

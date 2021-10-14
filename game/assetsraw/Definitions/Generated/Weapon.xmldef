@@ -22,6 +22,8 @@
 	<Definition Name="MoveVariant" Nullable="False" TextColour="204,11,11" meta:RefKey="StructDef">
 		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" ToolTip="Known variables: resources" meta:RefKey="String" />
 		<Data Name="Ability" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Weapons" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Weapons" SkipIfDefault="True" Default="" meta:RefKey="String" />
 		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="WeaponMove" Nullable="False" TextColour="204,204,9" meta:RefKey="StructDef">

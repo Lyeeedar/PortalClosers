@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Value
+import com.lyeeedar.Components.weapon
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
@@ -26,23 +27,18 @@ class PlayerWidget(val world: World<*>) : Table()
 		val hp = HealthBarWidget(player)
 		add(hp).growX().height(10f).pad(3f)
 		row()
-	}
-
-	private fun addAbility(ability: Ability?, table: Table)
-	{
-		val stack = Stack()
-		val background = SpriteWidget(emptySlot, 32f, 32f)
-
-		background.color = Color.DARK_GRAY
-
-		stack.add(background)
-
-		if (ability != null)
+		val resourcesTable = ResourcesWidget(player)
+		add(resourcesTable).growX().height(24f).pad(3f)
+		row()
+		val movesTable = Table()
+		for (move in player.weapon()!!.weapon.moves)
 		{
-			val widget = AbilityWidget(ability, world, background)
-			stack.add(widget)
+			val moveWidget = MoveWidget(move, world)
+			movesTable.add(moveWidget).growY().uniformX().padLeft(2f)
 		}
+		movesTable.add(Table()).grow()
 
-		table.add(stack).grow().width(Value.percentWidth(0.2f, this))
+		add(movesTable).growX().height(32f).pad(2f)
+		row()
 	}
 }

@@ -121,6 +121,12 @@ class MoveVariant : XmlDataClass()
 
 	lateinit var ability: AbilityData
 
+	@DataNeedsLocalisation(file = "Weapons")
+	var name: String = ""
+
+	@DataNeedsLocalisation(file = "Weapons")
+	var description: String = ""
+
 	@DataLayeredSprite
 	lateinit var icon: Sprite
 
@@ -132,6 +138,9 @@ class MoveVariant : XmlDataClass()
 		if (actualAbility == null)
 		{
 			actualAbility = Ability(ability)
+			actualAbility!!.icon = icon
+			actualAbility!!.name = name
+			actualAbility!!.description = description
 		}
 		return actualAbility!!
 	}
@@ -143,6 +152,8 @@ class MoveVariant : XmlDataClass()
 		val abilityEl = xmlData.getChildByName("Ability")!!
 		ability = AbilityData()
 		ability.load(abilityEl)
+		name = xmlData.get("Name", "")!!
+		description = xmlData.get("Description", "")!!
 		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 	}
 	//endregion

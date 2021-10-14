@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.Point
@@ -22,6 +23,10 @@ class Ability(val data: AbilityData)
 	var justUsed = false
 
 	var isSelected = false
+
+	var icon: Sprite? = null
+	var name: String? = null
+	var description: String? = null
 
 	fun transform(initial: String, transforms: Array<(String)->String>): String
 	{

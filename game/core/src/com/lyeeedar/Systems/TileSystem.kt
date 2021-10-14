@@ -1,10 +1,7 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.IntSet
-import com.lyeeedar.Components.ComponentType
-import com.lyeeedar.Components.ability
-import com.lyeeedar.Components.ai
-import com.lyeeedar.Components.position
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
 import com.lyeeedar.SpaceSlot
@@ -63,11 +60,12 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 			}
 		}
 
-		val ability = world.player?.ability()
-		if (ability != null)
+		val weapon = world.player?.weapon()
+		if (weapon != null)
 		{
-			for (ab in ability.abilities)
+			for (move in weapon.weapon.moves)
 			{
+				val ab = move.getAsAbility()
 				if (ab.isSelected)
 				{
 					for (tile in ab.getValidTargets(world.player!!, world, null))
