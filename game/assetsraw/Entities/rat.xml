@@ -21,9 +21,9 @@
 		</AI>
 		<RenderableComponent>
 			<classID>Renderable</classID>
-			<Renderable meta:RefKey="Sprite">
-				<Name>Oryx/uf_split/uf_heroes/rat</Name>
-				<DrawActualSize>true</DrawActualSize>
+			<Renderable meta:RefKey="Skeleton">
+				<Path>goblin</Path>
+				<Scale>0.3</Scale>
 			</Renderable>
 		</RenderableComponent>
 		<Combo>

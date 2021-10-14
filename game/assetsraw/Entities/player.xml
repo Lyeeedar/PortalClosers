@@ -31,8 +31,7 @@
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
-				<Path>goblin</Path>
-				<Scale>0.5</Scale>
+				<Path>pc_male</Path>
 			</Renderable>
 		</RenderableComponent>
 		<Weapon>

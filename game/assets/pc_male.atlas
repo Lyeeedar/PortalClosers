@@ -1,0 +1,62 @@
+
+pc_male.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shadow
+  rotate: false
+  xy: 2, 2
+  size: 169, 53
+  orig: 169, 53
+  offset: 0, 0
+  index: -1
+arml
+  rotate: false
+  xy: 73, 139
+  size: 50, 107
+  orig: 50, 107
+  offset: 0, 0
+  index: -1
+legl
+  rotate: false
+  xy: 190, 128
+  size: 50, 109
+  orig: 50, 109
+  offset: 0, 0
+  index: -1
+legr
+  rotate: false
+  xy: 172, 2
+  size: 45, 125
+  orig: 45, 125
+  offset: 0, 0
+  index: -1
+torso
+  rotate: false
+  xy: 9, 58
+  size: 75, 101
+  orig: 75, 101
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 89, 59
+  size: 60, 74
+  orig: 60, 74
+  offset: 0, 0
+  index: -1
+cape
+  rotate: false
+  xy: 13, 162
+  size: 30, 35
+  orig: 30, 35
+  offset: 0, 0
+  index: -1
+armr
+  rotate: false
+  xy: 142, 122
+  size: 47, 119
+  orig: 47, 119
+  offset: 0, 0
+  index: -1

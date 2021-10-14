@@ -10,6 +10,7 @@ class WeaponComponent : DataComponent()
 	override val type: ComponentType = ComponentType.Weapon
 
 	lateinit var weapon: Weapon
+	var equipped = false
 
 	var resources: Int = 0
 
@@ -25,6 +26,7 @@ class WeaponComponent : DataComponent()
 	override fun reset()
 	{
 		resources = 0
+		equipped = false
 	}
 
 	fun buildResource(count: Int)

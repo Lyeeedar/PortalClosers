@@ -22,37 +22,6 @@ class WorldScreen : AbstractScreen()
 
 	var timeMultiplier = 1f
 
-	fun setSkeleton(entity: Entity)
-	{
-		val atlas = TextureAtlas(Gdx.files.internal("goblin.atlas"))
-		val json = SkeletonJson(atlas) // This loads skeleton JSON data, which is stateless.
-
-		var skeletonData: SkeletonData = json.readSkeletonData(Gdx.files.internal("goblin.json"))
-
-		json.scale = 48f / 512f
-
-		skeletonData = json.readSkeletonData(Gdx.files.internal("goblin.json"))
-
-		val skeleton = Skeleton(skeletonData) // Skeleton holds skeleton state (boneskins = {Array@2566} "[default]" positions, slot attachments, etc).
-
-		val stateData = AnimationStateData(skeletonData) // Defines mixing (crossfading) between animations.
-
-		//stateData.setMix("idle", "walk", 0f)
-		stateData.setMix("walk", "idle", 0.1f)
-
-		val state = AnimationState(stateData) // Holds the animation state for a skeleton (current animation, time, etc).
-		//state.timeScale = 2f
-
-		// Queue animations on track 0.
-
-		// Queue animations on track 0.
-		state.setAnimation(0, "idle", true)
-
-		entity.removeComponent(ComponentType.DirectionalSprite)
-		entity.renderable()!!.renderable = SkeletonRenderable(skeleton, state)
-		entity.renderable()!!.renderable.colour.set(1f, 2f, 1f, 1f)
-	}
-
 	override fun create()
 	{
 		val player = EntityLoader.load("Entities/player")
@@ -62,8 +31,6 @@ class WorldScreen : AbstractScreen()
 		world.addSystems()
 
 		world.tileSize = 50f
-
-		//setSkeleton(player)
 
 		for (i in 0 until 5)
 		{
@@ -75,8 +42,6 @@ class WorldScreen : AbstractScreen()
 			rat.position()!!.position = world.grid.random()!!
 			rat.position()!!.addToTile(rat)
 			world.addEntity(rat)
-
-			setSkeleton(rat)
 		}
 
 		val topBarTable = Table()

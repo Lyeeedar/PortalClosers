@@ -1,10 +1,11 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.ObjectFloatMap
-import com.lyeeedar.Components.ComponentType
-import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.statistics
-import com.lyeeedar.Components.weapon
+import com.esotericsoftware.spine.attachments.Attachment
+import com.esotericsoftware.spine.attachments.RegionAttachment
+import com.lyeeedar.Components.*
+import com.lyeeedar.Renderables.SkeletonRenderable
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.set
 
 class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().any(ComponentType.Weapon).get())
@@ -20,6 +21,25 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 		for (move in weapon.weapon.moves)
 		{
 			move.updateAvailability(variables, world.rng)
+		}
+
+		if (!weapon.equipped)
+		{
+			val renderable = entity.renderable()?.renderable as? SkeletonRenderable
+			if (renderable != null)
+			{
+				val slot = renderable.skeleton.findSlot("handr")
+
+				val attachment = RegionAttachment("weapon")
+				attachment.region = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/weapon_axe_exotic1.png")
+				attachment.width = attachment.region.regionWidth.toFloat()
+				attachment.height = attachment.region.regionHeight.toFloat()
+				attachment.updateOffset()
+
+				slot.attachment = attachment
+			}
+
+			weapon.equipped = true
 		}
 	}
 
