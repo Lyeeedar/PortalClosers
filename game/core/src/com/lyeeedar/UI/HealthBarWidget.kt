@@ -37,6 +37,7 @@ class HealthBarWidget(val player: Entity) : Widget()
 		val spacing = spacePerPip * solidSpaceRatio
 		val solid = spacePerPip - spacing
 
+		val prevCol = batch.packedColor
 		batch.color = emptyCol
 		batch.draw(white, x, y, totalWidth, height)
 
@@ -52,5 +53,6 @@ class HealthBarWidget(val player: Entity) : Widget()
 		{
 			batch.draw(hp_border, x + i*spacePerPip, y, solid, height)
 		}
+		batch.packedColor = prevCol
 	}
 }

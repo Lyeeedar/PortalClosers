@@ -1,0 +1,17 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbstractAbilityModifier" Nullable="False" TextColour="204,115,204" IsGlobal="True" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="ColourModifier" Nullable="False" TextColour="31,250,31" IsGlobal="True" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Colour</Const>
+		<Data Name="Keyframes" Keys="ColourKeyframe" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="RepeatModifier" Nullable="False" TextColour="93,204,204" IsGlobal="True" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Repeat</Const>
+		<Data Name="Keyframes" Keys="RepeatKeyframe" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="DamageModifier" Nullable="False" TextColour="204,66,204" IsGlobal="True" Extends="AbstractAbilityModifier" meta:RefKey="StructDef">
+		<Const Name="classID">Damage</Const>
+		<Data Name="Keyframes" Keys="DamageKeyframe" meta:RefKey="Timeline" />
+	</Definition>
+	<Definition Name="AbstractAbilityModifierDefs" Keys="ColourModifier,DamageModifier,RepeatModifier" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>

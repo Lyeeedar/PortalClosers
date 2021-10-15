@@ -2,7 +2,8 @@ package com.lyeeedar.headless
 
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Components.ComponentType
-import com.lyeeedar.Game.Ability.AbilityOrb
+import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Ability.AbilityTemplate
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Screens.addAbilityToWorld
 import com.lyeeedar.Screens.closeGrid
@@ -30,15 +31,15 @@ class AbilityTest
 			{
 				System.out.println("Testing $path")
 
-				val orb = AbilityOrb()
+				val orb = AbilityTemplate()
 				orb.load(getXml(path))
 				for (i in 0 until 3)
 				{
-					testAbility(orb, closeGrid, i.toLong(), 2, path)
+					testAbility(orb.getAbility(1), closeGrid, i.toLong(), 2, path)
 				}
 				for (i in 0 until 3)
 				{
-					testAbility(orb, farGrid, i.toLong(), 2, path)
+					testAbility(orb.getAbility(1), farGrid, i.toLong(), 2, path)
 				}
 
 				total++
@@ -57,15 +58,15 @@ class AbilityTest
 			{
 				System.out.println("Testing $path")
 
-				val orb = AbilityOrb()
+				val orb = AbilityTemplate()
 				orb.load(getXml(path))
 				for (i in 0 until 10)
 				{
-					testAbility(orb, closeGrid, ran.nextLong(), 4, path)
+					testAbility(orb.getAbility(1), closeGrid, ran.nextLong(), 4, path)
 				}
 				for (i in 0 until 10)
 				{
-					testAbility(orb, farGrid, ran.nextLong(), 4, path)
+					testAbility(orb.getAbility(1), farGrid, ran.nextLong(), 4, path)
 				}
 				for (i in 0 until 10)
 				{
@@ -73,7 +74,7 @@ class AbilityTest
 					println(grid)
 					for (i in 0 until 10)
 					{
-						testAbility(orb, grid, ran.nextLong(), 4, path)
+						testAbility(orb.getAbility(1), grid, ran.nextLong(), 4, path)
 					}
 				}
 
@@ -121,7 +122,7 @@ class AbilityTest
 			return output.toString().trim()
 		}
 
-		fun testAbility(abilityOrb: AbilityOrb, grid: String, seed: Long, numIterations: Int, fileName: String)
+		fun testAbility(abilityOrb: Ability, grid: String, seed: Long, numIterations: Int, fileName: String)
 		{
 			try
 			{

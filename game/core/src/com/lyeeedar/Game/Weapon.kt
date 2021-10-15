@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
+import com.lyeeedar.Game.Ability.AbilityTemplate
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Util.*
@@ -19,7 +20,6 @@ class Weapon : XmlDataClass()
 	val moves: Array<WeaponMove> = Array()
 
 	var defaultResources: Int = 0
-	var minResources: Int = 0
 	var maxResources: Int = 5
 
 	val handlers: FastEnumMap<EventType, Array<EventAndCondition>> = FastEnumMap(EventType::class.java)
@@ -40,7 +40,6 @@ class Weapon : XmlDataClass()
 			}
 		}
 		defaultResources = xmlData.getInt("DefaultResources", 0)
-		minResources = xmlData.getInt("MinResources", 0)
 		maxResources = xmlData.getInt("MaxResources", 5)
 		val handlersEl = xmlData.getChildByName("Handlers")
 		if (handlersEl != null)
@@ -68,6 +67,7 @@ class Weapon : XmlDataClass()
 	//endregion
 }
 
+@DataClassCollection
 class WeaponMove : XmlDataClass()
 {
 	val variants: Array<MoveVariant> = Array()
@@ -98,7 +98,7 @@ class WeaponMove : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		val variantsEl = xmlData.getChildByName("Variants")
+		val variantsEl = xmlData
 		if (variantsEl != null)
 		{
 			for (el in variantsEl.children)
@@ -119,16 +119,7 @@ class MoveVariant : XmlDataClass()
 	@DataCompiledExpression(default = "1", knownVariables = "resources")
 	lateinit var availableCondition: CompiledExpression
 
-	lateinit var ability: AbilityData
-
-	@DataNeedsLocalisation(file = "Weapons")
-	var name: String = ""
-
-	@DataNeedsLocalisation(file = "Weapons")
-	var description: String = ""
-
-	@DataLayeredSprite
-	lateinit var icon: Sprite
+	lateinit var ability: AbilityTemplate
 
 	@Transient
 	var actualAbility: Ability? = null
@@ -137,10 +128,7 @@ class MoveVariant : XmlDataClass()
 	{
 		if (actualAbility == null)
 		{
-			actualAbility = Ability(ability)
-			actualAbility!!.icon = icon
-			actualAbility!!.name = name
-			actualAbility!!.description = description
+			actualAbility = ability.getAbility(1)
 		}
 		return actualAbility!!
 	}
@@ -150,11 +138,8 @@ class MoveVariant : XmlDataClass()
 	{
 		availableCondition = CompiledExpression(xmlData.get("AvailableCondition", "1")!!)
 		val abilityEl = xmlData.getChildByName("Ability")!!
-		ability = AbilityData()
+		ability = AbilityTemplate()
 		ability.load(abilityEl)
-		name = xmlData.get("Name", "")!!
-		description = xmlData.get("Description", "")!!
-		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
 	}
 	//endregion
 }

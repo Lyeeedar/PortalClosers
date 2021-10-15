@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
-import com.lyeeedar.Game.Ability.AbilityOrb
+import com.lyeeedar.Game.Ability.AbilityTemplate
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Systems.*
@@ -119,14 +119,12 @@ class AbilityPreviewScreen :  AbstractWorldPreviewScreen("ability")
 		world.systems.add(DialogueSystem(world))
 		world.systems.add(DirectionalSpriteSystem(world))
 
-		val abilityDef = AbilityOrb()
+		val abilityDef = AbilityTemplate()
 		abilityDef.load(xmlData)
 
-		val abilityData = abilityDef.getAbility(tierBox.selected)
-		val ability = abilityData.get()
-		this.ability = ability
+		this.ability = abilityDef.getAbility(tierBox.selected)
 
-		addAbilityToWorld(ability, world, seed)
+		addAbilityToWorld(ability!!, world, seed)
 
 		sequences = world.getEntitiesFor().all(ComponentType.ActionSequence).get()
 		turnTime = 0f
@@ -333,14 +331,6 @@ fun loadAbilityTestWorld(gridStr: String): World<Tile>
 	world.systems.add(DeletionSystem(world))
 
 	return world
-}
-
-fun addAbilityToWorld(abilityOrb: AbilityOrb, world: World<Tile>, seed: Long)
-{
-	val abilityData = abilityOrb.getAbility(1)
-	val ability = abilityData.get()
-
-	addAbilityToWorld(ability, world, seed)
 }
 
 fun addAbilityToWorld(ability: Ability, world: World<Tile>, seed: Long)

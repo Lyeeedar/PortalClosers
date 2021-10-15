@@ -2,24 +2,23 @@ package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.Actions.DamageAction
-import com.lyeeedar.Util.CompiledExpression
-import com.lyeeedar.Util.DataTimeline
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.lerp
 
+@DataClass(name = "DamageModifier")
 class DamageAbilityModifier : AbstractAbilityModifier<DamageKeyframeData>()
 {
 	@DataTimeline
 	override val keyframes: Array<DamageKeyframeData> = Array<DamageKeyframeData>()
 
-	override fun applyTo(ability: AbilityData, prev: DamageKeyframeData, next: DamageKeyframeData, alpha: Float)
+	override fun applyTo(ability: Ability, prev: DamageKeyframeData, next: DamageKeyframeData, alpha: Float)
 	{
 		val multiplier = prev.multiplier.lerp(next.multiplier, alpha)
 
 		val asPercent = (multiplier * 100).toInt()
-		ability.descriptionTransforms.add { it.replace("{Damage}", asPercent.toString()) }
+		ability.description = ability.description?.replace("{Damage}", asPercent.toString())
 
-		for (action in ability.actionSequence.rawActions)
+		for (action in ability.data.actionSequence.rawActions)
 		{
 			if (action is DamageAction)
 			{

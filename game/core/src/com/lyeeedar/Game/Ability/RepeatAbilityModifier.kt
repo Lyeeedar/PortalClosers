@@ -2,22 +2,21 @@ package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.Actions.RepeatAction
-import com.lyeeedar.Util.DataTimeline
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.lerp
-import com.lyeeedar.Util.round
 
+@DataClass(name = "RepeatModifier")
 class RepeatAbilityModifier : AbstractAbilityModifier<RepeatKeyframeData>()
 {
 	@DataTimeline
 	override val keyframes: Array<RepeatKeyframeData> = Array()
 
-	override fun applyTo(ability: AbilityData, prev: RepeatKeyframeData, next: RepeatKeyframeData, alpha: Float)
+	override fun applyTo(ability: Ability, prev: RepeatKeyframeData, next: RepeatKeyframeData, alpha: Float)
 	{
 		val countChange = prev.countChange.toFloat().lerp(next.countChange.toFloat(), alpha).round()
 		var actualCount = 0
 
-		for (action in ability.actionSequence.rawActions)
+		for (action in ability.data.actionSequence.rawActions)
 		{
 			if (action is RepeatAction)
 			{
@@ -26,7 +25,7 @@ class RepeatAbilityModifier : AbstractAbilityModifier<RepeatKeyframeData>()
 			}
 		}
 
-		ability.descriptionTransforms.add { it.replace("{Repeat}", actualCount.toString()) }
+		ability.description = ability.description?.replace("{Repeat}", actualCount.toString())
 	}
 
 	//region generated

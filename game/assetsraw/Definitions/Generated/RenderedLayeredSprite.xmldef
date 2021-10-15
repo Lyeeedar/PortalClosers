@@ -1,6 +1,5 @@
 <Definitions   xmlns:meta="Editor">
-	<Definition Name="RenderedLayeredSprite" Nullable="False" TextColour="238,238,30" IsGlobal="True" meta:RefKey="StructDef">
-		<Data Name="Layers" Keys="ImageLayer" meta:RefKey="Collection" />
+	<Definition Name="RenderedLayeredSprite" Keys="ImageLayer" TextColour="238,238,30" IsGlobal="True" meta:RefKey="CollectionDef">
 	</Definition>
 	<Definition Name="AbstractImageModifier" Nullable="False" TextColour="129,204,129" meta:RefKey="StructDef">
 	</Definition>

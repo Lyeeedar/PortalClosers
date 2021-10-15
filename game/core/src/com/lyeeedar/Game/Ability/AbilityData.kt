@@ -39,13 +39,6 @@ class AbilityData : XmlDataClass()
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile && TargetType != Self")
 	var pickSortedMin: Boolean = true
 
-	//region non-data
-	val nameTransforms = Array<(String)->String>()
-	val descriptionTransforms = Array<(String)->String>()
-	//endregion
-
-	fun get(): Ability = Ability(this)
-
 	//region generated
 	override fun load(xmlData: XmlData)
 	{

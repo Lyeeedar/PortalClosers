@@ -10,9 +10,9 @@ import com.lyeeedar.Util.XmlDataClassLoader
 abstract class AbstractAbilityModifier<T: AbstractAbilityModifierKeyframe> : XmlDataClass()
 {
 	abstract val keyframes: Array<T>
-	protected abstract fun applyTo(ability: AbilityData, prev: T, next: T, alpha: Float)
+	protected abstract fun applyTo(ability: Ability, prev: T, next: T, alpha: Float)
 
-	fun apply(ability: AbilityData, tier: Float)
+	fun apply(ability: Ability, tier: Float)
 	{
 		// find keyframes
 		var prev = keyframes[0]

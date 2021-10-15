@@ -41,9 +41,9 @@ class WeaponComponent : DataComponent()
 	fun consumeResource(count: Int)
 	{
 		resources -= count
-		if (resources < weapon.minResources)
+		if (resources < 0)
 		{
-			resources = weapon.minResources
+			resources = 0
 		}
 	}
 }

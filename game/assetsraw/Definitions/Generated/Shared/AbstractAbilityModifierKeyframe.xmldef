@@ -1,0 +1,18 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbstractAbilityModifierKeyframe" Nullable="False" TextColour="0,204,204" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Time" Min="0" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="ColourKeyframe" Nullable="False" TextColour="3,204,3" IsGlobal="True" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
+		<Const Name="classID">ColourKeyframe</Const>
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+	</Definition>
+	<Definition Name="RepeatKeyframe" Nullable="False" TextColour="103,204,204" IsGlobal="True" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
+		<Const Name="classID">RepeatKeyframe</Const>
+		<Data Name="CountChange" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="DamageKeyframe" Nullable="False" TextColour="14,247,247" IsGlobal="True" Extends="AbstractAbilityModifierKeyframe" meta:RefKey="StructDef">
+		<Const Name="classID">DamageKeyframe</Const>
+		<Data Name="Multiplier" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="AbstractAbilityModifierKeyframeDefs" Keys="ColourKeyframe,DamageKeyframe,RepeatKeyframe" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>

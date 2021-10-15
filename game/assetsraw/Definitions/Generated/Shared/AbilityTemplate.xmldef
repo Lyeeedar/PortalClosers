@@ -1,0 +1,11 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbilityTemplate" Nullable="False" TextColour="204,70,70" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="AbilityTemplate" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Modifiers" meta:RefKey="Collection">
+			<Data Name="Modifier" DefKey="AbstractAbilityModifierDefs" meta:RefKey="Reference" />
+		</Data>
+	</Definition>
+</Definitions>

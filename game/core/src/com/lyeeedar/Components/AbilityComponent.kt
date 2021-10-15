@@ -3,6 +3,7 @@ package com.lyeeedar.Components
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
+import com.lyeeedar.Game.Ability.AbilityTemplate
 import com.lyeeedar.Util.XmlData
 
 class AbilityComponent : DataComponent()
@@ -21,14 +22,14 @@ class AbilityComponent : DataComponent()
 		val data = data as AbilityComponentData
 		for (ab in data.abilities)
 		{
-			abilities.add(Ability(ab))
+			abilities.add(ab.getAbility(1))
 		}
 	}
 }
 
 class AbilityComponentData : AbstractComponentData()
 {
-	val abilities: Array<AbilityData> = Array<AbilityData>()
+	val abilities: Array<AbilityTemplate> = Array<AbilityTemplate>()
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -39,9 +40,9 @@ class AbilityComponentData : AbstractComponentData()
 		{
 			for (el in abilitiesEl.children)
 			{
-				val objabilities: AbilityData
+				val objabilities: AbilityTemplate
 				val objabilitiesEl = el
-				objabilities = AbilityData()
+				objabilities = AbilityTemplate()
 				objabilities.load(objabilitiesEl)
 				abilities.add(objabilities)
 			}

@@ -2,7 +2,6 @@
 	<Definition Name="Weapon" Nullable="False" TextColour="79,79,204" meta:RefKey="Struct">
 		<Data Name="Moves" Keys="WeaponMove" meta:RefKey="Collection" />
 		<Data Name="DefaultResources" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="MinResources" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="MaxResources" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Handlers" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 			<!--Actions-->
@@ -21,12 +20,8 @@
 	</Definition>
 	<Definition Name="MoveVariant" Nullable="False" TextColour="204,11,11" meta:RefKey="StructDef">
 		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" ToolTip="Known variables: resources" meta:RefKey="String" />
-		<Data Name="Ability" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Weapons" SkipIfDefault="True" Default="" meta:RefKey="String" />
-		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Weapons" SkipIfDefault="True" Default="" meta:RefKey="String" />
-		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Ability" Keys="AbilityTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="WeaponMove" Nullable="False" TextColour="204,204,9" meta:RefKey="StructDef">
-		<Data Name="Variants" Keys="MoveVariant" meta:RefKey="Collection" />
+	<Definition Name="WeaponMove" Keys="MoveVariant" TextColour="204,204,9" meta:RefKey="CollectionDef">
 	</Definition>
 </Definitions>

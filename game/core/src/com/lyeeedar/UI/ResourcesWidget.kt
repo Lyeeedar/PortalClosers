@@ -1,5 +1,6 @@
 package com.lyeeedar.UI
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Components.Entity
@@ -19,11 +20,21 @@ class ResourcesWidget(val entity: Entity) : Table()
 		val pad = 2f
 		val size = height
 
-		for (i in 0 until entity.weapon()!!.resources)
+		val weapon = entity.weapon()!!
+		for (i in 0 until weapon.weapon.maxResources)
 		{
 			val x = i * size + (i+1) * pad * 2f + this.x
 
-			batch.draw(resourcesImage, x, pad + this.y, size, size)
+			if (i < weapon.resources)
+			{
+				batch.color = Color.WHITE
+				batch.draw(resourcesImage, x, pad + this.y, size, size)
+			}
+			else
+			{
+				batch.color = Color.DARK_GRAY
+				batch.draw(resourcesImage, x, pad + this.y, size, size)
+			}
 		}
 	}
 }

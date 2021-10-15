@@ -1,10 +1,41 @@
 <Weapon xmlns:meta="Editor">
 	<Moves>
 		<WeaponMove>
-			<Variants>
-				<MoveVariant>
-					<AvailableCondition>resources &gt; 0</AvailableCondition>
-					<Ability meta:RefKey="AbilityData">
+			<MoveVariant>
+				<AvailableCondition>resources &gt; 0</AvailableCondition>
+				<Ability meta:RefKey="AbilityTemplate">
+					<Name>2ea276dc-3c2a-4d22-98ac-723257756334</Name>
+					<Description>37f4be55-ac03-4e2d-8517-d7bb6be60702</Description>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<ImageLayer>
+							<Path>GameIconsRaw/explosion/heavy-fall</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Vertical</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>122,100,5,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.33478463</Time>
+											<Colour>208,209,15,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>1</Time>
+											<Colour>242,128,0,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+								<Stroke>
+									<classID>Stroke</classID>
+									<Colour>255,217,93,255</Colour>
+									<Thickness>5</Thickness>
+								</Stroke>
+							</Modifiers>
+						</ImageLayer>
+					</Icon>
+					<AbilityTemplate meta:RefKey="AbilityData">
 						<ActionSequence meta:RefKey="ActionSequence">
 							<Actions>
 								<Timeline>
@@ -12,7 +43,7 @@
 										<classID>ConsumeResources</classID>
 									</ConsumeResources>
 									<OneShotFX>
-										<Time>0.0207088</Time>
+										<Time>0.016576223</Time>
 										<classID>SpawnOneShotParticle</classID>
 										<Particle meta:RefKey="ParticleEffect">
 											<Name>EnemyAttacks/slash</Name>
@@ -20,49 +51,57 @@
 										<SpawnBehaviour>Immediate</SpawnBehaviour>
 									</OneShotFX>
 									<OneShotFX>
-										<Time>0.1501962</Time>
+										<Time>0.07994239</Time>
 										<classID>SpawnOneShotParticle</classID>
 										<Particle meta:RefKey="ParticleEffect">
 											<Name>Abilities/GroundEruption</Name>
 										</Particle>
+										<AlignToVector>false</AlignToVector>
 										<SpawnBehaviour>Immediate</SpawnBehaviour>
 										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
 									</OneShotFX>
 									<Damage>
-										<Time>0.16948155</Time>
+										<Time>0.09371765</Time>
 										<classID>Damage</classID>
-										<Damage>source.damage</Damage>
+										<Damage>source.damage * 1.2</Damage>
 									</Damage>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
 						<TargetType>Target_enemy</TargetType>
-					</Ability>
+					</AbilityTemplate>
+				</Ability>
+			</MoveVariant>
+			<MoveVariant>
+				<AvailableCondition>1</AvailableCondition>
+				<Ability meta:RefKey="AbilityTemplate">
+					<Name>5670ff55-7cf3-4910-b1d6-982016284e43</Name>
+					<Description>1639b7d5-422c-4777-9e8b-07b903c4eb6c</Description>
 					<Icon meta:RefKey="RenderedLayeredSprite">
-						<Layers>
-							<ImageLayer>
-								<Path>Icons/Active</Path>
-							</ImageLayer>
-							<ImageLayer>
-								<Path>GameIconsRaw/explosion/meteor-impact</Path>
-								<Modifiers>
-									<Tint>
-										<classID>Tint</classID>
-										<Colour>153,102,32,255</Colour>
-									</Tint>
-									<Stroke>
-										<classID>Stroke</classID>
-										<Colour>237,178,24,255</Colour>
-										<Thickness>5</Thickness>
-									</Stroke>
-								</Modifiers>
-							</ImageLayer>
-						</Layers>
+						<ImageLayer>
+							<Path>GameIconsRaw/weapon/battle-axe</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Internal</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>232,232,232,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.14783333</Time>
+											<Colour>143,143,143,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.71082914</Time>
+											<Colour>117,83,13,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+							</Modifiers>
+						</ImageLayer>
 					</Icon>
-				</MoveVariant>
-				<MoveVariant>
-					<AvailableCondition>1</AvailableCondition>
-					<Ability meta:RefKey="AbilityData">
+					<AbilityTemplate meta:RefKey="AbilityData">
 						<ActionSequence meta:RefKey="ActionSequence">
 							<Actions>
 								<Timeline>
@@ -74,7 +113,7 @@
 										<SpawnBehaviour>Immediate</SpawnBehaviour>
 									</OneShotFX>
 									<Damage>
-										<Time>0.09990387</Time>
+										<Time>0.0964727</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage</Damage>
 									</Damage>
@@ -82,21 +121,117 @@
 							</Actions>
 						</ActionSequence>
 						<TargetType>Target_enemy</TargetType>
-					</Ability>
-					<Icon meta:RefKey="RenderedLayeredSprite">
-						<Layers>
-							<ImageLayer />
-							<ImageLayer />
-						</Layers>
-					</Icon>
-				</MoveVariant>
-			</Variants>
+					</AbilityTemplate>
+				</Ability>
+			</MoveVariant>
 		</WeaponMove>
 		<WeaponMove>
-			<Variants>
-				<MoveVariant>
-					<AvailableCondition>1</AvailableCondition>
-					<Ability meta:RefKey="AbilityData">
+			<MoveVariant>
+				<AvailableCondition>resources &gt; 0</AvailableCondition>
+				<Ability meta:RefKey="AbilityTemplate">
+					<Name>1a3774e9-a86d-4bef-8011-8ac8206bda0b</Name>
+					<Description>b6a9f463-b568-4a7e-a944-26b4b0137dd6</Description>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<ImageLayer>
+							<Path>GameIconsRaw/gun/cannon-ball</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Horizontal</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>171,171,171,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.3082871</Time>
+											<Colour>115,115,115,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.7066067</Time>
+											<Colour>214,122,19,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>1</Time>
+											<Colour>255,223,22,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+							</Modifiers>
+						</ImageLayer>
+					</Icon>
+					<AbilityTemplate meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<ConsumeResources>
+										<classID>ConsumeResources</classID>
+									</ConsumeResources>
+									<FlightFX>
+										<Time>0.016576225</Time>
+										<Duration LockDuration="False">0.084029056</Duration>
+										<classID>FlightParticle</classID>
+										<Particle meta:RefKey="ParticleEffectTemplate">
+											<Base meta:RefKey="ParticleEffect">
+												<Name>Ranged/FlightParticle</Name>
+												<Colour>230,199,6,255</Colour>
+												<Scale>0.1</Scale>
+											</Base>
+											<Overrides>
+												<OverrideTexture>
+													<Name>white</Name>
+													<Texture meta:RefKey="Texture">
+														<File>GameIconsRaw/explosion/shatter</File>
+													</Texture>
+												</OverrideTexture>
+											</Overrides>
+										</Particle>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
+									</FlightFX>
+									<Damage>
+										<Time>0.10060528</Time>
+										<classID>Damage</classID>
+										<Damage>source.damage * 0.6</Damage>
+									</Damage>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<Range>1,4</Range>
+						<TargetType>Target_enemy</TargetType>
+					</AbilityTemplate>
+				</Ability>
+			</MoveVariant>
+		</WeaponMove>
+		<WeaponMove>
+			<MoveVariant>
+				<AvailableCondition>1</AvailableCondition>
+				<Ability meta:RefKey="AbilityTemplate">
+					<Name>7003696c-3828-40fe-af23-881bac6f0b95</Name>
+					<Description>fe700c3e-de97-4b3e-9a9f-ea4b825ed58a</Description>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<ImageLayer>
+							<Path>GameIconsRaw/gun/chaingun</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Radial</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>115,115,115,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.20131792</Time>
+											<Colour>255,168,24,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>1</Time>
+											<Colour>255,233,0,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+							</Modifiers>
+						</ImageLayer>
+					</Icon>
+					<AbilityTemplate meta:RefKey="AbilityData">
 						<ActionSequence meta:RefKey="ActionSequence">
 							<Actions>
 								<Timeline>
@@ -108,117 +243,94 @@
 							</Actions>
 						</ActionSequence>
 						<TargetType>Self</TargetType>
-					</Ability>
-					<Icon meta:RefKey="RenderedLayeredSprite">
-						<Layers>
-							<ImageLayer>
-								<Path>Icons/Active</Path>
-							</ImageLayer>
-							<ImageLayer>
-								<Path>GameIconsRaw/weapon/chaingun</Path>
-								<Modifiers>
-									<Gradient>
-										<classID>Gradient</classID>
-										<Type>Radial</Type>
-										<Colours>
-											<GradientColour>
-												<Time>0.0031117012</Time>
-												<Colour>71,71,62,255</Colour>
-											</GradientColour>
-											<GradientColour>
-												<Time>0.994514</Time>
-												<Colour>219,172,50,255</Colour>
-											</GradientColour>
-										</Colours>
-									</Gradient>
-									<Stroke>
-										<classID>Stroke</classID>
-										<Colour>222,232,48,255</Colour>
-										<Thickness>3</Thickness>
-									</Stroke>
-								</Modifiers>
-							</ImageLayer>
-						</Layers>
-					</Icon>
-				</MoveVariant>
-			</Variants>
+					</AbilityTemplate>
+				</Ability>
+			</MoveVariant>
 		</WeaponMove>
 		<WeaponMove>
-			<Variants>
-				<MoveVariant>
-					<AvailableCondition>1</AvailableCondition>
-					<Ability meta:RefKey="AbilityData">
+			<MoveVariant>
+				<AvailableCondition>resources &gt; 1</AvailableCondition>
+				<Ability meta:RefKey="AbilityTemplate">
+					<Name>4d69636f-d07f-48b0-a16f-4ab212731b94</Name>
+					<Description>07c2c994-4b65-470d-92eb-e3d05fe3006c</Description>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<ImageLayer>
+							<Path>GameIconsRaw/explosion/arcing-bolt</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Vertical</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>255,208,0,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.17316814</Time>
+											<Colour>255,135,0,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>1</Time>
+											<Colour>209,112,51,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+							</Modifiers>
+						</ImageLayer>
+					</Icon>
+					<AbilityTemplate meta:RefKey="AbilityData">
 						<ActionSequence meta:RefKey="ActionSequence">
 							<Actions>
 								<Timeline>
-									<Permute>
-										<classID>Permute</classID>
-										<AppendTargets>true</AppendTargets>
-										<HitPoints>
-											<Line>###</Line>
-											<Line>.@.</Line>
-										</HitPoints>
-									</Permute>
+									<ConsumeResources>
+										<classID>ConsumeResources</classID>
+										<Count>2</Count>
+									</ConsumeResources>
+									<Move>
+										<Time>0.012350681</Time>
+										<classID>MoveSource</classID>
+										<Type>Leap</Type>
+									</Move>
 									<OneShotFX>
-										<Time>0.022086326</Time>
+										<Time>0.09850032</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>Abilities/GroundEruption</Name>
+										</Particle>
+										<AlignToVector>false</AlignToVector>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
+										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+									</OneShotFX>
+								</Timeline>
+								<Timeline>
+									<StoreTargets>
+										<classID>StoreTargets</classID>
+										<Key>dest</Key>
+									</StoreTargets>
+									<PickSelf>
+										<Time>0.001863758</Time>
+										<classID>SelectSelf</classID>
+									</PickSelf>
+									<OneShotFX>
+										<Time>0.0034034657</Time>
 										<classID>SpawnOneShotParticle</classID>
 										<Particle meta:RefKey="ParticleEffect">
 											<Name>Abilities/Fireburst</Name>
 										</Particle>
-										<SpawnBehaviour>From_source</SpawnBehaviour>
-										<SpawnDuration>0.1</SpawnDuration>
+										<SpawnBehaviour>Immediate</SpawnBehaviour>
 									</OneShotFX>
-									<Damage>
-										<Time>0.07580982</Time>
-										<classID>Damage</classID>
-										<Damage>source.damage</Damage>
-									</Damage>
-									<ConsumeResources>
-										<Time>0.1074929</Time>
-										<classID>ConsumeResources</classID>
-										<Count>5</Count>
-									</ConsumeResources>
+									<RestoreTargets>
+										<Time>0.0051681823</Time>
+										<classID>RestoreTargets</classID>
+										<Key>dest</Key>
+									</RestoreTargets>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
-						<Cooldown>5</Cooldown>
+						<Range>1,3</Range>
 						<TargetType>Tile</TargetType>
-					</Ability>
-					<Icon meta:RefKey="RenderedLayeredSprite">
-						<Layers>
-							<ImageLayer>
-								<Path>Icons/Active</Path>
-							</ImageLayer>
-							<ImageLayer>
-								<Path>GameIconsRaw/explosion/corner-explosion</Path>
-								<Modifiers>
-									<Gradient>
-										<classID>Gradient</classID>
-										<Type>Internal</Type>
-										<Colours>
-											<GradientColour>
-												<Colour>171,95,37,255</Colour>
-											</GradientColour>
-											<GradientColour>
-												<Time>0.4061897</Time>
-												<Colour>224,154,38,255</Colour>
-											</GradientColour>
-											<GradientColour>
-												<Time>0.9307164</Time>
-												<Colour>252,243,11,255</Colour>
-											</GradientColour>
-											<GradientColour>
-												<Time>1</Time>
-												<Colour>255,249,108,255</Colour>
-											</GradientColour>
-										</Colours>
-									</Gradient>
-								</Modifiers>
-							</ImageLayer>
-						</Layers>
-					</Icon>
-				</MoveVariant>
-			</Variants>
+					</AbilityTemplate>
+				</Ability>
+			</MoveVariant>
 		</WeaponMove>
 	</Moves>
 	<DefaultResources>5</DefaultResources>

@@ -5,11 +5,11 @@ import com.lyeeedar.ActionSequence.Actions.AttachParticleAction
 import com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction
 import com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction
 import com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.DataTimeline
 import com.lyeeedar.Util.XmlData
 
+@DataClass(name = "ColourModifier")
 class ColourAbilityModifier : AbstractAbilityModifier<ColourKeyframeData>()
 {
 	@DataTimeline
@@ -18,11 +18,11 @@ class ColourAbilityModifier : AbstractAbilityModifier<ColourKeyframeData>()
 	//region non-data
 	val tempCol = Colour()
 	//endregion
-	override fun applyTo(ability: AbilityData, prev: ColourKeyframeData, next: ColourKeyframeData, alpha: Float)
+	override fun applyTo(ability: Ability, prev: ColourKeyframeData, next: ColourKeyframeData, alpha: Float)
 	{
 		val colour = tempCol.set(prev.colour).lerp(next.colour, alpha)
 
-		for (action in ability.actionSequence.rawActions)
+		for (action in ability.data.actionSequence.rawActions)
 		{
 			if (action is SpawnOneShotParticleAction)
 			{
