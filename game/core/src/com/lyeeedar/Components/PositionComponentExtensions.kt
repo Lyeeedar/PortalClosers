@@ -149,7 +149,10 @@ fun PositionComponent.addToTile(entity: Entity)
 		for (y in 0 until size)
 		{
 			val tile = t.world.grid.tryGet(t, x, y, null) ?: continue
-			if (tile.contents[slot]?.get() != null) throw RuntimeException("Tile wasnt empty! Currently contains " + tile.contents[slot]!!.entity.toString())
+			if (tile.contents[slot]?.get() != null && tile.contents[slot]?.get() != entity)
+			{
+				throw RuntimeException("Tile wasnt empty! Currently contains " + tile.contents[slot]!!.entity.toString())
+			}
 			tile.contents[slot] = ref
 		}
 	}

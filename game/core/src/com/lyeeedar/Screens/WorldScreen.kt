@@ -39,7 +39,14 @@ class WorldScreen : AbstractScreen()
 			rat.statistics()!!.faction = "enemy"
 			rat.ai()!!.state.set(rat.getRef(), world, 0)
 			rat.addComponent(ComponentType.Task)
-			rat.position()!!.position = world.grid.random()!!
+
+			var tile = world.grid.random()!!
+			while (tile.contents.containsKey(rat.position()!!.slot))
+			{
+				tile = world.grid.random()!!
+			}
+
+			rat.position()!!.position = tile
 			rat.position()!!.addToTile(rat)
 			world.addEntity(rat)
 		}
