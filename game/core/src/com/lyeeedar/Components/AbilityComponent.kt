@@ -51,3 +51,23 @@ class AbilityComponentData : AbstractComponentData()
 	override val classID: String = "Ability"
 	//endregion
 }
+
+fun Entity.abilities(): Sequence<Ability> = sequence<Ability> {
+	val weapon = weapon()
+	if (weapon != null)
+	{
+		for (move in weapon.weapon.moves)
+		{
+			yield(move.getAsAbility())
+		}
+	}
+
+	val ability = ability()
+	if (ability != null)
+	{
+		for (ab in ability.abilities)
+		{
+			yield(ab)
+		}
+	}
+}

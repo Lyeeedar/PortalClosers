@@ -15,6 +15,8 @@ import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
+import com.lyeeedar.UI.AbilityWidget
+import com.lyeeedar.UI.AbstractAbilityWidget.Companion.selectedAbility
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Controls
 import com.lyeeedar.Util.DataClass
@@ -26,7 +28,6 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 {
 	//region non-data
 	val potentialTargets = Array<Tile>()
-	val abilities = Array<Ability>()
 	//endregion
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
@@ -36,24 +37,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		val task = entity.task() ?: return EvaluationState.FAILED
 		if (task.tasks.size > 0) return EvaluationState.FAILED
 
-		abilities.clear()
-		val ability = entity.ability()
-		if (ability != null)
-		{
-			abilities.addAll(ability.abilities)
-		}
-
-		val weapon = entity.weapon()
-		if (weapon != null)
-		{
-			for (move in weapon.weapon.moves)
-			{
-				val ab = move.getAsAbility()
-				abilities.add(ab)
-			}
-		}
-
-		for (ab in abilities)
+		for (ab in entity.abilities())
 		{
 			if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
 			{
@@ -68,6 +52,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 						task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
 
 						ab.isSelected = false
+						selectedAbility = null
 
 						return EvaluationState.RUNNING
 					}

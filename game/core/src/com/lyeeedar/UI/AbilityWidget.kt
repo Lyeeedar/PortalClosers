@@ -39,7 +39,20 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		addClickListener {
 			if (isAbilityEnabled())
 			{
-				ability.isSelected = !ability.isSelected
+				if (ability.isSelected)
+				{
+					ability.isSelected = false
+					if (selectedAbility == ability)
+					{
+						selectedAbility = null
+					}
+				}
+				else
+				{
+					ability.isSelected = true
+					selectedAbility?.isSelected = false
+					selectedAbility = ability
+				}
 			}
 		}
 
@@ -119,6 +132,11 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 			batch.color = colour
 		}
 		batch.draw(border, x, y, iconWidth, iconHeight)
+	}
+
+	companion object
+	{
+		var selectedAbility: Ability? = null
 	}
 }
 

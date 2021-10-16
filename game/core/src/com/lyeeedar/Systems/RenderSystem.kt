@@ -23,6 +23,8 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
 	val attack = AssetManager.loadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
 
+	val checkerCol = Colour(0f, 0f, 0f, 0.04f)
+
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
 		val renderer = renderer
@@ -98,6 +100,14 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 	override fun drawExtraTile(tile: AbstractTile)
 	{
+		if (tile.wall == null)
+		{
+			if ((tile.x + tile.y).rem(2) == 0)
+			{
+				renderer.queueTexture(white, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.FLOOR.ordinal, index = 1, colour = checkerCol)
+			}
+		}
+
 		val tile = tile as Tile
 		if (tile.predictedAttacksFrom.size > 0)
 		{

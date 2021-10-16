@@ -60,37 +60,15 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 			}
 		}
 
-		val weapon = world.player?.weapon()
-		if (weapon != null)
+		for (ability in world.player!!.abilities())
 		{
-			for (move in weapon.weapon.moves)
+			if (ability.isSelected)
 			{
-				val ab = move.getAsAbility()
-				if (ab.isSelected)
+				for (tile in ability.getValidTargets(world.player!!, world, null))
 				{
-					for (tile in ab.getValidTargets(world.player!!, world, null))
-					{
-						val tile = tile as Tile
-						tile.isTargetted = true
-						tile.isTileDirty = true
-					}
-				}
-			}
-		}
-
-		val ability = world.player?.ability()
-		if (ability != null)
-		{
-			for (ab in ability.abilities)
-			{
-				if (ab.isSelected)
-				{
-					for (tile in ab.getValidTargets(world.player!!, world, null))
-					{
-						val tile = tile as Tile
-						tile.isTargetted = true
-						tile.isTileDirty = true
-					}
+					val tile = tile as Tile
+					tile.isTargetted = true
+					tile.isTileDirty = true
 				}
 			}
 		}
