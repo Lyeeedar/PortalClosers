@@ -24,3 +24,5 @@ game/assetsraw/Settings.xml
 game/assets/*.jar
 *.pdb
 *.deps.json
+*.nupkg
+*.dylib
