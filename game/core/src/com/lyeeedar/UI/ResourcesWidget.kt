@@ -2,7 +2,10 @@ package com.lyeeedar.UI
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.WeaponComponent
 import com.lyeeedar.Components.weapon
@@ -11,12 +14,21 @@ import com.lyeeedar.Util.AssetManager
 
 class ResourcesWidget(val entity: Entity) : Table()
 {
+	init
+	{
+		background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Icons/Active"), 4, 4, 4, 4))
+
+		addHoldToolTip {
+			"The resources you have available to use your weapon abilities."
+		}
+	}
+
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
 		super.draw(batch!!, parentAlpha)
 
-		val pad = 2f
-		val size = height
+		val pad = 3f
+		val size = height - pad * 2f
 
 		val weapon = entity.weapon()!!
 		for (i in 0 until weapon.weapon.maxResources)
@@ -31,7 +43,7 @@ class ResourcesWidget(val entity: Entity) : Table()
 			{
 				batch.color = Color.DARK_GRAY
 			}
-			batch.draw(weapon.weapon.resourcesIcon.currentTexture, x, pad + this.y, size, size)
+			batch.draw(weapon.weapon.resourcesIcon.currentTexture, x, y + pad, size, size)
 		}
 	}
 }

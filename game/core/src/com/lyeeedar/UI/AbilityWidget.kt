@@ -24,7 +24,6 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 
 	val iconWidth = 32f
 	val iconHeight = 32f
-	val usageHeight = 8f
 
 	val font = Statics.skin.getFont("small")
 	val fontLayout = GlyphLayout()
@@ -42,6 +41,10 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 			{
 				ability.isSelected = !ability.isSelected
 			}
+		}
+
+		addHoldToolTip {
+			"${ability.name}\n${ability.description}"
 		}
 	}
 
