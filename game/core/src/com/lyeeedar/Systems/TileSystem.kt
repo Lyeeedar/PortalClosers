@@ -72,7 +72,6 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					{
 						val tile = tile as Tile
 						tile.isTargetted = true
-						tile.tileCol = Colour.GOLD
 						tile.isTileDirty = true
 					}
 				}
@@ -90,7 +89,6 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					{
 						val tile = tile as Tile
 						tile.isTargetted = true
-						tile.tileCol = Colour.GOLD
 						tile.isTileDirty = true
 					}
 				}

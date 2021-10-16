@@ -71,7 +71,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				overhead *= ratio
 			}
 
-			val index = pos.slot.ordinal
+			val index = SpaceSlot.ABOVEENTITY.ordinal
 
 			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay)
 
@@ -91,7 +91,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				val buff = stats.buffs[i]
 				val icon = buff.icon ?: continue
 
-				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, pos.slot.ordinal, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour)
+				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, index, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour)
 			}
 		}
 	}
@@ -103,6 +103,11 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		{
 			val rotation = (tile.x + tile.y).rem(3) * 90f
 			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = Colour.RED, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation)
+		}
+		if (tile.isTargetted)
+		{
+			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = Colour.LIGHT_GRAY, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
 		}
 	}
 
