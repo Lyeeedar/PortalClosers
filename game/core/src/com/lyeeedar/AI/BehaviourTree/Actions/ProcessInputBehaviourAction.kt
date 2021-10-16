@@ -11,6 +11,7 @@ import com.lyeeedar.AI.Tasks.TaskUseAbility
 import com.lyeeedar.AI.Tasks.TaskWait
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
@@ -25,6 +26,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 {
 	//region non-data
 	val potentialTargets = Array<Tile>()
+	val abilities = Array<Ability>()
 	//endregion
 
 	override fun evaluate(state: BehaviourTreeState): EvaluationState
@@ -34,32 +36,44 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		val task = entity.task() ?: return EvaluationState.FAILED
 		if (task.tasks.size > 0) return EvaluationState.FAILED
 
+		abilities.clear()
+		val ability = entity.ability()
+		if (ability != null)
+		{
+			abilities.addAll(ability.abilities)
+		}
+
 		val weapon = entity.weapon()
 		if (weapon != null)
 		{
 			for (move in weapon.weapon.moves)
 			{
 				val ab = move.getAsAbility()
-				if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
+				abilities.add(ab)
+			}
+		}
+
+		for (ab in abilities)
+		{
+			if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
+			{
+				if (RenderSystemWidget.instance!!.isSelected)
 				{
-					if (RenderSystemWidget.instance!!.isSelected)
+					val tile = state.world.grid.tryGet(RenderSystemWidget.instance!!.selectedPoint, null)
+
+					if (tile != null && ab.getValidTargets(entity, state.world, null).contains(tile))
 					{
-						val tile = state.world.grid.tryGet(RenderSystemWidget.instance!!.selectedPoint, null)
+						if (ab.data.targetType != AbilityData.TargetType.SELF && tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
 
-						if (tile != null && ab.getValidTargets(entity, state.world, null).contains(tile))
-						{
-							if (ab.data.targetType != AbilityData.TargetType.SELF && tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
+						task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
 
-							task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
+						ab.isSelected = false
 
-							ab.isSelected = false
-
-							return EvaluationState.RUNNING
-						}
+						return EvaluationState.RUNNING
 					}
-
-					return EvaluationState.FAILED
 				}
+
+				return EvaluationState.FAILED
 			}
 		}
 

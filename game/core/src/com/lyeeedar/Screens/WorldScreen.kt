@@ -52,7 +52,7 @@ class WorldScreen : AbstractScreen()
 
 		mainTable.add(RenderSystemWidget(world)).grow()
 		mainTable.row()
-		mainTable.add(PlayerWidget(world)).growX().padBottom(5f)
+		mainTable.add(PlayerWidget(world)).growX()
 
 		debugConsole.register("time", "") { args, _ ->
 

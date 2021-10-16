@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Value
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.lyeeedar.Components.ability
 import com.lyeeedar.Components.weapon
 import com.lyeeedar.Game.Ability.Ability
@@ -14,7 +15,7 @@ import ktx.scene2d.table
 
 class PlayerWidget(val world: World<*>) : Table()
 {
-	val emptySlot = AssetManager.loadSprite("Icons/Empty")
+	val basePanel = AssetManager.loadTextureRegion("GUI/BasePanel")
 
 	init
 	{
@@ -27,44 +28,41 @@ class PlayerWidget(val world: World<*>) : Table()
 
 		val player = world.player!!
 
-		debug()
+		add(Table()).growX().height(24f).pad(1f) // will be buffs
+		row()
+		add(scene2d.table {
+			background = TextureRegionDrawable(basePanel)
 
-		val left = scene2d.table {
-			add(ResourcesWidget(player)).growX().height(24f).pad(3f)
-			row()
-			table { cell ->
-				cell.grow()
-				for (move in player.weapon()!!.weapon.moves)
-				{
-					val moveWidget = MoveWidget(move, world)
-					add(moveWidget).growY().uniformX().padLeft(2f)
-				}
-				add(Table()).grow()
-			}
-		}
+			add(HealthBarWidget(player)).growY().width(Value.percentHeight(1f, this))
 
-		val right = scene2d.table {
-			add(Table()).growX().height(24f).pad(3f) // will be buffs
-			row()
-			table { cell ->
-				cell.grow()
-				val ability = player.ability()
-				if (ability != null)
-				{
-					for (ab in ability.abilities)
+			table {
+				cell -> cell.grow()
+				add(ResourcesWidget(player)).growX().height(16f).pad(1f)
+				row()
+				table { cell ->
+					cell.grow().padLeft(2f)
+					for (move in player.weapon()!!.weapon.moves)
 					{
-						val widget = AbilityWidget(ab, world)
-						add(widget).growY().uniformX().padLeft(2f)
+						val moveWidget = MoveWidget(move, world)
+						add(moveWidget).growY().uniformX().padLeft(1f)
 					}
+					add(Table()).grow()
 				}
-				add(Table()).grow()
+				row()
+				table { cell ->
+					cell.grow().pad(2f)
+					val ability = player.ability()
+					if (ability != null)
+					{
+						for (ab in ability.abilities)
+						{
+							val widget = AbilityWidget(ab, world)
+							add(widget).growY().uniformX().padLeft(1f)
+						}
+					}
+					add(Table()).grow()
+				}
 			}
-		}
-
-		val hp = HealthBarWidget(player)
-
-		add(left).growY().width(Value.percentWidth(0.4f, this))
-		add(hp).uniform().width(Value.percentWidth(0.2f, this))
-		add(right).growY().width(Value.percentWidth(0.4f, this))
+		}).grow()
 	}
 }

@@ -242,6 +242,7 @@
 								</Timeline>
 							</Actions>
 						</ActionSequence>
+						<Cooldown>3</Cooldown>
 						<TargetType>Self</TargetType>
 					</AbilityTemplate>
 				</Ability>
@@ -335,4 +336,24 @@
 	</Moves>
 	<DefaultResources>5</DefaultResources>
 	<Handlers />
+	<ResourcesIcon meta:RefKey="RenderedLayeredSprite">
+		<ImageLayer>
+			<Path>GameIconsRaw/gun/artillery-shell</Path>
+			<Modifiers>
+				<Gradient>
+					<classID>Gradient</classID>
+					<Type>Internal</Type>
+					<Colours>
+						<GradientColour>
+							<Colour>232,201,6,255</Colour>
+						</GradientColour>
+						<GradientColour>
+							<Time>1</Time>
+							<Colour>150,111,66,255</Colour>
+						</GradientColour>
+					</Colours>
+				</Gradient>
+			</Modifiers>
+		</ImageLayer>
+	</ResourcesIcon>
 </Weapon>

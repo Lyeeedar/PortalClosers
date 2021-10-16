@@ -24,6 +24,9 @@ class Weapon : XmlDataClass()
 
 	val handlers: FastEnumMap<EventType, Array<EventAndCondition>> = FastEnumMap(EventType::class.java)
 
+	@DataLayeredSprite
+	lateinit var resourcesIcon: Sprite
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
@@ -63,6 +66,7 @@ class Weapon : XmlDataClass()
 				handlers[enumVal] = objhandlers
 			}
 		}
+		resourcesIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("ResourcesIcon")!!)
 	}
 	//endregion
 }

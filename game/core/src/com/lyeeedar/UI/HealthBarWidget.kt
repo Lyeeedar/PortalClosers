@@ -11,48 +11,30 @@ import com.lyeeedar.Util.floor
 
 class HealthBarWidget(val player: Entity) : Widget()
 {
-	val hpCol = Color.GREEN
+	val full = AssetManager.loadTextureRegion("Sprites/GUI/attack_full.png")!!
+	val empty = AssetManager.loadTextureRegion("Sprites/GUI/attack_empty.png")!!
+
 	val lostHpCol = Color.ORANGE
-	val emptyCol = Color.BLACK
-
-	val white = AssetManager.loadTextureRegion("Sprites/white.png")!!
-	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
-
-	val pipSize = 10f
 
 	override fun draw(batch: Batch, parentAlpha: Float)
 	{
 		val stats = player.statistics()!!
 
-		val totalWidth = width// * 0.95f
-
-		val numHpPips = (totalWidth / pipSize).floor()
-
 		val hp = stats.hp
 		val maxhp = stats.getStat(Statistic.MAX_HP)
-
-		val solidSpaceRatio = 0.05f
-		val space = totalWidth
-		val spacePerPip = space / numHpPips
-		val spacing = spacePerPip * solidSpaceRatio
-		val solid = spacePerPip - spacing
+		val alpha = hp / maxhp
+		val lostAlpha = (hp + stats.lostHp) / maxhp
 
 		val prevCol = batch.packedColor
-		batch.color = emptyCol
-		batch.draw(white, x, y, totalWidth, height)
+		batch.color = Color.WHITE
+		batch.draw(empty, x, y, width, height)
 
 		batch.color = lostHpCol
-		val lostLen = (hp + stats.lostHp) / maxhp
-		batch.draw(white, x, y, totalWidth*lostLen, height)
+		batch.draw(full.texture, x, y, width, height * lostAlpha, full.u, full.v, full.u2, full.v + (full.v2 - full.v) * lostAlpha)
 
-		batch.color = hpCol
-		val hpLen = hp / maxhp
-		batch.draw(white, x, y, totalWidth*hpLen, height)
+		batch.color = Color.WHITE
+		batch.draw(full.texture, x, y, width, height * alpha, full.u, full.v, full.u2, full.v + (full.v2 - full.v) * alpha)
 
-		for (i in 0 until numHpPips)
-		{
-			batch.draw(hp_border, x + i*spacePerPip, y, solid, height)
-		}
 		batch.packedColor = prevCol
 	}
 }

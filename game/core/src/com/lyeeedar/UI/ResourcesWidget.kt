@@ -11,8 +11,6 @@ import com.lyeeedar.Util.AssetManager
 
 class ResourcesWidget(val entity: Entity) : Table()
 {
-	val resourcesImage = AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_items/crystal_blood.png")
-
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
 		super.draw(batch!!, parentAlpha)
@@ -28,13 +26,12 @@ class ResourcesWidget(val entity: Entity) : Table()
 			if (i < weapon.resources)
 			{
 				batch.color = Color.WHITE
-				batch.draw(resourcesImage, x, pad + this.y, size, size)
 			}
 			else
 			{
 				batch.color = Color.DARK_GRAY
-				batch.draw(resourcesImage, x, pad + this.y, size, size)
 			}
+			batch.draw(weapon.weapon.resourcesIcon.currentTexture, x, pad + this.y, size, size)
 		}
 	}
 }

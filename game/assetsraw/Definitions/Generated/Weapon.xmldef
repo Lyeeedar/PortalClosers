@@ -17,6 +17,7 @@
 			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
 		</Data>
+		<Data Name="ResourcesIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="MoveVariant" Nullable="False" TextColour="204,11,11" meta:RefKey="StructDef">
 		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" ToolTip="Known variables: resources" meta:RefKey="String" />

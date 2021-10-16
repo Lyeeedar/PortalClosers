@@ -78,6 +78,24 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 				}
 			}
 		}
+
+		val ability = world.player?.ability()
+		if (ability != null)
+		{
+			for (ab in ability.abilities)
+			{
+				if (ab.isSelected)
+				{
+					for (tile in ab.getValidTargets(world.player!!, world, null))
+					{
+						val tile = tile as Tile
+						tile.isTargetted = true
+						tile.tileCol = Colour.GOLD
+						tile.isTileDirty = true
+					}
+				}
+			}
+		}
 	}
 
 	val visionShadowCast = ShadowCastCache()

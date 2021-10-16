@@ -38,5 +38,56 @@
 			<classID>Weapon</classID>
 			<Weapon>Weapons/BlastAxe</Weapon>
 		</Weapon>
+		<Ability>
+			<classID>Ability</classID>
+			<Abilities>
+				<AbilityTemplate>
+					<Name>779a330b-f969-4a44-b309-3117b7cc7be3</Name>
+					<Description>69affc07-7e77-40fe-8ba2-a20f740a5add</Description>
+					<Icon meta:RefKey="RenderedLayeredSprite">
+						<ImageLayer>
+							<Path>GameIconsRaw/bottle/magic-potion</Path>
+							<Modifiers>
+								<Gradient>
+									<classID>Gradient</classID>
+									<Type>Internal</Type>
+									<Colours>
+										<GradientColour>
+											<Colour>59,230,10,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.21961528</Time>
+											<Colour>10,230,119,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.4054039</Time>
+											<Colour>175,222,161,255</Colour>
+										</GradientColour>
+										<GradientColour>
+											<Time>0.9782522</Time>
+											<Colour>81,82,78,255</Colour>
+										</GradientColour>
+									</Colours>
+								</Gradient>
+							</Modifiers>
+						</ImageLayer>
+					</Icon>
+					<AbilityTemplate meta:RefKey="AbilityData">
+						<ActionSequence meta:RefKey="ActionSequence">
+							<Actions>
+								<Timeline>
+									<Heal>
+										<classID>Heal</classID>
+										<Amount>map_hp * 0.6</Amount>
+									</Heal>
+								</Timeline>
+							</Actions>
+						</ActionSequence>
+						<Usages>3</Usages>
+						<TargetType>Self</TargetType>
+					</AbilityTemplate>
+				</AbilityTemplate>
+			</Abilities>
+		</Ability>
 	</Components>
 </Entity>
