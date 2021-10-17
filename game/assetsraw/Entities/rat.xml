@@ -22,8 +22,8 @@
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
-				<Path>goblin</Path>
-				<Scale>0.3</Scale>
+				<Path>elemental1</Path>
+				<Colour>255,233,0,255</Colour>
 			</Renderable>
 		</RenderableComponent>
 		<Combo>

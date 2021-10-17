@@ -2,5 +2,6 @@
 	<Definition Name="Skeleton" Nullable="False" TextColour="228,228,155" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Path" BasePath="../assets/" StripExtension="True" AllowedFileTypes="json" SkipIfDefault="False" Default="" meta:RefKey="File" />
 		<Data Name="Scale" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
 	</Definition>
 </Definitions>
