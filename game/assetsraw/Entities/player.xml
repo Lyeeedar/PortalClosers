@@ -78,7 +78,7 @@
 								<Timeline>
 									<Heal>
 										<classID>Heal</classID>
-										<Amount>map_hp * 0.6</Amount>
+										<Amount>source.max_hp * 0.6</Amount>
 									</Heal>
 								</Timeline>
 							</Actions>

@@ -49,9 +49,7 @@ class HealAction : AbstractOneShotActionSequenceAction()
 					targetstats.write(map, "target")
 					state.writeVariables(map)
 
-					var healing = amount.evaluate(map, state.rng)
-					healing += healing * sourceStats.getStat(Statistic.POWER)
-
+					val healing = amount.evaluate(map, state.rng)
 					targetstats.heal(healing)
 
 					sourceStats.healingDone += healing
