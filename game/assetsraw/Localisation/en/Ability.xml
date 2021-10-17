@@ -1,14 +1,14 @@
 <Localisation Language="en" xmlns:meta="Editor">
-	<Text ID="37f4be55-ac03-4e2d-8517-d7bb6be60702" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description"></Text>
-	<Text ID="2ea276dc-3c2a-4d22-98ac-723257756334" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name"></Text>
-	<Text ID="1639b7d5-422c-4777-9e8b-07b903c4eb6c" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[1] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description"></Text>
-	<Text ID="5670ff55-7cf3-4910-b1d6-982016284e43" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[1] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name"></Text>
+	<Text ID="37f4be55-ac03-4e2d-8517-d7bb6be60702" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description">Expend a shell to let out a blast as your slash impacts, dealing [GOLD]120%[] damage. Costs [CYAN]1[] shell.</Text>
+	<Text ID="2ea276dc-3c2a-4d22-98ac-723257756334" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Blast Slash</Text>
+	<Text ID="1639b7d5-422c-4777-9e8b-07b903c4eb6c" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[1] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description">Slash at your target, dealing [GOLD]100%[] damage.</Text>
+	<Text ID="5670ff55-7cf3-4910-b1d6-982016284e43" Context="BlastAxe.Weapon.Moves.[0] WeaponMove.WeaponMove.[1] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Slash</Text>
 	<Text ID="b6a9f463-b568-4a7e-a944-26b4b0137dd6" Context="BlastAxe.Weapon.Moves.[1] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description"></Text>
 	<Text ID="1a3774e9-a86d-4bef-8011-8ac8206bda0b" Context="BlastAxe.Weapon.Moves.[1] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name"></Text>
-	<Text ID="fe700c3e-de97-4b3e-9a9f-ea4b825ed58a" Context="BlastAxe.Weapon.Moves.[2] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description"></Text>
-	<Text ID="7003696c-3828-40fe-af23-881bac6f0b95" Context="BlastAxe.Weapon.Moves.[2] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name"></Text>
-	<Text ID="07c2c994-4b65-470d-92eb-e3d05fe3006c" Context="BlastAxe.Weapon.Moves.[3] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description"></Text>
-	<Text ID="4d69636f-d07f-48b0-a16f-4ab212731b94" Context="BlastAxe.Weapon.Moves.[3] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name"></Text>
+	<Text ID="fe700c3e-de97-4b3e-9a9f-ea4b825ed58a" Context="BlastAxe.Weapon.Moves.[2] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description">Reload all your shells when your magazine is empty</Text>
+	<Text ID="7003696c-3828-40fe-af23-881bac6f0b95" Context="BlastAxe.Weapon.Moves.[2] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Reload</Text>
+	<Text ID="07c2c994-4b65-470d-92eb-e3d05fe3006c" Context="BlastAxe.Weapon.Moves.[3] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description">Blast the ground, sending you flying to a distant tile. Costs [CYAN]2[] shells.</Text>
+	<Text ID="4d69636f-d07f-48b0-a16f-4ab212731b94" Context="BlastAxe.Weapon.Moves.[3] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Soaring blast</Text>
 	<Text ID="69affc07-7e77-40fe-8ba2-a20f740a5add" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Description"></Text>
 	<Text ID="779a330b-f969-4a44-b309-3117b7cc7be3" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Name"></Text>
 </Localisation>

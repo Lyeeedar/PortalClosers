@@ -203,7 +203,7 @@
 		</WeaponMove>
 		<WeaponMove>
 			<MoveVariant>
-				<AvailableCondition>1</AvailableCondition>
+				<AvailableCondition>resources == 0</AvailableCondition>
 				<Ability meta:RefKey="AbilityTemplate">
 					<Name>7003696c-3828-40fe-af23-881bac6f0b95</Name>
 					<Description>fe700c3e-de97-4b3e-9a9f-ea4b825ed58a</Description>
@@ -328,7 +328,7 @@
 							</Actions>
 						</ActionSequence>
 						<Range>1,3</Range>
-						<TargetType>Tile</TargetType>
+						<TargetType>Empty_tile</TargetType>
 					</AbilityTemplate>
 				</Ability>
 			</MoveVariant>

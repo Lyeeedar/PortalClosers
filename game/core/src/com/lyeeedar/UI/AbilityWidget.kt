@@ -3,11 +3,14 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
+import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.WeaponMove
 import com.lyeeedar.Systems.World
@@ -35,30 +38,45 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		updateEnabled()
 
 		touchable = Touchable.enabled
-
-		addClickListener {
-			if (isAbilityEnabled())
+		this.addListener(object : ActorGestureListener() {
+			var longPressed = false
+			override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
 			{
-				if (ability.isSelected)
+				super.touchDown(event, x, y, pointer, button)
+				longPressed = false
+			}
+
+			override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
+			{
+				super.touchUp(event, x, y, pointer, button)
+
+				if (!longPressed && isAbilityEnabled())
 				{
-					ability.isSelected = false
-					if (selectedAbility == ability)
+					if (ability.isSelected)
 					{
-						selectedAbility = null
+						ability.isSelected = false
+						if (selectedAbility == ability)
+						{
+							selectedAbility = null
+						}
+					}
+					else
+					{
+						ability.isSelected = true
+						selectedAbility?.isSelected = false
+						selectedAbility = ability
 					}
 				}
-				else
-				{
-					ability.isSelected = true
-					selectedAbility?.isSelected = false
-					selectedAbility = ability
-				}
 			}
-		}
 
-		addHoldToolTip {
-			"${ability.name}\n${ability.description}"
-		}
+			override fun longPress(actor: Actor?, x: Float, y: Float): Boolean
+			{
+				super.longPress(actor, x, y)
+				actor?.showTooltip("${ability.name}\n${ability.description}", x, y)
+				longPressed = true
+				return true
+			}
+		})
 	}
 
 	override fun getPrefWidth(): Float

@@ -28,6 +28,9 @@ class AbilityTemplate : XmlDataClass()
 		data.load(abilityTemplate)
 		data.actionSequence = data.actionSequence.loadDuplicate()
 
+		val name = Localisation.getText(this.name, "Ability")
+		val description = Localisation.getText(this.description, "Ability")
+
 		val ability = Ability(data)
 		ability.name = "$name ${tier.toRomanNumerals()}"
 		ability.description = description
