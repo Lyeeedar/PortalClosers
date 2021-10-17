@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 arml
   rotate: false
-  xy: 233, 12
+  xy: 135, 95
   size: 65, 156
   orig: 65, 156
   offset: 0, 0
@@ -20,8 +20,15 @@ torso
   index: -1
 armr
   rotate: false
-  xy: 148, 24
+  xy: 359, 3
   size: 88, 191
   orig: 88, 191
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 154, 30
+  size: 203, 63
+  orig: 203, 63
   offset: 0, 0
   index: -1
