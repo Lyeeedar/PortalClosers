@@ -32,6 +32,7 @@
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
 				<Path>pc_male</Path>
+				<Colour>255,255,255,255</Colour>
 			</Renderable>
 		</RenderableComponent>
 		<Weapon>
@@ -42,8 +43,8 @@
 			<classID>Ability</classID>
 			<Abilities>
 				<AbilityTemplate>
-					<Name>779a330b-f969-4a44-b309-3117b7cc7be3</Name>
-					<Description>69affc07-7e77-40fe-8ba2-a20f740a5add</Description>
+					<Name>40bb3bdf-1ddf-4040-8f1d-622f3d0383fd</Name>
+					<Description>34303f13-6305-43ab-b45d-551826127694</Description>
 					<Icon meta:RefKey="RenderedLayeredSprite">
 						<ImageLayer>
 							<Path>GameIconsRaw/bottle/magic-potion</Path>

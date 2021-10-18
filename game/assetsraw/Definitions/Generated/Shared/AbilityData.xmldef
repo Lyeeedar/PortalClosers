@@ -8,5 +8,6 @@
 		<Data Name="TargetCondition" SkipIfDefault="False" Default="1" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile &amp;&amp; TargetType != Self" meta:RefKey="String" />
 		<Data Name="SortCondition" SkipIfDefault="False" Default="dist" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile &amp;&amp; TargetType != Self" meta:RefKey="String" />
 		<Data Name="PickSortedMin" SkipIfDefault="True" Default="true" VisibleIf="TargetType != Target_enemy &amp;&amp; TargetType != Tile &amp;&amp; TargetType != Empty_tile &amp;&amp; TargetType != Self" meta:RefKey="Boolean" />
+		<Data Name="CardinalDirectionsOnly" SkipIfDefault="True" Default="true" VisibleIf="TargetType != Self" meta:RefKey="Boolean" />
 	</Definition>
 </Definitions>

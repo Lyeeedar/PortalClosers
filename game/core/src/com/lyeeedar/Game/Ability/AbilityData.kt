@@ -39,6 +39,9 @@ class AbilityData : XmlDataClass()
 	@DataValue(visibleIf = "TargetType != Target_enemy && TargetType != Tile && TargetType != Empty_tile && TargetType != Self")
 	var pickSortedMin: Boolean = true
 
+	@DataValue(visibleIf = "TargetType != Self")
+	var cardinalDirectionsOnly: Boolean = true
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
@@ -52,6 +55,7 @@ class AbilityData : XmlDataClass()
 		targetCondition = CompiledExpression(xmlData.get("TargetCondition", "1")!!)
 		sortCondition = CompiledExpression(xmlData.get("SortCondition", "dist")!!)
 		pickSortedMin = xmlData.getBoolean("PickSortedMin", true)
+		cardinalDirectionsOnly = xmlData.getBoolean("CardinalDirectionsOnly", true)
 	}
 	//endregion
 }

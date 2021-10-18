@@ -372,6 +372,7 @@
 						<Cooldown>6</Cooldown>
 						<Range>1,3</Range>
 						<TargetType>Empty_tile</TargetType>
+						<CardinalDirectionsOnly>false</CardinalDirectionsOnly>
 					</AbilityTemplate>
 				</Ability>
 			</MoveVariant>

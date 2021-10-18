@@ -40,19 +40,24 @@ class Ability(val data: AbilityData)
 		return current
 	}
 
-	fun getValidTargets(entity: Entity, world: World<*>, fixedDirection: Direction?): List<AbstractTile>
+	fun getValidTargets(entity: Entity, world: World<*>, fixedDirection: Direction?, targetType: AbilityData.TargetType? = null): List<AbstractTile>
 	{
 		val pos = entity.position()!!
 		val vision = entity.addOrGet(ComponentType.Vision) as VisionComponent
 		val visiblePoints = vision.getVision(pos.x, pos.y)
 		var visibleTiles = visiblePoints.filter { it.dist(pos.position) in data.range.x..data.range.y }.mapNotNull { world.grid.tryGet(it, null) }
 
+		if (data.cardinalDirectionsOnly)
+		{
+			visibleTiles = visibleTiles.filter { it.x == pos.x || it.y == pos.y }
+		}
+
 		if (fixedDirection != null)
 		{
 			visibleTiles = visibleTiles.filter { Direction.getCardinalDirection(it, pos.position) == fixedDirection }
 		}
 
-		return when (data.targetType)
+		return when (targetType ?: data.targetType)
 		{
 			AbilityData.TargetType.SELF -> listOf(world.grid[pos.position])
 

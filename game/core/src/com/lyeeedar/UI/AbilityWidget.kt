@@ -16,8 +16,6 @@ import com.lyeeedar.Util.Statics
 
 abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 {
-	val empty = AssetManager.loadTextureRegion("GUI/power_empty")
-	val full = AssetManager.loadTextureRegion("GUI/power_full")
 	val background = AssetManager.loadTextureRegion("Icons/Active")
 	val border = AssetManager.loadTextureRegion("Icons/BorderGrey")
 	val white = AssetManager.loadTextureRegion("white")
@@ -32,8 +30,6 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 
 	fun initialise()
 	{
-		updateEnabled()
-
 		touchable = Touchable.enabled
 		this.addListener(object : ActorGestureListener(20f, 0.4f, longPressDuration, Int.MAX_VALUE.toFloat()) {
 			var longPressed = false
@@ -47,7 +43,7 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 			{
 				super.touchUp(event, x, y, pointer, button)
 
-				if (!longPressed && isAbilityEnabled())
+				if (!longPressed && ability.isUsable())
 				{
 					if (ability.isSelected)
 					{
@@ -86,26 +82,13 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		return iconHeight// + usageHeight
 	}
 
-	private fun isAbilityEnabled(): Boolean = ability.isUsable() && ability.getValidTargets(world.player!!, world, null).isNotEmpty()
-
-	var colour: Color = Color.DARK_GRAY
-	fun updateEnabled()
-	{
-		if (isAbilityEnabled())
-		{
-			colour = Color.WHITE
-		}
-		else
-		{
-			colour = Color.DARK_GRAY
-		}
-	}
+	private fun hasValidTargets(): Boolean = ability.getValidTargets(world.player!!, world, null).isNotEmpty()
 
 	override fun draw(batch: Batch, parentAlpha: Float)
 	{
-		updateEnabled()
+		val hasTargets = hasValidTargets()
 
-		batch.color = colour
+		batch.color = Color.WHITE
 
 		batch.draw(background, x, y, iconWidth, iconHeight)
 
@@ -116,13 +99,6 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 
 		if (ability.remainingUsages > -1)
 		{
-			val pipSize = (iconWidth - (ability.data.usages+1) * 1) / ability.data.usages
-			for (i in 0 until ability.data.usages)
-			{
-				val tex = if (i < ability.remainingUsages) full else empty
-				//batch.draw(tex, x + (i+1) + i * pipSize, y+iconHeight, pipSize, usageHeight)
-			}
-
 			fontLayout.setText(font, "${ability.remainingUsages}/${ability.data.usages}")
 			font.draw(batch, fontLayout, x+iconWidth - fontLayout.width - 2f, y+2f + fontLayout.height)
 		}
@@ -142,11 +118,13 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		{
 			batch.color = Color.GOLD
 		}
-		else
-		{
-			batch.color = colour
-		}
 		batch.draw(border, x, y, iconWidth, iconHeight)
+
+		if (!hasTargets)
+		{
+			batch.color = Color.MAROON
+			batch.draw(white, x, y, iconWidth, 3f)
+		}
 	}
 
 	companion object

@@ -2,6 +2,7 @@ package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.IntSet
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
 import com.lyeeedar.SpaceSlot
@@ -37,9 +38,10 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					}
 				}
 
-				if (tile.isTargetted)
+				if (tile.isTargetted || tile.isValidTarget)
 				{
 					tile.isTargetted = false
+					tile.isValidTarget = false
 					tile.tileCol = Colour.WHITE
 					tile.isTileDirty = true
 				}
@@ -64,10 +66,20 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 		{
 			if (ability.isSelected)
 			{
+				if (ability.data.targetType != AbilityData.TargetType.SELF && ability.data.targetType != AbilityData.TargetType.TILE)
+				{
+					for (tile in ability.getValidTargets(world.player!!, world, null, targetType = AbilityData.TargetType.TILE))
+					{
+						val tile = tile as Tile
+						tile.isTargetted = true
+						tile.isTileDirty = true
+					}
+				}
+
 				for (tile in ability.getValidTargets(world.player!!, world, null))
 				{
 					val tile = tile as Tile
-					tile.isTargetted = true
+					tile.isValidTarget = true
 					tile.isTileDirty = true
 				}
 			}

@@ -195,7 +195,7 @@ private fun doMove(src: AbstractTile, dst: AbstractTile, type: MovementType, int
 
 	pos.doMove(actualDst, entity)
 
-	val animSpeed = 0.1f + src.euclideanDist(actualDst) * 0.015f
+	val animSpeed = 0.15f + src.euclideanDist(actualDst) * 0.015f
 
 	val renderable = entity.renderable()?.renderable
 	if (type == MovementType.MOVE)

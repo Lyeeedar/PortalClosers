@@ -18,6 +18,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	private val visible = LerpedValue(0.3f)
 
 	var isTargetted = false
+	var isValidTarget = false
 
 	val predictedAttacksFrom = ObjectSet<ActionSequenceReference>()
 
