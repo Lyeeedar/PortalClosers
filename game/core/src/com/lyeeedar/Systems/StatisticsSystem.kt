@@ -94,7 +94,7 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 		{
 			for (message in stats.messagesToShow)
 			{
-				val offset = Vector2(world.tileSize / 2f + Random.random(Random.sharedRandom, -5, 5).toFloat(), world.tileSize*2.2f + Random.random(Random.sharedRandom, -5, 5).toFloat())
+				val offset = Vector2(world.tileSize / 2f + Random.random(Random.sharedRandom, -5, 5).toFloat(), world.tileSize*1.2f + Random.random(Random.sharedRandom, -5, 5).toFloat())
 
 				val label = Label(message.text, Statics.skin, "popup")
 				label.color = message.colour.color()

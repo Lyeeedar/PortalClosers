@@ -13,6 +13,11 @@ import ktx.collections.toGdxArray
 @DataClass(category = "Permute", colour = "212,176,126", name = "PickEnts")
 class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 {
+	init
+	{
+		permutesTargets = true
+	}
+
 	enum class Mode
 	{
 		ALLIES,

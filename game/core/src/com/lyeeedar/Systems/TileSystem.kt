@@ -90,6 +90,13 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					val tile = tile as Tile
 					tile.isSelectedTarget = true
 					tile.isTileDirty = true
+
+					for (prediction in ability.predictTargets(world.player!!, world, tile))
+					{
+						val tile = world.grid[prediction] as? Tile ?: continue
+						tile.isPreviewedTarget = true
+						tile.isTileDirty = true
+					}
 				}
 			}
 		}

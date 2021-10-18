@@ -2,6 +2,10 @@ package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
+import com.lyeeedar.ActionSequence.ActionSequenceState
+import com.lyeeedar.ActionSequence.Actions.BlockTurnAction
+import com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction
+import com.lyeeedar.ActionSequence.Actions.PermuteAction
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Tile
@@ -125,5 +129,33 @@ class Ability(val data: AbilityData)
 
 		val sorted = if (data.pickSortedMin) values.sortedBy { it.second } else values.sortedByDescending { it.second }
 		return sorted.firstOrNull()?.first
+	}
+
+	private val predictionState = ActionSequenceState()
+	fun predictTargets(entity: Entity, world: World<*>, tile: Tile): Array<Point>
+	{
+		predictionState.reset()
+		predictionState.set(entity.getRef(), data.actionSequence, world, 0L)
+		predictionState.targets.clear()
+		predictionState.targets.add(tile)
+		predictionState.facing = entity.position()!!.facing
+
+		for (action in data.actionSequence.rawActions)
+		{
+			if (action.permutesTargets)
+			{
+				action.enter(predictionState)
+				action.exit(predictionState)
+			}
+			else
+			{
+				when (action)
+				{
+					is BlockTurnAction, is MarkAndWaitForPlayerAction -> break
+				}
+			}
+		}
+
+		return predictionState.targets
 	}
 }
