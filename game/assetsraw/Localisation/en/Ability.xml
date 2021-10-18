@@ -9,6 +9,6 @@
 	<Text ID="4d69636f-d07f-48b0-a16f-4ab212731b94" Context="BlastAxe.Weapon.Moves.[1] WeaponMove.WeaponMove.[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Soaring blast</Text>
 	<Text ID="fe700c3e-de97-4b3e-9a9f-ea4b825ed58a" Context="BlastAxe.Weapon.WaitMove (WeaponMove).[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Description">Reload all your shells.</Text>
 	<Text ID="7003696c-3828-40fe-af23-881bac6f0b95" Context="BlastAxe.Weapon.WaitMove (WeaponMove).[0] MoveVariant.MoveVariant.Ability (AbilityTemplate).Name">Reload</Text>
-	<Text ID="34303f13-6305-43ab-b45d-551826127694" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Description">Heal yourself for [GREEN]60%[] of your max hp.</Text>
+	<Text ID="34303f13-6305-43ab-b45d-551826127694" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Description">Heal yourself for [GREEN]60%[] of your max health.</Text>
 	<Text ID="40bb3bdf-1ddf-4040-8f1d-622f3d0383fd" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Name">Healing Potion</Text>
 </Localisation>
