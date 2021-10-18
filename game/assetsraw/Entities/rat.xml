@@ -22,7 +22,7 @@
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
-				<Path>elemental1</Path>
+				<Path>elemental2</Path>
 				<Colour>255,233,0,255</Colour>
 			</Renderable>
 		</RenderableComponent>
