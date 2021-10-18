@@ -1,5 +1,12 @@
 <Definitions Colour="154,186,114" Icon="Sprites/Oryx/uf_split/uf_items/weapon_axe_exotic1.png" xmlns:meta="Editor">
 	<Definition Name="Weapon" Nullable="False" TextColour="79,79,204" meta:RefKey="Struct">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Weapon" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Weapon" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="WeaponIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="ResourcesIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="ResourcesName" NeedsLocalisation="True" LocalisationFile="Weapon" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="AttackMove" Keys="WeaponMove" meta:RefKey="Reference" />
+		<Data Name="WaitMove" Keys="WeaponMove" meta:RefKey="Reference" />
 		<Data Name="Moves" Keys="WeaponMove" meta:RefKey="Collection" />
 		<Data Name="DefaultResources" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="MaxResources" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
@@ -17,7 +24,6 @@
 			<Data Name="Death" Keys="EventAndCondition" meta:RefKey="Collection" />
 			<Data Name="On_turn" Keys="EventAndCondition" meta:RefKey="Collection" />
 		</Data>
-		<Data Name="ResourcesIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="MoveVariant" Nullable="False" TextColour="204,11,11" meta:RefKey="StructDef">
 		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" ToolTip="Known variables: resources" meta:RefKey="String" />

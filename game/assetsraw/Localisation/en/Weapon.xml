@@ -1,0 +1,5 @@
+<Localisation Language="en" xmlns:meta="Editor">
+	<Text ID="3eea9d7a-ff55-42e7-8af6-1456cb0b23c9" Context="BlastAxe.Weapon.Description">This axe has a magazine of shells that can be detonated to increase the impact of its attacks to devastating effect.</Text>
+	<Text ID="59ea6a08-0dc4-4cca-bc4e-9b97d4073dbf" Context="BlastAxe.Weapon.Name">Blast Axe</Text>
+	<Text ID="002be915-b924-483f-994b-8a8c817f9b0d" Context="BlastAxe.Weapon.ResourcesName">shells</Text>
+</Localisation>

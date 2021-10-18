@@ -6,9 +6,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.ui.Button
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
-import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener
 import com.lyeeedar.Game.Ability.Ability
@@ -38,7 +35,7 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		updateEnabled()
 
 		touchable = Touchable.enabled
-		this.addListener(object : ActorGestureListener() {
+		this.addListener(object : ActorGestureListener(20f, 0.4f, longPressDuration, Int.MAX_VALUE.toFloat()) {
 			var longPressed = false
 			override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
 			{
@@ -89,7 +86,7 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 		return iconHeight// + usageHeight
 	}
 
-	private fun isAbilityEnabled(): Boolean = ability.available && ability.cooldown == 0 && ability.remainingUsages != 0 && ability.getValidTargets(world.player!!, world, null).isNotEmpty()
+	private fun isAbilityEnabled(): Boolean = ability.isUsable() && ability.getValidTargets(world.player!!, world, null).isNotEmpty()
 
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()

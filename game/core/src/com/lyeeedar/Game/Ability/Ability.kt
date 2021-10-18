@@ -28,6 +28,8 @@ class Ability(val data: AbilityData)
 	var name: String? = null
 	var description: String? = null
 
+	fun isUsable() = cooldown == 0 && remainingUsages != 0 && available
+
 	fun transform(initial: String, transforms: Array<(String)->String>): String
 	{
 		var current = initial

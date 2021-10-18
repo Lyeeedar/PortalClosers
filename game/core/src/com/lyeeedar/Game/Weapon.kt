@@ -17,29 +17,72 @@ import squidpony.squidmath.LightRNG
 @DataFile(colour = "154,186,114", icon = "Sprites/Oryx/uf_split/uf_items/weapon_axe_exotic1.png")
 class Weapon : XmlDataClass()
 {
-	val moves: Array<WeaponMove> = Array()
+	@DataNeedsLocalisation(file = "Weapon")
+	lateinit var name: String
+
+	@DataNeedsLocalisation(file = "Weapon")
+	lateinit var description: String
+
+	@DataLayeredSprite
+	lateinit var weaponIcon: Sprite
+
+	@DataLayeredSprite
+	lateinit var resourcesIcon: Sprite
+
+	@DataNeedsLocalisation(file = "Weapon")
+	lateinit var resourcesName: String
+
+	var attackMove: WeaponMove? = null
+	var waitMove: WeaponMove? = null
+
+	@DataValue(dataName = "Moves")
+	val otherMoves: Array<WeaponMove> = Array()
+
+	@Transient
+	val moves: Sequence<WeaponMove> = sequence {
+		if (attackMove != null) yield(attackMove!!)
+		if (waitMove != null) yield(waitMove!!)
+		for (move in otherMoves)
+		{
+			yield(move)
+		}
+	}
 
 	var defaultResources: Int = 0
 	var maxResources: Int = 5
 
 	val handlers: FastEnumMap<EventType, Array<EventAndCondition>> = FastEnumMap(EventType::class.java)
 
-	@DataLayeredSprite
-	lateinit var resourcesIcon: Sprite
-
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		val movesEl = xmlData.getChildByName("Moves")
-		if (movesEl != null)
+		name = xmlData.get("Name")
+		description = xmlData.get("Description")
+		weaponIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("WeaponIcon")!!)
+		resourcesIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("ResourcesIcon")!!)
+		resourcesName = xmlData.get("ResourcesName")
+		val attackMoveEl = xmlData.getChildByName("AttackMove")
+		if (attackMoveEl != null)
 		{
-			for (el in movesEl.children)
+			attackMove = WeaponMove()
+			attackMove!!.load(attackMoveEl)
+		}
+		val waitMoveEl = xmlData.getChildByName("WaitMove")
+		if (waitMoveEl != null)
+		{
+			waitMove = WeaponMove()
+			waitMove!!.load(waitMoveEl)
+		}
+		val otherMovesEl = xmlData.getChildByName("Moves")
+		if (otherMovesEl != null)
+		{
+			for (el in otherMovesEl.children)
 			{
-				val objmoves: WeaponMove
-				val objmovesEl = el
-				objmoves = WeaponMove()
-				objmoves.load(objmovesEl)
-				moves.add(objmoves)
+				val objotherMoves: WeaponMove
+				val objotherMovesEl = el
+				objotherMoves = WeaponMove()
+				objotherMoves.load(objotherMovesEl)
+				otherMoves.add(objotherMoves)
 			}
 		}
 		defaultResources = xmlData.getInt("DefaultResources", 0)
@@ -66,7 +109,6 @@ class Weapon : XmlDataClass()
 				handlers[enumVal] = objhandlers
 			}
 		}
-		resourcesIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("ResourcesIcon")!!)
 	}
 	//endregion
 }

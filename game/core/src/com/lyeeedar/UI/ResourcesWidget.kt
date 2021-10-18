@@ -11,6 +11,7 @@ import com.lyeeedar.Components.WeaponComponent
 import com.lyeeedar.Components.weapon
 import com.lyeeedar.Game.Weapon
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
 
 class ResourcesWidget(val entity: Entity) : Table()
 {
@@ -19,7 +20,7 @@ class ResourcesWidget(val entity: Entity) : Table()
 		background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Icons/Active"), 4, 4, 4, 4))
 
 		addHoldToolTip {
-			"The resources you have available to use your weapon abilities."
+			"The ${Localisation.getText(entity.weapon()!!.weapon.resourcesName, "Weapon")} you have available to use your ${Localisation.getText(entity.weapon()!!.weapon.name, "Weapon")} abilities."
 		}
 	}
 

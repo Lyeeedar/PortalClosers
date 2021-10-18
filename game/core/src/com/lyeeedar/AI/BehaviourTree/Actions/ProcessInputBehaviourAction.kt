@@ -119,50 +119,61 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		{
 			if (moveDir == Direction.CENTER)
 			{
-				task.tasks.add(TaskWait.obtain())
-			}
-			else
-			{
-				val attack = entity.weapon()!!.weapon.moves[0].getAsAbility()
-				potentialTargets.clear()
-
-				if (attack.data.range.y == 1)
+				val wait = entity.weapon()!!.weapon.waitMove?.getAsAbility()
+				if (wait != null && wait.isUsable())
 				{
-					val tile = state.world.grid.tryGet(pos.position, moveDir, null) as? Tile ?: return EvaluationState.FAILED
-					potentialTargets.add(tile)
+					task.tasks.add(TaskUseAbility.obtain().set(pos.tile!!, wait))
 				}
 				else
 				{
-					for (point in Direction.buildCone(moveDir, pos.position, attack.data.range.y))
+					task.tasks.add(TaskWait.obtain())
+				}
+			}
+			else
+			{
+				val attack = entity.weapon()!!.weapon.attackMove?.getAsAbility()
+				var enemyTile: Tile? = null
+				if (attack != null && attack.isUsable())
+				{
+					potentialTargets.clear()
+
+					if (attack.data.range.y == 1)
 					{
-						val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
-						if (tile.skipRender || tile.skipRenderEntities) continue
+						val tile = state.world.grid.tryGet(pos.position, moveDir, null) as? Tile ?: return EvaluationState.FAILED
 						potentialTargets.add(tile)
 					}
-				}
-
-				var enemyTile: Tile? = null
-				var enemyTileDist: Int = Int.MAX_VALUE
-				outer@for (tile in potentialTargets)
-				{
-					for (slot in SpaceSlot.EntityValues)
+					else
 					{
-						val other = tile.contents[slot]?.get() ?: continue
-						if (other.isEnemies(entity))
+						for (point in Direction.buildCone(moveDir, pos.position, attack.data.range.y))
 						{
-							val dist = pos.position.dist(tile)
-							if (dist < enemyTileDist)
-							{
-								enemyTile = tile
-								enemyTileDist = dist
-							}
+							val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
+							if (tile.skipRender || tile.skipRenderEntities) continue
+							potentialTargets.add(tile)
+						}
+					}
 
-							break
+					var enemyTileDist: Int = Int.MAX_VALUE
+					outer@for (tile in potentialTargets)
+					{
+						for (slot in SpaceSlot.EntityValues)
+						{
+							val other = tile.contents[slot]?.get() ?: continue
+							if (other.isEnemies(entity))
+							{
+								val dist = pos.position.dist(tile)
+								if (dist < enemyTileDist)
+								{
+									enemyTile = tile
+									enemyTileDist = dist
+								}
+
+								break
+							}
 						}
 					}
 				}
 
-				if (enemyTile != null)
+				if (enemyTile != null && attack != null)
 				{
 					task.tasks.add(TaskUseAbility.obtain().set(enemyTile, attack))
 				}
