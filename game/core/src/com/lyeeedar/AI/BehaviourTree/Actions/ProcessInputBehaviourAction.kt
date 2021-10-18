@@ -39,22 +39,40 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 
 		for (ab in entity.abilities())
 		{
-			if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
+			if (ab.launch)
 			{
-				if (RenderSystemWidget.instance!!.isSelected)
+				task.tasks.add(TaskUseAbility.obtain().set(ab.selectedTargets.get(0), ab))
+
+				ab.isSelected = false
+				ab.launch = false
+				ab.selectedTargets.clear()
+				selectedAbility = null
+
+				return EvaluationState.RUNNING
+			}
+			else if (ab.isSelected && ab.cooldown == 0 && ab.remainingUsages != 0)
+			{
+				if (RenderSystemWidget.instance!!.isSelected && !RenderSystemWidget.instance!!.clickConsumed && ab.data.targetType != AbilityData.TargetType.SELF)
 				{
 					val tile = state.world.grid.tryGet(RenderSystemWidget.instance!!.selectedPoint, null)
 
 					if (tile != null && ab.getValidTargets(entity, state.world, null).contains(tile))
 					{
-						if (ab.data.targetType != AbilityData.TargetType.SELF && tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
+						if (tile.dist(pos.position) !in ab.data.range.x..ab.data.range.y) continue
 
-						task.tasks.add(TaskUseAbility.obtain().set(tile, ab))
+						val tile = tile as Tile
+						if (ab.selectedTargets.contains(tile))
+						{
+							ab.selectedTargets.removeValue(tile, true)
+						}
+						else
+						{
+							ab.selectedTargets.clear()
+							ab.selectedTargets.add(tile)
+						}
 
-						ab.isSelected = false
-						selectedAbility = null
-
-						return EvaluationState.RUNNING
+						RenderSystemWidget.instance!!.clickConsumed = true
+						return EvaluationState.FAILED
 					}
 				}
 

@@ -6,6 +6,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceReference
 import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.position
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.AbstractTile
 import com.lyeeedar.Util.Colour
@@ -19,6 +20,8 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 
 	var isTargetted = false
 	var isValidTarget = false
+	var isSelectedTarget = false
+	var isPreviewedTarget = false
 
 	val predictedAttacksFrom = ObjectSet<ActionSequenceReference>()
 

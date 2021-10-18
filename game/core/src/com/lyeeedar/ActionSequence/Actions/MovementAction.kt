@@ -162,12 +162,12 @@ private fun doMove(src: AbstractTile, dst: AbstractTile, type: MovementType, int
 		}
 	}
 
-	val moveSlot = when (type)
+	val checkPassable = when (type)
 	{
-		MovementType.MOVE, MovementType.ROLL -> SpaceSlot.ENTITY
-		MovementType.TELEPORT, MovementType.LEAP -> SpaceSlot.LIGHT
+		MovementType.MOVE, MovementType.ROLL -> true
+		MovementType.TELEPORT, MovementType.LEAP -> false
 	}
-	val path = BresenhamLine.lineNoDiag(src.x, src.y, dst.x, dst.y, state.world.grid, true, moveSlot, entity)
+	val path = BresenhamLine.lineNoDiag(src.x, src.y, dst.x, dst.y, state.world.grid, checkPassable, SpaceSlot.ENTITY, entity)
 
 	var actualDst: AbstractTile? = null
 	outer@for (point in path.reversed())

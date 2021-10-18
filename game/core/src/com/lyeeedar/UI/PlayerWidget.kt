@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
@@ -31,6 +32,8 @@ class PlayerWidget(val world: World<*>) : Table()
 
 		val player = world.player!!
 
+		add(LaunchButton()).expandX().height(24f).center()
+		row()
 		add(Table()).growX().height(24f).pad(1f) // will be buffs
 		row()
 		add(scene2d.table {

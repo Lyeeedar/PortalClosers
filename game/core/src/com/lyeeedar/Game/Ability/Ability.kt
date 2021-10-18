@@ -23,6 +23,8 @@ class Ability(val data: AbilityData)
 	var justUsed = false
 
 	var isSelected = false
+	val selectedTargets = Array<Tile>()
+	var launch = false
 
 	var icon: Sprite? = null
 	var name: String? = null

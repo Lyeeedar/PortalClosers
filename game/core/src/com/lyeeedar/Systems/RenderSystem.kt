@@ -22,6 +22,8 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	val predictedAttackCol = Colour.RED.copy()
 	val validTargetCol = Colour.LIGHT_GRAY.copy()
 	val targetCol = Colour.DARK_GRAY.copy()
+	val selectedTargetCol = Colour.GOLD.copy()
+	val previewTargetCol = Colour.GREEN.copy()
 
 	val white = AssetManager.loadTextureRegion("Sprites/white.png")!!
 	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
@@ -118,7 +120,17 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 			val rotation = (tile.x + tile.y).rem(3) * 90f
 			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = predictedAttackCol, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation)
 		}
-		if (tile.isValidTarget)
+		if (tile.isSelectedTarget)
+		{
+			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+		}
+		else if (tile.isPreviewedTarget)
+		{
+			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+		}
+		else if (tile.isValidTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
 			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = validTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)

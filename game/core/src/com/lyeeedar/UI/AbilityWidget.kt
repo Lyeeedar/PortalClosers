@@ -8,7 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener
+import com.lyeeedar.Components.position
+import com.lyeeedar.Components.tile
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Ability.AbilityData
+import com.lyeeedar.Game.Tile
 import com.lyeeedar.Game.WeaponMove
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
@@ -48,6 +52,8 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 					if (ability.isSelected)
 					{
 						ability.isSelected = false
+						ability.launch = false
+						ability.selectedTargets.clear()
 						if (selectedAbility == ability)
 						{
 							selectedAbility = null
@@ -56,6 +62,22 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 					else
 					{
 						ability.isSelected = true
+						ability.launch = false
+						ability.selectedTargets.clear()
+
+						if (ability.data.targetType == AbilityData.TargetType.SELF)
+						{
+							ability.selectedTargets.add(world.player!!.position()!!.tile)
+						}
+						else
+						{
+							val valid = ability.getValidTargets(world.player!!, world, null)
+							if (valid.size == 1)
+							{
+								ability.selectedTargets.add(valid[0] as Tile)
+							}
+						}
+
 						selectedAbility?.isSelected = false
 						selectedAbility = ability
 					}
@@ -88,7 +110,14 @@ abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 	{
 		val hasTargets = hasValidTargets()
 
-		batch.color = Color.WHITE
+		if (ability.remainingUsages == 0 || !ability.available)
+		{
+			batch.color = Color.DARK_GRAY
+		}
+		else
+		{
+			batch.color = Color.WHITE
+		}
 
 		batch.draw(background, x, y, iconWidth, iconHeight)
 
