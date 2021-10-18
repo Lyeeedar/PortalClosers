@@ -22,6 +22,7 @@
 		<Const Name="classID">MeleeAttack</Const>
 		<Data Name="Effect" Keys="OneShotFX" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Damage" Keys="Damage" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Permute" Keys="Permute" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Wait" Nullable="False" Background="206,21,21" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
 		<Const Name="classID">Wait</Const>

@@ -169,6 +169,7 @@ class MeleeAttackComboStep : AbstractComboStep()
 {
 	lateinit var effect: SpawnOneShotParticleAction
 	lateinit var damage: DamageAction
+	var permute: PermuteAction? = null
 
 	override fun getAbilityData(): AbilityData
 	{
@@ -184,7 +185,11 @@ class MeleeAttackComboStep : AbstractComboStep()
 		bump.time = 0.01f
 		bump.duration = 0.1f
 
-		data.actionSequence.rawActions.add(MarkAndWaitForPlayerAction())
+		val mark = MarkAndWaitForPlayerAction()
+		mark.time = 0.005f
+
+		data.actionSequence.rawActions.add(permute)
+		data.actionSequence.rawActions.add(mark)
 		data.actionSequence.rawActions.add(effect)
 		data.actionSequence.rawActions.add(bump)
 		data.actionSequence.rawActions.add(damage)
@@ -203,6 +208,12 @@ class MeleeAttackComboStep : AbstractComboStep()
 		val damageEl = xmlData.getChildByName("Damage")!!
 		damage = DamageAction()
 		damage.load(damageEl)
+		val permuteEl = xmlData.getChildByName("Permute")
+		if (permuteEl != null)
+		{
+			permute = PermuteAction()
+			permute!!.load(permuteEl)
+		}
 	}
 	override val classID: String = "MeleeAttack"
 	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)

@@ -57,7 +57,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		// also mark the tiles
 		for (point in state.targets)
 		{
-			val tile = state.world.grid[point] as? Tile ?: continue
+			val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
 			tile.predictedAttacksFrom.add(state.getRef())
 			tile.isTileDirty = true
 
@@ -107,7 +107,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		// remove tile mark
 		for (point in state.targets)
 		{
-			val tile = state.world.grid[point] as? Tile ?: continue
+			val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
 			tile.predictedAttacksFrom.remove(state.getRef())
 			tile.isTileDirty = true
 		}

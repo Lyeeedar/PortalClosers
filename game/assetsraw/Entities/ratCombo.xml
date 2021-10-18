@@ -7,6 +7,7 @@
 	<NodeMap>
 		<MeleeAttack meta:X="270" meta:Y="0" GUID="0b6872e3-a544-451c-b789-8e94b2b3553a">
 			<Chance>1</Chance>
+			<StepForward>true</StepForward>
 			<Next>
 				<ComboStep>
 					<Next meta:RefKey="MeleeAttack">c2c3a505-7755-4fc4-8834-2e86c05d349b</Next>
@@ -18,17 +19,23 @@
 				<Particle meta:RefKey="ParticleEffect">
 					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
 				<Damage>source.damage</Damage>
-				<Type>None</Type>
 			</Damage>
-			<StepForward>true</StepForward>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<AppendTargets>true</AppendTargets>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
 		</MeleeAttack>
 		<MeleeAttack meta:X="626" meta:Y="0" GUID="c2c3a505-7755-4fc4-8834-2e86c05d349b">
 			<Chance>1</Chance>
+			<StepForward>true</StepForward>
 			<Next>
 				<ComboStep>
 					<Next meta:RefKey="MeleeAttack">f72a3b3f-153b-4187-83b9-240e077a3cab</Next>
@@ -40,17 +47,23 @@
 				<Particle meta:RefKey="ParticleEffect">
 					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
 				<Damage>source.damage</Damage>
-				<Type>None</Type>
 			</Damage>
-			<StepForward>true</StepForward>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<AppendTargets>true</AppendTargets>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
 		</MeleeAttack>
 		<MeleeAttack meta:X="982" meta:Y="0" GUID="f72a3b3f-153b-4187-83b9-240e077a3cab">
 			<Chance>1</Chance>
+			<StepForward>true</StepForward>
 			<Next>
 				<ComboStep>
 					<Next meta:RefKey="Wait">34395b2c-c059-458a-bd7b-f006140fe4bd</Next>
@@ -62,14 +75,19 @@
 				<Particle meta:RefKey="ParticleEffect">
 					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
 				<Damage>source.damage</Damage>
-				<Type>None</Type>
 			</Damage>
-			<StepForward>true</StepForward>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<AppendTargets>true</AppendTargets>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
 		</MeleeAttack>
 		<Wait meta:X="1338" meta:Y="0" GUID="34395b2c-c059-458a-bd7b-f006140fe4bd">
 			<Chance>1</Chance>
