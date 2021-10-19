@@ -10,6 +10,7 @@ import com.lyeeedar.Util.CompiledExpression
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.round
+import ktx.collections.set
 
 @DataClass(category = "Action")
 class WaitBehaviourAction : AbstractBehaviourAction()

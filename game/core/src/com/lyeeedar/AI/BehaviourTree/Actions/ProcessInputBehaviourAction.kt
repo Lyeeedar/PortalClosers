@@ -22,6 +22,7 @@ import com.lyeeedar.Util.Controls
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
+import ktx.collections.set
 
 @DataClass(category = "Action")
 class ProcessInputBehaviourAction : AbstractBehaviourAction()

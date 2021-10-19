@@ -79,7 +79,7 @@ class TaskUseAbility : AbstractTask()
 
 		if (e.renderable()?.renderable is SkeletonRenderable)
 		{
-			(e.renderable()!!.renderable as SkeletonRenderable).setAnimation("attack", 0.25f)
+			(e.renderable()!!.renderable as SkeletonRenderable).setAnimationState("Attack", 0.25f, "Idle")
 		}
 	}
 

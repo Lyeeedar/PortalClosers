@@ -8,6 +8,7 @@ import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Animation.AlphaAnimation
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.CurveRenderable
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.DataClass
@@ -53,6 +54,12 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		state.data[key] = turns
 
 		val markers = Array<EntityReference>()
+
+		val renderable = state.source.get()?.renderable()?.renderable
+		if (renderable is SkeletonRenderable)
+		{
+			renderable.setAnimationState("Attack")
+		}
 
 		// also mark the tiles
 		for (point in state.targets)
@@ -116,6 +123,12 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		for (ref in markers)
 		{
 			ref.get()?.markForDeletion(0f)
+		}
+
+		val renderable = state.source.get()?.renderable()?.renderable
+		if (renderable is SkeletonRenderable)
+		{
+			renderable.setAnimationState("Idle")
 		}
 	}
 

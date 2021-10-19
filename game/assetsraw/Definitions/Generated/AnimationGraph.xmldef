@@ -1,0 +1,23 @@
+<Definitions Colour="200,255,100" Icon="Sprites/Oryx/uf_split/uf_heroes/wolf_red_1.png" xmlns:meta="Editor">
+	<Definition Name="AnimationGraph" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="152,250,250" meta:RefKey="GraphStruct">
+		<Data Name="Root" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="AbstractAnimationGraphNode" Nullable="False" Background="204,204,165" meta:RefKey="GraphStructDef">
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Animation" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="AbstractAnimationGraphNodeDefs" Keys="Anim,Loop" meta:RefKey="ReferenceDef" />
+	<Definition Name="Anim" Nullable="False" Background="204,204,0" Extends="AbstractAnimationGraphNode" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Anim</Const>
+		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="Loop" Nullable="False" Background="217,100,217" Extends="AbstractAnimationGraphNode" meta:RefKey="GraphStructDef">
+		<Const Name="classID">Loop</Const>
+		<Data Name="Transitions" Keys="Transition" meta:RefKey="Collection" />
+		<Data Name="RandomizeStart" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Transition" Nullable="False" TextColour="77,204,204" meta:RefKey="StructDef">
+		<Data Name="Weight" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+</Definitions>

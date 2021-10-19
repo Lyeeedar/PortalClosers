@@ -10,6 +10,7 @@ import com.lyeeedar.Components.position
 import com.lyeeedar.Components.task
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
+import ktx.collections.set
 
 class UseAbilityBehaviourAction : AbstractBehaviourAction()
 {

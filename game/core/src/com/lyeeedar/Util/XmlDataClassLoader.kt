@@ -237,6 +237,15 @@ actual class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractMapGenerationAction!")
 			}
 		}
+		fun loadAbstractAnimationGraphNode(classID: String): com.lyeeedar.Renderables.AbstractAnimationGraphNode
+		{
+			return when (classID)
+			{
+				"Anim" -> com.lyeeedar.Renderables.AnimAnimationGraphNode()
+				"Loop" -> com.lyeeedar.Renderables.LoopAnimationGraphNode()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAnimationGraphNode!")
+			}
+		}
 		fun loadAbstractImageModifier(classID: String): com.lyeeedar.Renderables.AbstractImageModifier
 		{
 			return when (classID)

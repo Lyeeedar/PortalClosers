@@ -11,6 +11,7 @@ import com.lyeeedar.Components.task
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
+import ktx.collections.set
 
 class ComboBehaviourAction : AbstractBehaviourAction()
 {

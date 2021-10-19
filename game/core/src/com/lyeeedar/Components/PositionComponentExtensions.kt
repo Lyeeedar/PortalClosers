@@ -187,7 +187,7 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 		var renderable = e.renderable()?.renderable
 		if (renderable is SkeletonRenderable)
 		{
-			renderable.setAnimation("walk", 0.5f)
+			renderable.setAnimationState("Walk", 0.45f, "Idle")
 		}
 
 		return true
@@ -215,7 +215,7 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 				var renderable = e.renderable()?.renderable
 				if (renderable is SkeletonRenderable)
 				{
-					renderable.setAnimation("walk", 0.5f)
+					renderable.setAnimationState("Walk", 0.45f, "Idle")
 				}
 
 				opos.doMove(prev, contents)
@@ -224,7 +224,7 @@ fun PositionComponent.moveInDirection(direction: Direction, e: Entity, world: Wo
 				renderable = contents.renderable()?.renderable
 				if (renderable is SkeletonRenderable)
 				{
-					renderable.setAnimation("walk", 0.5f)
+					renderable.setAnimationState("Walk", 0.45f, "Idle")
 				}
 
 				return true

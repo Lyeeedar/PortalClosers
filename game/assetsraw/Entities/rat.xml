@@ -23,6 +23,7 @@
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
 				<Path>elemental2</Path>
+				<AnimGraph>Entities/elemental2_anim</AnimGraph>
 				<Colour>255,233,0,255</Colour>
 			</Renderable>
 		</RenderableComponent>

@@ -10,6 +10,7 @@ import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 import java.util.*
+import ktx.collections.set
 import ktx.collections.toGdxArray
 
 @DataClass(category = "Entity")
