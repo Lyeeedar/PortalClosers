@@ -169,7 +169,7 @@
 	</AttackMove>
 	<WaitMove meta:RefKey="WeaponMove">
 		<MoveVariant>
-			<AvailableCondition>1</AvailableCondition>
+			<AvailableCondition>resources &lt; 5</AvailableCondition>
 			<Ability meta:RefKey="AbilityTemplate">
 				<Name>7003696c-3828-40fe-af23-881bac6f0b95</Name>
 				<Description>fe700c3e-de97-4b3e-9a9f-ea4b825ed58a</Description>

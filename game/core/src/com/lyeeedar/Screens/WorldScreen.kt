@@ -34,7 +34,7 @@ class WorldScreen : AbstractScreen()
 
 		for (i in 0 until 5)
 		{
-			val rat = EntityLoader.load("Entities/elemental1")
+			val rat = EntityLoader.load("Entities/elemental2")
 			rat.statistics()!!.calculateStatistics(1)
 			rat.statistics()!!.faction = "enemy"
 			rat.ai()!!.state.set(rat.getRef(), world, 0)

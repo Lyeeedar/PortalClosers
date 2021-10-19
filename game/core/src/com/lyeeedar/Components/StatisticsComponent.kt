@@ -439,7 +439,7 @@ class DifficultyRating : XmlDataClass()
 
 	private fun calculateRaw(level: Int): Float
 	{
-		return 100f + 20f * level
+		return 100f + 20f * (level - 1)
 	}
 
 	fun calculateArmour(level: Int): Float
@@ -450,7 +450,7 @@ class DifficultyRating : XmlDataClass()
 
 	private fun calculatePlayerHP(level: Int): Float
 	{
-		return 100f + level * 10f
+		return 100f + (level - 1) * 10f
 	}
 
 	fun calculateHP(level: Int, statistics: FastEnumMap<Statistic, Float>): Float

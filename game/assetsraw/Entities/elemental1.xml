@@ -9,7 +9,6 @@
 			<BaseStatistics />
 			<DifficultyRating meta:RefKey="DifficultyRating">
 				<TimeToKill>5</TimeToKill>
-				<Damage>2</Damage>
 			</DifficultyRating>
 			<BloodColour>133,133,133,255</BloodColour>
 			<Element>None</Element>

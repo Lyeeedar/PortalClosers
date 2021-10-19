@@ -188,7 +188,11 @@ class MeleeAttackComboStep : AbstractComboStep()
 		val mark = MarkAndWaitForPlayerAction()
 		mark.time = 0.005f
 
-		data.actionSequence.rawActions.add(permute)
+		if (permute != null)
+		{
+			data.actionSequence.rawActions.add(permute)
+		}
+
 		data.actionSequence.rawActions.add(mark)
 		data.actionSequence.rawActions.add(effect)
 		data.actionSequence.rawActions.add(bump)

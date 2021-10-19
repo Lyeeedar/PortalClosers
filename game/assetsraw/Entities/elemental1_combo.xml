@@ -17,9 +17,9 @@
 			<Effect meta:RefKey="OneShotFX">
 				<classID>SpawnOneShotParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
-					<Name>EnemyAttacks/slash</Name>
+					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
@@ -44,9 +44,9 @@
 			<Effect meta:RefKey="OneShotFX">
 				<classID>SpawnOneShotParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
-					<Name>EnemyAttacks/slash</Name>
+					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
@@ -71,9 +71,9 @@
 			<Effect meta:RefKey="OneShotFX">
 				<classID>SpawnOneShotParticle</classID>
 				<Particle meta:RefKey="ParticleEffect">
-					<Name>EnemyAttacks/slash</Name>
+					<Name>EnemyAttacks/Claws</Name>
 				</Particle>
-				<SpawnBehaviour>Immediate</SpawnBehaviour>
+				<SpawnSingleParticle>true</SpawnSingleParticle>
 			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
