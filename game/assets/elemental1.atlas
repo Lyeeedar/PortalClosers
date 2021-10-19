@@ -4,6 +4,13 @@ size: 512,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+shadow
+  rotate: false
+  xy: 154, 30
+  size: 203, 63
+  orig: 203, 63
+  offset: 0, 0
+  index: -1
 arml
   rotate: false
   xy: 135, 95
@@ -23,12 +30,5 @@ armr
   xy: 359, 3
   size: 88, 191
   orig: 88, 191
-  offset: 0, 0
-  index: -1
-shadow
-  rotate: false
-  xy: 154, 30
-  size: 203, 63
-  orig: 203, 63
   offset: 0, 0
   index: -1
