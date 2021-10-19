@@ -58,7 +58,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		val renderable = state.source.get()?.renderable()?.renderable
 		if (renderable is SkeletonRenderable)
 		{
-			renderable.setAnimationState("Attack")
+			renderable.gotoState("Attack")
 		}
 
 		// also mark the tiles
@@ -128,7 +128,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 		val renderable = state.source.get()?.renderable()?.renderable
 		if (renderable is SkeletonRenderable)
 		{
-			renderable.setAnimationState("Idle")
+			renderable.gotoState("Idle")
 		}
 	}
 
