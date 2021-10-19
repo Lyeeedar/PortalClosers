@@ -1,0 +1,94 @@
+<Combo meta:X="0" meta:Y="0" GUID="e4693ad1-fec1-4b0a-8232-990e0cd0d0c5" xmlns:meta="Editor">
+	<Roots>
+		<ComboStep>
+			<Next meta:RefKey="MeleeAttack">e35bca30-23b9-4459-84ca-20822913c7cc</Next>
+		</ComboStep>
+	</Roots>
+	<NodeMap>
+		<MeleeAttack meta:X="270" meta:Y="0" GUID="e35bca30-23b9-4459-84ca-20822913c7cc">
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<Next>
+				<ComboStep>
+					<Next meta:RefKey="MeleeAttack">ced60d70-1c93-4db9-b6b9-dbb3ca7c9f13</Next>
+				</ComboStep>
+			</Next>
+			<classID>MeleeAttack</classID>
+			<Effect meta:RefKey="OneShotFX">
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>EnemyAttacks/slash</Name>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</Effect>
+			<Damage meta:RefKey="Damage">
+				<classID>Damage</classID>
+				<Damage>source.damage</Damage>
+			</Damage>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
+		</MeleeAttack>
+		<MeleeAttack meta:X="621" meta:Y="0" GUID="ced60d70-1c93-4db9-b6b9-dbb3ca7c9f13">
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<Next>
+				<ComboStep>
+					<Next meta:RefKey="MeleeAttack">3c399ce0-6b55-4ad7-819e-94ef32cdb702</Next>
+				</ComboStep>
+			</Next>
+			<classID>MeleeAttack</classID>
+			<Effect meta:RefKey="OneShotFX">
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>EnemyAttacks/slash</Name>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</Effect>
+			<Damage meta:RefKey="Damage">
+				<classID>Damage</classID>
+				<Damage>source.damage</Damage>
+			</Damage>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
+		</MeleeAttack>
+		<MeleeAttack meta:X="972" meta:Y="0" GUID="3c399ce0-6b55-4ad7-819e-94ef32cdb702">
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<Next>
+				<ComboStep>
+					<Next meta:RefKey="Wait">8a933dfd-12c7-4060-aaad-66467a74a2f3</Next>
+				</ComboStep>
+			</Next>
+			<classID>MeleeAttack</classID>
+			<Effect meta:RefKey="OneShotFX">
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>EnemyAttacks/slash</Name>
+				</Particle>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</Effect>
+			<Damage meta:RefKey="Damage">
+				<classID>Damage</classID>
+				<Damage>source.damage</Damage>
+			</Damage>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
+		</MeleeAttack>
+		<Wait meta:X="1323" meta:Y="0" GUID="8a933dfd-12c7-4060-aaad-66467a74a2f3">
+			<Chance>1</Chance>
+			<classID>Wait</classID>
+		</Wait>
+	</NodeMap>
+</Combo>

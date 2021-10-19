@@ -12,7 +12,7 @@
 		<Statistics>
 			<classID>Statistics</classID>
 			<BaseStatistics>
-				<Max_hp>10000</Max_hp>
+				<Max_hp>100</Max_hp>
 				<Power>100</Power>
 				<Armour>100</Armour>
 			</BaseStatistics>

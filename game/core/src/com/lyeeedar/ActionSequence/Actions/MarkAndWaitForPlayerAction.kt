@@ -82,7 +82,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			renderable.renderable = CurveRenderable(Bezier(p0, p1, p2, p3), 2f, AssetManager.loadTextureRegion("ray.png")!!, 10)
 			renderable.renderable.colour = Colour.RED
 			renderable.renderable.animation = BlinkAnimation.obtain()
-				.set(Colour(1f, 1f, 1f, 0.5f), Colour(1f, 1f, 1f, 0.8f), 2f, false)
+				.set(Colour(1f, 1f, 1f, 0.3f), Colour(1f, 1f, 1f, 0.7f), 2f, false)
 				.setNonBlocking()
 			state.world.addEntity(entity)
 

@@ -435,7 +435,7 @@ class DifficultyRating : XmlDataClass()
 
 	var timeToKill: Int = 8
 	var armourFactor: Float = 0.7f
-	var damage: Float = 0.1f
+	var damage: Float = 1f
 
 	private fun calculateRaw(level: Int): Float
 	{
@@ -450,7 +450,7 @@ class DifficultyRating : XmlDataClass()
 
 	private fun calculatePlayerHP(level: Int): Float
 	{
-		return 1000f + level * 100f
+		return 100f + level * 10f
 	}
 
 	fun calculateHP(level: Int, statistics: FastEnumMap<Statistic, Float>): Float
