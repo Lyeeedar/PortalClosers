@@ -42,8 +42,10 @@
 					<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
 				</Sprite>
 				<Sprite meta:RefKey="Skeleton">
-					<Path>goblin</Path>
+					<Path>Sprites/Skeletons/goblin/goblin</Path>
+					<AnimGraph>Entities/monster_anim</AnimGraph>
 					<Scale>0.5</Scale>
+					<Colour>255,255,255,255</Colour>
 				</Sprite>
 			</Sprites>
 		</ParticleEditorSymbol>

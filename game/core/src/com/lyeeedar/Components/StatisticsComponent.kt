@@ -477,7 +477,7 @@ class DifficultyRating : XmlDataClass()
 	{
 		timeToKill = xmlData.getInt("TimeToKill", 8)
 		armourFactor = xmlData.getFloat("ArmourFactor", 0.7f)
-		damage = xmlData.getFloat("Damage", 0.1f)
+		damage = xmlData.getFloat("Damage", 1f)
 	}
 	//endregion
 }

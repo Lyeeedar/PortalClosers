@@ -39,7 +39,7 @@
 	<Definition Name="DifficultyRating" Nullable="False" TextColour="74,204,204" meta:RefKey="StructDef">
 		<Data Name="TimeToKill" Type="Int" Default="8" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="ArmourFactor" Type="Float" Default="0.7" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="Damage" Type="Float" Default="0.1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Damage" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="DirectionalSpriteComponent" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>

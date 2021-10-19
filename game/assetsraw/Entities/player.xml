@@ -31,7 +31,7 @@
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
-				<Path>pc_male</Path>
+				<Path>Sprites/Skeletons/pc_male/pc_male</Path>
 				<AnimGraph>Entities/player_anim</AnimGraph>
 				<Colour>255,255,255,255</Colour>
 			</Renderable>

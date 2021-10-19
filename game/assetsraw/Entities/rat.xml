@@ -22,9 +22,10 @@
 		<RenderableComponent>
 			<classID>Renderable</classID>
 			<Renderable meta:RefKey="Skeleton">
-				<Path>elemental2</Path>
+				<Path>Sprites/Skeletons/goblin/goblin</Path>
 				<AnimGraph>Entities/elemental2_anim</AnimGraph>
-				<Colour>255,233,0,255</Colour>
+				<Scale>0.5</Scale>
+				<Colour>255,255,255,255</Colour>
 			</Renderable>
 		</RenderableComponent>
 		<Combo>
