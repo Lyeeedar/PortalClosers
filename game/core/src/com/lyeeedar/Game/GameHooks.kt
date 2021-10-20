@@ -16,6 +16,7 @@ actual fun newGame() {
 
 	Statics.analytics.tutorialBegin()
 
+	Statics.spriteTargetResolution = 64f
 	//Statics.supportsDiagonals = true
 }
 

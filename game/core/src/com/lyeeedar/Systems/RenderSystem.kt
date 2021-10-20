@@ -9,6 +9,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Statics.Companion.spriteTargetResolution
 
 fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNull()
 const val numHpPips = 10
@@ -70,12 +71,12 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 			{
 				val region = renderable.currentTexture
 				val height = region.regionHeight
-				val ratio = height / 32f
+				val ratio = height / spriteTargetResolution
 				overhead *= ratio
 			}
 			else if (renderable is SkeletonRenderable)
 			{
-				val ratio = 48f / 32f
+				val ratio = 1.5f
 				overhead *= ratio
 			}
 
