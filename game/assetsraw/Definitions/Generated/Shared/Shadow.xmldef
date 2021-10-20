@@ -1,7 +1,7 @@
 <Definitions xmlns:meta="Editor">
 	<Definition Name="Shadow" Nullable="False" TextColour="183,183,214" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Texture" Keys="TextureRegion" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
 		<Data Name="Scale" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Offset" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
 	</Definition>
 </Definitions>

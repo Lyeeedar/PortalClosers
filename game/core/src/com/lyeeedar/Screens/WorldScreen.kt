@@ -68,7 +68,7 @@ class WorldScreen : AbstractScreen()
 			true
 		}
 
-		drawFPS = false
+		//drawFPS = false
 		world.ambientLight.set(0.8f, 0.8f, 0.8f, 1f)
 	}
 
