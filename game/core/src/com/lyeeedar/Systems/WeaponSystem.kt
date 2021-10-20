@@ -1,7 +1,6 @@
 package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.ObjectFloatMap
-import com.esotericsoftware.spine.attachments.Attachment
 import com.esotericsoftware.spine.attachments.RegionAttachment
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.SkeletonRenderable
@@ -31,7 +30,7 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 				val slot = renderable.skeleton.findSlot("handr")
 
 				val attachment = RegionAttachment("weapon")
-				attachment.region = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/weapon_axe_exotic1.png")
+				attachment.region = AssetManager.tryLoadTextureRegion("Oryx/uf_split/uf_items/weapon_axe_exotic1.png")
 				attachment.width = attachment.region.regionWidth.toFloat()
 				attachment.height = attachment.region.regionHeight.toFloat()
 				attachment.updateOffset()

@@ -117,7 +117,7 @@ enum class Statistic private constructor(val min: Float, val max: Float, val mod
 
 					if (bright)
 					{
-						statTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(1f, 1f, 1f, 0.1f))
+						statTable.background = TextureRegionDrawable(AssetManager.tryLoadTextureRegion("white")).tint(Color(1f, 1f, 1f, 0.1f))
 					}
 					bright = !bright
 

@@ -1,0 +1,9 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Light" Nullable="False" TextColour="32,204,32" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Colour" SkipIfDefault="false" Default="255,255,255" meta:RefKey="Colour" />
+		<Data Name="Brightness" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Range" Type="Float" Default="3" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="HasShadows" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="Anim" DefKey="LightAnimationDefs" meta:RefKey="Reference" />
+	</Definition>
+</Definitions>

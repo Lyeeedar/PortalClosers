@@ -26,9 +26,9 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 	val selectedTargetCol = Colour.GOLD.copy()
 	val previewTargetCol = Colour.GREEN.copy()
 
-	val white = AssetManager.loadTextureRegion("Sprites/white.png")!!
-	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
-	val attack = AssetManager.loadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
+	val white = AssetManager.tryLoadTextureRegion("Sprites/white.png")!!
+	val hp_border = AssetManager.tryLoadTextureRegion("Sprites/GUI/health_border.png")!!
+	val attack = AssetManager.tryLoadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
 
 	val checkerCol = Colour(0f, 0f, 0f, 0.04f)
 

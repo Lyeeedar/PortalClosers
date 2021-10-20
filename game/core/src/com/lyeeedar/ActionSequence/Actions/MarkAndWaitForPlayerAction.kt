@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Tile
-import com.lyeeedar.Renderables.Animation.AlphaAnimation
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.CurveRenderable
 import com.lyeeedar.Renderables.SkeletonRenderable
@@ -79,7 +78,7 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			val p1 = p0.cpy().lerp(p3, 0.25f).add(0f, 0.2f)
 			val p2 = p0.cpy().lerp(p3, 0.75f).add(0f, 0.2f)
 
-			renderable.renderable = CurveRenderable(Bezier(p0, p1, p2, p3), 2f, AssetManager.loadTextureRegion("ray.png")!!, 10)
+			renderable.renderable = CurveRenderable(Bezier(p0, p1, p2, p3), 2f, AssetManager.tryLoadTextureRegion("ray.png")!!, 10)
 			renderable.renderable.colour = Colour.RED
 			renderable.renderable.animation = BlinkAnimation.obtain()
 				.set(Colour(1f, 1f, 1f, 0.3f), Colour(1f, 1f, 1f, 0.7f), 2f, false)

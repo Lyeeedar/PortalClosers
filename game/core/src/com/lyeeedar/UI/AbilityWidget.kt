@@ -20,9 +20,9 @@ import com.lyeeedar.Util.Statics
 
 abstract class AbstractAbilityWidget(val world: World<*>) : Widget()
 {
-	val background = AssetManager.loadTextureRegion("Icons/Active")
-	val border = AssetManager.loadTextureRegion("Icons/BorderGrey")
-	val white = AssetManager.loadTextureRegion("white")
+	val background = AssetManager.tryLoadTextureRegion("Icons/Active")
+	val border = AssetManager.tryLoadTextureRegion("Icons/BorderGrey")
+	val white = AssetManager.tryLoadTextureRegion("white")
 
 	val iconWidth = 32f
 	val iconHeight = 32f

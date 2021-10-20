@@ -18,10 +18,10 @@ import ktx.collections.set
 
 class EntityWidget(var entity: EntityReference, val world: World<*>) : Widget()
 {
-	val background = AssetManager.loadTextureRegion("Icons/Empty")!!
-	val border = AssetManager.loadTextureRegion("GUI/RewardChanceBorder")!!
-	val white = AssetManager.loadTextureRegion("white")!!
-	val hp_border = AssetManager.loadTextureRegion("Sprites/GUI/health_border.png")!!
+	val background = AssetManager.tryLoadTextureRegion("Icons/Empty")!!
+	val border = AssetManager.tryLoadTextureRegion("GUI/RewardChanceBorder")!!
+	val white = AssetManager.tryLoadTextureRegion("white")!!
+	val hp_border = AssetManager.tryLoadTextureRegion("Sprites/GUI/health_border.png")!!
 
 	val whiteColour = Colour.WHITE
 	val hpColour = Colour.GREEN

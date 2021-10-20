@@ -7,12 +7,11 @@ import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.statistics
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.floor
 
 class HealthBarWidget(val player: Entity) : Widget()
 {
-	val full = AssetManager.loadTextureRegion("Sprites/GUI/attack_full.png")!!
-	val empty = AssetManager.loadTextureRegion("Sprites/GUI/attack_empty.png")!!
+	val full = AssetManager.tryLoadTextureRegion("Sprites/GUI/attack_full.png")!!
+	val empty = AssetManager.tryLoadTextureRegion("Sprites/GUI/attack_empty.png")!!
 
 	val lostHpCol = Color.ORANGE
 

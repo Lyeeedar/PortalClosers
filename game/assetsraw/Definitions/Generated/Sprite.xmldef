@@ -1,0 +1,13 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="Sprite" Nullable="False" TextColour="204,204,38" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" SkipIfDefault="True" Default="white" meta:RefKey="File" />
+		<Data Name="DrawActualSize" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="UpdateRate" Min="0" Type="Float" Default="0.5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+		<Data Name="Light" Keys="Light" meta:RefKey="Reference" />
+		<Data Name="RepeatDelay" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Blend" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="DisableHDR" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="RandomStart" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+	</Definition>
+</Definitions>

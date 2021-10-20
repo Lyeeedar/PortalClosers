@@ -1,0 +1,13 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="LightAnimation" Nullable="False" TextColour="86,204,204" IsGlobal="True" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="Pulse" Nullable="False" TextColour="204,88,88" IsGlobal="True" Extends="LightAnimation" meta:RefKey="StructDef">
+		<Const Name="classID">Pulse</Const>
+		<Data Name="PeriodRange" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
+		<Data Name="MinBrightnessRange" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
+		<Data Name="MaxBrightnessRange" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
+		<Data Name="MinRangeRange" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
+		<Data Name="MaxRangeRange" NumComponents="2" SkipIfDefault="True" Default="" meta:RefKey="Vector" />
+	</Definition>
+	<Definition Name="LightAnimationDefs" Keys="Pulse" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>

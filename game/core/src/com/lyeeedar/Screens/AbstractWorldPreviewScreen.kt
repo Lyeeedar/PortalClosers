@@ -32,7 +32,7 @@ abstract class AbstractWorldPreviewScreen(val resourceName: String) : AbstractSc
 		drawFPS = false
 
 		val options = Table()
-		options.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0.4f, 0.4f, 0.4f, 0.4f))
+		options.background = TextureRegionDrawable(AssetManager.tryLoadTextureRegion("white")).tint(Color(0.4f, 0.4f, 0.4f, 0.4f))
 		options.defaults().pad(5f).growX()
 
 		val newSeedButton = TextButton("New Seed", Statics.skin)

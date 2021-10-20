@@ -246,6 +246,14 @@ actual class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAnimationGraphNode!")
 			}
 		}
+		fun loadLightAnimation(classID: String): com.lyeeedar.Renderables.LightAnimation
+		{
+			return when (classID)
+			{
+				"Pulse" -> com.lyeeedar.Renderables.PulseLightAnimation()
+				else -> throw RuntimeException("Unknown classID '$classID' for LightAnimation!")
+			}
+		}
 		fun loadAbstractImageModifier(classID: String): com.lyeeedar.Renderables.AbstractImageModifier
 		{
 			return when (classID)
