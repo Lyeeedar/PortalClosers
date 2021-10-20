@@ -188,6 +188,7 @@ actual class XmlDataClassLoader
 				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
 				"Light" -> com.lyeeedar.Components.LightComponentData()
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
+				"Shadow" -> com.lyeeedar.Components.ShadowComponentData()
 				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
 				"Water" -> com.lyeeedar.Components.WaterComponentData()
 				"Weapon" -> com.lyeeedar.Components.WeaponComponentData()

@@ -22,6 +22,7 @@ actual enum class ComponentType private constructor(val constructor: ()->Abstrac
 	Name({ NameComponent() }),
 	Position({ PositionComponent() }),
 	Renderable({ RenderableComponent() }),
+	Shadow({ ShadowComponent() }),
 	Statistics({ StatisticsComponent() }),
 	Task({ TaskComponent() }),
 	Transient({ TransientComponent() }),
@@ -56,6 +57,7 @@ inline fun Entity.metaRegion(): MetaRegionComponent? = this.components[Component
 inline fun Entity.name(): NameComponent? = this.components[ComponentType.Name.ordinal] as NameComponent?
 inline fun Entity.position(): PositionComponent? = this.components[ComponentType.Position.ordinal] as PositionComponent?
 inline fun Entity.renderable(): RenderableComponent? = this.components[ComponentType.Renderable.ordinal] as RenderableComponent?
+inline fun Entity.shadow(): ShadowComponent? = this.components[ComponentType.Shadow.ordinal] as ShadowComponent?
 inline fun Entity.statistics(): StatisticsComponent? = this.components[ComponentType.Statistics.ordinal] as StatisticsComponent?
 inline fun Entity.task(): TaskComponent? = this.components[ComponentType.Task.ordinal] as TaskComponent?
 inline fun Entity.transient(): TransientComponent? = this.components[ComponentType.Transient.ordinal] as TransientComponent?

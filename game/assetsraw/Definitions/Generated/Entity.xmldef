@@ -13,7 +13,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,Statistics,Water,Weapon" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,ShadowComponent,Statistics,Water,Weapon" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -87,6 +87,10 @@
 	<Definition Name="RenderableComponent" Nullable="False" TextColour="232,27,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Renderable</Const>
 		<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect,Skeleton" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="ShadowComponent" Nullable="False" TextColour="27,204,27" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Shadow</Const>
+		<Data Name="Shadow" Keys="Shadow" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Statistics" Nullable="False" TextColour="204,56,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Statistics</Const>
