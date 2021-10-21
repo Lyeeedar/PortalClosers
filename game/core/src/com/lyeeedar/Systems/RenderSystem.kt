@@ -82,17 +82,17 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 			val index = SpaceSlot.ABOVEENTITY.ordinal
 
-			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay)
+			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			val lostLen = (hp + stats.lostHp) / maxhp
-			renderer.queueTexture(white, ax + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead, index, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay)
+			renderer.queueTexture(white, ax + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead, index, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			val hpLen = hp / maxhp
-			renderer.queueTexture(white, ax + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead, index, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay)
+			renderer.queueTexture(white, ax + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead, index, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			for (i in 0 until numHpPips)
 			{
-				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay)
+				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 			}
 
 			for (i in 0 until stats.buffs.size)
@@ -100,7 +100,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				val buff = stats.buffs[i]
 				val icon = buff.icon ?: continue
 
-				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, index, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour)
+				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, index, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour, lit = false)
 			}
 		}
 	}
@@ -119,27 +119,27 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		if (tile.predictedAttacksFrom.size > 0)
 		{
 			val rotation = (tile.x + tile.y).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = predictedAttackCol, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation)
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = predictedAttackCol, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation, lit = false)
 		}
 		if (tile.isSelectedTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 		else if (tile.isPreviewedTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 		else if (tile.isValidTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = validTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = validTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 		else if (tile.isTargetted)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = targetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation)
+			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = targetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 	}
 
