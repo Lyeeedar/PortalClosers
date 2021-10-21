@@ -6,6 +6,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.isEnemies
 import com.lyeeedar.Components.statistics
+import com.lyeeedar.Components.variables
 import com.lyeeedar.Game.*
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Util.CompiledExpression
@@ -50,8 +51,8 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					val sourceStats = source.statistics()!!
 
 					map.clear()
-					sourceStats.write(map, "source")
-					targetstats.write(map, "target")
+					source.variables()?.write(map, "source")
+					entity.variables()?.write(map, "target")
 					state.writeVariables(map)
 
 					var damage = damage.evaluate(map, state.rng)

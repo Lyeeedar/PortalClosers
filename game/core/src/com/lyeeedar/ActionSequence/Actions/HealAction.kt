@@ -6,6 +6,7 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.isAllies
 import com.lyeeedar.Components.statistics
+import com.lyeeedar.Components.variables
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.EventSystem
@@ -45,8 +46,8 @@ class HealAction : AbstractOneShotActionSequenceAction()
 					val sourceStats = source.statistics()!!
 
 					map.clear()
-					sourceStats.write(map, "source")
-					targetstats.write(map, "target")
+					source.variables()?.write(map, "source")
+					entity.variables()?.write(map, "target")
 					state.writeVariables(map)
 
 					val healing = amount.evaluate(map, state.rng)

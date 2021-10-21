@@ -9,6 +9,7 @@ import com.lyeeedar.AI.BehaviourTree.Nodes.AbstractBehaviourNode
 import com.lyeeedar.Components.EntityReference
 import com.lyeeedar.Components.position
 import com.lyeeedar.Components.statistics
+import com.lyeeedar.Components.variables
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
@@ -53,7 +54,7 @@ class PickOneFromBehaviourAction : AbstractBehaviourAction()
 						map.clear()
 						val dist = item.entity.position()!!.position.dist(entity.position()!!.position)
 						map.put("dist", dist.toFloat())
-						item.entity.statistics()?.write(map)
+						item.entity.variables()?.write(map)
 
 						condition.evaluate(map, state.rng)
 					}

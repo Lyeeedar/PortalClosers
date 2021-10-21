@@ -11,11 +11,10 @@ import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.UI.lambda
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.Statics
 import ktx.actors.then
+import java.util.*
 
 class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().all(ComponentType.Statistics).get())
 {
@@ -124,6 +123,29 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 			message.free()
 		}
 		stats.messagesToShow.clear()
+
+		val variables = entity.addOrGet(ComponentType.Variables) as VariablesComponent
+		variables.variables.clear()
+		variables.variables.put("hp", stats.hp)
+		variables.variables.put("level", stats.level.toFloat())
+
+		val attack = stats.getStat(Statistic.POWER)
+		variables.variables.put("damage", attack)
+
+		for (stat in Statistic.Values)
+		{
+			val statVal = stats.getStat(stat)
+			if (statVal != 0f)
+			{
+				variables.variables.put(stat.toString().lowercase(Locale.ENGLISH), statVal)
+			}
+		}
+
+		val weapon = entity.weapon()
+		if (weapon != null)
+		{
+			variables.variables["resources"] = weapon.resources.toFloat()
+		}
 	}
 
 	override fun onTurnEntity(entity: Entity)

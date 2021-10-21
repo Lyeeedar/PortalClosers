@@ -26,6 +26,7 @@ actual enum class ComponentType private constructor(val constructor: ()->Abstrac
 	Statistics({ StatisticsComponent() }),
 	Task({ TaskComponent() }),
 	Transient({ TransientComponent() }),
+	Variables({ VariablesComponent() }),
 	Vision({ VisionComponent() }),
 	Water({ WaterComponent() }),
 	Weapon({ WeaponComponent() });
@@ -61,6 +62,7 @@ inline fun Entity.shadow(): ShadowComponent? = this.components[ComponentType.Sha
 inline fun Entity.statistics(): StatisticsComponent? = this.components[ComponentType.Statistics.ordinal] as StatisticsComponent?
 inline fun Entity.task(): TaskComponent? = this.components[ComponentType.Task.ordinal] as TaskComponent?
 inline fun Entity.transient(): TransientComponent? = this.components[ComponentType.Transient.ordinal] as TransientComponent?
+inline fun Entity.variables(): VariablesComponent? = this.components[ComponentType.Variables.ordinal] as VariablesComponent?
 inline fun Entity.vision(): VisionComponent? = this.components[ComponentType.Vision.ordinal] as VisionComponent?
 inline fun Entity.water(): WaterComponent? = this.components[ComponentType.Water.ordinal] as WaterComponent?
 inline fun Entity.weapon(): WeaponComponent? = this.components[ComponentType.Weapon.ordinal] as WeaponComponent?

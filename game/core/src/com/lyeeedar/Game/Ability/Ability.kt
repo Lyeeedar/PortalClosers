@@ -117,7 +117,7 @@ class Ability(val data: AbilityData)
 			val other = target.contents[pos.slot]!!.get()!!
 
 			tempVariableMap.clear()
-			other.statistics()!!.write(tempVariableMap)
+			other.variables()?.write(tempVariableMap)
 			tempVariableMap["dist"] = other.position()!!.position.dist(pos.position).toFloat()
 
 			if (data.targetCondition.evaluate(tempVariableMap, rng).round() != 0)

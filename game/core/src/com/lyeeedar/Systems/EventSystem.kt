@@ -192,8 +192,8 @@ class EventData()
 			}
 		}
 
-		source.entity.statistics()?.write(variables, "self")
-		target.entity.statistics()?.write(variables, "target")
+		source.entity.variables()?.write(variables, "self")
+		target.entity.variables()?.write(variables, "target")
 
 		return this
 	}

@@ -4,6 +4,28 @@
 		<Loop meta:X="204" meta:Y="0" GUID="5b16d493-f30a-49ea-b42d-fe68e2035632">
 			<Name>Idle</Name>
 			<Animation>idle</Animation>
+			<VisibilityRules>
+				<VisibilityRule>
+					<Slot>shell1</Slot>
+					<Rule>resources&gt;4</Rule>
+				</VisibilityRule>
+				<VisibilityRule>
+					<Slot>shell2</Slot>
+					<Rule>resources&gt;3</Rule>
+				</VisibilityRule>
+				<VisibilityRule>
+					<Slot>shell3</Slot>
+					<Rule>resources&gt;2</Rule>
+				</VisibilityRule>
+				<VisibilityRule>
+					<Slot>shell4</Slot>
+					<Rule>resources&gt;1</Rule>
+				</VisibilityRule>
+				<VisibilityRule>
+					<Slot>shell5</Slot>
+					<Rule>resources&gt;0</Rule>
+				</VisibilityRule>
+			</VisibilityRules>
 			<classID>Loop</classID>
 		</Loop>
 	</NodeMap>

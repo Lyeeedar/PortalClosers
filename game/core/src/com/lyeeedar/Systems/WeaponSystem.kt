@@ -15,8 +15,7 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 		val weapon = entity.weapon()!!
 
 		val variables = ObjectFloatMap<String>()
-		entity.statistics()?.write(variables)
-		variables["resources"] = weapon.resources.toFloat()
+		entity.variables()?.write(variables)
 
 		for (move in weapon.weapon.moves)
 		{
@@ -36,7 +35,7 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 					val attachment = SkeletonAttachment("weapon")
 					attachment.skeleton = child.skeleton
 					renderable.attachedSkeletons.add(child)
-					
+
 					slot.attachment = attachment
 				}
 				else

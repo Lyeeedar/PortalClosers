@@ -5,6 +5,7 @@
 	<Definition Name="AbstractAnimationGraphNode" Nullable="False" Background="204,204,165" meta:RefKey="GraphStructDef">
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Animation" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="VisibilityRules" Keys="VisibilityRule" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="AbstractAnimationGraphNodeDefs" Keys="Anim,Loop" meta:RefKey="ReferenceDef" />
 	<Definition Name="Anim" Nullable="False" Background="204,204,0" Extends="AbstractAnimationGraphNode" meta:RefKey="GraphStructDef">
@@ -19,5 +20,9 @@
 	<Definition Name="Transition" Nullable="False" TextColour="77,204,204" meta:RefKey="StructDef">
 		<Data Name="Weight" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="VisibilityRule" Nullable="False" TextColour="18,245,18" meta:RefKey="StructDef">
+		<Data Name="Slot" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Rule" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 	</Definition>
 </Definitions>

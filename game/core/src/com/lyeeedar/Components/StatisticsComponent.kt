@@ -248,29 +248,6 @@ class StatisticsComponent : DataComponent()
 		messagesToShow.add(MessageData.obtain().set(message, colour, size))
 	}
 
-	fun get(key: String): Float
-	{
-		val key = key.toLowerCase(Locale.ENGLISH)
-		if (key == "hp")
-		{
-			return hp
-		}
-		else if (key == "damage")
-		{
-			return getStat(Statistic.POWER)
-		}
-
-		for (stat in Statistic.Values)
-		{
-			if (stat.toString().toLowerCase(Locale.ENGLISH) == key)
-			{
-				return getStat(stat)
-			}
-		}
-
-		return 0f
-	}
-
 	fun getStat(statistic: Statistic): Float
 	{
 		var value = statistics[statistic] ?: 0f
@@ -301,36 +278,6 @@ class StatisticsComponent : DataComponent()
 		return MathUtils.clamp(value, statistic.min, statistic.max)
 	}
 
-	val map = ObjectFloatMap<String>()
-	fun variables(): ObjectFloatMap<String>
-	{
-		map.clear()
-		write(map)
-		return map
-	}
-
-	fun write(variableMap: ObjectFloatMap<String>, prefixName: String? = null): ObjectFloatMap<String>
-	{
-		val prefix = if (prefixName != null) "$prefixName.".toLowerCase(Locale.ENGLISH) else ""
-
-		variableMap.put(prefix + "hp", hp)
-		variableMap.put(prefix + "level", level.toFloat())
-
-		val attack = getStat(Statistic.POWER)
-		variableMap.put(prefix + "damage", attack)
-
-		for (stat in Statistic.Values)
-		{
-			val statVal = getStat(stat)
-			if (statVal != 0f)
-			{
-				variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), statVal)
-			}
-		}
-
-		return variableMap
-	}
-
 	override fun toShortString(): String
 	{
 		val stats = StringBuilder()
@@ -339,7 +286,7 @@ class StatisticsComponent : DataComponent()
 			val statVal = getStat(stat)
 			if (statVal != 0f)
 			{
-				stats.append(",").append(stat.toString().toLowerCase(Locale.ENGLISH), statVal)
+				stats.append(",").append(stat.toString().lowercase(Locale.ENGLISH), statVal)
 			}
 		}
 
@@ -350,25 +297,6 @@ class StatisticsComponent : DataComponent()
 		}
 
 		return super.toShortString() + "($faction,hp:$hp$stats$buffs)"
-	}
-
-	companion object
-	{
-		val defaultVariables: ObjectFloatMap<String> by lazy { writeDefaultVariables(ObjectFloatMap<String>()) }
-		private fun writeDefaultVariables(variableMap: ObjectFloatMap<String>, prefixName: String? = null): ObjectFloatMap<String>
-		{
-			val prefix = if (prefixName != null) "$prefixName." else ""
-
-			variableMap.put(prefix + "hp", 0f)
-			variableMap.put(prefix + "damage", 0f)
-
-			for (stat in Statistic.Values)
-			{
-				variableMap.put(prefix + stat.toString().toLowerCase(Locale.ENGLISH), 0f)
-			}
-
-			return variableMap
-		}
 	}
 }
 
