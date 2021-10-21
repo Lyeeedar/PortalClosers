@@ -70,6 +70,9 @@ class WorldScreen : AbstractScreen()
 
 		//drawFPS = false
 		world.ambientLight.set(0.8f, 0.8f, 0.8f, 1f)
+
+	//	darkest particle effects
+	//	curve based attacks (basic attack and spiral attack)
 	}
 
 	override fun doRender(delta: Float)

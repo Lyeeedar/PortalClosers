@@ -17,7 +17,7 @@ import ktx.collections.set
 @DataClass(category = "Meta", colour = "199,18,117", name = "MarkAndWait")
 class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 {
-	val key = "waitForPlayer"
+	val key = "waitForPlayer" + this.hashCode()
 	var turns: Int = 1
 
 	override fun isDelayed(state: ActionSequenceState): Boolean
@@ -73,12 +73,14 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 			pos.position = tile
 
-			val p0 = state.source.get()!!.position()!!.position.toVec().add(0.5f, 0.5f)
+			val p0 = state.sourcePoint.toVec().add(0.5f, 0.5f)
 			val p3 = tile.toVec().add(0.5f, 0.5f)
 			val p1 = p0.cpy().lerp(p3, 0.25f).add(0f, 0.2f)
 			val p2 = p0.cpy().lerp(p3, 0.75f).add(0f, 0.2f)
 
-			renderable.renderable = CurveRenderable(Bezier(p0, p1, p2, p3), 2f, AssetManager.tryLoadTextureRegion("ray.png")!!, 10)
+			val curve = CurveRenderable(Bezier(p0, p1, p2, p3), 2f, AssetManager.tryLoadTextureRegion("ray.png")!!, 10)
+			curve.setAnimation(0.1f, 1f)
+			renderable.renderable = curve
 			renderable.renderable.colour = Colour.RED
 			renderable.renderable.animation = BlinkAnimation.obtain()
 				.set(Colour(1f, 1f, 1f, 0.3f), Colour(1f, 1f, 1f, 0.7f), 2f, false)

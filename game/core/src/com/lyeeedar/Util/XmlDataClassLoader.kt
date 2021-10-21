@@ -67,6 +67,7 @@ actual class XmlDataClassLoader
 				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
 				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
 				"ConsumeResources" -> com.lyeeedar.ActionSequence.Actions.ConsumeResourcesAction()
+				"StrikeTile" -> com.lyeeedar.ActionSequence.Actions.StrikeTileAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractActionSequenceAction!")
 			}
 		}
@@ -109,6 +110,7 @@ actual class XmlDataClassLoader
 				"SpawnTrackedParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnTrackedParticleAction()
 				"FlightParticle" -> com.lyeeedar.ActionSequence.Actions.FlightParticleAction()
 				"AttachParticle" -> com.lyeeedar.ActionSequence.Actions.AttachParticleAction()
+				"StrikeTile" -> com.lyeeedar.ActionSequence.Actions.StrikeTileAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractDurationActionSequenceAction!")
 			}
 		}

@@ -153,5 +153,15 @@
 		<Const Name="classID">ConsumeResources</Const>
 		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="StrikeFX" Nullable="False" TextColour="204,137,204" IsGlobal="True" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">StrikeTile</Const>
+		<Data Name="Texture" Keys="TextureRegion" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Thickness" Type="Float" Default="0.5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Samples" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="CurveLag" Type="Float" Default="0.5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Colour" SkipIfDefault="false" Default="255,255,255" meta:RefKey="Colour" />
+		<Data Name="StartAtSource" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Loop" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

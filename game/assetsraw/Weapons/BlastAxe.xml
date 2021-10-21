@@ -108,6 +108,17 @@
 									<Damage>source.damage * 1.2</Damage>
 								</Damage>
 							</Timeline>
+							<Timeline>
+								<StrikeFX>
+									<Duration LockDuration="False">0.29997054</Duration>
+									<classID>StrikeTile</classID>
+									<Texture meta:RefKey="TextureRegion">
+										<File>darkest/particle/slash</File>
+									</Texture>
+									<Samples>30</Samples>
+									<Colour>255,255,255,255</Colour>
+								</StrikeFX>
+							</Timeline>
 						</Actions>
 					</ActionSequence>
 					<TargetType>Target_enemy</TargetType>
@@ -281,6 +292,20 @@
 									<ConsumeResources>
 										<classID>ConsumeResources</classID>
 									</ConsumeResources>
+								</Timeline>
+								<Timeline>
+									<StrikeFX>
+										<Time>0.024350785</Time>
+										<Duration LockDuration="False">0.23459694</Duration>
+										<classID>StrikeTile</classID>
+										<Texture meta:RefKey="TextureRegion">
+											<File>darkest/particle/slash</File>
+										</Texture>
+										<Thickness>1</Thickness>
+										<Samples>30</Samples>
+										<Colour>255,255,255,255</Colour>
+										<StartAtSource>false</StartAtSource>
+									</StrikeFX>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
