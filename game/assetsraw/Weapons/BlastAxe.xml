@@ -122,7 +122,7 @@
 										<File>darkest/particle/slash</File>
 									</Texture>
 									<Samples>30</Samples>
-									<Colour>255,255,255,255</Colour>
+									<Colour>255,249,115,255</Colour>
 								</StrikeFX>
 							</Timeline>
 						</Actions>
@@ -164,18 +164,21 @@
 					<ActionSequence meta:RefKey="ActionSequence">
 						<Actions>
 							<Timeline>
-								<OneShotFX>
-									<classID>SpawnOneShotParticle</classID>
-									<Particle meta:RefKey="ParticleEffect">
-										<Name>EnemyAttacks/slash</Name>
-									</Particle>
-									<SpawnBehaviour>Immediate</SpawnBehaviour>
-								</OneShotFX>
 								<Damage>
 									<Time>0.0964727</Time>
 									<classID>Damage</classID>
 									<Damage>source.damage</Damage>
 								</Damage>
+							</Timeline>
+							<Timeline>
+								<StrikeFX>
+									<Duration LockDuration="False">0.20005655</Duration>
+									<classID>StrikeTile</classID>
+									<Texture meta:RefKey="TextureRegion">
+										<File>darkest/particle/slash</File>
+									</Texture>
+									<Colour>255,255,255,255</Colour>
+								</StrikeFX>
 							</Timeline>
 						</Actions>
 					</ActionSequence>
@@ -262,16 +265,11 @@
 						<ActionSequence meta:RefKey="ActionSequence">
 							<Actions>
 								<Timeline>
-									<OneShotFX>
-										<classID>SpawnOneShotParticle</classID>
-										<Particle meta:RefKey="ParticleEffect">
-											<Name>Abilities/GroundEruption</Name>
-										</Particle>
-										<SpawnBehaviour>Immediate</SpawnBehaviour>
-										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-									</OneShotFX>
+									<ConsumeResources>
+										<classID>ConsumeResources</classID>
+									</ConsumeResources>
 									<Permute>
-										<Time>0.0064538564</Time>
+										<Time>0.0063160975</Time>
 										<classID>Permute</classID>
 										<HitPoints>
 											<Line>###</Line>
@@ -279,25 +277,11 @@
 											<Line>###</Line>
 										</HitPoints>
 									</Permute>
-									<OneShotFX>
-										<Time>0.01292276</Time>
-										<classID>SpawnOneShotParticle</classID>
-										<Particle meta:RefKey="ParticleEffect">
-											<Name>EnemyAttacks/SpinSlash</Name>
-										</Particle>
-										<SpawnSingleParticle>true</SpawnSingleParticle>
-										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
-									</OneShotFX>
 									<Damage>
 										<Time>0.09299774</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage * 1.5</Damage>
 									</Damage>
-								</Timeline>
-								<Timeline>
-									<ConsumeResources>
-										<classID>ConsumeResources</classID>
-									</ConsumeResources>
 								</Timeline>
 								<Timeline>
 									<StrikeFX>
@@ -397,6 +381,12 @@
 										<classID>RestoreTargets</classID>
 										<Key>dest</Key>
 									</RestoreTargets>
+									<ScreenJolt>
+										<Time>0.09850032</Time>
+										<classID>ScreenJolt</classID>
+										<Amount>5</Amount>
+										<JoltDuration>0.05</JoltDuration>
+									</ScreenJolt>
 								</Timeline>
 							</Actions>
 						</ActionSequence>

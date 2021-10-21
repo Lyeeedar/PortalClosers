@@ -20,7 +20,7 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 
 	lateinit var texture: TextureRegion
 	var thickness: Float = 0.5f
-	var samples: Int = 10
+	var samples: Int = 20
 	var curveLag: Float = 0.5f
 	var colour: Colour = Colour.WHITE.copy()
 	var startAtSource: Boolean = true
@@ -104,7 +104,7 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 		super.load(xmlData)
 		texture = AssetManager.loadTextureRegion(xmlData.getChildByName("Texture")!!)
 		thickness = xmlData.getFloat("Thickness", 0.5f)
-		samples = xmlData.getInt("Samples", 10)
+		samples = xmlData.getInt("Samples", 20)
 		curveLag = xmlData.getFloat("CurveLag", 0.5f)
 		colour = AssetManager.tryLoadColour(xmlData.getChildByName("Colour"))!!
 		startAtSource = xmlData.getBoolean("StartAtSource", true)
