@@ -39,6 +39,9 @@
 	<Definition Name="LockTargets" Nullable="False" TextColour="252,102,9" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">LockEntityTargets</Const>
 	</Definition>
+	<Definition Name="ExecuteTargetsIndividually" Nullable="False" TextColour="54,210,54" IsGlobal="True" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">ExecuteTargetsIndividually</Const>
+	</Definition>
 	<Definition Name="StoreTargets" Nullable="False" TextColour="252,102,9" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">StoreTargets</Const>
 		<Data Name="Key" SkipIfDefault="False" Default="" meta:RefKey="String" />
@@ -168,5 +171,5 @@
 		<Data Name="StartAtSource" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Loop" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,ExecuteTargetsIndividually,Heal,Knockback,Move,Pull,Stun),Meta(Block,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

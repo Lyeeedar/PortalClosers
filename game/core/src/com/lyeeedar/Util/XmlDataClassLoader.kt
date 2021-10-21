@@ -48,6 +48,7 @@ actual class XmlDataClassLoader
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()
 				"Heal" -> com.lyeeedar.ActionSequence.Actions.HealAction()
 				"LockEntityTargets" -> com.lyeeedar.ActionSequence.Actions.LockEntityTargetsAction()
+				"ExecuteTargetsIndividually" -> com.lyeeedar.ActionSequence.Actions.ExecuteTargetsIndividuallyAction()
 				"StoreTargets" -> com.lyeeedar.ActionSequence.Actions.StoreTargetsAction()
 				"SpawnOneShotParticle" -> com.lyeeedar.ActionSequence.Actions.SpawnOneShotParticleAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
@@ -105,6 +106,7 @@ actual class XmlDataClassLoader
 			return when (classID)
 			{
 				"Animation" -> com.lyeeedar.ActionSequence.Actions.AnimationAction()
+				"ExecuteTargetsIndividually" -> com.lyeeedar.ActionSequence.Actions.ExecuteTargetsIndividuallyAction()
 				"Repeat" -> com.lyeeedar.ActionSequence.Actions.RepeatAction()
 				"ReplaceSourceRenderable" -> com.lyeeedar.ActionSequence.Actions.ReplaceSourceRenderableAction()
 				"ScreenShake" -> com.lyeeedar.ActionSequence.Actions.ScreenShakeAction()

@@ -3,6 +3,7 @@ package com.lyeeedar.ActionSequence.Actions
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.*
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectFloatMap
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
@@ -45,6 +46,8 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 		val targets = Array<Point>(state.targets)
 		val points = Array<Vector2>()
 
+		val targetDelayMap = ObjectFloatMap<Point>()
+
 		var current = source
 		while (targets.size > 0)
 		{
@@ -53,7 +56,11 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 			current = min
 
 			points.add(min.toVec().add(0.5f, 0.5f))
+
+			targetDelayMap[min] = (duration / (state.targets.size + 1)) * points.size
 		}
+
+		state.data[targetDelayKey] = targetDelayMap
 
 		if (state.targets.size == 1)
 		{

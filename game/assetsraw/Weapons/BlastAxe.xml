@@ -278,7 +278,7 @@
 										</HitPoints>
 									</Permute>
 									<Damage>
-										<Time>0.09299774</Time>
+										<Time>0.026033394</Time>
 										<classID>Damage</classID>
 										<Damage>source.damage * 1.5</Damage>
 									</Damage>
@@ -296,6 +296,13 @@
 										<Colour>255,255,255,255</Colour>
 										<StartAtSource>false</StartAtSource>
 									</StrikeFX>
+								</Timeline>
+								<Timeline>
+									<ExecuteTargetsIndividually>
+										<Time>0.025219452</Time>
+										<Duration LockDuration="False">0.25136712</Duration>
+										<classID>ExecuteTargetsIndividually</classID>
+									</ExecuteTargetsIndividually>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
