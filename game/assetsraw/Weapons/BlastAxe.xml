@@ -42,6 +42,12 @@
 		</ImageLayer>
 	</ResourcesIcon>
 	<ResourcesName>002be915-b924-483f-994b-8a8c817f9b0d</ResourcesName>
+	<Renderable meta:RefKey="Skeleton">
+		<Path>Sprites/Skeletons/blast_axe/blast_axe</Path>
+		<AnimGraph>Weapons/BlastAxe_anim</AnimGraph>
+		<Scale>2</Scale>
+		<Colour>255,255,255,255</Colour>
+	</Renderable>
 	<AttackMove meta:RefKey="WeaponMove">
 		<MoveVariant>
 			<AvailableCondition>resources &gt; 0</AvailableCondition>

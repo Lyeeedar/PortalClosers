@@ -2,9 +2,10 @@ package com.lyeeedar.Systems
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.esotericsoftware.spine.attachments.RegionAttachment
+import com.esotericsoftware.spine.attachments.SkeletonAttachment
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.SkeletonRenderable
-import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.set
 
 class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntitiesFor().any(ComponentType.Weapon).get())
@@ -29,13 +30,25 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 			{
 				val slot = renderable.skeleton.findSlot("handr")
 
-				val attachment = RegionAttachment("weapon")
-				attachment.region = AssetManager.tryLoadTextureRegion("Oryx/uf_split/uf_items/weapon_axe_exotic1.png")
-				attachment.width = attachment.region.regionWidth.toFloat()
-				attachment.height = attachment.region.regionHeight.toFloat()
-				attachment.updateOffset()
+				val child = weapon.weapon.renderable.copy()
+				if (child is SkeletonRenderable)
+				{
+					val attachment = SkeletonAttachment("weapon")
+					attachment.skeleton = child.skeleton
+					renderable.attachedSkeletons.add(child)
+					
+					slot.attachment = attachment
+				}
+				else
+				{
+					val attachment = RegionAttachment("weapon")
+					attachment.region = (renderable as Sprite).currentTexture
+					attachment.width = attachment.region.regionWidth.toFloat()
+					attachment.height = attachment.region.regionHeight.toFloat()
+					attachment.updateOffset()
 
-				slot.attachment = attachment
+					slot.attachment = attachment
+				}
 			}
 
 			weapon.equipped = true

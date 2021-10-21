@@ -6,6 +6,9 @@ import com.lyeeedar.Components.EventAndCondition
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Ability.AbilityTemplate
+import com.lyeeedar.Renderables.Renderable
+import com.lyeeedar.Renderables.SkeletonData
+import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Util.*
@@ -31,6 +34,8 @@ class Weapon : XmlDataClass()
 
 	@DataNeedsLocalisation(file = "Weapon")
 	lateinit var resourcesName: String
+
+	lateinit var renderable: Renderable
 
 	var attackMove: WeaponMove? = null
 	var waitMove: WeaponMove? = null
@@ -61,6 +66,7 @@ class Weapon : XmlDataClass()
 		weaponIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("WeaponIcon")!!)
 		resourcesIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("ResourcesIcon")!!)
 		resourcesName = xmlData.get("ResourcesName")
+		renderable = AssetManager.loadRenderable(xmlData.getChildByName("Renderable")!!)
 		val attackMoveEl = xmlData.getChildByName("AttackMove")
 		if (attackMoveEl != null)
 		{

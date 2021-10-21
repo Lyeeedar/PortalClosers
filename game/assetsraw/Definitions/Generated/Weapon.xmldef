@@ -5,6 +5,7 @@
 		<Data Name="WeaponIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="ResourcesIcon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="ResourcesName" NeedsLocalisation="True" LocalisationFile="Weapon" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Renderable" Keys="Sprite,TilingSprite,ParticleEffect,Skeleton" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="AttackMove" Keys="WeaponMove" meta:RefKey="Reference" />
 		<Data Name="WaitMove" Keys="WeaponMove" meta:RefKey="Reference" />
 		<Data Name="Moves" Keys="WeaponMove" meta:RefKey="Collection" />

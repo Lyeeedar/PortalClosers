@@ -1,0 +1,10 @@
+<AnimationGraph meta:X="0" meta:Y="0" GUID="4d027f00-0af6-4eff-ac1e-0f0037f51e2a" xmlns:meta="Editor">
+	<Root meta:RefKey="Loop">5b16d493-f30a-49ea-b42d-fe68e2035632</Root>
+	<NodeMap>
+		<Loop meta:X="204" meta:Y="0" GUID="5b16d493-f30a-49ea-b42d-fe68e2035632">
+			<Name>Idle</Name>
+			<Animation>idle</Animation>
+			<classID>Loop</classID>
+		</Loop>
+	</NodeMap>
+</AnimationGraph>
