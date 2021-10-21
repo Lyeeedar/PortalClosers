@@ -140,12 +140,6 @@ class DamageEquations
 					Pair("damage", damage.damage),
 					Pair("dist", attackerPos.dist(defenderPos).toFloat())))
 			}
-
-			if (defender.renderable()?.renderable is SkeletonRenderable)
-			{
-				(defender.renderable()?.renderable as SkeletonRenderable).layerAnimation("hit")
-			}
-			defender.renderable()?.renderable?.animation = BlinkAnimation.obtain().set(Colour.WHITE, Colour.RED, 0.2f)
 		}
 	}
 }
