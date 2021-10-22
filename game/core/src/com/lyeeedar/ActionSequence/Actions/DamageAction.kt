@@ -64,13 +64,6 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 					val attackObj = AttackDamage(attackDam, attackType)
 
 					DamageEquations.doAttack(state.rng, source, entity, attackObj, state.world)
-
-					if (source == state.world.player)
-					{
-						state.world.hitStop = 0.075f
-						val renderSystem = state.world.systems.filterIsInstance<AbstractRenderSystem>().first()
-						renderSystem.renderer.setScreenJolt(1f, 0.075f)
-					}
 				}
 			}
 		}

@@ -1,20 +1,20 @@
 package com.lyeeedar.Game
 
 import com.lyeeedar.Components.*
+import com.lyeeedar.Direction
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Animation.ColourChangeAnimation
 import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.Systems.*
-import com.lyeeedar.Util.BloodSplatter
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.randomWeighted
+import com.lyeeedar.Util.*
 import squidpony.squidmath.LightRNG
 
 class DamageEquations
 {
 	companion object
 	{
+		val hitEffect = AssetManager.loadParticleEffect("darkest/hit")
+
 		// AttackDam = BaseAtk * 20%Modifier
 		fun getAttackDam(rng: LightRNG, baseAttack: Float): Float
 		{
@@ -95,6 +95,34 @@ class DamageEquations
 			if (attackerStats.summoner != null)
 			{
 				attackerStats.summoner!!.statistics()!!.attackDamageDealt += damage.damage
+			}
+
+			if (damage.damage > 0)
+			{
+				var alpha = damage.damage / defenderStats.getStat(Statistic.MAX_HP)
+				alpha *= 0.5f
+				if (defenderStats.hp <= 0)
+				{
+					alpha = 1f
+				}
+
+				val pos = defender.position()!!
+				val p = hitEffect.getParticleEffect()
+				p.size[0] = pos.size
+				p.size[1] = pos.size
+				p.scale = 0.5f + 0.25f * alpha
+				p.facing = Direction.getDirection(attackerPos, defenderPos)
+				p.useFacing = true
+				p.rotation = p.facing.angle
+
+				p.addToWorld(world, pos.position)
+
+				if (attacker == world.player)
+				{
+					world.hitStop = 0.02f + 0.3f * alpha
+					val renderSystem = world.systems.filterIsInstance<AbstractRenderSystem>().first()
+					renderSystem.renderer.setScreenJolt(0.8f + 0.6f * alpha, 0.05f + 0.4f * alpha)
+				}
 			}
 
 			if (Random.random(Random.sharedRandom) < 0.5f)

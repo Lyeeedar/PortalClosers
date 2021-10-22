@@ -8,10 +8,10 @@
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
 			<Area>Center</Area>
-			<ParticleSpeed>0,1</ParticleSpeed>
-			<ParticleRotation>-20,20</ParticleRotation>
+			<ParticleSpeed>0,0</ParticleSpeed>
+			<ParticleRotation>-40,40</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|1</Keyframe>
+				<Keyframe>0|2</Keyframe>
 			</RateKeyframes>
 			<SingleBurst>true</SingleBurst>
 			<Particles>
@@ -21,8 +21,8 @@
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.12243931|0.9|0.9</Keyframe>
-							<Keyframe>1|1|1</Keyframe>
+							<Keyframe>0.12243931|1.1|1.1</Keyframe>
+							<Keyframe>1|1.3|1.3</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>

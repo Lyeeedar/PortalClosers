@@ -23,7 +23,6 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 
 	val blockEffect = AssetManager.loadParticleEffect("Block")
 	val blockBrokenEffect = AssetManager.loadParticleEffect("BlockBroken")
-	val hitEffect = AssetManager.loadParticleEffect("darkest/hit")
 
 	val messageList = Array<Label>()
 
@@ -53,14 +52,6 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 				(entity.renderable()?.renderable as SkeletonRenderable).layerAnimation("hit")
 			}
 			entity.renderable()?.renderable?.animation = BlinkAnimation.obtain().set(Colour.WHITE, Colour.RED, 0.2f)
-
-			val pos = entity.position()!!
-			val p = hitEffect.getParticleEffect()
-			p.size[0] = pos.size
-			p.size[1] = pos.size
-			p.scale = 0.5f
-
-			p.addToWorld(world, pos.position)
 
 			stats.tookDamage = false
 		}
