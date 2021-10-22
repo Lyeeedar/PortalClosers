@@ -237,7 +237,7 @@ class MeleeAttackComboAction : AbstractComboAction()
 		strike.time = 0.02f
 		damage.time = 0.04f
 
-		val individually = ExecuteTargetsIndividuallyAction()
+		val individually = ProcessTargetsIndividuallyAction()
 		individually.time = 0.03f
 		individually.duration = strike.duration + 0.1f
 

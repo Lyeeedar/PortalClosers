@@ -301,11 +301,11 @@
 									</StrikeFX>
 								</Timeline>
 								<Timeline>
-									<ExecuteTargetsIndividually>
+									<ForEachTarget>
 										<Time>0.025219452</Time>
 										<Duration LockDuration="False">0.25136712</Duration>
-										<classID>ExecuteTargetsIndividually</classID>
-									</ExecuteTargetsIndividually>
+										<classID>ProcessTargetsIndividually</classID>
+									</ForEachTarget>
 								</Timeline>
 							</Actions>
 						</ActionSequence>
