@@ -13,6 +13,7 @@ import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
 import ktx.math.div
+import squidpony.squidgrid.Direction
 
 @DataClass(category = "Renderable", name = "StrikeFX")
 class StrikeTileAction : AbstractDurationActionSequenceAction()
@@ -49,6 +50,13 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 		val targetDelayMap = ObjectFloatMap<Point>()
 
 		var current = source
+		if (!startAtSource)
+		{
+			val randomDir = Direction.DIAGONALS.random(state.rng)
+			val point = Point(randomDir.deltaX * 10000, randomDir.deltaY * 10000)
+			current = targets.minByOrNull { it.dist(point) }!!
+		}
+
 		while (targets.size > 0)
 		{
 			val min = targets.minByOrNull { it.dist(current) }!!
@@ -78,16 +86,26 @@ class StrikeTileAction : AbstractDurationActionSequenceAction()
 			points.insert(0, control1)
 			points.add(control2)
 		}
-		else
-		{
-			points.add(points[0])
-		}
 
 		if (startAtSource)
 		{
 			points.insert(0, source.toVec().add(0.5f, 0.5f))
 		}
-		points.add(points[0].cpy())
+		else if (!loop)
+		{
+			val startVec = points[0].cpy().sub(points[1])
+			points.insert(0, startVec.add(points[0]))
+		}
+
+		if (loop)
+		{
+			points.add(points[0].cpy())
+		}
+		else
+		{
+			val endVec = points[points.size-1].cpy().sub(points[points.size-2])
+			points.add(endVec.add(points[points.size-1]))
+		}
 
 		val curve = CurveRenderable(BSpline(points.toArray(Vector2::class.java), 3, loop), thickness * state.world.tileSize, texture, samples)
 		curve.setAnimation(duration, curveLag)

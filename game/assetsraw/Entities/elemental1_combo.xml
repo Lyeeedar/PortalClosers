@@ -19,6 +19,8 @@
 					<File>darkest/particle/slash</File>
 				</Texture>
 				<Colour>255,255,255,255</Colour>
+				<StartAtSource>false</StartAtSource>
+				<Loop>false</Loop>
 			</Strike>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
@@ -30,6 +32,7 @@
 					<Line>###</Line>
 				</HitPoints>
 			</Permute>
+			<AttackTurns>2</AttackTurns>
 		</MeleeAttack>
 	</Actions>
 	<NodeMap>

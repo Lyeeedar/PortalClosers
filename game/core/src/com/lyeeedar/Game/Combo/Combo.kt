@@ -213,6 +213,7 @@ class MeleeAttackComboAction : AbstractComboAction()
 	var effect: SpawnOneShotParticleAction? = null
 	lateinit var damage: DamageAction
 	var permute: PermuteAction? = null
+	var attackTurns: Int = 1
 
 	override fun getAbilityData(): AbilityData
 	{
@@ -227,6 +228,7 @@ class MeleeAttackComboAction : AbstractComboAction()
 
 		val mark = MarkAndWaitForPlayerAction()
 		mark.time = 0.005f
+		mark.turns = attackTurns
 
 		if (permute != null)
 		{
@@ -278,6 +280,7 @@ class MeleeAttackComboAction : AbstractComboAction()
 			permute = PermuteAction()
 			permute!!.load(permuteEl)
 		}
+		attackTurns = xmlData.getInt("AttackTurns", 1)
 	}
 	override val classID: String = "MeleeAttack"
 	//endregion
