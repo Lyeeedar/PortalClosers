@@ -7,9 +7,11 @@
 			<classID>Loop</classID>
 			<Transitions>
 				<Transition>
+					<Condition>1</Condition>
 					<Next meta:RefKey="Anim">d7ecf147-d894-43df-846d-00d7a56aa911</Next>
 				</Transition>
 				<Transition>
+					<Condition>1</Condition>
 					<Next meta:RefKey="Loop">d41fed01-1b1d-45a7-8bab-eefcd4af3690</Next>
 				</Transition>
 			</Transitions>
@@ -21,6 +23,7 @@
 			<classID>Loop</classID>
 			<Transitions>
 				<Transition>
+					<Condition>1</Condition>
 					<Next meta:RefKey="Anim">249753bf-09e1-4321-9d55-0a61e99e81a8</Next>
 				</Transition>
 			</Transitions>
@@ -29,13 +32,13 @@
 			<Name>Attack Start</Name>
 			<Animation>attack_start</Animation>
 			<classID>Anim</classID>
-			<next meta:RefKey="Loop">02bf758c-2058-4c05-ac96-1ba4c9fe8286</next>
+			<Next meta:RefKey="Loop">02bf758c-2058-4c05-ac96-1ba4c9fe8286</Next>
 		</Anim>
 		<Anim meta:X="975" meta:Y="465" GUID="249753bf-09e1-4321-9d55-0a61e99e81a8">
 			<Name>Attack End</Name>
 			<Animation>attack_end</Animation>
 			<classID>Anim</classID>
-			<next meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</next>
+			<Next meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</Next>
 		</Anim>
 		<Loop meta:X="255" meta:Y="-420" GUID="d41fed01-1b1d-45a7-8bab-eefcd4af3690">
 			<Name>Walk</Name>
@@ -43,6 +46,7 @@
 			<classID>Loop</classID>
 			<Transitions>
 				<Transition>
+					<Condition>1</Condition>
 					<Next meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</Next>
 				</Transition>
 			</Transitions>

@@ -1,31 +1,41 @@
 <AnimationGraph meta:X="0" meta:Y="0" GUID="4d027f00-0af6-4eff-ac1e-0f0037f51e2a" xmlns:meta="Editor">
 	<Root meta:RefKey="Loop">5b16d493-f30a-49ea-b42d-fe68e2035632</Root>
+	<Actions>
+		<Alpha>
+			<Condition>1</Condition>
+			<Slot>shell1</Slot>
+			<classID>Alpha</classID>
+			<AlphaRule>resources&gt;4</AlphaRule>
+		</Alpha>
+		<Alpha>
+			<Condition>1</Condition>
+			<Slot>shell2</Slot>
+			<classID>Alpha</classID>
+			<AlphaRule>resources&gt;3</AlphaRule>
+		</Alpha>
+		<Alpha>
+			<Condition>1</Condition>
+			<Slot>shell3</Slot>
+			<classID>Alpha</classID>
+			<AlphaRule>resources&gt;2</AlphaRule>
+		</Alpha>
+		<Alpha>
+			<Condition>1</Condition>
+			<Slot>shell4</Slot>
+			<classID>Alpha</classID>
+			<AlphaRule>resources&gt;1</AlphaRule>
+		</Alpha>
+		<Alpha>
+			<Condition>1</Condition>
+			<Slot>shell5</Slot>
+			<classID>Alpha</classID>
+			<AlphaRule>resources&gt;0</AlphaRule>
+		</Alpha>
+	</Actions>
 	<NodeMap>
 		<Loop meta:X="204" meta:Y="0" GUID="5b16d493-f30a-49ea-b42d-fe68e2035632">
 			<Name>Idle</Name>
 			<Animation>idle</Animation>
-			<VisibilityRules>
-				<VisibilityRule>
-					<Slot>shell1</Slot>
-					<Rule>resources&gt;4</Rule>
-				</VisibilityRule>
-				<VisibilityRule>
-					<Slot>shell2</Slot>
-					<Rule>resources&gt;3</Rule>
-				</VisibilityRule>
-				<VisibilityRule>
-					<Slot>shell3</Slot>
-					<Rule>resources&gt;2</Rule>
-				</VisibilityRule>
-				<VisibilityRule>
-					<Slot>shell4</Slot>
-					<Rule>resources&gt;1</Rule>
-				</VisibilityRule>
-				<VisibilityRule>
-					<Slot>shell5</Slot>
-					<Rule>resources&gt;0</Rule>
-				</VisibilityRule>
-			</VisibilityRules>
 			<classID>Loop</classID>
 		</Loop>
 	</NodeMap>

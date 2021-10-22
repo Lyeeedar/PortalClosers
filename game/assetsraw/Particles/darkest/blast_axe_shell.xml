@@ -99,13 +99,15 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.39310837|1</Keyframe>
+							<Keyframe>0.9990527|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.38164595|0.2</Keyframe>
-							<Keyframe>0.7242155|0.9</Keyframe>
+							<Keyframe>0.25660154|0.1</Keyframe>
+							<Keyframe>0.6838365|0.9</Keyframe>
 							<Keyframe>1|1</Keyframe>
 						</Stream>
 					</AlphaRefKeyframes>
@@ -161,4 +163,17 @@
 			</Particles>
 		</Emitter>
 	</Emitters>
+	<Light>
+		<Colour>
+			<Keyframe>0|207,154,18,255</Keyframe>
+		</Colour>
+		<Brightness>
+			<Keyframe>0|0</Keyframe>
+			<Keyframe>0.11635703|0.5</Keyframe>
+			<Keyframe>0.34221247|0</Keyframe>
+		</Brightness>
+		<Range>
+			<Keyframe>0|0.7</Keyframe>
+		</Range>
+	</Light>
 </Effect>

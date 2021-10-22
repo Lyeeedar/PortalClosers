@@ -1,28 +1,45 @@
 <Definitions Colour="200,255,100" Icon="Sprites/Oryx/uf_split/uf_heroes/wolf_red_1.png" xmlns:meta="Editor">
 	<Definition Name="AnimationGraph" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="152,250,250" meta:RefKey="GraphStruct">
 		<Data Name="Root" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+		<Data Name="Actions" DefKey="AbstractAnimGraphActionDefs" meta:RefKey="Collection" />
 	</Definition>
+	<Definition Name="AbstractAnimGraphAction" Nullable="False" TextColour="108,204,108" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Slot" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="AbstractAnimGraphActionDefs" Keys="Alpha,LightAnimGraph,ParticleEffectAnimGraph" meta:RefKey="ReferenceDef" />
 	<Definition Name="AbstractAnimationGraphNode" Nullable="False" Background="204,204,165" meta:RefKey="GraphStructDef">
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Animation" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="VisibilityRules" Keys="VisibilityRule" meta:RefKey="Collection" />
+		<Data Name="Actions" DefKey="AbstractAnimGraphActionDefs" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="AbstractAnimationGraphNodeDefs" Keys="Anim,Loop" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractAttachmentAnimGraphAction" Nullable="False" TextColour="71,223,223" Extends="AbstractAnimGraphAction" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="AbstractAttachmentAnimGraphActionDefs" Keys="LightAnimGraph,ParticleEffectAnimGraph" meta:RefKey="ReferenceDef" />
+	<Definition Name="Alpha" Nullable="False" TextColour="47,210,47" Extends="AbstractAnimGraphAction" meta:RefKey="StructDef">
+		<Const Name="classID">Alpha</Const>
+		<Data Name="AlphaRule" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="Anim" Nullable="False" Background="204,204,0" Extends="AbstractAnimationGraphNode" meta:RefKey="GraphStructDef">
 		<Const Name="classID">Anim</Const>
 		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="LightAnimGraph" Nullable="False" TextColour="101,101,204" Extends="AbstractAttachmentAnimGraphAction" meta:RefKey="StructDef">
+		<Const Name="classID">LightAnimGraph</Const>
+		<Data Name="Light" Keys="Light" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="Loop" Nullable="False" Background="217,100,217" Extends="AbstractAnimationGraphNode" meta:RefKey="GraphStructDef">
 		<Const Name="classID">Loop</Const>
 		<Data Name="Transitions" Keys="Transition" meta:RefKey="Collection" />
 		<Data Name="RandomizeStart" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="Transition" Nullable="False" TextColour="77,204,204" meta:RefKey="StructDef">
-		<Data Name="Weight" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	<Definition Name="ParticleEffectAnimGraph" Nullable="False" TextColour="250,8,8" Extends="AbstractAttachmentAnimGraphAction" meta:RefKey="StructDef">
+		<Const Name="classID">ParticleEffectAnimGraph</Const>
+		<Data Name="ParticleEffectDescription" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="VisibilityRule" Nullable="False" TextColour="18,245,18" meta:RefKey="StructDef">
-		<Data Name="Slot" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="Rule" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+	<Definition Name="Transition" Nullable="False" TextColour="77,204,204" meta:RefKey="StructDef">
+		<Data Name="Condition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Next" DefKey="AbstractAnimationGraphNodeDefs" Nullable="False" SkipIfDefault="False" meta:RefKey="GraphReference" />
 	</Definition>
 </Definitions>

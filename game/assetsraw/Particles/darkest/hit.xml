@@ -39,6 +39,8 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.5001776|1</Keyframe>
+							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
@@ -88,6 +90,8 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.50148016|1</Keyframe>
+							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>

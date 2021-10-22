@@ -244,6 +244,25 @@ actual class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractMapGenerationAction!")
 			}
 		}
+		fun loadAbstractAnimGraphAction(classID: String): com.lyeeedar.Renderables.AnimGraph.AbstractAnimGraphAction
+		{
+			return when (classID)
+			{
+				"Alpha" -> com.lyeeedar.Renderables.AnimGraph.AlphaAnimGraphAction()
+				"ParticleEffectAnimGraph" -> com.lyeeedar.Renderables.AnimGraph.ParticleEffectAnimGraphAction()
+				"LightAnimGraph" -> com.lyeeedar.Renderables.AnimGraph.LightAnimGraphAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAnimGraphAction!")
+			}
+		}
+		fun loadAbstractAttachmentAnimGraphAction(classID: String): com.lyeeedar.Renderables.AnimGraph.AbstractAttachmentAnimGraphAction
+		{
+			return when (classID)
+			{
+				"ParticleEffectAnimGraph" -> com.lyeeedar.Renderables.AnimGraph.ParticleEffectAnimGraphAction()
+				"LightAnimGraph" -> com.lyeeedar.Renderables.AnimGraph.LightAnimGraphAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAttachmentAnimGraphAction!")
+			}
+		}
 		fun loadAbstractAnimationGraphNode(classID: String): com.lyeeedar.Renderables.AbstractAnimationGraphNode
 		{
 			return when (classID)

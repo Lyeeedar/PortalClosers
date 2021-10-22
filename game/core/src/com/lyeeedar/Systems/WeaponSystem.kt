@@ -27,7 +27,7 @@ class WeaponSystem(world: World<*>) : AbstractEntitySystem(world, world.getEntit
 			val renderable = entity.renderable()?.renderable as? SkeletonRenderable
 			if (renderable != null)
 			{
-				val slot = renderable.skeleton.findSlot("handr")
+				val slot = renderable.skeleton.findSlot("gripr")
 
 				val child = weapon.weapon.renderable.copy()
 				if (child is SkeletonRenderable)
