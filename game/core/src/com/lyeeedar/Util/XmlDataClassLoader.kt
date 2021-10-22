@@ -25,14 +25,14 @@ actual class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractAbilityModifierKeyframe!")
 			}
 		}
-		fun loadAbstractComboStep(classID: String): com.lyeeedar.Game.Combo.AbstractComboStep
+		fun loadAbstractComboAction(classID: String): com.lyeeedar.Game.Combo.AbstractComboAction
 		{
 			return when (classID)
 			{
-				"Wait" -> com.lyeeedar.Game.Combo.WaitComboStep()
-				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboStep()
-				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboStep()
-				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboStep!")
+				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboAction()
+				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboAction()
+				"Wait" -> com.lyeeedar.Game.Combo.WaitComboAction()
+				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboAction!")
 			}
 		}
 		fun loadAbstractActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractActionSequenceAction

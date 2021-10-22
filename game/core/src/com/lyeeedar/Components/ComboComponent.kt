@@ -1,8 +1,8 @@
 package com.lyeeedar.Components
 
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.Combo.AbstractComboStep
 import com.lyeeedar.Game.Combo.Combo
+import com.lyeeedar.Game.Combo.ComboStep
 import com.lyeeedar.Util.DataFileReference
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
@@ -40,7 +40,7 @@ class ComboComponent : DataComponent()
 	override val type: ComponentType = ComponentType.Combo
 
 	lateinit var combo: Combo
-	var currentStep: AbstractComboStep? = null
+	var currentStep: ComboStep? = null
 	var lastTarget: Point? = null
 	var fixedDirection: Direction? = null
 

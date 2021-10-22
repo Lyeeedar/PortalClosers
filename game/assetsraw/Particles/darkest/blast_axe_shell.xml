@@ -23,7 +23,7 @@
 					<Lifetime>0.8,0.8</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.2|0.2</Keyframe>
+							<Keyframe>0|0.1|0.1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<RotationSpeedKeyframes>

@@ -1,30 +1,36 @@
 <Definitions Colour="121,252,121" Icon="Sprites/Icons/CardIcon.png" xmlns:meta="Editor">
 	<Definition Name="Combo" AllowCircularLinks="True" FlattenData="True" NodeStoreName="NodeMap" Nullable="False" TextColour="204,33,33" meta:RefKey="GraphStruct">
-		<Data Name="Roots" Keys="ComboStep" meta:RefKey="Collection" />
+		<Data Name="Roots" Keys="ComboStepConnection" meta:RefKey="Collection" />
+		<Data Name="Actions" DefKey="AbstractComboActionDefs" meta:RefKey="Collection" />
 	</Definition>
-	<Definition Name="Ability" Nullable="False" Background="219,159,219" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
+	<Definition Name="Ability" Nullable="False" TextColour="204,204,59" Extends="AbstractComboAction" meta:RefKey="StructDef">
 		<Const Name="classID">Ability</Const>
 		<Data Name="Ability" Keys="AbilityData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="AbstractComboStep" Nullable="False" Background="2,207,2" meta:RefKey="GraphStructDef">
+	<Definition Name="AbstractComboAction" Nullable="False" TextColour="153,153,204" meta:RefKey="StructDef">
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="AbstractComboActionDefs" Keys="Ability,MeleeAttack,Wait" meta:RefKey="ReferenceDef" />
+	<Definition Name="ComboStep" Nullable="False" Background="10,10,204" meta:RefKey="GraphStructDef">
+		<Data Name="Next" Keys="ComboStepConnection" meta:RefKey="Collection" />
+		<Data Name="ActionName" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Cooldown" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Chance" SkipIfDefault="False" Default="1" meta:RefKey="String" />
 		<Data Name="CanStop" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="StepForward" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
 		<Data Name="CanTurn" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
-		<Data Name="Next" Keys="ComboStep" meta:RefKey="Collection" />
 	</Definition>
-	<Definition Name="AbstractComboStepDefs" Keys="Ability,MeleeAttack,Wait" meta:RefKey="ReferenceDef" />
-	<Definition Name="ComboStep" Nullable="False" TextColour="10,10,204" meta:RefKey="StructDef">
-		<Data Name="Next" DefKey="AbstractComboStepDefs" meta:RefKey="GraphReference" />
+	<Definition Name="ComboStepConnection" Nullable="False" TextColour="243,58,243" meta:RefKey="StructDef">
+		<Data Name="Next" Keys="ComboStep" meta:RefKey="GraphReference" />
 	</Definition>
-	<Definition Name="MeleeAttack" Nullable="False" Background="141,141,204" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
+	<Definition Name="MeleeAttack" Nullable="False" TextColour="204,9,9" Extends="AbstractComboAction" meta:RefKey="StructDef">
 		<Const Name="classID">MeleeAttack</Const>
-		<Data Name="Effect" Keys="OneShotFX" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Strike" Keys="StrikeFX" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Effect" Keys="OneShotFX" meta:RefKey="Reference" />
 		<Data Name="Damage" Keys="Damage" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Permute" Keys="Permute" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="Wait" Nullable="False" Background="206,21,21" Extends="AbstractComboStep" meta:RefKey="GraphStructDef">
+	<Definition Name="Wait" Nullable="False" TextColour="204,24,204" Extends="AbstractComboAction" meta:RefKey="StructDef">
 		<Const Name="classID">Wait</Const>
 		<Data Name="Turns" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>

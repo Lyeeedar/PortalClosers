@@ -6,19 +6,35 @@ import com.lyeeedar.ActionSequence.ActionSequence
 import com.lyeeedar.ActionSequence.Actions.*
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Ability.AbilityData
-import com.lyeeedar.Game.Combo.AbstractComboStep
+import com.lyeeedar.Game.Combo.ComboStep
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClassLoader
 import ktx.collections.set
 
 @DataFile(colour="121,252,121", icon="Sprites/Icons/CardIcon.png")
-class Combo : GraphXmlDataClass<AbstractComboStep>()
+class Combo : GraphXmlDataClass<ComboStep>()
 {
 	@DataGraphNodes
-	val nodeMap: ObjectMap<String, AbstractComboStep> = ObjectMap<String, AbstractComboStep>()
+	val nodeMap: ObjectMap<String, ComboStep> = ObjectMap()
 
-	val roots: Array<ComboStep> = Array<ComboStep>()
+	val roots: Array<ComboStepConnection> = Array()
+
+	val actions: Array<AbstractComboAction> = Array()
+
+	override fun afterLoad()
+	{
+		val actionMap = ObjectMap<String, AbstractComboAction>()
+		for (action in actions)
+		{
+			actionMap[action.name] = action
+		}
+
+		for (node in nodeMap.values())
+		{
+			node.action = actionMap[node.actionName]
+		}
+	}
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -28,7 +44,7 @@ class Combo : GraphXmlDataClass<AbstractComboStep>()
 		{
 			for (el in nodeMapEl.children)
 			{
-				val obj = XmlDataClassLoader.loadAbstractComboStep(el.get("classID", el.name)!!)
+				val obj = ComboStep()
 				obj.load(el)
 				val guid = el.getAttribute("GUID")
 				nodeMap[guid] = obj
@@ -39,16 +55,29 @@ class Combo : GraphXmlDataClass<AbstractComboStep>()
 		{
 			for (el in rootsEl.children)
 			{
-				val objroots: ComboStep
+				val objroots: ComboStepConnection
 				val objrootsEl = el
-				objroots = ComboStep()
+				objroots = ComboStepConnection()
 				objroots.load(objrootsEl)
 				roots.add(objroots)
 			}
 		}
+		val actionsEl = xmlData.getChildByName("Actions")
+		if (actionsEl != null)
+		{
+			for (el in actionsEl.children)
+			{
+				val objactions: AbstractComboAction
+				val objactionsEl = el
+				objactions = XmlDataClassLoader.loadAbstractComboAction(objactionsEl.get("classID", objactionsEl.name)!!)
+				objactions.load(objactionsEl)
+				actions.add(objactions)
+			}
+		}
 		resolve(nodeMap)
+		afterLoad()
 	}
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
+	override fun resolve(nodes: ObjectMap<String, ComboStep>)
 	{
 		for (item in nodeMap.values())
 		{
@@ -62,10 +91,10 @@ class Combo : GraphXmlDataClass<AbstractComboStep>()
 	//endregion
 }
 
-class ComboStep : GraphXmlDataClass<AbstractComboStep>()
+class ComboStepConnection : GraphXmlDataClass<ComboStep>()
 {
 	@DataGraphReference
-	var next: AbstractComboStep? = null
+	var next: ComboStep? = null
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -73,7 +102,7 @@ class ComboStep : GraphXmlDataClass<AbstractComboStep>()
 		nextGUID = xmlData.get("Next", null)
 	}
 	private var nextGUID: String? = null
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
+	override fun resolve(nodes: ObjectMap<String, ComboStep>)
 	{
 		if (!nextGUID.isNullOrBlank()) next = nodes[nextGUID]!!
 	}
@@ -81,8 +110,11 @@ class ComboStep : GraphXmlDataClass<AbstractComboStep>()
 }
 
 @DataGraphNode
-abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
+class ComboStep : GraphXmlDataClass<ComboStep>()
 {
+	val next: Array<ComboStepConnection> = Array()
+
+	lateinit var actionName: String
 	var cooldown: Int = 0
 
 	@DataCompiledExpression(default = "1")
@@ -92,7 +124,8 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 	var stepForward: Boolean = false
 	var canTurn: Boolean = false
 
-	val next: Array<ComboStep> = Array<ComboStep>()
+	@Transient
+	lateinit var action: AbstractComboAction
 
 	@Transient
 	var actual: Ability? = null
@@ -101,7 +134,7 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 	{
 		if (actual == null)
 		{
-			val data = getAbilityData()
+			val data = action.getAbilityData()
 			data.cooldown = cooldown
 			actual = Ability(data)
 		}
@@ -109,31 +142,29 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 		return actual!!
 	}
 
-	abstract fun getAbilityData(): AbilityData
-
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		cooldown = xmlData.getInt("Cooldown", 0)
-		chance = CompiledExpression(xmlData.get("Chance", "1")!!)
-		canStop = xmlData.getBoolean("CanStop", false)
-		stepForward = xmlData.getBoolean("StepForward", false)
-		canTurn = xmlData.getBoolean("CanTurn", false)
 		val nextEl = xmlData.getChildByName("Next")
 		if (nextEl != null)
 		{
 			for (el in nextEl.children)
 			{
-				val objnext: ComboStep
+				val objnext: ComboStepConnection
 				val objnextEl = el
-				objnext = ComboStep()
+				objnext = ComboStepConnection()
 				objnext.load(objnextEl)
 				next.add(objnext)
 			}
 		}
+		actionName = xmlData.get("ActionName")
+		cooldown = xmlData.getInt("Cooldown", 0)
+		chance = CompiledExpression(xmlData.get("Chance", "1")!!)
+		canStop = xmlData.getBoolean("CanStop", false)
+		stepForward = xmlData.getBoolean("StepForward", false)
+		canTurn = xmlData.getBoolean("CanTurn", false)
 	}
-	abstract val classID: String
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
+	override fun resolve(nodes: ObjectMap<String, ComboStep>)
 	{
 		for (item in next)
 		{
@@ -143,7 +174,22 @@ abstract class AbstractComboStep : GraphXmlDataClass<AbstractComboStep>()
 	//endregion
 }
 
-class AbilityComboStep : AbstractComboStep()
+abstract class AbstractComboAction : XmlDataClass()
+{
+	lateinit var name: String
+
+	abstract fun getAbilityData(): AbilityData
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		name = xmlData.get("Name")
+	}
+	abstract val classID: String
+	//endregion
+}
+
+class AbilityComboAction : AbstractComboAction()
 {
 	lateinit var ability: AbilityData
 
@@ -158,16 +204,13 @@ class AbilityComboStep : AbstractComboStep()
 		ability.load(abilityEl)
 	}
 	override val classID: String = "Ability"
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
-	{
-		super.resolve(nodes)
-	}
 	//endregion
 }
 
-class MeleeAttackComboStep : AbstractComboStep()
+class MeleeAttackComboAction : AbstractComboAction()
 {
-	lateinit var effect: SpawnOneShotParticleAction
+	lateinit var strike: StrikeTileAction
+	var effect: SpawnOneShotParticleAction? = null
 	lateinit var damage: DamageAction
 	var permute: PermuteAction? = null
 
@@ -176,9 +219,6 @@ class MeleeAttackComboStep : AbstractComboStep()
 		val data = AbilityData()
 		data.targetType = AbilityData.TargetType.TARGET_ENEMY
 		data.actionSequence = ActionSequence(XmlData())
-
-		effect.time = 0.01f
-		damage.time = 0.01f + effect.particle.getParticleEffect().blockinglifetime * 0.7f
 
 		val bump = AnimationAction()
 		bump.anim = AnimationAction.Animation.BUMP
@@ -190,12 +230,26 @@ class MeleeAttackComboStep : AbstractComboStep()
 
 		if (permute != null)
 		{
+			permute!!.time = 0f
 			data.actionSequence.rawActions.add(permute)
 		}
 
+		strike.time = 0.02f
+		damage.time = 0.04f
+
+		val individually = ExecuteTargetsIndividuallyAction()
+		individually.time = 0.03f
+		individually.duration = strike.duration + 0.1f
+
 		data.actionSequence.rawActions.add(mark)
-		data.actionSequence.rawActions.add(effect)
 		data.actionSequence.rawActions.add(bump)
+		data.actionSequence.rawActions.add(strike)
+		data.actionSequence.rawActions.add(individually)
+		if (effect != null)
+		{
+			effect!!.time = 0.04f
+			data.actionSequence.rawActions.add(effect)
+		}
 		data.actionSequence.rawActions.add(damage)
 		data.actionSequence.afterLoad()
 
@@ -206,9 +260,15 @@ class MeleeAttackComboStep : AbstractComboStep()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		val effectEl = xmlData.getChildByName("Effect")!!
-		effect = SpawnOneShotParticleAction()
-		effect.load(effectEl)
+		val strikeEl = xmlData.getChildByName("Strike")!!
+		strike = StrikeTileAction()
+		strike.load(strikeEl)
+		val effectEl = xmlData.getChildByName("Effect")
+		if (effectEl != null)
+		{
+			effect = SpawnOneShotParticleAction()
+			effect!!.load(effectEl)
+		}
 		val damageEl = xmlData.getChildByName("Damage")!!
 		damage = DamageAction()
 		damage.load(damageEl)
@@ -220,14 +280,10 @@ class MeleeAttackComboStep : AbstractComboStep()
 		}
 	}
 	override val classID: String = "MeleeAttack"
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
-	{
-		super.resolve(nodes)
-	}
 	//endregion
 }
 
-class WaitComboStep : AbstractComboStep()
+class WaitComboAction : AbstractComboAction()
 {
 	var turns: Int = 1
 
@@ -253,9 +309,5 @@ class WaitComboStep : AbstractComboStep()
 		turns = xmlData.getInt("Turns", 1)
 	}
 	override val classID: String = "Wait"
-	override fun resolve(nodes: ObjectMap<String, AbstractComboStep>)
-	{
-		super.resolve(nodes)
-	}
 	//endregion
 }

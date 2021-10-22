@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.Combo.AbstractComboStep
+import com.lyeeedar.Game.Combo.ComboStep
 import com.lyeeedar.Game.Statistic
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Systems.EventSystem
@@ -19,10 +19,10 @@ import squidpony.squidmath.LightRNG
 
 class TaskCombo(): AbstractTask()
 {
-	lateinit var comboStep: AbstractComboStep
+	lateinit var comboStep: ComboStep
 	lateinit var tile: Tile
 
-	fun set(tile: Tile, comboStep: AbstractComboStep): TaskCombo
+	fun set(tile: Tile, comboStep: ComboStep): TaskCombo
 	{
 		this.tile = tile
 		this.comboStep = comboStep
