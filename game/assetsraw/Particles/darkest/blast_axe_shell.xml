@@ -7,12 +7,12 @@
 			<Gravity>-15</Gravity>
 			<Shape>Cone</Shape>
 			<Angle>45</Angle>
-			<Width>1</Width>
-			<Height>1</Height>
+			<Width>0</Width>
+			<Height>0</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
-			<ParticleSpeed>4,4</ParticleSpeed>
+			<ParticleSpeed>5,5</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>

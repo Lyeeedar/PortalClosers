@@ -270,6 +270,16 @@
 											<Line>###</Line>
 										</HitPoints>
 									</Permute>
+									<OneShotFX>
+										<Time>0.01424809</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>darkest/blast_axe_shell</Name>
+										</Particle>
+										<AlignToVector>false</AlignToVector>
+										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+										<AttachmentSlot>exhaust</AttachmentSlot>
+									</OneShotFX>
 									<Damage>
 										<Time>0.026033394</Time>
 										<classID>Damage</classID>
@@ -360,27 +370,26 @@
 									</OneShotFX>
 								</Timeline>
 								<Timeline>
-									<StoreTargets>
-										<classID>StoreTargets</classID>
-										<Key>dest</Key>
-									</StoreTargets>
-									<PickSelf>
-										<Time>0.001863758</Time>
-										<classID>SelectSelf</classID>
-									</PickSelf>
 									<OneShotFX>
-										<Time>0.0034034657</Time>
+										<Time>0.0049608015</Time>
 										<classID>SpawnOneShotParticle</classID>
 										<Particle meta:RefKey="ParticleEffect">
-											<Name>Abilities/Fireburst</Name>
+											<Name>darkest/blast_axe_shell</Name>
 										</Particle>
-										<SpawnBehaviour>Immediate</SpawnBehaviour>
+										<AlignToVector>false</AlignToVector>
+										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+										<AttachmentSlot>exhaust</AttachmentSlot>
 									</OneShotFX>
-									<RestoreTargets>
-										<Time>0.0051681823</Time>
-										<classID>RestoreTargets</classID>
-										<Key>dest</Key>
-									</RestoreTargets>
+									<OneShotFX>
+										<Time>0.0077668405</Time>
+										<classID>SpawnOneShotParticle</classID>
+										<Particle meta:RefKey="ParticleEffect">
+											<Name>darkest/blast_axe_shell</Name>
+										</Particle>
+										<AlignToVector>false</AlignToVector>
+										<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+										<AttachmentSlot>exhaust</AttachmentSlot>
+									</OneShotFX>
 									<ScreenJolt>
 										<Time>0.09850032</Time>
 										<classID>ScreenJolt</classID>
