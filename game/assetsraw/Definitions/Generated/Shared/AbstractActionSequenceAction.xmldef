@@ -50,10 +50,11 @@
 		<Const Name="classID">SpawnOneShotParticle</Const>
 		<Data Name="Particle" Keys="ParticleEffect,ParticleEffectTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="AlignToVector" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
-		<Data Name="SpawnSingleParticle" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
-		<Data Name="SpawnBehaviour" EnumValues="Immediate,From_source,From_center,Random" Default="Immediate" SkipIfDefault="False" VisibleIf="SpawnSingleParticle == false" meta:RefKey="Enum" />
-		<Data Name="SpawnDuration" Type="Float" Default="0" SkipIfDefault="True" VisibleIf="SpawnSingleParticle == false &amp;&amp; SpawnBehaviour != Immediate" meta:RefKey="Number" />
+		<Data Name="SpawnSingleParticle" SkipIfDefault="True" Default="false" VisibleIf="AttachmentSlot == null" meta:RefKey="Boolean" />
+		<Data Name="SpawnBehaviour" EnumValues="Immediate,From_source,From_center,Random" Default="Immediate" SkipIfDefault="False" VisibleIf="AttachmentSlot == null &amp;&amp; SpawnSingleParticle == false" meta:RefKey="Enum" />
+		<Data Name="SpawnDuration" Type="Float" Default="0" SkipIfDefault="True" VisibleIf="SpawnBehaviour != Immediate" meta:RefKey="Number" />
 		<Data Name="MakeParticleNonBlocking" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="AttachmentSlot" SkipIfDefault="True" Default="" VisibleIf="SpawnSingleParticle == false" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="Repeat" Nullable="False" TextColour="255,0,0,255" IsGlobal="True" Extends="AbstractDurationActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Repeat</Const>

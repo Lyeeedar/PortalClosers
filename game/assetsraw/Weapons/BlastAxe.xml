@@ -88,25 +88,18 @@
 						<Actions>
 							<Timeline>
 								<ConsumeResources>
+									<Time>0.079272516</Time>
 									<classID>ConsumeResources</classID>
 								</ConsumeResources>
 								<OneShotFX>
-									<Time>0.016576223</Time>
+									<Time>0.08610406</Time>
 									<classID>SpawnOneShotParticle</classID>
 									<Particle meta:RefKey="ParticleEffect">
-										<Name>EnemyAttacks/slash</Name>
-									</Particle>
-									<SpawnBehaviour>Immediate</SpawnBehaviour>
-								</OneShotFX>
-								<OneShotFX>
-									<Time>0.07994239</Time>
-									<classID>SpawnOneShotParticle</classID>
-									<Particle meta:RefKey="ParticleEffect">
-										<Name>Abilities/GroundEruption</Name>
+										<Name>darkest/blast_axe_shell</Name>
 									</Particle>
 									<AlignToVector>false</AlignToVector>
-									<SpawnBehaviour>Immediate</SpawnBehaviour>
 									<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+									<AttachmentSlot>exhaust</AttachmentSlot>
 								</OneShotFX>
 								<Damage>
 									<Time>0.09371765</Time>
