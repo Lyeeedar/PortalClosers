@@ -14,6 +14,7 @@ import com.lyeeedar.Systems.World
 import com.lyeeedar.Systems.renderSystem
 import com.lyeeedar.UI.PlayerWidget
 import com.lyeeedar.UI.RenderSystemWidget
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.random
 
 class WorldScreen : AbstractScreen()
@@ -34,7 +35,7 @@ class WorldScreen : AbstractScreen()
 
 		for (i in 0 until 5)
 		{
-			val rat = EntityLoader.load("Entities/elemental1")
+			val rat = EntityLoader.load("Entities/elemental${Random.sharedRandom.nextInt(2)+1}")
 			rat.statistics()!!.calculateStatistics(1)
 			rat.statistics()!!.faction = "enemy"
 			rat.ai()!!.state.set(rat.getRef(), world, 0)
@@ -68,7 +69,7 @@ class WorldScreen : AbstractScreen()
 			true
 		}
 
-		drawFPS = false
+		//drawFPS = false
 		world.ambientLight.set(0.8f, 0.8f, 0.8f, 1f)
 	}
 

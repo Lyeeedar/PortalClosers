@@ -15,22 +15,24 @@ fun World<*>.renderSystem() = systems.filterIsInstance<RenderSystem>().firstOrNu
 const val numHpPips = 10
 open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 {
-	val allyHpCol = Colour.GREEN.copy()
-	val enemyHpCol = Colour.RED.copy()
-	val lostHpCol = Colour.ORANGE.copy()
-	val emptyCol = Colour.BLACK.copy()
+	val allyHpCol = Colour.GREEN.copy().lockColour()
+	val enemyHpCol = Colour.RED.copy().lockColour()
+	val lostHpCol = Colour.ORANGE.copy().lockColour()
+	val emptyCol = Colour.BLACK.copy().lockColour()
 
-	val predictedAttackCol = Colour.RED.copy()
-	val validTargetCol = Colour.LIGHT_GRAY.copy()
-	val targetCol = Colour.DARK_GRAY.copy()
-	val selectedTargetCol = Colour.GOLD.copy()
-	val previewTargetCol = Colour.GREEN.copy()
+	val predictedAttackCol = Colour.RED.copy().lockColour()
+	val validTargetCol = Colour.LIGHT_GRAY.copy().lockColour()
+	val targetCol = Colour.DARK_GRAY.copy().lockColour()
+	val selectedTargetCol = Colour.GOLD.copy().lockColour()
+	val previewTargetCol = Colour.GREEN.copy().lockColour()
+	val additionalCol = Colour.LIGHT_GRAY.copy().a(0.5f).lockColour()
 
-	val white = AssetManager.tryLoadTextureRegion("Sprites/white.png")!!
 	val hp_border = AssetManager.tryLoadTextureRegion("Sprites/GUI/health_border.png")!!
-	val attack = AssetManager.tryLoadTextureRegion("Sprites/Oryx/Custom/terrain/selection.png")!!
-
-	val checkerCol = Colour(0f, 0f, 0f, 0.04f)
+	val selection = AssetManager.tryLoadTextureRegion("Sprites/darkest/terrain/selection.png")!!
+	val num1 = AssetManager.tryLoadTextureRegion("Sprites/darkest/terrain/1.png")!!
+	val num2 = AssetManager.tryLoadTextureRegion("Sprites/darkest/terrain/2.png")!!
+	val num3 = AssetManager.tryLoadTextureRegion("Sprites/darkest/terrain/3.png")!!
+	val target = AssetManager.tryLoadTextureRegion("Sprites/darkest/terrain/target.png")!!
 
 	override fun drawExtraEntity(entity: Entity, deltaTime: Float)
 	{
@@ -82,17 +84,17 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 
 			val index = SpaceSlot.ABOVEENTITY.ordinal
 
-			renderer.queueTexture(white, ax + totalWidth*0.5f - solid*0.5f, ay+overhead, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay, lit = false)
+			renderer.queueTexture(white, ax - 0.5f + totalWidth*0.5f - solid*0.5f, ay+overhead - 0.5f, index, 1, colour = emptyCol, width = totalWidth, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			val lostLen = (hp + stats.lostHp) / maxhp
-			renderer.queueTexture(white, ax + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead, index, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
+			renderer.queueTexture(white, ax - 0.5f + totalWidth*lostLen*0.5f - solid*0.5f, ay+overhead - 0.5f, index, 2, colour = lostHpCol, width = totalWidth*lostLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			val hpLen = hp / maxhp
-			renderer.queueTexture(white, ax + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead, index, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
+			renderer.queueTexture(white, ax - 0.5f + totalWidth*hpLen*0.5f - solid*0.5f, ay+overhead - 0.5f, index, 3, colour = hpColour, width = totalWidth*hpLen, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 
 			for (i in 0 until numHpPips)
 			{
-				renderer.queueTexture(hp_border, ax+i*spacePerPip, ay+overhead, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay, lit = false)
+				renderer.queueTexture(hp_border, ax - 0.5f+i*spacePerPip, ay+overhead - 0.5f, index, 4, width = solid, height = 0.1f, sortX = ax, sortY = ay, lit = false)
 			}
 
 			for (i in 0 until stats.buffs.size)
@@ -100,46 +102,51 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				val buff = stats.buffs[i]
 				val icon = buff.icon ?: continue
 
-				renderer.queueTexture(icon.currentTexture, ax+i*spacePerPip*3, ay+overhead+0.1f+spacePerPip, index, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour, lit = false)
+				renderer.queueTexture(icon.currentTexture, ax - 0.5f+i*spacePerPip*3, ay+overhead - 0.5f+0.1f+spacePerPip, index, 4, width = spacePerPip*3, height = spacePerPip*3, sortX = ax, sortY = ay, colour = icon.colour, lit = false)
 			}
 		}
 	}
 
 	override fun drawExtraTile(tile: AbstractTile)
 	{
-		if (tile.wall == null)
-		{
-			if ((tile.x + tile.y).rem(2) == 0)
-			{
-				renderer.queueTexture(white, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.FLOOR.ordinal, index = 1, colour = checkerCol)
-			}
-		}
+		val slot = SpaceSlot.FLOOR.ordinal
 
 		val tile = tile as Tile
 		if (tile.predictedAttacksFrom.size > 0)
 		{
+			val turns = tile.predictedAttacksFrom.minOfOrNull { it.turns } ?: 1
 			val rotation = (tile.x + tile.y).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = predictedAttackCol, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation, lit = false)
+			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = predictedAttackCol, scaleX = 0.95f, scaleY = 0.95f, rotation = rotation, lit = false)
+
+			val num = when(turns)
+			{
+				0 -> num1
+				1 -> num1
+				2 -> num2
+				else -> num3
+			}
+			renderer.queueTexture(num, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = additionalCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
 		}
 		if (tile.isSelectedTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			renderer.queueTexture(target, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = additionalCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
 		}
 		else if (tile.isPreviewedTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 		else if (tile.isValidTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = validTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = validTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 		else if (tile.isTargetted)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
-			renderer.queueTexture(attack, tile.x.toFloat() + 0.5f, tile.y.toFloat() + 0.5f, SpaceSlot.BELOWENTITY.ordinal, colour = targetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = targetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
 		}
 	}
 

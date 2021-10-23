@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Bezier
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.PredictedAttack
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.CurveRenderable
@@ -17,7 +18,10 @@ import ktx.collections.set
 @DataClass(category = "Meta", colour = "199,18,117", name = "MarkAndWait")
 class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 {
-	val key = "waitForPlayer" + this.hashCode()
+	val turnsKey = "waitForPlayer" + this.hashCode()
+	val markersKey = turnsKey + "markers"
+	val predictionKey = turnsKey + "predictions"
+
 	var turns: Int = 1
 
 	override fun isDelayed(state: ActionSequenceState): Boolean
@@ -44,15 +48,13 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 	override fun isBlocked(state: ActionSequenceState): Boolean
 	{
-		val counter = state.data[key] as Int? ?: 0
+		val counter = state.data[turnsKey] as Int? ?: 0
 		return counter > 0
 	}
 
 	override fun enter(state: ActionSequenceState)
 	{
-		state.data[key] = turns
-
-		val markers = Array<EntityReference>()
+		state.data[turnsKey] = turns
 
 		val renderable = state.source.get()?.renderable()?.renderable
 		if (renderable is SkeletonRenderable)
@@ -60,11 +62,15 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			renderable.gotoState("Attack")
 		}
 
+		val markers = Array<EntityReference>()
+		val prediction = PredictedAttack(state.getRef(), turns)
+
 		// also mark the tiles
 		for (point in state.targets)
 		{
 			val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
-			tile.predictedAttacksFrom.add(state.getRef())
+
+			tile.predictedAttacksFrom.add(prediction)
 			tile.isTileDirty = true
 
 			val entity = EntityPool.obtain()
@@ -90,18 +96,19 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 			markers.add(entity.getRef())
 		}
 
-		state.data[key+"entities"] = markers
+		state.data[markersKey] = markers
+		state.data[predictionKey] = prediction
 	}
 
 	override fun exit(state: ActionSequenceState)
 	{
-		val counter = state.data[key] as Int? ?: 0
+		val counter = state.data[turnsKey] as Int? ?: 0
 
 		if (counter <= 0)
 		{
 			removeTileMark(state)
 
-			state.data.remove(key)
+			state.data.remove(turnsKey)
 		}
 	}
 
@@ -112,15 +119,16 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 	private fun removeTileMark(state: ActionSequenceState)
 	{
+		val prediction = state.data.get(predictionKey) as PredictedAttack
+
 		// remove tile mark
 		for (point in state.targets)
 		{
 			val tile = state.world.grid.tryGet(point, null) as? Tile ?: continue
-			tile.predictedAttacksFrom.remove(state.getRef())
-			tile.isTileDirty = true
+			tile.predictedAttacksFrom.remove(prediction)
 		}
 
-		val markers = state.data.get(key+"entities") as Array<EntityReference>
+		val markers = state.data.get(markersKey) as Array<EntityReference>
 		for (ref in markers)
 		{
 			ref.get()?.markForDeletion(0f)
@@ -135,9 +143,12 @@ class MarkAndWaitForPlayerAction : AbstractOneShotActionSequenceAction()
 
 	override fun preTurn(state: ActionSequenceState)
 	{
-		var counter = state.data[key] as Int
+		var counter = state.data[turnsKey] as Int
 		counter--
-		state.data[key] = counter
+		state.data[turnsKey] = counter
+
+		val prediction = state.data.get(predictionKey) as PredictedAttack
+		prediction.turns = counter
 	}
 
 	//region generated

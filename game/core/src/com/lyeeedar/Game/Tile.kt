@@ -23,7 +23,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	var isSelectedTarget = false
 	var isPreviewedTarget = false
 
-	val predictedAttacksFrom = ObjectSet<ActionSequenceReference>()
+	val predictedAttacksFrom = ObjectSet<PredictedAttack>()
 
 	private var lastRenderColData: Int = 0
 
@@ -158,4 +158,9 @@ class LerpedValue(val duration: Float)
 			}
 		}
 	}
+}
+
+class PredictedAttack(val sequence: ActionSequenceReference, var turns: Int)
+{
+
 }

@@ -38,15 +38,10 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					}
 				}
 
-				if (tile.isTargetted || tile.isValidTarget || tile.isSelectedTarget || tile.isPreviewedTarget)
-				{
-					tile.isTargetted = false
-					tile.isValidTarget = false
-					tile.isSelectedTarget = false
-					tile.isPreviewedTarget = false
-					tile.tileCol = Colour.WHITE
-					tile.isTileDirty = true
-				}
+				tile.isTargetted = false
+				tile.isValidTarget = false
+				tile.isSelectedTarget = false
+				tile.isPreviewedTarget = false
 
 				if (tile.predictedAttacksFrom.size > 0)
 				{
@@ -54,10 +49,9 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					while (itr.hasNext())
 					{
 						val attack = itr.next()
-						if (!attack.isValid())
+						if (!attack.sequence.isValid())
 						{
 							itr.remove()
-							tile.isTileDirty = true
 						}
 					}
 				}
@@ -74,7 +68,6 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					{
 						val tile = tile as Tile
 						tile.isTargetted = true
-						tile.isTileDirty = true
 					}
 				}
 
@@ -82,20 +75,17 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 				{
 					val tile = tile as Tile
 					tile.isValidTarget = true
-					tile.isTileDirty = true
 				}
 
 				for (tile in ability.selectedTargets)
 				{
 					val tile = tile as Tile
 					tile.isSelectedTarget = true
-					tile.isTileDirty = true
 
 					for (prediction in ability.predictTargets(world.player!!, world, tile))
 					{
 						val tile = world.grid.tryGet(prediction, null) as? Tile ?: continue
 						tile.isPreviewedTarget = true
-						tile.isTileDirty = true
 					}
 				}
 			}
