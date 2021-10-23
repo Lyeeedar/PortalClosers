@@ -53,12 +53,12 @@ class AbilityComponentData : AbstractComponentData()
 }
 
 fun Entity.abilities(): Sequence<Ability> = sequence<Ability> {
-	val weapon = equipment()
-	if (weapon != null)
+	val equip = equipment()
+	if (equip != null)
 	{
-		for (move in weapon.weapon.moves)
+		for (ability in equip.availableAbilities)
 		{
-			yield(move.getAsAbility())
+			yield(ability)
 		}
 	}
 

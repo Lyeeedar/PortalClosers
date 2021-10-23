@@ -43,6 +43,18 @@ class EquipmentComponent : DataComponent()
 		yield(healing.getAsAbility())
 	}
 
+	val availableAbilities = sequence<Ability> {
+		for (move in weapon.moves)
+		{
+			yield(move.getAsAbility())
+		}
+		for (ability in core.abilities)
+		{
+			yield(ability.getAsAbility())
+		}
+		yield(healing.getAsAbility())
+	}
+
 	fun updateAvailability(variables: ObjectFloatMap<String>, rng: LightRNG)
 	{
 		weapon.updateAvailability(variables, rng)
