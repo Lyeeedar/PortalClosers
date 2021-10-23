@@ -13,6 +13,7 @@ actual enum class ComponentType private constructor(val constructor: ()->Abstrac
 	Combo({ ComboComponent() }),
 	Dialogue({ DialogueComponent() }),
 	DirectionalSprite({ DirectionalSpriteComponent() }),
+	Equipment({ EquipmentComponent() }),
 	Event({ EventComponent() }),
 	EventHandler({ EventHandlerComponent() }),
 	Light({ LightComponent() }),
@@ -28,8 +29,7 @@ actual enum class ComponentType private constructor(val constructor: ()->Abstrac
 	Transient({ TransientComponent() }),
 	Variables({ VariablesComponent() }),
 	Vision({ VisionComponent() }),
-	Water({ WaterComponent() }),
-	Weapon({ WeaponComponent() });
+	Water({ WaterComponent() });
 
 	companion object
 	{
@@ -49,6 +49,7 @@ inline fun Entity.blood(): BloodComponent? = this.components[ComponentType.Blood
 inline fun Entity.combo(): ComboComponent? = this.components[ComponentType.Combo.ordinal] as ComboComponent?
 inline fun Entity.dialogue(): DialogueComponent? = this.components[ComponentType.Dialogue.ordinal] as DialogueComponent?
 inline fun Entity.directionalSprite(): DirectionalSpriteComponent? = this.components[ComponentType.DirectionalSprite.ordinal] as DirectionalSpriteComponent?
+inline fun Entity.equipment(): EquipmentComponent? = this.components[ComponentType.Equipment.ordinal] as EquipmentComponent?
 inline fun Entity.event(): EventComponent? = this.components[ComponentType.Event.ordinal] as EventComponent?
 inline fun Entity.eventHandler(): EventHandlerComponent? = this.components[ComponentType.EventHandler.ordinal] as EventHandlerComponent?
 inline fun Entity.light(): LightComponent? = this.components[ComponentType.Light.ordinal] as LightComponent?
@@ -65,5 +66,4 @@ inline fun Entity.transient(): TransientComponent? = this.components[ComponentTy
 inline fun Entity.variables(): VariablesComponent? = this.components[ComponentType.Variables.ordinal] as VariablesComponent?
 inline fun Entity.vision(): VisionComponent? = this.components[ComponentType.Vision.ordinal] as VisionComponent?
 inline fun Entity.water(): WaterComponent? = this.components[ComponentType.Water.ordinal] as WaterComponent?
-inline fun Entity.weapon(): WeaponComponent? = this.components[ComponentType.Weapon.ordinal] as WeaponComponent?
 

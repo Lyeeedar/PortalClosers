@@ -35,7 +35,8 @@ class Weapon : XmlDataClass()
 	@DataNeedsLocalisation(file = "Weapon")
 	lateinit var resourcesName: String
 
-	lateinit var renderable: Renderable
+	var leftHand: SkeletonRenderable? = null
+	var rightHand: SkeletonRenderable ? = null
 
 	var attackMove: WeaponMove? = null
 	var waitMove: WeaponMove? = null
@@ -58,6 +59,14 @@ class Weapon : XmlDataClass()
 
 	val handlers: FastEnumMap<EventType, Array<EventAndCondition>> = FastEnumMap(EventType::class.java)
 
+	fun updateAvailability(variables: ObjectFloatMap<String>, rng: LightRNG)
+	{
+		for (move in moves)
+		{
+			move.updateAvailability(variables, rng)
+		}
+	}
+
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
@@ -66,7 +75,8 @@ class Weapon : XmlDataClass()
 		weaponIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("WeaponIcon")!!)
 		resourcesIcon = AssetManager.loadLayeredSprite(xmlData.getChildByName("ResourcesIcon")!!)
 		resourcesName = xmlData.get("ResourcesName")
-		renderable = AssetManager.loadRenderable(xmlData.getChildByName("Renderable")!!)
+		leftHand = AssetManager.tryLoadSkeleton(xmlData.getChildByName("LeftHand"))
+		rightHand = AssetManager.tryLoadSkeleton(xmlData.getChildByName("RightHand"))
 		val attackMoveEl = xmlData.getChildByName("AttackMove")
 		if (attackMoveEl != null)
 		{

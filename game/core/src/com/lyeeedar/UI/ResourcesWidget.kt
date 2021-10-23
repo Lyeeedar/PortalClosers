@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.weapon
+import com.lyeeedar.Components.equipment
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Localisation
 
@@ -17,7 +17,7 @@ class ResourcesWidget(val entity: Entity) : Table()
 		background = NinePatchDrawable(NinePatch(AssetManager.tryLoadTextureRegion("Icons/Active"), 4, 4, 4, 4))
 
 		addHoldToolTip {
-			"The ${Localisation.getText(entity.weapon()!!.weapon.resourcesName, "Weapon")} you have available to use your ${Localisation.getText(entity.weapon()!!.weapon.name, "Weapon")} abilities."
+			"The ${Localisation.getText(entity.equipment()!!.weapon.resourcesName, "Weapon")} you have available to use your ${Localisation.getText(entity.equipment()!!.weapon.name, "Weapon")} abilities."
 		}
 	}
 
@@ -28,7 +28,7 @@ class ResourcesWidget(val entity: Entity) : Table()
 		val pad = 3f
 		val size = height - pad * 2f
 
-		val weapon = entity.weapon()!!
+		val weapon = entity.equipment()!!
 		for (i in 0 until weapon.weapon.maxResources)
 		{
 			val x = i * size + (i+1) * pad * 2f + this.x

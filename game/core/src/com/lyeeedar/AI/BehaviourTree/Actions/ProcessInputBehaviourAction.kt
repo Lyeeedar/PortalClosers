@@ -138,7 +138,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 		{
 			if (moveDir == Direction.CENTER)
 			{
-				val wait = entity.weapon()!!.weapon.waitMove?.getAsAbility()
+				val wait = entity.equipment()!!.weapon.waitMove?.getAsAbility()
 				if (wait != null && wait.isUsable())
 				{
 					task.tasks.add(TaskUseAbility.obtain().set(pos.tile!!, wait))
@@ -150,7 +150,7 @@ class ProcessInputBehaviourAction : AbstractBehaviourAction()
 			}
 			else
 			{
-				val attack = entity.weapon()!!.weapon.attackMove?.getAsAbility()
+				val attack = entity.equipment()!!.weapon.attackMove?.getAsAbility()
 				var enemyTile: Tile? = null
 				if (attack != null && attack.isUsable())
 				{

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.lyeeedar.Components.ability
-import com.lyeeedar.Components.weapon
+import com.lyeeedar.Components.equipment
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
 import ktx.scene2d.scene2d
@@ -44,9 +44,10 @@ class PlayerWidget(val world: World<*>) : Table()
 					cell.grow().padLeft(2f).padBottom(5f)
 					background = NinePatchDrawable(NinePatch(AssetManager.tryLoadTextureRegion("Icons/Active"), 4, 4, 4, 4))
 
+					val equip = player.equipment()!!
 					table { cell ->
 						cell.grow()
-						for (move in player.weapon()!!.weapon.moves)
+						for (move in equip.weapon.moves)
 						{
 							val moveWidget = MoveWidget(move, world)
 							add(moveWidget).growY().uniformX().padRight(1f)
@@ -56,14 +57,14 @@ class PlayerWidget(val world: World<*>) : Table()
 					row()
 					table { cell ->
 						cell.grow()
-						val ability = player.ability()
-						if (ability != null)
+
+						val widget = AbilityWidget(equip.healing.getAsAbility(), world)
+						add(widget).growY().uniformX().padRight(1f)
+
+						for (ab in equip.core.abilities)
 						{
-							for (ab in ability.abilities)
-							{
-								val widget = AbilityWidget(ab, world)
-								add(widget).growY().uniformX().padRight(1f)
-							}
+							val widget = AbilityWidget(ab.getAsAbility(), world)
+							add(widget).growY().uniformX().padRight(1f)
 						}
 						add(Table()).grow()
 					}

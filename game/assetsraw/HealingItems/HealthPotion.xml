@@ -1,0 +1,80 @@
+<HealingItem xmlns:meta="Editor">
+	<Name>06a6ee58-ca7e-4fdc-accf-befaa0246e80</Name>
+	<Description>8c4d3a2e-7261-42ec-b466-a12ab812caf4</Description>
+	<Icon meta:RefKey="RenderedLayeredSprite">
+		<ImageLayer>
+			<Path>GameIconsRaw/bottle/magic-potion</Path>
+			<Modifiers>
+				<Gradient>
+					<classID>Gradient</classID>
+					<Type>Internal</Type>
+					<Colours>
+						<GradientColour>
+							<Colour>59,230,10,255</Colour>
+						</GradientColour>
+						<GradientColour>
+							<Time>0.21961528</Time>
+							<Colour>10,230,119,255</Colour>
+						</GradientColour>
+						<GradientColour>
+							<Time>0.4054039</Time>
+							<Colour>175,222,161,255</Colour>
+						</GradientColour>
+						<GradientColour>
+							<Time>0.9782522</Time>
+							<Colour>81,82,78,255</Colour>
+						</GradientColour>
+					</Colours>
+				</Gradient>
+			</Modifiers>
+		</ImageLayer>
+	</Icon>
+	<AvailableCondition>1</AvailableCondition>
+	<Ability meta:RefKey="AbilityTemplate">
+		<Name>f9dcad18-731a-4a94-918e-4a8adc78c15a</Name>
+		<Description>53f523cf-a17a-4664-ac96-79f227afa8bc</Description>
+		<Icon meta:RefKey="RenderedLayeredSprite">
+			<ImageLayer>
+				<Path>GameIconsRaw/bottle/magic-potion</Path>
+				<Modifiers>
+					<Gradient>
+						<classID>Gradient</classID>
+						<Type>Internal</Type>
+						<Colours>
+							<GradientColour>
+								<Colour>59,230,10,255</Colour>
+							</GradientColour>
+							<GradientColour>
+								<Time>0.21961528</Time>
+								<Colour>10,230,119,255</Colour>
+							</GradientColour>
+							<GradientColour>
+								<Time>0.4054039</Time>
+								<Colour>175,222,161,255</Colour>
+							</GradientColour>
+							<GradientColour>
+								<Time>0.9782522</Time>
+								<Colour>81,82,78,255</Colour>
+							</GradientColour>
+						</Colours>
+					</Gradient>
+				</Modifiers>
+			</ImageLayer>
+		</Icon>
+		<AbilityTemplate meta:RefKey="AbilityData">
+			<ActionSequence meta:RefKey="ActionSequence">
+				<Actions>
+					<Timeline>
+						<Heal>
+							<classID>Heal</classID>
+							<Amount>source.max_hp * 0.6</Amount>
+						</Heal>
+					</Timeline>
+				</Actions>
+			</ActionSequence>
+			<Usages>3</Usages>
+			<TargetType>Self</TargetType>
+		</AbilityTemplate>
+	</Ability>
+	<classID>Healing</classID>
+</HealingItem>

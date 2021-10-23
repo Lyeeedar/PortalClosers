@@ -35,6 +35,14 @@ actual class XmlDataClassLoader
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboAction!")
 			}
 		}
+		fun loadUtilityItem(classID: String): com.lyeeedar.Game.Equipment.UtilityItem
+		{
+			return when (classID)
+			{
+				"Healing" -> com.lyeeedar.Game.Equipment.HealingItem()
+				else -> throw RuntimeException("Unknown classID '$classID' for UtilityItem!")
+			}
+		}
 		fun loadAbstractActionSequenceAction(classID: String): com.lyeeedar.ActionSequence.Actions.AbstractActionSequenceAction
 		{
 			return when (classID)
@@ -192,12 +200,12 @@ actual class XmlDataClassLoader
 				"AdditionalRenderable" -> com.lyeeedar.Components.AdditionalRenderableComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
 				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
+				"Equipment" -> com.lyeeedar.Components.EquipmentComponentData()
 				"Light" -> com.lyeeedar.Components.LightComponentData()
 				"Renderable" -> com.lyeeedar.Components.RenderableComponentData()
 				"Shadow" -> com.lyeeedar.Components.ShadowComponentData()
 				"Statistics" -> com.lyeeedar.Components.StatisticsComponentData()
 				"Water" -> com.lyeeedar.Components.WaterComponentData()
-				"Weapon" -> com.lyeeedar.Components.WeaponComponentData()
 				"Combo" -> com.lyeeedar.Components.ComboComponentData()
 				"BakedLight" -> com.lyeeedar.Components.BakedLightComponentData()
 				"EventHandler" -> com.lyeeedar.Components.EventHandlerComponentData()

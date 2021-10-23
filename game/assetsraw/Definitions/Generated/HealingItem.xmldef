@@ -1,0 +1,13 @@
+<Definitions Colour="104,226,114" Icon="Sprites/Oryx/uf_split/uf_items/potion_green.png" xmlns:meta="Editor">
+	<Definition Name="HealingItem" Nullable="False" TextColour="207,14,14" Extends="UtilityItem" meta:RefKey="Struct">
+		<Const Name="classID">Healing</Const>
+	</Definition>
+	<Definition Name="UtilityItem" Nullable="False" TextColour="204,76,204" meta:RefKey="StructDef">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="UtilityItem" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="UtilityItem" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Ability" Keys="AbilityTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="UtilityItemDefs" Keys="HealingItem" meta:RefKey="ReferenceDef" />
+</Definitions>

@@ -13,7 +13,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Dialogue,DirectionalSpriteComponent,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,ShadowComponent,Statistics,Water,Weapon" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Dialogue,DirectionalSpriteComponent,Equipment,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,ShadowComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -44,6 +44,12 @@
 	<Definition Name="DirectionalSpriteComponent" Nullable="False" TextColour="51,204,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">DirectionalSprite</Const>
 		<Data Name="DirectionalSprite" Keys="DirectionalSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="Equipment" Nullable="False" TextColour="204,98,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Equipment</Const>
+		<Data Name="Weapon" StripExtension="True" ResourceType="Weapon" SkipIfDefault="False" Default="" meta:RefKey="File" />
+		<Data Name="ElementalCore" StripExtension="True" ResourceType="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="File" />
+		<Data Name="HealingItem" StripExtension="True" ResourceType="HealingItem" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
 	<Definition Name="EventHandler" Nullable="False" TextColour="79,251,251" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">EventHandler</Const>
@@ -122,9 +128,5 @@
 		<Data Name="FlowChance" Type="Float" Default="0.3" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Depth" Type="Float" Default="0.3" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="FlowForce" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="Weapon" Nullable="False" TextColour="229,229,14" Extends="AbstractComponentData" meta:RefKey="StructDef">
-		<Const Name="classID">Weapon</Const>
-		<Data Name="Weapon" StripExtension="True" ResourceType="Weapon" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
 </Definitions>

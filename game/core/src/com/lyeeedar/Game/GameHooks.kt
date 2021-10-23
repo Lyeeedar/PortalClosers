@@ -34,7 +34,7 @@ fun World<Tile>.addSystems()
 	systems.add(WaterSystem(this))
 	systems.add(EventSystem(this))
 	systems.add(AbilitySystem(this))
-	systems.add(WeaponSystem(this))
+	systems.add(EquipmentSystem(this))
 
 	// render
 	systems.add(BloodSystem(this))

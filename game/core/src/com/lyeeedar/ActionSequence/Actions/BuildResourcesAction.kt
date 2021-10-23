@@ -1,7 +1,7 @@
 package com.lyeeedar.ActionSequence.Actions
 
 import com.lyeeedar.ActionSequence.ActionSequenceState
-import com.lyeeedar.Components.weapon
+import com.lyeeedar.Components.equipment
 import com.lyeeedar.Util.XmlData
 
 class BuildResourcesAction : AbstractOneShotActionSequenceAction()
@@ -10,7 +10,7 @@ class BuildResourcesAction : AbstractOneShotActionSequenceAction()
 
 	override fun enter(state: ActionSequenceState)
 	{
-		val weapon = state.source.get()?.weapon() ?: return
+		val weapon = state.source.get()?.equipment() ?: return
 		weapon.buildResource(count)
 	}
 

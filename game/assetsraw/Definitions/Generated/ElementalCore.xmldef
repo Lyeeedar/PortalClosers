@@ -1,0 +1,12 @@
+<Definitions Colour="204,186,114" Icon="Sprites/Oryx/uf_split/uf_items/gem_amethyst.png" xmlns:meta="Editor">
+	<Definition Name="ElementalCore" Nullable="False" TextColour="161,242,161" meta:RefKey="Struct">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Abilities" Keys="CoreAbility" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="CoreAbility" Nullable="False" TextColour="204,204,47" meta:RefKey="StructDef">
+		<Data Name="AvailableCondition" SkipIfDefault="False" Default="1" meta:RefKey="String" />
+		<Data Name="Ability" Keys="AbilityTemplate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+</Definitions>

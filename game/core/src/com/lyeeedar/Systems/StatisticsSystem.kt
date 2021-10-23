@@ -133,10 +133,10 @@ class StatisticsSystem(world: World<*>) : AbstractEntitySystem(world, world.getE
 			}
 		}
 
-		val weapon = entity.weapon()
-		if (weapon != null)
+		val equip = entity.equipment()
+		if (equip != null)
 		{
-			variables.variables["resources"] = weapon.resources.toFloat()
+			variables.variables["resources"] = equip.resources.toFloat()
 		}
 	}
 

@@ -7,7 +7,7 @@ class AbilitySystem(world: World<*>) : AbstractSystem(world)
 	private val abilities = world.getEntitiesFor().all(ComponentType.Ability).get()
 	private val activeAbilities = world.getEntitiesFor().all(ComponentType.ActiveAbility).get()
 	private val combos = world.getEntitiesFor().all(ComponentType.Combo).get()
-	private val weapons = world.getEntitiesFor().all(ComponentType.Weapon).get()
+	private val equipments = world.getEntitiesFor().all(ComponentType.Equipment).get()
 
 	override fun doUpdate(deltaTime: Float)
 	{
@@ -44,18 +44,14 @@ class AbilitySystem(world: World<*>) : AbstractSystem(world)
 				}
 			}
 		}
-		for (entity in weapons.entities)
+		for (entity in equipments.entities)
 		{
-			val weapon = entity.weapon() ?: continue
-			for (move in weapon.weapon.moves)
+			val equip = entity.equipment() ?: continue
+			for (ability in equip.allAbilities)
 			{
-				for (variant in move.variants)
+				if (ability.cooldown > 0)
 				{
-					val ability = variant.getAsAbility()
-					if (ability.cooldown > 0)
-					{
-						ability.cooldown--
-					}
+					ability.cooldown--
 				}
 			}
 		}
