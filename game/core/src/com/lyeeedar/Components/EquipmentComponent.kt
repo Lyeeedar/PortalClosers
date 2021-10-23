@@ -69,6 +69,8 @@ class EquipmentComponent : DataComponent()
 				attachToSlot(slot, renderable, right)
 			}
 		}
+
+		equipped = true
 	}
 
 	private fun attachToSlot(slot: Slot, skeletonRenderable: SkeletonRenderable, renderable: SkeletonRenderable)
