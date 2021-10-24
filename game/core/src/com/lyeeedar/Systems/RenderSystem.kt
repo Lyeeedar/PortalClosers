@@ -137,6 +137,17 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
 			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
+			val num = when(tile.previewTurns)
+			{
+				0 -> null
+				1 -> num1
+				2 -> num2
+				else -> num3
+			}
+			if (num != null)
+			{
+				renderer.queueTexture(num, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = previewTargetCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
+			}
 		}
 		else if (tile.isValidTarget)
 		{

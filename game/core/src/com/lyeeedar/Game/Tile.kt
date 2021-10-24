@@ -22,6 +22,7 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 	var isValidTarget = false
 	var isSelectedTarget = false
 	var isPreviewedTarget = false
+	var previewTurns = 0
 
 	val predictedAttacksFrom = ObjectSet<PredictedAttack>()
 

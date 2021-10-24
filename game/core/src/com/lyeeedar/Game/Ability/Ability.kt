@@ -2,6 +2,7 @@ package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
+import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.ActionSequence.Actions.BlockTurnAction
 import com.lyeeedar.ActionSequence.Actions.MarkAndWaitForPlayerAction
@@ -16,6 +17,7 @@ import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.random
 import com.lyeeedar.Util.round
 import com.lyeeedar.Util.set
+import squidpony.squidmath.IntSet
 import squidpony.squidmath.LightRNG
 
 class Ability(val data: AbilityData)
@@ -132,7 +134,7 @@ class Ability(val data: AbilityData)
 	}
 
 	private val predictionState = ActionSequenceState()
-	fun predictTargets(entity: Entity, world: World<*>, tile: Tile): Array<Point>
+	fun predictTargets(entity: Entity, world: World<*>, tile: Tile): Array<Pair<Point, Int>>
 	{
 		predictionState.reset()
 		predictionState.set(entity.getRef(), data.actionSequence, world, 0L)
@@ -140,15 +142,31 @@ class Ability(val data: AbilityData)
 		predictionState.targets.add(tile)
 		predictionState.facing = Direction.getCardinalDirection(tile, entity.position()!!.position)
 
+		val output = Array<Pair<Point, Int>>()
+		val added = IntSet()
+		var turns = 0
 		for (action in data.actionSequence.rawActions)
 		{
 			if (action.permutesTargets)
 			{
 				action.enter(predictionState)
 				action.exit(predictionState)
+
+				for (target in predictionState.targets)
+				{
+					if (!added.contains(target.hashCode()))
+					{
+						added.add(target.hashCode())
+						output.add(Pair(target, turns))
+					}
+				}
+			}
+			else if (action is BlockTurnAction)
+			{
+				turns++
 			}
 		}
 
-		return predictionState.targets
+		return output
 	}
 }

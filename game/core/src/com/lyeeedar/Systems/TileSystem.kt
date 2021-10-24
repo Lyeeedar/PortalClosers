@@ -84,8 +84,9 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 
 					for (prediction in ability.predictTargets(world.player!!, world, tile))
 					{
-						val tile = world.grid.tryGet(prediction, null) as? Tile ?: continue
+						val tile = world.grid.tryGet(prediction.first, null) as? Tile ?: continue
 						tile.isPreviewedTarget = true
+						tile.previewTurns = prediction.second
 					}
 				}
 			}
