@@ -177,5 +177,5 @@
 		<Data Name="StartAtSource" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Loop" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,ForEachTarget,MarkAndWait,Repeat,SetTargetDelay),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Heal,Knockback,Move,Pull,Stun),Meta(Block,Detach,ForEachTarget,MarkAndWait,Repeat,SetTargetDelay),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

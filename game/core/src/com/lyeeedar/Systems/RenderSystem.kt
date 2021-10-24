@@ -125,13 +125,13 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 				2 -> num2
 				else -> num3
 			}
-			renderer.queueTexture(num, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = additionalCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
+			renderer.queueTexture(num, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = predictedAttackCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
 		}
 		if (tile.isSelectedTarget)
 		{
 			val rotation = (tile.x + tile.y + 1).rem(3) * 90f
 			renderer.queueTexture(selection, tile.x.toFloat(), tile.y.toFloat(), slot, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, rotation = rotation, lit = false)
-			renderer.queueTexture(target, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = additionalCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
+			renderer.queueTexture(target, tile.x.toFloat(), tile.y.toFloat(), slot, 1, colour = selectedTargetCol, scaleX = 0.9f, scaleY = 0.9f, lit = false)
 		}
 		else if (tile.isPreviewedTarget)
 		{

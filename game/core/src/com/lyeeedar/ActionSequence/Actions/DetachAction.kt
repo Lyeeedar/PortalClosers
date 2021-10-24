@@ -4,8 +4,10 @@ import com.lyeeedar.ActionSequence.ActionSequenceState
 import com.lyeeedar.Components.ComponentType
 import com.lyeeedar.Components.EntityPool
 import com.lyeeedar.Components.actionSequence
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 
+@DataClass(category = "Meta")
 class DetachAction : AbstractOneShotActionSequenceAction()
 {
 	override fun enter(state: ActionSequenceState)

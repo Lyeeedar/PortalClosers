@@ -129,5 +129,208 @@
 				</AbilityTemplate>
 			</Ability>
 		</CoreAbility>
+		<CoreAbility>
+			<AvailableCondition>1</AvailableCondition>
+			<Ability meta:RefKey="AbilityTemplate">
+				<Name>c07c90b6-e256-427b-9208-09393462ee0c</Name>
+				<Description>bcdfdbb0-22c5-4d8d-b6d3-63921de5a63e</Description>
+				<Icon meta:RefKey="RenderedLayeredSprite">
+					<ImageLayer>
+						<Path>GameIconsRaw/fire/fire-spell-cast</Path>
+						<Modifiers>
+							<Gradient>
+								<classID>Gradient</classID>
+								<Type>Horizontal</Type>
+								<Colours>
+									<GradientColour>
+										<Time>0.0005896231</Time>
+										<Colour>166,48,20,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.14415243</Time>
+										<Colour>255,147,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.86694825</Time>
+										<Colour>255,220,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>1</Time>
+										<Colour>255,255,255,255</Colour>
+									</GradientColour>
+								</Colours>
+							</Gradient>
+						</Modifiers>
+					</ImageLayer>
+				</Icon>
+				<AbilityTemplate meta:RefKey="AbilityData">
+					<ActionSequence meta:RefKey="ActionSequence">
+						<Actions>
+							<Timeline>
+								<Permute>
+									<classID>Permute</classID>
+									<AppendTargets>true</AppendTargets>
+									<HitPoints>
+										<Line>###</Line>
+										<Line>.#.</Line>
+										<Line>.@.</Line>
+									</HitPoints>
+								</Permute>
+								<SetTargetDelay>
+									<Time>0.009836414</Time>
+									<classID>SetTargetDelay</classID>
+									<Mode>From_source</Mode>
+									<MaxDelay>0.3</MaxDelay>
+								</SetTargetDelay>
+								<OneShotFX>
+									<Time>0.020641796</Time>
+									<classID>SpawnOneShotParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>darkest/fire_surge</Name>
+									</Particle>
+									<AlignToVector>false</AlignToVector>
+									<SpawnBehaviour>Immediate</SpawnBehaviour>
+									<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+								</OneShotFX>
+								<Damage>
+									<Time>0.2240714</Time>
+									<classID>Damage</classID>
+									<Damage>source.damage * 1.1</Damage>
+								</Damage>
+							</Timeline>
+							<Timeline>
+								<ForEachTarget>
+									<Time>0.016810425</Time>
+									<Duration LockDuration="False">0.5369617</Duration>
+									<classID>ProcessTargetsIndividually</classID>
+								</ForEachTarget>
+							</Timeline>
+						</Actions>
+					</ActionSequence>
+					<Cooldown>5</Cooldown>
+					<TargetType>Tile</TargetType>
+				</AbilityTemplate>
+			</Ability>
+		</CoreAbility>
+		<CoreAbility>
+			<AvailableCondition>1</AvailableCondition>
+			<Ability meta:RefKey="AbilityTemplate">
+				<Name>b0fb0864-cf39-47e8-b42f-38604858dbfa</Name>
+				<Description>f4ee0808-e2e8-40ea-afcd-adb54d5d8d2e</Description>
+				<Icon meta:RefKey="RenderedLayeredSprite">
+					<ImageLayer>
+						<Path>GameIconsRaw/fire/fireflake</Path>
+						<Modifiers>
+							<Gradient>
+								<classID>Gradient</classID>
+								<Type>Radial</Type>
+								<Colours>
+									<GradientColour>
+										<Time>0.0005896231</Time>
+										<Colour>166,48,20,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.14415243</Time>
+										<Colour>255,147,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.86694825</Time>
+										<Colour>255,220,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>1</Time>
+										<Colour>255,255,255,255</Colour>
+									</GradientColour>
+								</Colours>
+							</Gradient>
+						</Modifiers>
+					</ImageLayer>
+				</Icon>
+				<AbilityTemplate meta:RefKey="AbilityData">
+					<ActionSequence meta:RefKey="ActionSequence">
+						<Actions>
+							<Timeline>
+								<Detach>
+									<classID>Detach</classID>
+								</Detach>
+								<Block>
+									<Time>0.0067833825</Time>
+									<classID>BlockTurn</classID>
+								</Block>
+								<Block>
+									<Time>0.012936228</Time>
+									<classID>BlockTurn</classID>
+								</Block>
+								<Permute>
+									<Time>0.019829016</Time>
+									<classID>Permute</classID>
+									<AppendTargets>true</AppendTargets>
+									<HitPoints>
+										<Line>###</Line>
+										<Line>#@#</Line>
+										<Line>###</Line>
+									</HitPoints>
+								</Permute>
+								<SetTargetDelay>
+									<Time>0.022492258</Time>
+									<classID>SetTargetDelay</classID>
+									<Mode>From_center</Mode>
+									<MaxDelay>0.2</MaxDelay>
+								</SetTargetDelay>
+								<OneShotFX>
+									<Time>0.039314236</Time>
+									<classID>SpawnOneShotParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>darkest/fire_surge</Name>
+									</Particle>
+									<AlignToVector>false</AlignToVector>
+									<SpawnBehaviour>Immediate</SpawnBehaviour>
+								</OneShotFX>
+								<Damage>
+									<Time>0.14804189</Time>
+									<classID>Damage</classID>
+									<Damage>source.damage * 2</Damage>
+								</Damage>
+								<SetSource>
+									<Time>0.0022826795</Time>
+									<classID>SetSourcePoint</classID>
+								</SetSource>
+							</Timeline>
+							<Timeline>
+								<TrackedFX>
+									<Duration LockDuration="False">0.010343432</Duration>
+									<classID>SpawnTrackedParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>Abilities/FireOrb</Name>
+										<Colour>255,255,255,172</Colour>
+										<Scale>0.5</Scale>
+									</Particle>
+									<AlignToVector>false</AlignToVector>
+								</TrackedFX>
+								<ForEachTarget>
+									<Time>0.02972586</Time>
+									<Duration LockDuration="False">0.57237715</Duration>
+									<classID>ProcessTargetsIndividually</classID>
+								</ForEachTarget>
+							</Timeline>
+							<Timeline>
+								<TrackedFX>
+									<Time>0.010343432</Time>
+									<Duration LockDuration="False">0.014191406</Duration>
+									<classID>SpawnTrackedParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>Abilities/FireOrb</Name>
+									</Particle>
+								</TrackedFX>
+							</Timeline>
+						</Actions>
+					</ActionSequence>
+					<Cooldown>10</Cooldown>
+					<Range>1,3</Range>
+					<TargetType>Tile</TargetType>
+					<CardinalDirectionsOnly>false</CardinalDirectionsOnly>
+				</AbilityTemplate>
+			</Ability>
+		</CoreAbility>
 	</Abilities>
 </ElementalCore>
