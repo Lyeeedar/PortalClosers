@@ -147,13 +147,6 @@ class Ability(val data: AbilityData)
 				action.enter(predictionState)
 				action.exit(predictionState)
 			}
-			else
-			{
-				when (action)
-				{
-					is BlockTurnAction, is MarkAndWaitForPlayerAction -> break
-				}
-			}
 		}
 
 		return predictionState.targets
