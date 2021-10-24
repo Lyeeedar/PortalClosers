@@ -138,7 +138,7 @@ class Ability(val data: AbilityData)
 		predictionState.set(entity.getRef(), data.actionSequence, world, 0L)
 		predictionState.targets.clear()
 		predictionState.targets.add(tile)
-		predictionState.facing = entity.position()!!.facing
+		predictionState.facing = Direction.getCardinalDirection(tile, entity.position()!!.position)
 
 		for (action in data.actionSequence.rawActions)
 		{

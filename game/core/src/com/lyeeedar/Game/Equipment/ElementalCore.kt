@@ -8,6 +8,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
+import java.util.*
 import squidpony.squidmath.LightRNG
 
 @DataFile(colour = "204,186,114", icon = "Sprites/Oryx/uf_split/uf_items/gem_amethyst.png")
@@ -21,6 +22,8 @@ class ElementalCore : XmlDataClass()
 
 	@DataLayeredSprite
 	lateinit var icon: Sprite
+
+	lateinit var element: Elements
 
 	val abilities: Array<CoreAbility> = Array()
 
@@ -38,6 +41,7 @@ class ElementalCore : XmlDataClass()
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
 		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
+		element = Elements.valueOf(xmlData.get("Element").toUpperCase(Locale.ENGLISH))
 		val abilitiesEl = xmlData.getChildByName("Abilities")
 		if (abilitiesEl != null)
 		{

@@ -10,6 +10,11 @@
 	<Definition Name="SetSource" Nullable="False" TextColour="247,176,78" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">SetSourcePoint</Const>
 	</Definition>
+	<Definition Name="SetTargetDelay" Nullable="False" TextColour="231,14,14" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
+		<Const Name="classID">SetTargetDelay</Const>
+		<Data Name="Mode" EnumValues="From_source,From_center,Random" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="MaxDelay" Type="Float" Default="0.5" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
 	<Definition Name="Stun" Nullable="False" TextColour="30,30,205" IsGlobal="True" Extends="AbstractOneShotActionSequenceAction" meta:RefKey="StructDef">
 		<Const Name="classID">Stun</Const>
 		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
@@ -172,5 +177,5 @@
 		<Data Name="StartAtSource" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 		<Data Name="Loop" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
 	</Definition>
-	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,ForEachTarget,MarkAndWait,Repeat),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractActionSequenceActionDefs" Keys="(AddBuff,BuildResources,ConsumeResources,Damage,Detach,Heal,Knockback,Move,Pull,Stun),Meta(Block,ForEachTarget,MarkAndWait,Repeat,SetTargetDelay),Permute(LockTargets,Permute,PickEnts,PickSelf,PickTiles,RestoreTargets,SetSource,StoreTargets),Renderable(Anim,AttachFX,FlightFX,OneShotFX,ReplaceSprite,ScreenJolt,ScreenShake,StrikeFX,TrackedFX)" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

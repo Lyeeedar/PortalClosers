@@ -49,6 +49,7 @@ actual class XmlDataClassLoader
 			{
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"SetSourcePoint" -> com.lyeeedar.ActionSequence.Actions.SetSourcePointAction()
+				"SetTargetDelay" -> com.lyeeedar.ActionSequence.Actions.SetTargetDelayAction()
 				"Stun" -> com.lyeeedar.ActionSequence.Actions.StunAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
 				"Pull" -> com.lyeeedar.ActionSequence.Actions.PullAction()
@@ -88,6 +89,7 @@ actual class XmlDataClassLoader
 				"Permute" -> com.lyeeedar.ActionSequence.Actions.PermuteAction()
 				"SelectSelf" -> com.lyeeedar.ActionSequence.Actions.SelectSelfAction()
 				"SetSourcePoint" -> com.lyeeedar.ActionSequence.Actions.SetSourcePointAction()
+				"SetTargetDelay" -> com.lyeeedar.ActionSequence.Actions.SetTargetDelayAction()
 				"Stun" -> com.lyeeedar.ActionSequence.Actions.StunAction()
 				"Pull" -> com.lyeeedar.ActionSequence.Actions.PullAction()
 				"Detach" -> com.lyeeedar.ActionSequence.Actions.DetachAction()

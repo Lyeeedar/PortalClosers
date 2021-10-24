@@ -82,6 +82,12 @@ class EquipmentComponent : DataComponent()
 			}
 		}
 
+		val stats = entity.statistics()
+		if (stats != null)
+		{
+			stats.elementalType = core.element
+		}
+
 		equipped = true
 	}
 

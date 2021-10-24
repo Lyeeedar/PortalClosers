@@ -27,25 +27,25 @@ enum class Elements constructor(vararg val baseElements: BaseElements)
 {
 	NONE,
 
-	FIRE(BaseElements.FIRE),
-	WATER(BaseElements.WATER),
-	WOOD(BaseElements.WOOD),
-	METAL(BaseElements.METAL),
-	AIR(BaseElements.AIR),
+	FIRE(BaseElements.FIRE), // ranged aoe attacks
+	WATER(BaseElements.WATER), // obstacles / roots
+	WOOD(BaseElements.WOOD), // healing + buffs
+	METAL(BaseElements.METAL), // melee attacks + buffs
+	AIR(BaseElements.AIR), // jumping / teleporting + ranged attacks
 
-	OIL(BaseElements.FIRE, BaseElements.WATER),
-	SLIME(BaseElements.FIRE, BaseElements.WOOD),
-	LAVA(BaseElements.FIRE, BaseElements.METAL),
-	LIGHTNING(BaseElements.FIRE, BaseElements.AIR),
+	OIL(BaseElements.FIRE, BaseElements.WATER), // setting things on fire
+	SLIME(BaseElements.FIRE, BaseElements.WOOD), // explosions
+	LAVA(BaseElements.FIRE, BaseElements.METAL), // ground based dots
+	LIGHTNING(BaseElements.FIRE, BaseElements.AIR), // chain damage
 
-	POISON(BaseElements.WATER, BaseElements.WOOD),
-	ACID(BaseElements.WATER, BaseElements.METAL),
-	PRISMATIC(BaseElements.WATER, BaseElements.AIR),
+	POISON(BaseElements.WATER, BaseElements.WOOD), // dots
+	ACID(BaseElements.WATER, BaseElements.METAL), // armour reduction
+	PRISMATIC(BaseElements.WATER, BaseElements.AIR), // illusions
 
-	NECROTIC(BaseElements.WOOD, BaseElements.METAL),
-	COSMIC(BaseElements.WOOD, BaseElements.AIR),
+	NECROTIC(BaseElements.WOOD, BaseElements.METAL), // raising dead
+	COSMIC(BaseElements.WOOD, BaseElements.AIR), // summoning
 
-	VORPAL(BaseElements.METAL, BaseElements.AIR);
+	VORPAL(BaseElements.METAL, BaseElements.AIR); // super crits
 
 	fun getDamageAgainst(target: Elements): Float
 	{

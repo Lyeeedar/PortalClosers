@@ -43,4 +43,91 @@
 			</Modifiers>
 		</ImageLayer>
 	</Icon>
+	<Element>Fire</Element>
+	<Abilities>
+		<CoreAbility>
+			<AvailableCondition>1</AvailableCondition>
+			<Ability meta:RefKey="AbilityTemplate">
+				<Name>a7e0cf01-111f-4773-a72a-496aea0f712f</Name>
+				<Description>175bd2d5-c531-4b86-8305-fe5c77fadcba</Description>
+				<Icon meta:RefKey="RenderedLayeredSprite">
+					<ImageLayer>
+						<Path>GameIconsRaw/fire/fire-wave</Path>
+						<Modifiers>
+							<Gradient>
+								<classID>Gradient</classID>
+								<Type>Horizontal</Type>
+								<Colours>
+									<GradientColour>
+										<Time>0.0005896231</Time>
+										<Colour>166,48,20,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.14415243</Time>
+										<Colour>255,147,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>0.86694825</Time>
+										<Colour>255,220,0,255</Colour>
+									</GradientColour>
+									<GradientColour>
+										<Time>1</Time>
+										<Colour>255,255,255,255</Colour>
+									</GradientColour>
+								</Colours>
+							</Gradient>
+						</Modifiers>
+					</ImageLayer>
+				</Icon>
+				<AbilityTemplate meta:RefKey="AbilityData">
+					<ActionSequence meta:RefKey="ActionSequence">
+						<Actions>
+							<Timeline>
+								<Permute>
+									<classID>Permute</classID>
+									<AppendTargets>true</AppendTargets>
+									<HitPoints>
+										<Line>#</Line>
+										<Line>#</Line>
+										<Line>#</Line>
+										<Line>@</Line>
+									</HitPoints>
+								</Permute>
+								<OneShotFX>
+									<Time>0.020641796</Time>
+									<classID>SpawnOneShotParticle</classID>
+									<Particle meta:RefKey="ParticleEffect">
+										<Name>darkest/fire_surge</Name>
+									</Particle>
+									<AlignToVector>false</AlignToVector>
+									<SpawnBehaviour>Immediate</SpawnBehaviour>
+									<MakeParticleNonBlocking>true</MakeParticleNonBlocking>
+								</OneShotFX>
+								<Damage>
+									<Time>0.2240714</Time>
+									<classID>Damage</classID>
+									<Damage>source.damage * 1.1</Damage>
+								</Damage>
+								<SetTargetDelay>
+									<Time>0.009836414</Time>
+									<classID>SetTargetDelay</classID>
+									<Mode>From_source</Mode>
+									<MaxDelay>0.3</MaxDelay>
+								</SetTargetDelay>
+							</Timeline>
+							<Timeline>
+								<ForEachTarget>
+									<Time>0.016810425</Time>
+									<Duration LockDuration="False">0.38366747</Duration>
+									<classID>ProcessTargetsIndividually</classID>
+								</ForEachTarget>
+							</Timeline>
+						</Actions>
+					</ActionSequence>
+					<Cooldown>5</Cooldown>
+					<TargetType>Tile</TargetType>
+				</AbilityTemplate>
+			</Ability>
+		</CoreAbility>
+	</Abilities>
 </ElementalCore>
