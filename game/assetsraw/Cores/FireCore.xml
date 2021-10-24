@@ -93,6 +93,12 @@
 										<Line>@</Line>
 									</HitPoints>
 								</Permute>
+								<SetTargetDelay>
+									<Time>0.009836414</Time>
+									<classID>SetTargetDelay</classID>
+									<Mode>From_source</Mode>
+									<MaxDelay>0.3</MaxDelay>
+								</SetTargetDelay>
 								<OneShotFX>
 									<Time>0.020641796</Time>
 									<classID>SpawnOneShotParticle</classID>
@@ -108,17 +114,11 @@
 									<classID>Damage</classID>
 									<Damage>source.damage * 1.1</Damage>
 								</Damage>
-								<SetTargetDelay>
-									<Time>0.009836414</Time>
-									<classID>SetTargetDelay</classID>
-									<Mode>From_source</Mode>
-									<MaxDelay>0.3</MaxDelay>
-								</SetTargetDelay>
 							</Timeline>
 							<Timeline>
 								<ForEachTarget>
 									<Time>0.016810425</Time>
-									<Duration LockDuration="False">0.38366747</Duration>
+									<Duration LockDuration="False">0.5369617</Duration>
 									<classID>ProcessTargetsIndividually</classID>
 								</ForEachTarget>
 							</Timeline>
