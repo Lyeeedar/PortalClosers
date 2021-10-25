@@ -6,22 +6,31 @@ import com.lyeeedar.Game.Ability.AbilityData
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Renderables.ShadowCastCache
 import com.lyeeedar.SpaceSlot
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.max
+import com.lyeeedar.UI.DebugConsole
+import com.lyeeedar.Util.*
+import com.sun.javafx.Utils.clamp
 
+fun World<*>.tileSystem() = systems.filterIsInstance<TileSystem>().firstOrNull()
 class TileSystem(world: World<*>) : AbstractSystem(world)
 {
+	val levelCompleteTileEffect = AssetManager.loadParticleEffect("darkest/level_complete_tile").getParticleEffect()
+	val levelCompleteFadeTime = 0.4f
+	val levelCompleteFadeLeadIn = 0.6f
+	val levelCompleteEndCol = Colour(0f, 0f, 0f, 0f).lockColour()
+	var completing = false
+	var completed = false
+
 	override fun doUpdate(deltaTime: Float)
 	{
 		doVisibility(deltaTime)
 
+		var allCompleted = true
 		for (x in 0 until world.grid.width)
 		{
 			for (y in 0 until world.grid.height)
 			{
 				val tile = world.grid[x, y] as Tile
+				allCompleted = allCompleted && tile.hasCompleted
 
 				if (tile.queuedActions.size > 0)
 				{
@@ -52,6 +61,36 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 						if (!attack.sequence.isValid())
 						{
 							itr.remove()
+						}
+					}
+				}
+
+				if (tile.levelCompleting)
+				{
+					if (tile.levelCompleteDelay > 0f)
+					{
+						tile.levelCompleteDelay -= deltaTime
+						if (tile.levelCompleteDelay <= 0f)
+						{
+							val effect = levelCompleteTileEffect.copy()
+							effect.isLit = false
+							val entity = effect.addToWorld(world, tile)
+							entity.renderable()!!.ignoreTileCol = true
+						}
+					}
+					else if (!tile.hasCompleted)
+					{
+						tile.levelCompleteTimer += deltaTime
+
+						val fadeTime = tile.levelCompleteTimer - levelCompleteFadeLeadIn
+
+						val alpha = clamp(fadeTime / levelCompleteFadeTime, 0f, 1f)
+						tile.tileCol.set(Colour.WHITE).lerp(levelCompleteEndCol, alpha)
+						tile.isTileDirty = true
+
+						if (tile.levelCompleteTimer >= levelCompleteFadeLeadIn + levelCompleteFadeTime)
+						{
+							tile.hasCompleted = true
 						}
 					}
 				}
@@ -90,6 +129,49 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 					}
 				}
 			}
+		}
+
+		if (allCompleted)
+		{
+			completed = true
+		}
+	}
+
+	fun completeLevel()
+	{
+		completing = true
+		completed = false
+
+		val playerPos = world.player!!.position()!!.position
+		val maxDist = world.grid.width / 2f
+		for (tile in world.grid)
+		{
+			val tile = tile as Tile
+			tile.levelCompleting = true
+			tile.levelCompleteTimer = 0f
+			tile.hasCompleted = false
+			tile.isSeen = true
+			tile.tileCol.set(Colour.WHITE)
+			tile.isTileDirty = true
+
+			val distAlpha = 1f - clamp(tile.dist(playerPos) / maxDist, 0f, 1f)
+			tile.levelCompleteDelay = distAlpha * 3f + Random.random(Random.sharedRandom, -0.5f, 0.5f)
+
+			for (er in tile.contents.values)
+			{
+				val entity = er.get() ?: continue
+				entity.statistics()?.renderStats = false
+			}
+		}
+	}
+
+	override fun registerDebugCommands(debugConsole: DebugConsole)
+	{
+		super.registerDebugCommands(debugConsole)
+
+		debugConsole.register("complete", "") { args, console ->
+			completeLevel()
+			true
 		}
 	}
 

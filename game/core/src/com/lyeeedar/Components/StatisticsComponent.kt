@@ -132,6 +132,7 @@ class StatisticsComponent : DataComponent()
 	val damageDealt: Float
 		get() = attackDamageDealt + abilityDamageDealt
 	var healingDone: Float = 0f
+	var renderStats = true
 	//endregion
 
 	override fun reset()
@@ -154,6 +155,7 @@ class StatisticsComponent : DataComponent()
 		totalHpLost = 0f
 		buffs.clear()
 		elementalType = Elements.NONE
+		renderStats = true
 	}
 
 	override fun initialiseFrom(data: AbstractComponentData)

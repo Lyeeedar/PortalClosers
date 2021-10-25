@@ -10,8 +10,7 @@ import com.lyeeedar.Game.addSystems
 import com.lyeeedar.MapGeneration.MapCreator
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.SkeletonRenderable
-import com.lyeeedar.Systems.World
-import com.lyeeedar.Systems.renderSystem
+import com.lyeeedar.Systems.*
 import com.lyeeedar.UI.PlayerWidget
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Random
@@ -20,8 +19,11 @@ import com.lyeeedar.Util.random
 class WorldScreen : AbstractScreen()
 {
 	lateinit var world: World<Tile>
+	lateinit var entities: EntitySignature
 
 	var timeMultiplier = 1f
+
+	lateinit var completionCallback: () -> Unit
 
 	override fun create()
 	{
@@ -62,6 +64,7 @@ class WorldScreen : AbstractScreen()
 		mainTable.row()
 		mainTable.add(PlayerWidget(world)).growX()
 
+		debugConsole.commands.clear()
 		debugConsole.register("time", "") { args, _ ->
 
 			timeMultiplier = args[0].toFloat()
@@ -71,10 +74,40 @@ class WorldScreen : AbstractScreen()
 
 		//drawFPS = false
 		world.ambientLight.set(0.8f, 0.8f, 0.8f, 1f)
+
+		for (system in world.systems)
+		{
+			system.registerDebugCommands(debugConsole)
+		}
+
+		entities = world.getEntitiesFor().all(ComponentType.Statistics).get()
 	}
 
 	override fun doRender(delta: Float)
 	{
 		world.update(delta * timeMultiplier)
+
+		val tileSystem = world.tileSystem()!!
+		if (tileSystem.completed)
+		{
+			world.free()
+			completionCallback.invoke()
+		}
+		else if (!tileSystem.completing)
+		{
+			var hasEnemies = false
+			for (entity in entities.entities)
+			{
+				if (entity.isEnemies(world.player!!))
+				{
+					hasEnemies = true
+					break
+				}
+			}
+			if (!hasEnemies)
+			{
+				tileSystem.completeLevel()
+			}
+		}
 	}
 }

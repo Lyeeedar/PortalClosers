@@ -30,6 +30,11 @@ class Tile(x: Int, y: Int) : AbstractTile(x, y)
 
 	private val cachedRenderCol: Colour = Colour.WHITE.copy()
 
+	var levelCompleting = false
+	var levelCompleteDelay = 0f
+	var levelCompleteTimer = 0f
+	var hasCompleted = false
+
 	fun updateVisibility(delta: Float, isSeen: Boolean, isVisible: Boolean)
 	{
 		this.isSeen = this.isSeen or isSeen

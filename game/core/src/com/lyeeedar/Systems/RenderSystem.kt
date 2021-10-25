@@ -41,7 +41,7 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		val pos = entity.position()!!
 		val renderable = entity.renderable()!!.renderable
 		val stats = entity.statistics()
-		if (stats != null)
+		if (stats != null && stats.renderStats)
 		{
 			val px = pos.position.xFloat + pos.offset.x
 			val py = pos.position.yFloat + pos.offset.y
@@ -112,6 +112,8 @@ open class RenderSystem(world: World<*>) : AbstractRenderSystem(world)
 		val slot = SpaceSlot.FLOOR.ordinal
 
 		val tile = tile as Tile
+		if (tile.levelCompleting) return
+
 		if (tile.predictedAttacksFrom.size > 0)
 		{
 			val turns = tile.predictedAttacksFrom.minOfOrNull { it.turns } ?: 1
