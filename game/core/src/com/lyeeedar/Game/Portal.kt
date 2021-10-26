@@ -5,9 +5,10 @@ import com.badlogic.gdx.utils.Array
 class Portal
 {
 	val encounters = Array<Array<Encounter>>()
-	var current: Encounter? = null
+	lateinit var current: Encounter
 
 	private val connectionMap = mapOf(
+			"1to2" to arrayOf(intArrayOf(0), intArrayOf(0,1)),
 			"2to3" to arrayOf(intArrayOf(0,1), intArrayOf(1,2)),
 			"3to4" to arrayOf(intArrayOf(0,1), intArrayOf(1,2), intArrayOf(2,3)),
 			"4to3" to arrayOf(intArrayOf(0), intArrayOf(0,1), intArrayOf(1,2), intArrayOf(2)),
@@ -16,6 +17,7 @@ class Portal
 
 	fun generate(length: Int)
 	{
+		encounters.add(generateEncounters(1))
 		encounters.add(generateEncounters(2))
 
 		var is3 = true
@@ -37,7 +39,9 @@ class Portal
 		encounters.add(generateEncounters(2))
 		encounters.add(generateEncounters(1))
 
-		for (encounter in encounters[0])
+		current = encounters[0][0]
+		current.state = Encounter.EncounterState.CURRENT
+		for (encounter in encounters[1])
 		{
 			encounter.state = Encounter.EncounterState.NEXT
 		}
@@ -78,15 +82,23 @@ class Portal
 
 	fun completeEncounter(encounter: Encounter)
 	{
+		current.state = Encounter.EncounterState.COMPLETED
 		current = encounter
-		encounter.state = Encounter.EncounterState.COMPLETED
+		encounter.state = Encounter.EncounterState.CURRENT
 		for (sibling in encounter.siblings)
 		{
 			sibling.state = Encounter.EncounterState.SKIPPED
 		}
-		for (next in encounter.next)
+		if (encounter.next.size > 0)
 		{
-			next.state = Encounter.EncounterState.NEXT
+			for (row in encounter.next[0].siblings)
+			{
+				row.state = Encounter.EncounterState.SKIPPED
+			}
+			for (next in encounter.next)
+			{
+				next.state = Encounter.EncounterState.NEXT
+			}
 		}
 	}
 }
@@ -98,10 +110,13 @@ class Encounter
 		COMPLETED,
 		SKIPPED,
 		NEXT,
-		FUTURE
+		FUTURE,
+		CURRENT
 	}
 	var state = EncounterState.FUTURE
 
 	val siblings = Array<Encounter>()
 	val next = Array<Encounter>()
+
+	var animatedDrop = false
 }
