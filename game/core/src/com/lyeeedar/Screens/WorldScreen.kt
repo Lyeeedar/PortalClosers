@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.esotericsoftware.spine.*
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Portal.CombatEncounter
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Game.addSystems
 import com.lyeeedar.MapGeneration.MapCreator
@@ -25,11 +26,42 @@ class WorldScreen : AbstractScreen()
 
 	lateinit var completionCallback: () -> Unit
 
+	lateinit var renderSystemWidget: RenderSystemWidget
+	lateinit var playerWidget: PlayerWidget
+
 	override fun create()
 	{
-		val player = EntityLoader.load("Entities/player")
-		player.statistics()!!.calculateStatistics(1)
 
+	}
+
+	var beenCreated = false
+	fun setupUI()
+	{
+		if (beenCreated)
+		{
+			renderSystemWidget.world = world
+			playerWidget.world = world
+			playerWidget.update()
+			return
+		}
+		beenCreated = true
+
+		val topBarTable = Table()
+
+		topBarTable.add(Table()).grow()
+		mainTable.add(topBarTable).growX()
+		mainTable.row()
+
+		renderSystemWidget = RenderSystemWidget(world)
+		playerWidget = PlayerWidget(world)
+
+		mainTable.add(renderSystemWidget).grow()
+		mainTable.row()
+		mainTable.add(playerWidget).growX()
+	}
+
+	fun createWorld(player: Entity, encounter: CombatEncounter)
+	{
 		world = MapCreator.generateWorld("Maps/test", player, 1, 4)
 		world.addSystems()
 
@@ -54,19 +86,8 @@ class WorldScreen : AbstractScreen()
 			world.addEntity(rat)
 		}
 
-		val topBarTable = Table()
-
-		topBarTable.add(Table()).grow()
-		mainTable.add(topBarTable).growX()
-		mainTable.row()
-
-		mainTable.add(RenderSystemWidget(world)).grow()
-		mainTable.row()
-		mainTable.add(PlayerWidget(world)).growX()
-
 		debugConsole.commands.clear()
 		debugConsole.register("time", "") { args, _ ->
-
 			timeMultiplier = args[0].toFloat()
 
 			true
@@ -81,6 +102,8 @@ class WorldScreen : AbstractScreen()
 		}
 
 		entities = world.getEntitiesFor().all(ComponentType.Statistics).get()
+
+		setupUI()
 	}
 
 	override fun doRender(delta: Float)
@@ -90,6 +113,8 @@ class WorldScreen : AbstractScreen()
 		val tileSystem = world.tileSystem()!!
 		if (tileSystem.completed)
 		{
+			world.removeEntity(world.player!!)
+			world.update(0f)
 			world.free()
 			completionCallback.invoke()
 		}

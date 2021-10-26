@@ -1,7 +1,6 @@
 package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
@@ -9,20 +8,16 @@ import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
-import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Components.EntityLoader
 import com.lyeeedar.Components.renderable
-import com.lyeeedar.Game.Encounter
-import com.lyeeedar.Game.Portal
+import com.lyeeedar.Game.Portal.AbstractEncounter
+import com.lyeeedar.Game.Portal.EncounterState
+import com.lyeeedar.Game.Portal.Portal
 import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
@@ -31,7 +26,6 @@ import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData.Companion.getXml
 import ktx.actors.alpha
 import ktx.actors.centerPosition
-import ktx.actors.then
 import ktx.scene2d.*
 import kotlin.random.Random
 
@@ -59,7 +53,7 @@ class PortalScreen : AbstractScreen()
 		scroll.setOverscroll(false, false)
 		mainTable.add(scroll).grow()
 		mainTable.row()
-		mainTable.add(PlayerPreviewWidget(EntityLoader.load("Entities/player"))).fillX()
+		mainTable.add(PlayerPreviewWidget(portal.player)).fillX()
 	}
 
 	override fun getStageBatch(): Batch
@@ -86,9 +80,9 @@ class PortalScreen : AbstractScreen()
 						stack { cell ->
 							cell.pad(1f)
 
-							val tint = if (encounter.state == Encounter.EncounterState.FUTURE) Color.LIGHT_GRAY else Color.WHITE
+							val tint = if (encounter.state == EncounterState.FUTURE) Color.LIGHT_GRAY else Color.WHITE
 
-							if (encounter.state != Encounter.EncounterState.SKIPPED)
+							if (encounter.state != EncounterState.SKIPPED)
 							{
 								add(SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile", drawActualSize = true), 48f, 48f).tint(tint))
 							}
@@ -105,33 +99,21 @@ class PortalScreen : AbstractScreen()
 								add(SpriteWidget(AssetManager.loadSprite("blank"), 48f, 48f))
 							}
 
-							if (encounter.state == Encounter.EncounterState.COMPLETED || encounter.state == Encounter.EncounterState.SKIPPED)
+							if (encounter.state == EncounterState.COMPLETED || encounter.state == EncounterState.SKIPPED)
 							{
 
 							}
-							else if (encounter.state == Encounter.EncounterState.CURRENT)
+							else if (encounter.state == EncounterState.CURRENT)
 							{
-								val entity = EntityLoader.load("Entities/player")
-								val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
+								val skeleton = portal.player.renderable()!!.renderable as SkeletonRenderable
 								playerTile = SkeletonWidget(skeleton, 48f, 48f)
 								add(playerTile)
 							}
 							else
 							{
-								var widget: Widget
-								if (encounter.type == Encounter.EncounterType.SIGIL_RECHARGE)
-								{
-									val renderable = AssetManager.loadSkeleton(getXml("Sprites/Skeletons/sigil_shrine/sigil_shrine.xml"))
-									widget = SkeletonWidget(renderable, 48f, 48f)
-								}
-								else
-								{
-									val entity = EntityLoader.load("Entities/elemental1")
-									val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
-									widget = SkeletonWidget(skeleton, 48f, 48f)
-								}
-
+								var widget: Widget = encounter.getMapWidget()
 								widget = widget.tint(tint) as Widget
+
 								addClickListener {
 									createEncounterTable(encounter)
 								}
@@ -155,7 +137,7 @@ class PortalScreen : AbstractScreen()
 		}
 	}
 
-	fun createEncounterTable(encounter: Encounter)
+	fun createEncounterTable(encounter: AbstractEncounter)
 	{
 		val greyout = createGreyoutTable(stage, opacity = 0.6f)
 
@@ -195,7 +177,7 @@ class PortalScreen : AbstractScreen()
 				add(encounter.createPreviewTable()).padBottom(15f)
 				row()
 
-				if (encounter.state == Encounter.EncounterState.NEXT)
+				if (encounter.state == EncounterState.NEXT)
 				{
 					table {
 						for (action in encounter.actions(this@PortalScreen))
@@ -220,7 +202,7 @@ class PortalScreen : AbstractScreen()
 		table.setPosition(table.x + scroll.x, table.y + scroll.y)
 		table.touchable = Touchable.enabled
 
-		val actionsOffset = if (encounter.state == Encounter.EncounterState.NEXT) 15f else 0f
+		val actionsOffset = if (encounter.state == EncounterState.NEXT) 15f else 0f
 
 		backgroundTable.width = table.width
 		backgroundTable.height = table.height-(25f + actionsOffset)

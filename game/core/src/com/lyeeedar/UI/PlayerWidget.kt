@@ -11,7 +11,7 @@ import com.lyeeedar.Util.AssetManager
 import ktx.scene2d.scene2d
 import ktx.scene2d.table
 
-class PlayerWidget(val world: World<*>) : Table()
+class PlayerWidget(var world: World<*>) : Table()
 {
 	val basePanel = AssetManager.tryLoadTextureRegion("GUI/BasePanel")
 
