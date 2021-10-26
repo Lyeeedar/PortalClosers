@@ -3,6 +3,7 @@
 	<Emitters>
 		<Emitter>
 			<Name>cloud</Name>
+			<Space>Local</Space>
 			<Width>1</Width>
 			<Height>1</Height>
 			<SizeMultiplier>
@@ -71,6 +72,7 @@
 		</Emitter>
 		<Emitter>
 			<Name>lightning</Name>
+			<Space>Local</Space>
 			<Shape>Circle</Shape>
 			<Width>6</Width>
 			<Height>6</Height>

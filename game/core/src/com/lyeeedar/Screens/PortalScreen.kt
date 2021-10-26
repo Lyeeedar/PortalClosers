@@ -5,9 +5,13 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Interpolation
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
@@ -18,6 +22,7 @@ import com.lyeeedar.Game.Portal
 import com.lyeeedar.Renderables.SkeletonRenderable
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Statics
 import ktx.actors.alpha
 import ktx.actors.then
@@ -27,18 +32,26 @@ import kotlin.random.Random
 class PortalScreen : AbstractScreen()
 {
 	val portal = Portal()
+	val clouds1 = CloudEffect(10f, 3f, 2f)
+	lateinit var scroll: ScrollPane
+	val pathTable = Table()
 
 	override fun create()
 	{
-		portal.generate(10)
+		portal.generate(20)
 		update()
 
-		val clouds1 = CloudEffect(10f, 3f, 5f)
 		clouds1.alpha = 0.6f
 		stage.addActor(clouds1)
 		clouds1.toBack()
 
 		backgroundColor.set(30f / 255f, 45f / 255f, 51f / 255f, 1f)
+
+		scroll = ScrollPane(pathTable, Statics.skin, "noBar")
+		scroll.setFlingTime(0.2f)
+		scroll.setScrollingDisabled(true, false)
+		scroll.setOverscroll(false, false)
+		mainTable.add(scroll).fill()
 	}
 
 	override fun getStageBatch(): Batch
@@ -48,9 +61,11 @@ class PortalScreen : AbstractScreen()
 
 	fun update()
 	{
-		mainTable.clear()
+		var playerTile: Widget? = null
 
 		val pathTable = scene2d.table {
+			padTop(400f)
+			padBottom(50f)
 			for (y in portal.encounters.size-1 downTo 0)
 			{
 				val row = portal.encounters[y]
@@ -88,7 +103,8 @@ class PortalScreen : AbstractScreen()
 							{
 								val entity = EntityLoader.load("Entities/player")
 								val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
-								add(SkeletonWidget(skeleton, 48f, 48f))
+								playerTile = SkeletonWidget(skeleton, 48f, 48f)
+								add(playerTile)
 							}
 							else if (encounter.state == Encounter.EncounterState.NEXT)
 							{
@@ -137,8 +153,18 @@ class PortalScreen : AbstractScreen()
 				row()
 			}
 		}
-		mainTable.add(pathTable).fill()
+
+		this.pathTable.clear()
+		this.pathTable.add(pathTable).fill()
+
+		Future.call(0.1f) {
+			val pos = playerTile!!.localToActorCoordinates(pathTable, Vector2())
+			scroll.scrollTo(0f, pos.y-stage.height*0.3f, playerTile!!.width, playerTile!!.height+stage.height*0.75f)
+		}
 	}
+
+	var activeLightning: Actor? = null
+	var lightningY = 0f
 
 	var lightningTimer = 0f
 	override fun doRender(delta: Float)
@@ -150,12 +176,21 @@ class PortalScreen : AbstractScreen()
 
 			val particle = AssetManager.loadParticleEffect("darkest/cloud_lightning")
 			particle.timeMultiplier = 0.9f + Random.nextFloat() * 0.2f
-			val particleEffectActor = ParticleEffectActor(particle.getParticleEffect())
+			val particleEffectActor = ParticleEffectActor(particle.getParticleEffect()) {
+				activeLightning = null
+			}
 			particleEffectActor.setPosition(stage.width * Random.nextFloat(), stage.height * Random.nextFloat())
+			lightningY = particleEffectActor.y
+
 			particleEffectActor.setSize(20f, 20f)
 			particleEffectActor.alpha = 0.5f + 0.5f * Random.nextFloat()
 			stage.addActor(particleEffectActor)
 			particleEffectActor.toBack()
+
+			activeLightning = particleEffectActor
 		}
+
+		activeLightning?.setPosition(activeLightning!!.x, lightningY+scroll.scrollY * 0.5f)
+		clouds1.setPosition(0f, scroll.scrollY * -0.5f)
 	}
 }
