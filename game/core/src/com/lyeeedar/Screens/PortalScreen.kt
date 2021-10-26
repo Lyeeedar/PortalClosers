@@ -51,7 +51,7 @@ class PortalScreen : AbstractScreen()
 		scroll.setFlingTime(0.2f)
 		scroll.setScrollingDisabled(true, false)
 		scroll.setOverscroll(false, false)
-		mainTable.add(scroll).fill()
+		mainTable.add(scroll).expand().fill()
 	}
 
 	override fun getStageBatch(): Batch
@@ -165,6 +165,7 @@ class PortalScreen : AbstractScreen()
 
 	var activeLightning: Actor? = null
 	var lightningY = 0f
+	var lightningScrollY = 0f
 
 	var lightningTimer = 0f
 	override fun doRender(delta: Float)
@@ -181,6 +182,7 @@ class PortalScreen : AbstractScreen()
 			}
 			particleEffectActor.setPosition(stage.width * Random.nextFloat(), stage.height * Random.nextFloat())
 			lightningY = particleEffectActor.y
+			lightningScrollY = scroll.scrollY
 
 			particleEffectActor.setSize(20f, 20f)
 			particleEffectActor.alpha = 0.5f + 0.5f * Random.nextFloat()
@@ -190,7 +192,7 @@ class PortalScreen : AbstractScreen()
 			activeLightning = particleEffectActor
 		}
 
-		activeLightning?.setPosition(activeLightning!!.x, lightningY+scroll.scrollY * 0.5f)
+		activeLightning?.setPosition(activeLightning!!.x, lightningY+(scroll.scrollY - lightningScrollY) * 0.5f)
 		clouds1.setPosition(0f, scroll.scrollY * -0.5f)
 	}
 }
