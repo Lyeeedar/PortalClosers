@@ -1,0 +1,67 @@
+<AnimationGraph meta:X="0" meta:Y="0" GUID="e73a0d22-b344-4411-a87c-297ba216b7c1" xmlns:meta="Editor">
+	<Root meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</Root>
+	<Actions>
+		<LightAnimGraph>
+			<Condition>1</Condition>
+			<Slot>torso_light</Slot>
+			<classID>LightAnimGraph</classID>
+			<Light meta:RefKey="Light">
+				<Colour>255,255,255,255</Colour>
+				<Brightness>0.6</Brightness>
+				<Range>1.3</Range>
+			</Light>
+		</LightAnimGraph>
+	</Actions>
+	<NodeMap>
+		<Loop meta:X="204" meta:Y="0" GUID="422aa6be-eb65-4481-bceb-71d8c6bf8669">
+			<Name>Idle</Name>
+			<Animation>idle</Animation>
+			<classID>Loop</classID>
+			<Transitions>
+				<Transition>
+					<Condition>1</Condition>
+					<Next meta:RefKey="Anim">d7ecf147-d894-43df-846d-00d7a56aa911</Next>
+				</Transition>
+				<Transition>
+					<Condition>1</Condition>
+					<Next meta:RefKey="Loop">d41fed01-1b1d-45a7-8bab-eefcd4af3690</Next>
+				</Transition>
+			</Transitions>
+			<RandomizeStart>true</RandomizeStart>
+		</Loop>
+		<Loop meta:X="735" meta:Y="480" GUID="02bf758c-2058-4c05-ac96-1ba4c9fe8286">
+			<Name>Attack</Name>
+			<Animation>attack_loop</Animation>
+			<classID>Loop</classID>
+			<Transitions>
+				<Transition>
+					<Condition>1</Condition>
+					<Next meta:RefKey="Anim">249753bf-09e1-4321-9d55-0a61e99e81a8</Next>
+				</Transition>
+			</Transitions>
+		</Loop>
+		<Anim meta:X="525" meta:Y="480" GUID="d7ecf147-d894-43df-846d-00d7a56aa911">
+			<Name>Attack Start</Name>
+			<Animation>attack_start</Animation>
+			<classID>Anim</classID>
+			<Next meta:RefKey="Loop">02bf758c-2058-4c05-ac96-1ba4c9fe8286</Next>
+		</Anim>
+		<Anim meta:X="975" meta:Y="465" GUID="249753bf-09e1-4321-9d55-0a61e99e81a8">
+			<Name>Attack End</Name>
+			<Animation>attack_end</Animation>
+			<classID>Anim</classID>
+			<Next meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</Next>
+		</Anim>
+		<Loop meta:X="255" meta:Y="-420" GUID="d41fed01-1b1d-45a7-8bab-eefcd4af3690">
+			<Name>Walk</Name>
+			<Animation>walk</Animation>
+			<classID>Loop</classID>
+			<Transitions>
+				<Transition>
+					<Condition>1</Condition>
+					<Next meta:RefKey="Loop">422aa6be-eb65-4481-bceb-71d8c6bf8669</Next>
+				</Transition>
+			</Transitions>
+		</Loop>
+	</NodeMap>
+</AnimationGraph>
