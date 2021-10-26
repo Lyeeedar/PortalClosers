@@ -5,13 +5,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.equipment
-import com.lyeeedar.Systems.World
 import com.lyeeedar.Util.AssetManager
 import ktx.scene2d.scene2d
 import ktx.scene2d.table
 
-class PlayerWidget(val world: World<*>) : Table()
+class PlayerPreviewWidget(val player: Entity) : Table()
 {
 	val basePanel = AssetManager.tryLoadTextureRegion("GUI/BasePanel")
 
@@ -24,12 +24,6 @@ class PlayerWidget(val world: World<*>) : Table()
 	{
 		clear()
 
-		val player = world.player!!
-
-		add(LaunchButton()).expandX().height(24f).center()
-		row()
-		add(Table()).growX().height(24f).pad(1f) // will be buffs
-		row()
 		add(scene2d.table {
 			background = TextureRegionDrawable(basePanel)
 
@@ -48,7 +42,7 @@ class PlayerWidget(val world: World<*>) : Table()
 						cell.grow()
 						for (move in equip.weapon.moves)
 						{
-							val moveWidget = MoveWidget(move, world)
+							val moveWidget = MovePreviewWidget(move)
 							add(moveWidget).growY().uniformX().padRight(1f)
 						}
 						add(Table()).grow()
@@ -57,12 +51,12 @@ class PlayerWidget(val world: World<*>) : Table()
 					table { cell ->
 						cell.grow()
 
-						val widget = AbilityWidget(equip.sigil.getAsAbility(), world)
+						val widget = AbilityPreviewWidget(equip.sigil.getAsAbility())
 						add(widget).growY().uniformX().padRight(1f)
 
 						for (ab in equip.core.abilities)
 						{
-							val widget = AbilityWidget(ab.getAsAbility(), world)
+							val widget = AbilityPreviewWidget(ab.getAsAbility())
 							add(widget).growY().uniformX().padRight(1f)
 						}
 						add(Table()).grow()

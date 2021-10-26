@@ -1,4 +1,4 @@
-<HealingItem xmlns:meta="Editor">
+<Sigil xmlns:meta="Editor">
 	<Name>06a6ee58-ca7e-4fdc-accf-befaa0246e80</Name>
 	<Description>8c4d3a2e-7261-42ec-b466-a12ab812caf4</Description>
 	<Icon meta:RefKey="RenderedLayeredSprite">
@@ -35,7 +35,7 @@
 		<Description>53f523cf-a17a-4664-ac96-79f227afa8bc</Description>
 		<Icon meta:RefKey="RenderedLayeredSprite">
 			<ImageLayer>
-				<Path>GameIconsRaw/bottle/magic-potion</Path>
+				<Path>GameIconsRaw/energy/aura</Path>
 				<Modifiers>
 					<Gradient>
 						<classID>Gradient</classID>
@@ -76,5 +76,5 @@
 			<TargetType>Self</TargetType>
 		</AbilityTemplate>
 	</Ability>
-	<classID>Healing</classID>
-</HealingItem>
+	<classID></classID>
+</Sigil>

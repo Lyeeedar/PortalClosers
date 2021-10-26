@@ -11,8 +11,8 @@ import com.lyeeedar.Util.XmlDataClassLoader
 import squidpony.squidmath.LightRNG
 
 @DataFile(colour = "104,226,114", icon = "Sprites/Oryx/uf_split/uf_items/potion_green.png")
-@DataClass(name = "HealingItem")
-class HealingItem : UtilityItem()
+@DataClass(name = "Sigil")
+class Sigil : UtilityItem()
 {
 
 	//region generated
@@ -20,7 +20,7 @@ class HealingItem : UtilityItem()
 	{
 		super.load(xmlData)
 	}
-	override val classID: String = "Healing"
+	override val classID: String = ""
 	//endregion
 }
 

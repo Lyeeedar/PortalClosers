@@ -1,4 +1,4 @@
 <Localisation Language="en" xmlns:meta="Editor">
-	<Text ID="8c4d3a2e-7261-42ec-b466-a12ab812caf4" Context="HealthPotion.HealingItem.Description">A potion that heals you. Can be used up to 3 times.</Text>
-	<Text ID="06a6ee58-ca7e-4fdc-accf-befaa0246e80" Context="HealthPotion.HealingItem.Name">Health Potion</Text>
+	<Text ID="8c4d3a2e-7261-42ec-b466-a12ab812caf4" Context="HealingSigil.Sigil.Description">A sigil that heals you. Can be used up to 3 times.</Text>
+	<Text ID="06a6ee58-ca7e-4fdc-accf-befaa0246e80" Context="HealingSigil.Sigil.Name">Healing Sigil</Text>
 </Localisation>

@@ -45,13 +45,15 @@ class PortalScreen : AbstractScreen()
 		stage.addActor(clouds1)
 		clouds1.toBack()
 
-		backgroundColor.set(30f / 255f, 45f / 255f, 51f / 255f, 1f)
+		backgroundColor.set(15f / 255f, 23f / 255f, 25f / 255f, 1f)
 
 		scroll = ScrollPane(pathTable, Statics.skin, "noBar")
 		scroll.setFlingTime(0.2f)
 		scroll.setScrollingDisabled(true, false)
 		scroll.setOverscroll(false, false)
 		mainTable.add(scroll).expand().fill()
+		mainTable.row()
+		mainTable.add(PlayerPreviewWidget(EntityLoader.load("Entities/player"))).fillX()
 	}
 
 	override fun getStageBatch(): Batch
@@ -64,8 +66,8 @@ class PortalScreen : AbstractScreen()
 		var playerTile: Widget? = null
 
 		val pathTable = scene2d.table {
-			padTop(400f)
-			padBottom(50f)
+			add(Table()).height(300f)
+			row()
 			for (y in portal.encounters.size-1 downTo 0)
 			{
 				val row = portal.encounters[y]
@@ -152,6 +154,7 @@ class PortalScreen : AbstractScreen()
 				}
 				row()
 			}
+			add(Table()).height(50f)
 		}
 
 		this.pathTable.clear()
@@ -184,7 +187,8 @@ class PortalScreen : AbstractScreen()
 			lightningY = particleEffectActor.y
 			lightningScrollY = scroll.scrollY
 
-			particleEffectActor.setSize(20f, 20f)
+			val size = 15f + 15f * Random.nextFloat()
+			particleEffectActor.setSize(size, size)
 			particleEffectActor.alpha = 0.5f + 0.5f * Random.nextFloat()
 			stage.addActor(particleEffectActor)
 			particleEffectActor.toBack()

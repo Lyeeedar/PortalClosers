@@ -19,8 +19,8 @@
 	<Text ID="f4ee0808-e2e8-40ea-afcd-adb54d5d8d2e" Context="FireCore.ElementalCore.Abilities.[2] CoreAbility.CoreAbility.Ability (AbilityTemplate).Description">Summon an orb that detonates after [CYAN]2[] turns, blasting everything within [CYAN]1[] tile of it for [GOLD]200%[] damage.</Text>
 	<Text ID="b0fb0864-cf39-47e8-b42f-38604858dbfa" Context="FireCore.ElementalCore.Abilities.[2] CoreAbility.CoreAbility.Ability (AbilityTemplate).Name">Immolation Orb</Text>
 	<Text ID="b326732e-d8d0-46a7-a163-7cdb3977b2aa" Context="FireCore.ElementalCore.Abilities.[2] CoreAbility.CoreAbility.Ability (AbilityTemplate).Name"></Text>
-	<Text ID="53f523cf-a17a-4664-ac96-79f227afa8bc" Context="HealthPotion.HealingItem.Ability (AbilityTemplate).Description">Heal yourself for [GREEN]60%[] of your max health.</Text>
-	<Text ID="f9dcad18-731a-4a94-918e-4a8adc78c15a" Context="HealthPotion.HealingItem.Ability (AbilityTemplate).Name">Health Potion</Text>
+	<Text ID="53f523cf-a17a-4664-ac96-79f227afa8bc" Context="HealingSigil.Sigil.Ability (AbilityTemplate).Description">Heal yourself for [GREEN]60%[] of your max health.</Text>
+	<Text ID="f9dcad18-731a-4a94-918e-4a8adc78c15a" Context="HealingSigil.Sigil.Ability (AbilityTemplate).Name">Healing Sigil</Text>
 	<Text ID="34303f13-6305-43ab-b45d-551826127694" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Description">Heal yourself for [GREEN]60%[] of your max health.</Text>
 	<Text ID="40bb3bdf-1ddf-4040-8f1d-622f3d0383fd" Context="player.Entity.Components.[6] Ability.Ability.Abilities.[0] AbilityTemplate.AbilityTemplate.Name">Healing Potion</Text>
 </Localisation>

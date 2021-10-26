@@ -39,7 +39,7 @@
 			<classID>Equipment</classID>
 			<Weapon>Weapons/BlastAxe</Weapon>
 			<ElementalCore>Cores/FireCore</ElementalCore>
-			<HealingItem>HealingItems/HealthPotion</HealingItem>
+			<Sigil>Sigils/HealingSigil</Sigil>
 		</Equipment>
 	</Components>
 </Entity>

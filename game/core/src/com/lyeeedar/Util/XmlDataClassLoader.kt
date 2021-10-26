@@ -39,7 +39,7 @@ actual class XmlDataClassLoader
 		{
 			return when (classID)
 			{
-				"Healing" -> com.lyeeedar.Game.Equipment.HealingItem()
+				"" -> com.lyeeedar.Game.Equipment.Sigil()
 				else -> throw RuntimeException("Unknown classID '$classID' for UtilityItem!")
 			}
 		}

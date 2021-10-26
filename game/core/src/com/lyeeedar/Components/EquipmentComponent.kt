@@ -2,15 +2,12 @@ package com.lyeeedar.Components
 
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.esotericsoftware.spine.Slot
-import com.esotericsoftware.spine.attachments.RegionAttachment
 import com.esotericsoftware.spine.attachments.SkeletonAttachment
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.ElementalCore
-import com.lyeeedar.Game.Equipment.HealingItem
+import com.lyeeedar.Game.Equipment.Sigil
 import com.lyeeedar.Game.Weapon
-import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.SkeletonRenderable
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.DataFileReference
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
@@ -22,7 +19,7 @@ class EquipmentComponent : DataComponent()
 
 	lateinit var weapon: Weapon
 	lateinit var core: ElementalCore
-	lateinit var healing: HealingItem
+	lateinit var sigil: Sigil
 
 	var resources: Int = 0
 
@@ -40,7 +37,7 @@ class EquipmentComponent : DataComponent()
 		{
 			yield(ability.getAsAbility())
 		}
-		yield(healing.getAsAbility())
+		yield(sigil.getAsAbility())
 	}
 
 	val availableAbilities = sequence<Ability> {
@@ -52,14 +49,14 @@ class EquipmentComponent : DataComponent()
 		{
 			yield(ability.getAsAbility())
 		}
-		yield(healing.getAsAbility())
+		yield(sigil.getAsAbility())
 	}
 
 	fun updateAvailability(variables: ObjectFloatMap<String>, rng: LightRNG)
 	{
 		weapon.updateAvailability(variables, rng)
 		core.updateAvailability(variables, rng)
-		healing.updateAvailability(variables, rng)
+		sigil.updateAvailability(variables, rng)
 	}
 
 	fun equip(entity: Entity)
@@ -112,8 +109,8 @@ class EquipmentComponent : DataComponent()
 		core = ElementalCore()
 		core.load(getXml(data.elementalCore))
 
-		healing = HealingItem()
-		healing.load(getXml(data.healingItem))
+		sigil = Sigil()
+		sigil.load(getXml(data.sigil))
 	}
 
 	override fun reset()
@@ -149,8 +146,8 @@ class EquipmentComponentData : AbstractComponentData()
 	@DataFileReference(resourceType = "ElementalCore")
 	lateinit var elementalCore: String
 
-	@DataFileReference(resourceType = "HealingItem")
-	lateinit var healingItem: String
+	@DataFileReference(resourceType = "Sigil")
+	lateinit var sigil: String
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -158,7 +155,7 @@ class EquipmentComponentData : AbstractComponentData()
 		super.load(xmlData)
 		weapon = xmlData.get("Weapon")
 		elementalCore = xmlData.get("ElementalCore")
-		healingItem = xmlData.get("HealingItem")
+		sigil = xmlData.get("Sigil")
 	}
 	override val classID: String = "Equipment"
 	//endregion

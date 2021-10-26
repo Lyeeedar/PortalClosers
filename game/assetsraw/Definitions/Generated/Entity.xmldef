@@ -49,7 +49,7 @@
 		<Const Name="classID">Equipment</Const>
 		<Data Name="Weapon" StripExtension="True" ResourceType="Weapon" SkipIfDefault="False" Default="" meta:RefKey="File" />
 		<Data Name="ElementalCore" StripExtension="True" ResourceType="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="File" />
-		<Data Name="HealingItem" StripExtension="True" ResourceType="HealingItem" SkipIfDefault="False" Default="" meta:RefKey="File" />
+		<Data Name="Sigil" StripExtension="True" ResourceType="Sigil" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
 	<Definition Name="EventHandler" Nullable="False" TextColour="79,251,251" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">EventHandler</Const>
