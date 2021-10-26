@@ -1,5 +1,5 @@
-<Definitions   xmlns:meta="Editor">
-	<Definition Name="Skeleton" Nullable="False" TextColour="228,228,155" IsGlobal="True" meta:RefKey="StructDef">
+<Definitions Colour="170,170,150" Icon="Sprites/Oryx/uf_split/uf_heroes/skeleton_1.png" xmlns:meta="Editor">
+	<Definition Name="Skeleton" Nullable="False" TextColour="228,228,155" meta:RefKey="Struct">
 		<Data Name="Path" StripExtension="True" AllowedFileTypes="json" SkipIfDefault="False" Default="" meta:RefKey="File" />
 		<Data Name="AnimGraph" StripExtension="True" ResourceType="AnimationGraph" SkipIfDefault="False" Default="" meta:RefKey="File" />
 		<Data Name="Scale" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />

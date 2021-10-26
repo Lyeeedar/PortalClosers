@@ -3,16 +3,20 @@ package com.lyeeedar.Screens
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Components.EntityLoader
@@ -24,7 +28,9 @@ import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.XmlData.Companion.getXml
 import ktx.actors.alpha
+import ktx.actors.centerPosition
 import ktx.actors.then
 import ktx.scene2d.*
 import kotlin.random.Random
@@ -51,7 +57,7 @@ class PortalScreen : AbstractScreen()
 		scroll.setFlingTime(0.2f)
 		scroll.setScrollingDisabled(true, false)
 		scroll.setOverscroll(false, false)
-		mainTable.add(scroll).expand().fill()
+		mainTable.add(scroll).grow()
 		mainTable.row()
 		mainTable.add(PlayerPreviewWidget(EntityLoader.load("Entities/player"))).fillX()
 	}
@@ -80,13 +86,15 @@ class PortalScreen : AbstractScreen()
 						stack { cell ->
 							cell.pad(1f)
 
+							val tint = if (encounter.state == Encounter.EncounterState.FUTURE) Color.LIGHT_GRAY else Color.WHITE
+
 							if (encounter.state != Encounter.EncounterState.SKIPPED)
 							{
-								add(SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile", drawActualSize = true), 48f, 48f))
+								add(SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile", drawActualSize = true), 48f, 48f).tint(tint))
 							}
 							else if (!encounter.animatedDrop)
 							{
-								val widget = SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile", drawActualSize = true), 48f, 48f)
+								val widget = SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile", drawActualSize = true), 48f, 48f).tint(tint)
 								widget.addAction(parallel(moveBy(0f, -200f, 0.5f, Interpolation.pow2Out), fadeOut(0.5f, Interpolation.pow2Out)))
 								add(widget)
 
@@ -97,7 +105,7 @@ class PortalScreen : AbstractScreen()
 								add(SpriteWidget(AssetManager.loadSprite("blank"), 48f, 48f))
 							}
 
-							if (encounter.state == Encounter.EncounterState.COMPLETED)
+							if (encounter.state == Encounter.EncounterState.COMPLETED || encounter.state == Encounter.EncounterState.SKIPPED)
 							{
 
 							}
@@ -108,46 +116,27 @@ class PortalScreen : AbstractScreen()
 								playerTile = SkeletonWidget(skeleton, 48f, 48f)
 								add(playerTile)
 							}
-							else if (encounter.state == Encounter.EncounterState.NEXT)
-							{
-								val entity = EntityLoader.load("Entities/elemental1")
-								val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
-								add(SkeletonWidget(skeleton, 48f, 48f))
-								addClickListener {
-										var fullscreenTable: Table? = null
-										fullscreenTable = FullscreenTable.createCloseable(scene2d.table {
-											label("Fight some stuff", skin = Statics.skin)
-											row()
-											add(SpriteWidget(AssetManager.loadSprite("darkest/terrain/portal_tile"), 48f, 48f))
-											row()
-											textButton("Fight", skin = Statics.skin) {
-												this.addClickListener {
-//													val world = Statics.game.getTypedScreen<WorldScreen>()!!
-//													world.baseCreate()
-//													world.create()
-//													world.completionCallback = {
-//														Statics.game.switchScreen(ScreenEnum.PORTAL)
-//														portal.completeEncounter(encounter)
-//														update()
-//													}
-//													Statics.game.switchScreen(ScreenEnum.WORLD)
-													portal.completeEncounter(encounter)
-													update()
-													fullscreenTable?.remove()
-												}
-											}
-										})
-									}
-							}
-							else if (encounter.state == Encounter.EncounterState.FUTURE)
-							{
-								val entity = EntityLoader.load("Entities/elemental1")
-								val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
-								add(SkeletonWidget(skeleton, 48f, 48f).tint(Color.LIGHT_GRAY))
-							}
 							else
 							{
+								var widget: Widget
+								if (encounter.type == Encounter.EncounterType.SIGIL_RECHARGE)
+								{
+									val renderable = AssetManager.loadSkeleton(getXml("Sprites/Skeletons/sigil_shrine/sigil_shrine.xml"))
+									widget = SkeletonWidget(renderable, 48f, 48f)
+								}
+								else
+								{
+									val entity = EntityLoader.load("Entities/elemental1")
+									val skeleton = entity.renderable()!!.renderable as SkeletonRenderable
+									widget = SkeletonWidget(skeleton, 48f, 48f)
+								}
 
+								widget = widget.tint(tint) as Widget
+								addClickListener {
+									createEncounterTable(encounter)
+								}
+
+								add(widget)
 							}
 						}
 					}
@@ -164,6 +153,90 @@ class PortalScreen : AbstractScreen()
 			val pos = playerTile!!.localToActorCoordinates(pathTable, Vector2())
 			scroll.scrollTo(0f, pos.y-stage.height*0.3f, playerTile!!.width, playerTile!!.height+stage.height*0.75f)
 		}
+	}
+
+	fun createEncounterTable(encounter: Encounter)
+	{
+		val greyout = createGreyoutTable(stage, opacity = 0.6f)
+
+		val backgroundTable = scene2d.table {
+			table { cell ->
+				cell.grow()
+				background = NinePatchDrawable(NinePatch(AssetManager.tryLoadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
+			}
+		}
+
+		val table = scene2d.table {
+			val root = it
+
+			table { cell ->
+				cell.width(this@PortalScreen.stage.width * 0.8f)
+				table {
+					background = NinePatchDrawable(
+						NinePatch(
+							AssetManager.tryLoadTextureRegion("Sprites/GUI/background.png"),
+							24,
+							24,
+							24,
+							24
+						         )
+					                              )
+					label(encounter.title, skin = Statics.skin)
+				}
+				row()
+
+				label(encounter.description, skin = Statics.skin) { cell ->
+					cell.growX()
+					cell.pad(10f)
+					wrap = true
+				}
+				row()
+
+				add(encounter.createPreviewTable()).padBottom(15f)
+				row()
+
+				if (encounter.state == Encounter.EncounterState.NEXT)
+				{
+					table {
+						for (action in encounter.actions(this@PortalScreen))
+						{
+							textButton(action.first, skin = Statics.skin) { cell ->
+								cell.pad(2f)
+								this.addClickListener {
+									action.second.invoke()
+									root.remove()
+									greyout.remove()
+									backgroundTable.remove()
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		table.pack()
+		table.centerPosition(scroll.width, scroll.height)
+		table.setPosition(table.x + scroll.x, table.y + scroll.y)
+		table.touchable = Touchable.enabled
+
+		val actionsOffset = if (encounter.state == Encounter.EncounterState.NEXT) 15f else 0f
+
+		backgroundTable.width = table.width
+		backgroundTable.height = table.height-(25f + actionsOffset)
+		backgroundTable.x = table.x
+		backgroundTable.y = table.y+actionsOffset
+		backgroundTable.touchable = Touchable.enabled
+		backgroundTable.layout()
+
+		greyout.addClickListener {
+			table.remove()
+			backgroundTable.remove()
+			greyout.remove()
+		}
+
+		Statics.stage.addActor(backgroundTable)
+		Statics.stage.addActor(table)
 	}
 
 	var activeLightning: Actor? = null

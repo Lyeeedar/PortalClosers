@@ -1,6 +1,12 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Screens.PortalScreen
+import com.lyeeedar.Screens.ScreenEnum
+import com.lyeeedar.Screens.WorldScreen
+import com.lyeeedar.Util.Statics
+import kotlin.random.Random
 
 class Portal
 {
@@ -105,6 +111,17 @@ class Portal
 
 class Encounter
 {
+	enum class EncounterType
+	{
+		BATTLE,
+		ELITE_BATTLE,
+		BOSS_BATTLE,
+
+		SIGIL_RECHARGE,
+		STAT_REBALANCE,
+		EVENT
+	}
+
 	enum class EncounterState
 	{
 		COMPLETED,
@@ -114,9 +131,68 @@ class Encounter
 		CURRENT
 	}
 	var state = EncounterState.FUTURE
+	var type = if (Random.nextFloat() < 0.1f) EncounterType.SIGIL_RECHARGE else EncounterType.BATTLE
 
 	val siblings = Array<Encounter>()
 	val next = Array<Encounter>()
 
 	var animatedDrop = false
+
+	val title: String
+		get()
+		{
+			return when(type)
+			{
+				EncounterType.SIGIL_RECHARGE -> "Sigil Shrine"
+				else -> "Battle"
+			}
+		}
+
+	val description: String
+		get()
+		{
+			return when (type)
+			{
+				EncounterType.SIGIL_RECHARGE -> "Your sigil resonates with the energy radiating from this shrine. Absorb it to recharge your sigil usages, or take its power to enhance your body."
+				else -> "A pack of enemies fills the area, you are going to need to slay them to progress."
+			}
+		}
+
+	fun createPreviewTable(): Table
+	{
+		return Table()
+	}
+
+	fun actions(screen: PortalScreen): Sequence<Pair<String, ()->Unit>>
+	{
+		return sequence {
+			if (type == EncounterType.SIGIL_RECHARGE)
+			{
+				yield(Pair("Recharge Sigil") {
+					screen.portal.completeEncounter(this@Encounter)
+					screen.update()
+				})
+				yield(Pair("Absorb Energy") {
+					screen.portal.completeEncounter(this@Encounter)
+					screen.update()
+				})
+			}
+			else
+			{
+				yield(Pair("Fight") {
+//					val world = Statics.game.getTypedScreen<WorldScreen>()!!
+//					world.baseCreate()
+//					world.create()
+//					world.completionCallback = {
+//						Statics.game.switchScreen(ScreenEnum.PORTAL)
+//						screen.portal.completeEncounter(this@Encounter)
+//						screen.update()
+//					}
+//					Statics.game.switchScreen(ScreenEnum.WORLD)
+					screen.portal.completeEncounter(this@Encounter)
+					screen.update()
+				})
+			}
+		}
+	}
 }
