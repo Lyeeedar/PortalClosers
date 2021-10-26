@@ -1,0 +1,12 @@
+<Definitions Colour="200,250,150" Icon="Sprites/Oryx/uf_split/uf_terrain/wall_hedge_7.png" xmlns:meta="Editor">
+	<Definition Name="Biome" Nullable="False" TextColour="64,216,64" meta:RefKey="Struct">
+		<Data Name="Element" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Poison,Acid,Prismatic,Necrotic,Cosmic,Vorpal" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="NormalPacks" Keys="Pack" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="Pack" Nullable="False" TextColour="204,16,204" meta:RefKey="StructDef">
+		<Data Name="Creatures" Keys="PackCreature" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="PackCreature" Nullable="False" TextColour="94,204,204" meta:RefKey="StructDef">
+		<Data Name="Entity" StripExtension="True" ResourceType="Entity" SkipIfDefault="False" Default="" meta:RefKey="File" />
+	</Definition>
+</Definitions>

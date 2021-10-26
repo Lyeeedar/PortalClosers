@@ -11,6 +11,7 @@ actual enum class ComponentType private constructor(val constructor: ()->Abstrac
 	BakedLight({ BakedLightComponent() }),
 	Blood({ BloodComponent() }),
 	Combo({ ComboComponent() }),
+	Description({ DescriptionComponent() }),
 	Dialogue({ DialogueComponent() }),
 	DirectionalSprite({ DirectionalSpriteComponent() }),
 	Equipment({ EquipmentComponent() }),
@@ -47,6 +48,7 @@ inline fun Entity.archetypeBuilder(): ArchetypeBuilderComponent? = this.componen
 inline fun Entity.bakedLight(): BakedLightComponent? = this.components[ComponentType.BakedLight.ordinal] as BakedLightComponent?
 inline fun Entity.blood(): BloodComponent? = this.components[ComponentType.Blood.ordinal] as BloodComponent?
 inline fun Entity.combo(): ComboComponent? = this.components[ComponentType.Combo.ordinal] as ComboComponent?
+inline fun Entity.description(): DescriptionComponent? = this.components[ComponentType.Description.ordinal] as DescriptionComponent?
 inline fun Entity.dialogue(): DialogueComponent? = this.components[ComponentType.Dialogue.ordinal] as DialogueComponent?
 inline fun Entity.directionalSprite(): DirectionalSpriteComponent? = this.components[ComponentType.DirectionalSprite.ordinal] as DirectionalSpriteComponent?
 inline fun Entity.equipment(): EquipmentComponent? = this.components[ComponentType.Equipment.ordinal] as EquipmentComponent?

@@ -200,6 +200,7 @@ actual class XmlDataClassLoader
 				"AI" -> com.lyeeedar.Components.AIComponentData()
 				"Ability" -> com.lyeeedar.Components.AbilityComponentData()
 				"AdditionalRenderable" -> com.lyeeedar.Components.AdditionalRenderableComponentData()
+				"Description" -> com.lyeeedar.Components.DescriptionComponentData()
 				"Dialogue" -> com.lyeeedar.Components.DialogueComponentData()
 				"DirectionalSprite" -> com.lyeeedar.Components.DirectionalSpriteComponentData()
 				"Equipment" -> com.lyeeedar.Components.EquipmentComponentData()

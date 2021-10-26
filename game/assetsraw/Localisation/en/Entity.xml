@@ -1,0 +1,6 @@
+<Localisation Language="en" xmlns:meta="Editor">
+	<Text ID="ca6e827c-05ec-4cd8-9565-ebe15f60255c" Context="elemental1.Entity.Components.[5] Description.Description.Description">A hulking mass of elemental power, coalesced around a metal elemental core. Slow but hardy, its attacks can crush anything that stands before it.</Text>
+	<Text ID="5e3115ae-a71d-4d97-9a9d-f509f15824f1" Context="elemental1.Entity.Components.[5] Description.Description.Name">Elemental Hulk (Metal)</Text>
+	<Text ID="a2a29d43-110a-4e8e-90f7-c1491e43fcf2" Context="elemental2.Entity.Components.[5] Description.Description.Description">A collective of small metal elemental cores, pooling their power to form a fast and deadly creature. It attacks relentlessly, ruthlessly slaughtering all before it.</Text>
+	<Text ID="068aa167-2a6c-4425-b349-3e286401b16a" Context="elemental2.Entity.Components.[5] Description.Description.Name">Elemental Ravager (Metal)</Text>
+</Localisation>

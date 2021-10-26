@@ -30,5 +30,10 @@
 			<classID>Combo</classID>
 			<ComboPath>Entities/elemental2_combo</ComboPath>
 		</Combo>
+		<Description>
+			<classID>Description</classID>
+			<Name>068aa167-2a6c-4425-b349-3e286401b16a</Name>
+			<Description>a2a29d43-110a-4e8e-90f7-c1491e43fcf2</Description>
+		</Description>
 	</Components>
 </Entity>

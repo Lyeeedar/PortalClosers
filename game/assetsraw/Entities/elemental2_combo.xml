@@ -53,18 +53,20 @@
 		<ComboStep meta:X="600" meta:Y="0" GUID="27bbcdf6-28f3-44fd-9655-041bd0c04012">
 			<Next>
 				<ComboStepConnection>
-					<Next meta:RefKey="ComboStep">7272a82d-c07c-46c9-b128-55a4716dbdcc</Next>
+					<Next meta:RefKey="ComboStep">5680c150-15b9-4e66-aef6-d097259bc947</Next>
 				</ComboStepConnection>
 			</Next>
 			<ActionName>Attack</ActionName>
 			<Chance>1</Chance>
+			<CanStop>true</CanStop>
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
 		</ComboStep>
-		<ComboStep meta:X="765" meta:Y="0" GUID="7272a82d-c07c-46c9-b128-55a4716dbdcc">
-			<ActionName>Wait</ActionName>
+		<ComboStep meta:X="765" meta:Y="0" GUID="5680c150-15b9-4e66-aef6-d097259bc947">
+			<ActionName>Attack</ActionName>
 			<Chance>1</Chance>
 			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
 		</ComboStep>
 	</NodeMap>
 </Combo>

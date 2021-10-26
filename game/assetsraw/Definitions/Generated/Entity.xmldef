@@ -13,7 +13,7 @@
 	</Definition>
 	<Definition Name="AbstractComponentData" Nullable="False" TextColour="204,27,204" meta:RefKey="StructDef">
 	</Definition>
-	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Dialogue,DirectionalSpriteComponent,Equipment,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,ShadowComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
+	<Definition Name="AbstractComponentDataDefs" Keys="AI,Ability,AdditionalRenderable,BakedLight,Combo,Description,Dialogue,DirectionalSpriteComponent,Equipment,EventHandler,LightComponent,MetaRegion,Name,Position,RenderableComponent,ShadowComponent,Statistics,Water" meta:RefKey="ReferenceDef" />
 	<Definition Name="AdditionalRenderable" Nullable="False" TextColour="204,136,204" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">AdditionalRenderable</Const>
 		<Data Name="Below" meta:RefKey="Collection">
@@ -30,6 +30,11 @@
 	<Definition Name="Combo" Nullable="False" TextColour="232,118,232" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Combo</Const>
 		<Data Name="ComboPath" StripExtension="True" ResourceType="Combo" SkipIfDefault="False" Default="" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="Description" Nullable="False" TextColour="24,247,24" Extends="AbstractComponentData" meta:RefKey="StructDef">
+		<Const Name="classID">Description</Const>
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Entity" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Entity" SkipIfDefault="False" Default="" meta:RefKey="String" />
 	</Definition>
 	<Definition Name="Dialogue" Nullable="False" TextColour="10,204,10" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Dialogue</Const>
