@@ -260,7 +260,7 @@ class MeleeAttackComboAction : AbstractComboAction()
 		}
 		else
 		{
-			damage.time = 0.1f + (effect?.particle?.getParticleEffect()?.blockinglifetime ?: 0f)
+			damage.time = 0.1f + (effect?.particle?.getParticleEffect()?.blockinglifetime ?: 0f) * 0.7f
 
 			data.actionSequence.rawActions.add(mark)
 			data.actionSequence.rawActions.add(bump)

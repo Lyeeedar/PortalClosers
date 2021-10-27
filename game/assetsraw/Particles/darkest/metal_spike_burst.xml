@@ -60,6 +60,7 @@
 		</Emitter>
 		<Emitter>
 			<Name>Spikes</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Width>1</Width>
 			<Height>1</Height>
 			<SizeMultiplier>
