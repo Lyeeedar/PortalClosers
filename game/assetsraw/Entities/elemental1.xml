@@ -23,6 +23,7 @@
 				<Path>Sprites/Skeletons/elemental1/elemental1</Path>
 				<AnimGraph>Entities/elemental1_anim</AnimGraph>
 				<Colour>255,255,255,255</Colour>
+				<Skin>metal</Skin>
 			</Renderable>
 		</RenderableComponent>
 		<Combo>

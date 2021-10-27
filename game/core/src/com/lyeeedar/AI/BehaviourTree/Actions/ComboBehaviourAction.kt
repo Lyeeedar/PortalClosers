@@ -54,7 +54,7 @@ class ComboBehaviourAction : AbstractBehaviourAction()
 
 					if (tile == null) continue
 
-					task.tasks.add(TaskCombo.obtain().set(tile, step))
+					task.tasks.add(TaskCombo.obtain().set(tile, step, storedTarget))
 
 					return EvaluationState.RUNNING
 				}
@@ -75,7 +75,7 @@ class ComboBehaviourAction : AbstractBehaviourAction()
 			comboHolder.currentStep = step
 			comboHolder.lastTarget = tile
 
-			task.tasks.add(TaskCombo.obtain().set(tile, step))
+			task.tasks.add(TaskCombo.obtain().set(tile, step, storedTarget))
 
 			return EvaluationState.RUNNING
 		}

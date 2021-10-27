@@ -58,7 +58,6 @@
 			</Next>
 			<ActionName>Attack</ActionName>
 			<Chance>1</Chance>
-			<CanStop>true</CanStop>
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
 		</ComboStep>

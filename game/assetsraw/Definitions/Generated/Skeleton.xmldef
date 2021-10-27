@@ -4,5 +4,6 @@
 		<Data Name="AnimGraph" StripExtension="True" ResourceType="AnimationGraph" SkipIfDefault="False" Default="" meta:RefKey="File" />
 		<Data Name="Scale" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Colour" SkipIfDefault="false" meta:RefKey="Colour" />
+		<Data Name="Skin" SkipIfDefault="True" Default="default" meta:RefKey="String" />
 	</Definition>
 </Definitions>

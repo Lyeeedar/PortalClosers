@@ -11,21 +11,20 @@ import com.lyeeedar.Systems.EventSystem
 import com.lyeeedar.Systems.EventType
 import com.lyeeedar.Systems.World
 import com.lyeeedar.Systems.eventSystem
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Localisation
-import com.lyeeedar.Util.Random
+import com.lyeeedar.Util.*
 import squidpony.squidmath.LightRNG
 
 class TaskCombo(): AbstractTask()
 {
 	lateinit var comboStep: ComboStep
 	lateinit var tile: Tile
+	var storedTarget: Point? = null
 
-	fun set(tile: Tile, comboStep: ComboStep): TaskCombo
+	fun set(tile: Tile, comboStep: ComboStep, storedTarget: Point?): TaskCombo
 	{
 		this.tile = tile
 		this.comboStep = comboStep
+		this.storedTarget = storedTarget
 
 		return this
 	}
@@ -39,7 +38,7 @@ class TaskCombo(): AbstractTask()
 		comboHolder.currentStep = comboStep
 		comboHolder.lastTarget = tile
 
-		val direction = Direction.getCardinalDirection(tile, pos.position)
+		var direction = Direction.getCardinalDirection(tile, pos.position)
 		pos.facing = direction
 
 		if (!comboStep.canTurn)
@@ -82,6 +81,14 @@ class TaskCombo(): AbstractTask()
 				if (didMove)
 				{
 					tile = world.grid.getClamped(tile, direction) as Tile
+
+					if (comboHolder.fixedDirection == null)
+					{
+						tile = comboStep.getAsAbility().getValidTile(e, world, world.rng, storedTarget, comboHolder.fixedDirection) ?: tile
+						direction = Direction.getCardinalDirection(tile, pos.position)
+						pos.facing = direction
+					}
+
 					delay = 0.4f
 				}
 			}
