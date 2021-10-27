@@ -209,7 +209,7 @@ class AbilityComboAction : AbstractComboAction()
 
 class MeleeAttackComboAction : AbstractComboAction()
 {
-	lateinit var strike: StrikeTileAction
+	var strike: StrikeTileAction? = null
 	var effect: SpawnOneShotParticleAction? = null
 	lateinit var damage: DamageAction
 	var permute: PermuteAction? = null
@@ -236,24 +236,42 @@ class MeleeAttackComboAction : AbstractComboAction()
 			data.actionSequence.rawActions.add(permute)
 		}
 
-		strike.time = 0.02f
-		damage.time = 0.04f
-
-		val individually = ProcessTargetsIndividuallyAction()
-		individually.time = 0.03f
-		individually.duration = strike.duration + 0.1f
-
-		data.actionSequence.rawActions.add(mark)
-		data.actionSequence.rawActions.add(bump)
-		data.actionSequence.rawActions.add(strike)
-		data.actionSequence.rawActions.add(individually)
-		if (effect != null)
+		val strike = strike
+		if (strike != null)
 		{
-			effect!!.time = 0.04f
-			data.actionSequence.rawActions.add(effect)
+			strike.time = 0.02f
+			damage.time = 0.04f
+
+			val individually = ProcessTargetsIndividuallyAction()
+			individually.time = 0.03f
+			individually.duration = strike.duration + 0.1f
+
+			data.actionSequence.rawActions.add(mark)
+			data.actionSequence.rawActions.add(bump)
+			data.actionSequence.rawActions.add(strike)
+			data.actionSequence.rawActions.add(individually)
+			if (effect != null)
+			{
+				effect!!.time = 0.04f
+				data.actionSequence.rawActions.add(effect)
+			}
+			data.actionSequence.rawActions.add(damage)
+			data.actionSequence.afterLoad()
 		}
-		data.actionSequence.rawActions.add(damage)
-		data.actionSequence.afterLoad()
+		else
+		{
+			damage.time = 0.1f + (effect?.particle?.getParticleEffect()?.blockinglifetime ?: 0f)
+
+			data.actionSequence.rawActions.add(mark)
+			data.actionSequence.rawActions.add(bump)
+			if (effect != null)
+			{
+				effect!!.time = 0.04f
+				data.actionSequence.rawActions.add(effect)
+			}
+			data.actionSequence.rawActions.add(damage)
+			data.actionSequence.afterLoad()
+		}
 
 		return data
 	}
@@ -262,9 +280,12 @@ class MeleeAttackComboAction : AbstractComboAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		val strikeEl = xmlData.getChildByName("Strike")!!
-		strike = StrikeTileAction()
-		strike.load(strikeEl)
+		val strikeEl = xmlData.getChildByName("Strike")
+		if (strikeEl != null)
+		{
+			strike = StrikeTileAction()
+			strike!!.load(strikeEl)
+		}
 		val effectEl = xmlData.getChildByName("Effect")
 		if (effectEl != null)
 		{

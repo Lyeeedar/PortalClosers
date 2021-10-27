@@ -12,16 +12,14 @@
 		<MeleeAttack>
 			<Name>Attack</Name>
 			<classID>MeleeAttack</classID>
-			<Strike meta:RefKey="StrikeFX">
-				<Duration LockDuration="False">0.2</Duration>
-				<classID>StrikeTile</classID>
-				<Texture meta:RefKey="TextureRegion">
-					<File>darkest/particle/slash</File>
-				</Texture>
-				<Colour>255,255,255,255</Colour>
-				<StartAtSource>false</StartAtSource>
-				<Loop>false</Loop>
-			</Strike>
+			<Effect meta:RefKey="OneShotFX">
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>darkest/metal_spike_burst</Name>
+				</Particle>
+				<AlignToVector>false</AlignToVector>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</Effect>
 			<Damage meta:RefKey="Damage">
 				<classID>Damage</classID>
 				<Damage>source.damage</Damage>

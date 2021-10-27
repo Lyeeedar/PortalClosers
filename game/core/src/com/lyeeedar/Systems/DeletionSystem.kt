@@ -69,8 +69,11 @@ class DeletionSystem(world: World<*>) : AbstractEntitySystem(world, world.getEnt
 		val activeAbility = entity.actionSequence()
 		activeAbility?.actionSequence?.cancel(activeAbility.actionSequenceState)
 
-		world.removeEntity(entity)
-		entity.free()
+		if (entity != world.player)
+		{
+			world.removeEntity(entity)
+			entity.free()
+		}
 	}
 
 	override fun onTurnEntity(entity: Entity)

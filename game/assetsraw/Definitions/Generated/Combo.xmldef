@@ -25,7 +25,7 @@
 	</Definition>
 	<Definition Name="MeleeAttack" Nullable="False" TextColour="204,9,9" Extends="AbstractComboAction" meta:RefKey="StructDef">
 		<Const Name="classID">MeleeAttack</Const>
-		<Data Name="Strike" Keys="StrikeFX" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Strike" Keys="StrikeFX" meta:RefKey="Reference" />
 		<Data Name="Effect" Keys="OneShotFX" meta:RefKey="Reference" />
 		<Data Name="Damage" Keys="Damage" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Permute" Keys="Permute" meta:RefKey="Reference" />

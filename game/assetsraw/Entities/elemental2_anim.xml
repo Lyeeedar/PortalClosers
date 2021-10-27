@@ -6,7 +6,7 @@
 			<Slot>body1_light</Slot>
 			<classID>LightAnimGraph</classID>
 			<Light meta:RefKey="Light">
-				<Colour>255,255,255,255</Colour>
+				<Colour>224,255,253,255</Colour>
 				<Brightness>0.1</Brightness>
 				<Range>1</Range>
 			</Light>
@@ -16,7 +16,7 @@
 			<Slot>body2_light</Slot>
 			<classID>LightAnimGraph</classID>
 			<Light meta:RefKey="Light">
-				<Colour>255,255,255,255</Colour>
+				<Colour>224,255,253,255</Colour>
 				<Brightness>0.1</Brightness>
 				<Range>1</Range>
 			</Light>
@@ -26,7 +26,7 @@
 			<Slot>body3_light</Slot>
 			<classID>LightAnimGraph</classID>
 			<Light meta:RefKey="Light">
-				<Colour>255,255,255,255</Colour>
+				<Colour>224,255,253,255</Colour>
 				<Brightness>0.1</Brightness>
 				<Range>1</Range>
 			</Light>
@@ -36,7 +36,7 @@
 			<Slot>body4_light</Slot>
 			<classID>LightAnimGraph</classID>
 			<Light meta:RefKey="Light">
-				<Colour>255,255,255,255</Colour>
+				<Colour>224,255,253,255</Colour>
 				<Brightness>0.1</Brightness>
 				<Range>1</Range>
 			</Light>
