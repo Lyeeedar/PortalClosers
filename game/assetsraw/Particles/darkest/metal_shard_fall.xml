@@ -26,7 +26,7 @@
 					<VelocityAligned>true</VelocityAligned>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.4|0.6</Keyframe>
+							<Keyframe>0|0.2|0.4</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
@@ -83,8 +83,8 @@
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.05079929|0.4|0.4</Keyframe>
-							<Keyframe>1|0.6|0.6</Keyframe>
+							<Keyframe>0.05079929|0.3|0.3</Keyframe>
+							<Keyframe>1|0.5|0.5</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>

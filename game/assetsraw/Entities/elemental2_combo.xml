@@ -1,6 +1,9 @@
 <Combo meta:X="0" meta:Y="0" GUID="adc59a3f-2685-44b5-bf05-013074d1b3f2" xmlns:meta="Editor">
 	<Roots>
 		<ComboStepConnection>
+			<Next meta:RefKey="ComboStep">e5f896e9-38f0-4f25-9fcf-d91697fa8ae9</Next>
+		</ComboStepConnection>
+		<ComboStepConnection>
 			<Next meta:RefKey="ComboStep">b3a8692e-7332-4886-832b-2500b46a2fc2</Next>
 		</ComboStepConnection>
 	</Roots>
@@ -26,9 +29,68 @@
 				<Damage>source.damage</Damage>
 			</Damage>
 		</MeleeAttack>
+		<Ability>
+			<Name>Shardfall</Name>
+			<classID>Ability</classID>
+			<Ability meta:RefKey="AbilityData">
+				<ActionSequence meta:RefKey="ActionSequence">
+					<Actions>
+						<Timeline>
+							<PickSelf>
+								<classID>SelectSelf</classID>
+							</PickSelf>
+							<Permute>
+								<Time>0.003933597</Time>
+								<classID>Permute</classID>
+								<HitPoints>
+									<Line>#</Line>
+									<Line>#</Line>
+									<Line>#</Line>
+									<Line>@</Line>
+								</HitPoints>
+							</Permute>
+							<MarkAndWait>
+								<Time>0.008104149</Time>
+								<classID>MarkAndWaitForPlayer</classID>
+							</MarkAndWait>
+							<SetTargetDelay>
+								<Time>0.012767998</Time>
+								<classID>SetTargetDelay</classID>
+								<Mode>From_source</Mode>
+								<MaxDelay>0.4</MaxDelay>
+							</SetTargetDelay>
+							<OneShotFX>
+								<Time>0.0313804</Time>
+								<classID>SpawnOneShotParticle</classID>
+								<Particle meta:RefKey="ParticleEffect">
+									<Name>darkest/metal_shard_fall</Name>
+								</Particle>
+								<AlignToVector>false</AlignToVector>
+								<SpawnBehaviour>Immediate</SpawnBehaviour>
+							</OneShotFX>
+							<Damage>
+								<Time>0.08870861</Time>
+								<classID>Damage</classID>
+								<Damage>source.damage</Damage>
+							</Damage>
+						</Timeline>
+						<Timeline>
+							<ForEachTarget>
+								<Time>0.02607495</Time>
+								<Duration LockDuration="False">0.5</Duration>
+								<classID>ProcessTargetsIndividually</classID>
+							</ForEachTarget>
+						</Timeline>
+					</Actions>
+				</ActionSequence>
+				<Cooldown>20</Cooldown>
+				<Range>1,3</Range>
+				<TargetType>Target_enemy</TargetType>
+			</Ability>
+		</Ability>
 	</Actions>
 	<NodeMap>
-		<ComboStep meta:X="270" meta:Y="0" GUID="b3a8692e-7332-4886-832b-2500b46a2fc2">
+		<ComboStep meta:X="255" meta:Y="180" GUID="b3a8692e-7332-4886-832b-2500b46a2fc2">
 			<Next>
 				<ComboStepConnection>
 					<Next meta:RefKey="ComboStep">35d90baf-255e-4702-88bd-081912357381</Next>
@@ -39,7 +101,7 @@
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
 		</ComboStep>
-		<ComboStep meta:X="435" meta:Y="0" GUID="35d90baf-255e-4702-88bd-081912357381">
+		<ComboStep meta:X="420" meta:Y="180" GUID="35d90baf-255e-4702-88bd-081912357381">
 			<Next>
 				<ComboStepConnection>
 					<Next meta:RefKey="ComboStep">27bbcdf6-28f3-44fd-9655-041bd0c04012</Next>
@@ -50,7 +112,7 @@
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
 		</ComboStep>
-		<ComboStep meta:X="600" meta:Y="0" GUID="27bbcdf6-28f3-44fd-9655-041bd0c04012">
+		<ComboStep meta:X="585" meta:Y="180" GUID="27bbcdf6-28f3-44fd-9655-041bd0c04012">
 			<Next>
 				<ComboStepConnection>
 					<Next meta:RefKey="ComboStep">5680c150-15b9-4e66-aef6-d097259bc947</Next>
@@ -61,11 +123,25 @@
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
 		</ComboStep>
-		<ComboStep meta:X="765" meta:Y="0" GUID="5680c150-15b9-4e66-aef6-d097259bc947">
+		<ComboStep meta:X="750" meta:Y="180" GUID="5680c150-15b9-4e66-aef6-d097259bc947">
 			<ActionName>Attack</ActionName>
 			<Chance>1</Chance>
 			<StepForward>true</StepForward>
 			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="285" meta:Y="-300" GUID="e5f896e9-38f0-4f25-9fcf-d91697fa8ae9">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">0ba60545-b9a7-4e15-a9a9-22fadc350ac2</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Shardfall</ActionName>
+			<Cooldown>20</Cooldown>
+			<Chance>chance(1,5)</Chance>
+		</ComboStep>
+		<ComboStep meta:X="480" meta:Y="-300" GUID="0ba60545-b9a7-4e15-a9a9-22fadc350ac2">
+			<ActionName>Wait</ActionName>
+			<Chance>1</Chance>
 		</ComboStep>
 	</NodeMap>
 </Combo>
