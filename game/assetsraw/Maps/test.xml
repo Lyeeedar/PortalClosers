@@ -23,7 +23,7 @@
 			<DefineSymbol>
 				<classID>DefineSymbol</classID>
 				<SymbolDef meta:RefKey="Symbol">
-					<Floor>Sprites/Defs/Grass</Floor>
+					<Floor>Sprites/Defs/floor_metal</Floor>
 					<Contents />
 				</SymbolDef>
 			</DefineSymbol>
@@ -63,7 +63,7 @@
 				<SymbolDef meta:RefKey="Symbol">
 					<Extends>.</Extends>
 					<Char>#</Char>
-					<Wall>Sprites/Defs/Trees</Wall>
+					<Wall>Sprites/Defs/tree_metal</Wall>
 					<Contents />
 				</SymbolDef>
 			</DefineSymbol>

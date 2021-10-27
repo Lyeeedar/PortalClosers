@@ -24,6 +24,7 @@
 				<Path>Sprites/Skeletons/elemental2/elemental2</Path>
 				<AnimGraph>Entities/elemental2_anim</AnimGraph>
 				<Colour>255,255,255,255</Colour>
+				<Skin>metal</Skin>
 			</Renderable>
 		</RenderableComponent>
 		<Combo>
