@@ -2,11 +2,9 @@ package com.lyeeedar.Game.Portal
 
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Game.Elements
-import com.lyeeedar.Util.DataFile
-import com.lyeeedar.Util.DataFileReference
-import com.lyeeedar.Util.DataNeedsLocalisation
+import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.XmlDataClass
 import java.util.*
 
 @DataFile(colour = "200,250,150", icon="Sprites/Oryx/uf_split/uf_terrain/wall_hedge_7.png")
@@ -15,6 +13,11 @@ class Biome : XmlDataClass()
 	lateinit var element: Elements
 
 	val normalPacks: Array<Pack> = Array()
+
+	@DataFileReference(resourceType = "MapGenerator")
+	lateinit var roomGenerator: String
+
+	var ambientLight: Colour = Colour(0.6f, 0.6f, 0.6f, 1f)
 
 	//region generated
 	override fun load(xmlData: XmlData)
@@ -32,6 +35,8 @@ class Biome : XmlDataClass()
 				normalPacks.add(objnormalPacks)
 			}
 		}
+		roomGenerator = xmlData.get("RoomGenerator")
+		ambientLight = AssetManager.tryLoadColour(xmlData.getChildByName("AmbientLight"))!!
 	}
 	//endregion
 }

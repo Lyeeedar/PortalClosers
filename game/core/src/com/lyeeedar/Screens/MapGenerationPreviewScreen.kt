@@ -4,12 +4,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.lyeeedar.Components.EntityLoader
 import com.lyeeedar.Components.statistics
+import com.lyeeedar.Game.Portal.Biome
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.MapGeneration.MapCreator
 import com.lyeeedar.Systems.World
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.getXml
 
 class MapGenerationPreviewScreen : AbstractWorldPreviewScreen("map")
 {
@@ -30,6 +32,9 @@ class MapGenerationPreviewScreen : AbstractWorldPreviewScreen("map")
 		val player = EntityLoader.load("Entities/player")
 		player.statistics()!!.calculateStatistics(1)
 
-		return MapCreator.generateWorld(xmlData, player, 1, seed)
+		val biome = Biome()
+		biome.load(getXml("Biomes/metalBiome"))
+
+		return MapCreator.generateWorld(biome, biome.normalPacks.random(), player, 1, seed)
 	}
 }

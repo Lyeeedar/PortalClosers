@@ -38,8 +38,8 @@ enum class Elements constructor(vararg val baseElements: BaseElements)
 	LAVA(BaseElements.FIRE, BaseElements.METAL), // ground based dots
 	LIGHTNING(BaseElements.FIRE, BaseElements.AIR), // chain damage
 
-	POISON(BaseElements.WATER, BaseElements.WOOD), // dots
-	ACID(BaseElements.WATER, BaseElements.METAL), // armour reduction
+	BLOOD(BaseElements.WATER, BaseElements.WOOD), // life for damage
+	CORROSION(BaseElements.WATER, BaseElements.METAL), // acid/poison armour reduction
 	PRISMATIC(BaseElements.WATER, BaseElements.AIR), // illusions
 
 	NECROTIC(BaseElements.WOOD, BaseElements.METAL), // raising dead

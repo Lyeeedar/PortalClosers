@@ -1,4 +1,6 @@
 <Localisation Language="en" xmlns:meta="Editor">
+	<Text ID="61af196c-af56-40f3-b68c-a3c7af84ea72" Context="beseiger.Entity.Components.[5] Description.Description.Description">A mass of elemental power, specialised for flinging shards of itself great distances. Weak individually, it relies on it's companions to protect it as it rains down death from afar.</Text>
+	<Text ID="f79ed93a-1490-4c9a-935b-a0fb2550353e" Context="beseiger.Entity.Components.[5] Description.Description.Name">Elemental Besieger (Metal)</Text>
 	<Text ID="ca6e827c-05ec-4cd8-9565-ebe15f60255c" Context="elemental1.Entity.Components.[5] Description.Description.Description">A hulking mass of elemental power, coalesced around a metal elemental core. Slow but hardy, its attacks can crush anything that stands before it.</Text>
 	<Text ID="5e3115ae-a71d-4d97-9a9d-f509f15824f1" Context="elemental1.Entity.Components.[5] Description.Description.Name">Elemental Hulk (Metal)</Text>
 	<Text ID="a2a29d43-110a-4e8e-90f7-c1491e43fcf2" Context="elemental2.Entity.Components.[5] Description.Description.Description">A collective of small metal elemental cores, pooling their power to form a fast and deadly creature. It attacks relentlessly, ruthlessly slaughtering all before it.</Text>

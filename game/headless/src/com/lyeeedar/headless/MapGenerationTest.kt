@@ -3,6 +3,7 @@ package com.lyeeedar.headless
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Components.EntityLoader
 import com.lyeeedar.Components.statistics
+import com.lyeeedar.Game.Portal.Biome
 import com.lyeeedar.MapGeneration.MapCreator
 import com.lyeeedar.MapGeneration.MapGenerator
 import com.lyeeedar.MapGeneration.Symbol
@@ -76,14 +77,18 @@ class MapGenerationTest
 			val player = EntityLoader.load("Entities/player")
 			player.statistics()!!.calculateStatistics(1)
 
-			val world = MapCreator.generateWorld(file, player, 1, seed)
+			val biome = Biome()
+			biome.load(getXml("Biomes/metalBiome"))
+			val pack = biome.normalPacks.random()
+
+			val world = MapCreator.generateWorld(biome, pack, player, 1, seed)
 
 			for (n in 0 until numIterations)
 			{
 				val player2 = EntityLoader.load("Entities/player")
 				player2.statistics()!!.calculateStatistics(1)
 
-				val world2 = MapCreator.generateWorld(file, player2, 1, seed)
+				val world2 = MapCreator.generateWorld(biome, pack, player2, 1, seed)
 
 				for (x in 0 until world.grid.width)
 				{

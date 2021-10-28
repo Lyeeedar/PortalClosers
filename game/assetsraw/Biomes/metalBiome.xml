@@ -84,4 +84,6 @@
 			</Creatures>
 		</Pack>
 	</NormalPacks>
+	<RoomGenerator>Maps/metalRoom</RoomGenerator>
+	<AmbientLight>166,166,166,255</AmbientLight>
 </Biome>

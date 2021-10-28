@@ -1,0 +1,121 @@
+<MapGenerator meta:X="0" meta:Y="0" GUID="32167423-9f75-49a4-b94a-2f5339766086" xmlns:meta="Editor" meta:GraphCommentData="2ad17155-7b08-4dd0-a3d5-91d9732373f2$Place player spawn$$255,255,255,255">
+	<BaseSize>12,12</BaseSize>
+	<Root meta:RefKey="MapGeneratorNode">70821707-e34c-48f1-a4b8-9ed700c26155</Root>
+	<NodeMap>
+		<MapGeneratorNode meta:X="315" meta:Y="-30" GUID="70821707-e34c-48f1-a4b8-9ed700c26155">
+			<Child>
+				<classID>Node</classID>
+				<Child meta:RefKey="MapGeneratorNode">3324ec76-5fd2-496d-8656-bacc7abfe575</Child>
+			</Child>
+			<Fill>
+				<classID>Fill</classID>
+				<Char>.</Char>
+			</Fill>
+			<Split>
+				<SplitPart>
+					<Side>Edge</Side>
+					<Size>1</Size>
+					<Child meta:RefKey="MapGeneratorNode">365d5497-1347-41d2-96ef-d458b1dbc2cd</Child>
+				</SplitPart>
+				<SplitPart>
+					<Side>Remainder</Side>
+					<Size>1</Size>
+					<Child meta:RefKey="MapGeneratorNode">4d54f18e-3b75-4c64-a99f-fd8aad03f463</Child>
+				</SplitPart>
+			</Split>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="630" meta:Y="-165" GUID="3324ec76-5fd2-496d-8656-bacc7abfe575">
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Floor>Sprites/Defs/floor_metal</Floor>
+					<Contents />
+				</SymbolDef>
+			</DefineSymbol>
+			<DefineSymbol>
+				<classID>DefineSymbol</classID>
+				<SymbolDef meta:RefKey="Symbol">
+					<Extends>.</Extends>
+					<Char>#</Char>
+					<Wall>Sprites/Defs/tree_metal</Wall>
+					<Contents />
+				</SymbolDef>
+			</DefineSymbol>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1800" meta:Y="165" meta:Comment="2ad17155-7b08-4dd0-a3d5-91d9732373f2" GUID="951b7ae2-c09a-4d84-aec5-ff835ef10db2">
+			<SetNamedArea>
+				<classID>SetNamedArea</classID>
+				<Name>playerspawn</Name>
+			</SetNamedArea>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="600" meta:Y="180" GUID="4d54f18e-3b75-4c64-a99f-fd8aad03f463">
+			<!--Add random trees-->
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>5</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">1cd8b2a4-3383-4e08-9d24-bf347f96cce3</Node>
+				<Remainder meta:RefKey="MapGeneratorNode">172ca9d0-1cda-4e96-91d7-cd06beb469bf</Remainder>
+			</Take>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="870" meta:Y="180" GUID="1cd8b2a4-3383-4e08-9d24-bf347f96cce3">
+			<Fill>
+				<classID>Fill</classID>
+				<Char>#</Char>
+				<Overwrite>true</Overwrite>
+			</Fill>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="600" meta:Y="45" GUID="365d5497-1347-41d2-96ef-d458b1dbc2cd">
+			<!--Line edge with trees-->
+			<Fill>
+				<classID>Fill</classID>
+				<Char>#</Char>
+				<Overwrite>true</Overwrite>
+			</Fill>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1590" meta:Y="165" meta:Comment="2ad17155-7b08-4dd0-a3d5-91d9732373f2" GUID="5dd197d8-314e-458c-9935-afe67304430d">
+			<Take>
+				<classID>Take</classID>
+				<Mode>Random</Mode>
+				<CountExp>1</CountExp>
+				<Node meta:RefKey="MapGeneratorNode">951b7ae2-c09a-4d84-aec5-ff835ef10db2</Node>
+			</Take>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="870" meta:Y="405" GUID="172ca9d0-1cda-4e96-91d7-cd06beb469bf">
+			<Divide>
+				<classID>Divide</classID>
+				<Divisions>
+					<Division>
+						<Size>30%</Size>
+						<Child meta:RefKey="MapGeneratorNode">f91dd622-183e-4160-a931-f7e59fd35e5e</Child>
+					</Division>
+					<Division>
+						<Size>70%</Size>
+						<Child meta:RefKey="MapGeneratorNode">9464f3bd-0fc6-41b5-9184-6486fee8d8a7</Child>
+					</Division>
+				</Divisions>
+				<OnX>false</OnX>
+			</Divide>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1275" meta:Y="510" GUID="9464f3bd-0fc6-41b5-9184-6486fee8d8a7">
+			<SetNamedArea>
+				<classID>SetNamedArea</classID>
+				<Name>enemyspawn</Name>
+			</SetNamedArea>
+		</MapGeneratorNode>
+		<MapGeneratorNode meta:X="1275" meta:Y="165" meta:Comment="2ad17155-7b08-4dd0-a3d5-91d9732373f2" GUID="f91dd622-183e-4160-a931-f7e59fd35e5e">
+			<Divide>
+				<classID>Divide</classID>
+				<Divisions>
+					<Division>
+						<Size>30%</Size>
+					</Division>
+					<Division>
+						<Size>30%</Size>
+						<Child meta:RefKey="MapGeneratorNode">5dd197d8-314e-458c-9935-afe67304430d</Child>
+					</Division>
+				</Divisions>
+			</Divide>
+		</MapGeneratorNode>
+	</NodeMap>
+</MapGenerator>

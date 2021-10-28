@@ -18,7 +18,7 @@
 			</BaseStatistics>
 			<Faction>player</Faction>
 			<BloodColour>255,0,0,255</BloodColour>
-			<Element>Poison</Element>
+			<Element>None</Element>
 		</Statistics>
 		<LightComponent>
 			<classID>Light</classID>

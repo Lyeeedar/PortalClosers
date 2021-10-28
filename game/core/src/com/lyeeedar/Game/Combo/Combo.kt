@@ -307,6 +307,97 @@ class MeleeAttackComboAction : AbstractComboAction()
 	//endregion
 }
 
+class RangedAttackComboAction : AbstractComboAction()
+{
+	var flightEffect: FlightParticleAction? = null
+	var effect: SpawnOneShotParticleAction? = null
+	lateinit var damage: DamageAction
+	var permute: PermuteAction? = null
+	var attackTurns: Int = 1
+	var range: Int = 3
+	var cardinalDirectionsOnly: Boolean = false
+
+	override fun getAbilityData(): AbilityData
+	{
+		val data = AbilityData()
+		data.targetType = AbilityData.TargetType.TARGET_ENEMY
+		data.cardinalDirectionsOnly = cardinalDirectionsOnly
+		data.range.y = range
+		data.actionSequence = ActionSequence(XmlData())
+
+		val bump = AnimationAction()
+		bump.anim = AnimationAction.Animation.BUMP
+		bump.time = 0.01f
+		bump.duration = 0.1f
+
+		val mark = MarkAndWaitForPlayerAction()
+		mark.time = 0.005f
+		mark.turns = attackTurns
+
+		if (permute != null)
+		{
+			permute!!.time = 0f
+			data.actionSequence.rawActions.add(permute)
+		}
+
+		var delay = 0f
+		if (flightEffect != null)
+		{
+			flightEffect!!.time = 0.01f
+			flightEffect!!.duration = 0.3f
+			delay = 0.3f
+
+			data.actionSequence.rawActions.add(flightEffect!!)
+		}
+
+		damage.time = 0.1f + (effect?.particle?.getParticleEffect()?.blockinglifetime ?: 0f) * 0.7f + delay
+
+		data.actionSequence.rawActions.add(mark)
+		data.actionSequence.rawActions.add(bump)
+		if (effect != null)
+		{
+			effect!!.time = 0.04f + delay
+			data.actionSequence.rawActions.add(effect)
+		}
+		data.actionSequence.rawActions.add(damage)
+		data.actionSequence.afterLoad()
+
+		return data
+	}
+
+	//region generated
+	override fun load(xmlData: XmlData)
+	{
+		super.load(xmlData)
+		val flightEffectEl = xmlData.getChildByName("FlightEffect")
+		if (flightEffectEl != null)
+		{
+			flightEffect = FlightParticleAction()
+			flightEffect!!.load(flightEffectEl)
+		}
+		val effectEl = xmlData.getChildByName("Effect")
+		if (effectEl != null)
+		{
+			effect = SpawnOneShotParticleAction()
+			effect!!.load(effectEl)
+		}
+		val damageEl = xmlData.getChildByName("Damage")!!
+		damage = DamageAction()
+		damage.load(damageEl)
+		val permuteEl = xmlData.getChildByName("Permute")
+		if (permuteEl != null)
+		{
+			permute = PermuteAction()
+			permute!!.load(permuteEl)
+		}
+		attackTurns = xmlData.getInt("AttackTurns", 1)
+		range = xmlData.getInt("Range", 3)
+		cardinalDirectionsOnly = xmlData.getBoolean("CardinalDirectionsOnly", false)
+	}
+	override val classID: String = "RangedAttack"
+	//endregion
+}
+
 class WaitComboAction : AbstractComboAction()
 {
 	var turns: Int = 1

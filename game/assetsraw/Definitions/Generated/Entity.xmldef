@@ -124,7 +124,7 @@
 		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
 		<Data Name="DifficultyRating" Keys="DifficultyRating" meta:RefKey="Reference" />
 		<Data Name="BloodColour" SkipIfDefault="false" Default="255,0,0" meta:RefKey="Colour" />
-		<Data Name="Element" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Poison,Acid,Prismatic,Necrotic,Cosmic,Vorpal" Default="None" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Element" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Blood,Corrosion,Prismatic,Necrotic,Cosmic,Vorpal" Default="None" SkipIfDefault="False" meta:RefKey="Enum" />
 	</Definition>
 	<Definition Name="Water" Nullable="False" TextColour="204,32,32" Extends="AbstractComponentData" meta:RefKey="StructDef">
 		<Const Name="classID">Water</Const>

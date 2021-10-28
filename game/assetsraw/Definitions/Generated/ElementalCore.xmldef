@@ -3,7 +3,7 @@
 		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="ElementalCore" SkipIfDefault="False" Default="" meta:RefKey="String" />
 		<Data Name="Icon" Keys="RenderedLayeredSprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Element" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Poison,Acid,Prismatic,Necrotic,Cosmic,Vorpal" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Element" EnumValues="None,Fire,Water,Wood,Metal,Air,Oil,Slime,Lava,Lightning,Blood,Corrosion,Prismatic,Necrotic,Cosmic,Vorpal" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Abilities" Keys="CoreAbility" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="CoreAbility" Nullable="False" TextColour="204,204,47" meta:RefKey="StructDef">

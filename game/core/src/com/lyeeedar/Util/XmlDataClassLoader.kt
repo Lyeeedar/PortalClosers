@@ -30,6 +30,7 @@ actual class XmlDataClassLoader
 			return when (classID)
 			{
 				"MeleeAttack" -> com.lyeeedar.Game.Combo.MeleeAttackComboAction()
+				"RangedAttack" -> com.lyeeedar.Game.Combo.RangedAttackComboAction()
 				"Ability" -> com.lyeeedar.Game.Combo.AbilityComboAction()
 				"Wait" -> com.lyeeedar.Game.Combo.WaitComboAction()
 				else -> throw RuntimeException("Unknown classID '$classID' for AbstractComboAction!")

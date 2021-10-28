@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.esotericsoftware.spine.*
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Portal.Biome
 import com.lyeeedar.Game.Portal.CombatEncounter
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.Game.addSystems
@@ -15,6 +16,7 @@ import com.lyeeedar.Systems.*
 import com.lyeeedar.UI.PlayerWidget
 import com.lyeeedar.UI.RenderSystemWidget
 import com.lyeeedar.Util.Random
+import com.lyeeedar.Util.getXml
 import com.lyeeedar.Util.random
 
 class WorldScreen : AbstractScreen()
@@ -62,29 +64,13 @@ class WorldScreen : AbstractScreen()
 
 	fun createWorld(player: Entity, encounter: CombatEncounter)
 	{
-		world = MapCreator.generateWorld("Maps/test", player, 1, 4)
+		val biome = Biome()
+		biome.load(getXml("Biomes/metalBiome"))
+
+		world = MapCreator.generateWorld(biome, biome.normalPacks.random(), player, 1, 4)
 		world.addSystems()
 
 		world.tileSize = 50f
-
-		for (i in 0 until 5)
-		{
-			val rat = EntityLoader.load("Entities/elemental${Random.sharedRandom.nextInt(2)+1}")
-			rat.statistics()!!.calculateStatistics(1)
-			rat.statistics()!!.faction = "enemy"
-			rat.ai()!!.state.set(rat.getRef(), world, 0)
-			rat.addComponent(ComponentType.Task)
-
-			var tile = world.grid.random()!!
-			while (tile.contents.containsKey(rat.position()!!.slot))
-			{
-				tile = world.grid.random()!!
-			}
-
-			rat.position()!!.position = tile
-			rat.position()!!.addToTile(rat)
-			world.addEntity(rat)
-		}
 
 		debugConsole.commands.clear()
 		debugConsole.register("time", "") { args, _ ->

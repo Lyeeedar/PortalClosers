@@ -3,11 +3,10 @@ package com.lyeeedar.MapGeneration
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Components.ComponentType
-import com.lyeeedar.Components.Entity
-import com.lyeeedar.Components.addToTile
-import com.lyeeedar.Components.ai
+import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Portal.Biome
+import com.lyeeedar.Game.Portal.Pack
 import com.lyeeedar.Game.Tile
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.Systems.World
@@ -45,12 +44,17 @@ class MapCreator
 			return set.filter { it.contents[slot] == null }.sorted().toGdxArray()
 		}
 
-		private fun processSymbol(symbol: Symbol, tile: Tile, level: Int, world: World<*>, rng: LightRNG, deferredActions: Array<()->Unit>)
+		private fun processSymbol(symbol: Symbol, tile: Tile, level: Int, world: World<*>, rng: LightRNG, deferredActions: Array<()->Unit>, creatures: Array<Entity>)
 		{
 			for (slot in SpaceSlot.Values)
 			{
 				val entityData = symbol.contents[slot] ?: continue
 				val entity = entityData.create()
+
+				if (entity.hasComponent(ComponentType.Statistics) && entity.hasComponent(ComponentType.AI))
+				{
+					creatures.add(entity)
+				}
 
 				entity.addToTile(tile, slot)
 
@@ -58,30 +62,24 @@ class MapCreator
 			}
 		}
 
-		fun generateWorld(path: String, player: Entity, level: Int, seed: Long): World<Tile>
-		{
-			val xml = getXml(path)
-			return generateWorld(xml, player, level, seed)
-		}
-
-		fun generateWorld(xml: XmlData, player: Entity, level: Int, seed: Long): World<Tile>
+		fun generateWorld(biome: Biome, pack: Pack, player: Entity, level: Int, seed: Long): World<Tile>
 		{
 			val generator = MapGenerator()
-			generator.load(xml)
+			generator.load(getXml(biome.roomGenerator))
 
 			val symbolGrid = generator.execute(seed) { _,_ -> Symbol() } as Array2D<Symbol>
 
-			return generateWorld(symbolGrid, generator.namedAreas, player, level, seed)
+			return generateWorld(biome, pack, symbolGrid, generator.namedAreas, player, level, seed)
 		}
 
-		fun generateWorld(symbolGrid: Array2D<Symbol>, namedAreas: ObjectMap<String, Array<Area>>, player: Entity, level: Int, seed: Long): World<Tile>
+		fun generateWorld(biome: Biome, pack: Pack, symbolGrid: Array2D<Symbol>, namedAreas: ObjectMap<String, Array<Area>>, player: Entity, level: Int, seed: Long): World<Tile>
 		{
 			val rng = Random.obtainTS(seed)
 
 			val map = Array2D<Tile>(symbolGrid.width, symbolGrid.height) { x,y -> Tile(x, y) }
 			val world = World(map)
 			world.rng = LightRNG(seed)
-			world.ambientLight.set(0.6f, 0.6f, 0.6f, 1f)
+			world.ambientLight.set(biome.ambientLight)
 
 			// setup tiles base
 			for (x in 0 until map.width)
@@ -99,6 +97,7 @@ class MapCreator
 
 			// add entities
 			val deferredActions = Array<()->Unit>()
+			val creatures = Array<Entity>()
 			for (x in 0 until map.width)
 			{
 				for (y in 0 until map.height)
@@ -106,9 +105,59 @@ class MapCreator
 					val symbol = symbolGrid[x, y]
 					val tile = map[x, y]
 
-					processSymbol(symbol, tile, level, world, rng, deferredActions)
+					processSymbol(symbol, tile, level, world, rng, deferredActions, creatures)
 				}
 			}
+
+			// add pack entities
+			val possibleEnemyTiles = namedAreas["enemyspawn"][0].getAllPoints().map { it.toPoint() }.toGdxArray()
+			for (creature in pack.creatures)
+			{
+				val entity = EntityLoader.load(creature.entity)
+				val ePos = entity.addOrGet(ComponentType.Position) as PositionComponent
+
+				var i = 0
+				while (true)
+				{
+					val pos = possibleEnemyTiles.random(rng)
+					val tile = map[pos]
+					if (ePos.isValidTile(tile, entity))
+					{
+						entity.addToTile(tile)
+
+						for (x in 0 until ePos.size)
+						{
+							for (y in 0 until ePos.size)
+							{
+								val tile = map[pos.x+x, pos.y+y]
+								possibleEnemyTiles.removeValue(tile, false)
+							}
+						}
+
+						break
+					}
+
+					i++
+					if (i > 10)
+					{
+						throw RuntimeException("Unable to find spot to place entity: $entity")
+					}
+				}
+
+				creatures.add(entity)
+				world.addEntity(entity)
+			}
+
+			// load creatures
+			for (creature in creatures)
+			{
+				creature.statistics()!!.calculateStatistics(level)
+				creature.statistics()!!.faction = "enemy"
+				creature.ai()!!.state.set(creature.getRef(), world, rng.nextLong())
+				creature.addComponent(ComponentType.Task)
+			}
+
+			// finish actions
 			for (action in deferredActions)
 			{
 				action.invoke()
@@ -117,10 +166,9 @@ class MapCreator
 			// add player
 			val playerSpawnArea = namedAreas["playerspawn"][0]
 			val playerStartTile = map[playerSpawnArea.getAllPoints()[0].toPoint()]
-			val startRoomPoints = floodFill(playerStartTile, 4, world, SpaceSlot.ENTITY)
 
 			player.addToTile(playerStartTile)
-			player.ai()!!.state.set(player.getRef(), world, 0)
+			player.ai()!!.state.set(player.getRef(), world, rng.nextLong())
 			player.addComponent(ComponentType.Task)
 
 			world.player = player
