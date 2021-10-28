@@ -1,0 +1,40 @@
+<Entity xmlns:meta="Editor">
+	<Components>
+		<Position>
+			<classID>Position</classID>
+			<Slot>Entity</Slot>
+		</Position>
+		<Statistics>
+			<classID>Statistics</classID>
+			<BaseStatistics />
+			<DifficultyRating meta:RefKey="DifficultyRating">
+				<TimeToKill>4</TimeToKill>
+				<Damage>0.5</Damage>
+			</DifficultyRating>
+			<BloodColour>196,196,196,255</BloodColour>
+			<Element>Metal</Element>
+		</Statistics>
+		<AI>
+			<classID>AI</classID>
+			<AiPath>AI/MeleeAI</AiPath>
+		</AI>
+		<RenderableComponent>
+			<classID>Renderable</classID>
+			<Renderable meta:RefKey="Skeleton">
+				<Path>Sprites/Skeletons/elemental2/elemental2</Path>
+				<AnimGraph>Sprites/Skeletons/elemental2/elemental2_anim</AnimGraph>
+				<Colour>255,255,255,255</Colour>
+				<Skin>metal</Skin>
+			</Renderable>
+		</RenderableComponent>
+		<Combo>
+			<classID>Combo</classID>
+			<ComboPath>Entities/metal/ravager_combo</ComboPath>
+		</Combo>
+		<Description>
+			<classID>Description</classID>
+			<Name>df7b8ba0-d9a8-4719-8e59-2e8b2e64bc4f</Name>
+			<Description>60558d88-e66d-4f62-bfc6-1ee587dcb6b1</Description>
+		</Description>
+	</Components>
+</Entity>

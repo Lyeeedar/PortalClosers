@@ -1,0 +1,76 @@
+<Combo meta:X="0" meta:Y="0" GUID="adc59a3f-2685-44b5-bf05-013074d1b3f2" xmlns:meta="Editor">
+	<Roots>
+		<ComboStepConnection>
+			<Next meta:RefKey="ComboStep">b3a8692e-7332-4886-832b-2500b46a2fc2</Next>
+		</ComboStepConnection>
+	</Roots>
+	<Actions>
+		<Wait>
+			<Name>Wait</Name>
+			<classID>Wait</classID>
+		</Wait>
+		<MeleeAttack>
+			<Name>Attack</Name>
+			<classID>MeleeAttack</classID>
+			<Effect meta:RefKey="OneShotFX">
+				<classID>SpawnOneShotParticle</classID>
+				<Particle meta:RefKey="ParticleEffect">
+					<Name>darkest/metal_spike_burst</Name>
+				</Particle>
+				<AlignToVector>false</AlignToVector>
+				<SpawnBehaviour>Immediate</SpawnBehaviour>
+			</Effect>
+			<Damage meta:RefKey="Damage">
+				<classID>Damage</classID>
+				<Damage>source.damage</Damage>
+			</Damage>
+			<Permute meta:RefKey="Permute">
+				<classID>Permute</classID>
+				<HitPoints>
+					<Line>###</Line>
+				</HitPoints>
+			</Permute>
+			<AttackTurns>2</AttackTurns>
+		</MeleeAttack>
+	</Actions>
+	<NodeMap>
+		<ComboStep meta:X="255" meta:Y="0" GUID="b3a8692e-7332-4886-832b-2500b46a2fc2">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">35d90baf-255e-4702-88bd-081912357381</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="435" meta:Y="0" GUID="35d90baf-255e-4702-88bd-081912357381">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">27bbcdf6-28f3-44fd-9655-041bd0c04012</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="600" meta:Y="0" GUID="27bbcdf6-28f3-44fd-9655-041bd0c04012">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">7272a82d-c07c-46c9-b128-55a4716dbdcc</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="765" meta:Y="0" GUID="7272a82d-c07c-46c9-b128-55a4716dbdcc">
+			<ActionName>Wait</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+		</ComboStep>
+	</NodeMap>
+</Combo>

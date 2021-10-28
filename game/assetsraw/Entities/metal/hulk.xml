@@ -1,0 +1,39 @@
+<Entity xmlns:meta="Editor">
+	<Components>
+		<Position>
+			<classID>Position</classID>
+			<Slot>Entity</Slot>
+		</Position>
+		<Statistics>
+			<classID>Statistics</classID>
+			<BaseStatistics />
+			<DifficultyRating meta:RefKey="DifficultyRating">
+				<TimeToKill>5</TimeToKill>
+			</DifficultyRating>
+			<BloodColour>212,212,212,255</BloodColour>
+			<Element>Metal</Element>
+		</Statistics>
+		<AI>
+			<classID>AI</classID>
+			<AiPath>AI/MeleeAI</AiPath>
+		</AI>
+		<RenderableComponent>
+			<classID>Renderable</classID>
+			<Renderable meta:RefKey="Skeleton">
+				<Path>Sprites/Skeletons/elemental1/elemental1</Path>
+				<AnimGraph>Sprites/Skeletons/elemental1/elemental1_anim</AnimGraph>
+				<Colour>255,255,255,255</Colour>
+				<Skin>metal</Skin>
+			</Renderable>
+		</RenderableComponent>
+		<Combo>
+			<classID>Combo</classID>
+			<ComboPath>Entities/metal/hulk_combo</ComboPath>
+		</Combo>
+		<Description>
+			<classID>Description</classID>
+			<Name>ea5f16c8-113c-4524-bf62-9eee5539a511</Name>
+			<Description>12358841-ddd3-451a-bb9b-f837eda918f6</Description>
+		</Description>
+	</Components>
+</Entity>

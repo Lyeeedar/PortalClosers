@@ -1,0 +1,71 @@
+<Combo meta:X="0" meta:Y="0" GUID="adc59a3f-2685-44b5-bf05-013074d1b3f2" xmlns:meta="Editor">
+	<Roots>
+		<ComboStepConnection>
+			<Next meta:RefKey="ComboStep">b3a8692e-7332-4886-832b-2500b46a2fc2</Next>
+		</ComboStepConnection>
+	</Roots>
+	<Actions>
+		<Wait>
+			<Name>Wait</Name>
+			<classID>Wait</classID>
+		</Wait>
+		<MeleeAttack>
+			<Name>Attack</Name>
+			<classID>MeleeAttack</classID>
+			<Strike meta:RefKey="StrikeFX">
+				<Duration LockDuration="False">0.2</Duration>
+				<classID>StrikeTile</classID>
+				<Texture meta:RefKey="TextureRegion">
+					<File>darkest/particle/slash</File>
+				</Texture>
+				<Thickness>0.2</Thickness>
+				<Colour>255,255,255,255</Colour>
+			</Strike>
+			<Damage meta:RefKey="Damage">
+				<classID>Damage</classID>
+				<Damage>source.damage</Damage>
+			</Damage>
+		</MeleeAttack>
+	</Actions>
+	<NodeMap>
+		<ComboStep meta:X="225" meta:Y="-15" GUID="b3a8692e-7332-4886-832b-2500b46a2fc2">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">35d90baf-255e-4702-88bd-081912357381</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="390" meta:Y="-15" GUID="35d90baf-255e-4702-88bd-081912357381">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">27bbcdf6-28f3-44fd-9655-041bd0c04012</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="555" meta:Y="-15" GUID="27bbcdf6-28f3-44fd-9655-041bd0c04012">
+			<Next>
+				<ComboStepConnection>
+					<Next meta:RefKey="ComboStep">5680c150-15b9-4e66-aef6-d097259bc947</Next>
+				</ComboStepConnection>
+			</Next>
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+		<ComboStep meta:X="720" meta:Y="-15" GUID="5680c150-15b9-4e66-aef6-d097259bc947">
+			<ActionName>Attack</ActionName>
+			<Chance>1</Chance>
+			<StepForward>true</StepForward>
+			<CanTurn>true</CanTurn>
+		</ComboStep>
+	</NodeMap>
+</Combo>

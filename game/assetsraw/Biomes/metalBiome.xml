@@ -4,82 +4,57 @@
 		<Pack>
 			<Creatures>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/hulk</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/hulk</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 			</Creatures>
 		</Pack>
 		<Pack>
 			<Creatures>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/ravager</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/beseiger</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
-				</PackCreature>
-			</Creatures>
-		</Pack>
-		<Pack>
-			<Creatures>
-				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/beseiger</Entity>
 				</PackCreature>
 			</Creatures>
 		</Pack>
 		<Pack>
 			<Creatures>
 				<PackCreature>
-					<Entity>Entities/elemental1</Entity>
+					<Entity>Entities/metal/hulk</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/hulk</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/beseiger</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/beseiger</Entity>
 				</PackCreature>
 				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
-				</PackCreature>
-				<PackCreature>
-					<Entity>Entities/elemental2</Entity>
+					<Entity>Entities/metal/beseiger</Entity>
 				</PackCreature>
 			</Creatures>
 		</Pack>
