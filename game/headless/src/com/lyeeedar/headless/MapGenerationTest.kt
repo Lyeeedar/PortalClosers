@@ -79,6 +79,7 @@ class MapGenerationTest
 
 			val biome = Biome()
 			biome.load(getXml("Biomes/metalBiome"))
+			biome.roomGenerator = file
 			val pack = biome.normalPacks.random()
 
 			val world = MapCreator.generateWorld(biome, pack, player, 1, seed)
