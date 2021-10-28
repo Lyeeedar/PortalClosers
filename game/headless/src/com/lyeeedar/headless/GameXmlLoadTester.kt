@@ -10,7 +10,7 @@ class GameXmlLoadTester
 	{
 		fun testLoad(xml: XmlData, path: String)
 		{
-			when (xml.name.toUpperCase(Locale.ENGLISH))
+			when (xml.name.uppercase(Locale.ENGLISH))
 			{
 				"BUFF" -> Buff.load(xml)
 			}

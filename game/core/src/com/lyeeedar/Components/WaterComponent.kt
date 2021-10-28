@@ -48,7 +48,7 @@ class WaterComponentData : AbstractComponentData()
 	{
 		super.load(xmlData)
 		flowTowards = xmlData.get("FlowTowards", null)
-		flowDir = Direction.valueOf(xmlData.get("FlowDir", Direction.CENTER.toString())!!.toUpperCase(Locale.ENGLISH))
+		flowDir = Direction.valueOf(xmlData.get("FlowDir", Direction.CENTER.toString())!!.uppercase(Locale.ENGLISH))
 		flowChance = xmlData.getFloat("FlowChance", 0.3f)
 		depth = xmlData.getFloat("Depth", 0.3f)
 		flowForce = xmlData.getInt("FlowForce", 1)

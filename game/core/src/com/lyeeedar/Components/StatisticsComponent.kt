@@ -28,7 +28,7 @@ class StatisticsComponentData : AbstractComponentData()
 		{
 			for (el in baseStatisticsEl.children)
 			{
-				val enumVal = Statistic.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val enumVal = Statistic.valueOf(el.name.uppercase(Locale.ENGLISH))
 				baseStatistics[enumVal] = el.float()
 			}
 		}
@@ -40,7 +40,7 @@ class StatisticsComponentData : AbstractComponentData()
 			difficultyRating!!.load(difficultyRatingEl)
 		}
 		bloodColour = AssetManager.tryLoadColour(xmlData.getChildByName("BloodColour"))!!
-		element = Elements.valueOf(xmlData.get("Element", Elements.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
+		element = Elements.valueOf(xmlData.get("Element", Elements.NONE.toString())!!.uppercase(Locale.ENGLISH))
 	}
 	override val classID: String = "Statistics"
 	//endregion

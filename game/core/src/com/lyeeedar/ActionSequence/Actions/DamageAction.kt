@@ -74,7 +74,7 @@ class DamageAction : AbstractOneShotActionSequenceAction()
 	{
 		super.load(xmlData)
 		damage = CompiledExpression(xmlData.get("Damage", "source.damage")!!)
-		type = Elements.valueOf(xmlData.get("Type", Elements.NONE.toString())!!.toUpperCase(Locale.ENGLISH))
+		type = Elements.valueOf(xmlData.get("Type", Elements.NONE.toString())!!.uppercase(Locale.ENGLISH))
 		useAttackDamageType = xmlData.getBoolean("UseAttackDamageType", true)
 	}
 	override val classID: String = "Damage"

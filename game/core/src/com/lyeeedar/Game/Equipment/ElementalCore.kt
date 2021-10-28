@@ -41,7 +41,7 @@ class ElementalCore : XmlDataClass()
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
 		icon = AssetManager.loadLayeredSprite(xmlData.getChildByName("Icon")!!)
-		element = Elements.valueOf(xmlData.get("Element").toUpperCase(Locale.ENGLISH))
+		element = Elements.valueOf(xmlData.get("Element").uppercase(Locale.ENGLISH))
 		val abilitiesEl = xmlData.getChildByName("Abilities")
 		if (abilitiesEl != null)
 		{

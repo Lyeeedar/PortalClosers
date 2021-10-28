@@ -361,7 +361,7 @@ class ConnectRoomsAction : AbstractMapGenerationAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		pathStyle = PathStyle.valueOf(xmlData.get("PathStyle").toUpperCase(Locale.ENGLISH))
+		pathStyle = PathStyle.valueOf(xmlData.get("PathStyle").uppercase(Locale.ENGLISH))
 		roomName = xmlData.get("RoomName")
 		val centralEl = xmlData.getChildByName("Central")
 		if (centralEl != null)
@@ -401,7 +401,7 @@ class CorridorFeature : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		placementMode = PlacementMode.valueOf(xmlData.get("PlacementMode").toUpperCase(Locale.ENGLISH))
+		placementMode = PlacementMode.valueOf(xmlData.get("PlacementMode").uppercase(Locale.ENGLISH))
 		interval = xmlData.getInt("Interval", 0)
 		char = xmlData.get("Char", " ")!![0]
 	}

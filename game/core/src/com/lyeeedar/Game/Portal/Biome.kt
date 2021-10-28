@@ -22,7 +22,7 @@ class Biome : XmlDataClass()
 	//region generated
 	override fun load(xmlData: XmlData)
 	{
-		element = Elements.valueOf(xmlData.get("Element").toUpperCase(Locale.ENGLISH))
+		element = Elements.valueOf(xmlData.get("Element").uppercase(Locale.ENGLISH))
 		val normalPacksEl = xmlData.getChildByName("NormalPacks")
 		if (normalPacksEl != null)
 		{

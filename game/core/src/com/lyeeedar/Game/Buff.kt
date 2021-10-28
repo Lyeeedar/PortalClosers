@@ -61,7 +61,7 @@ class Buff : XmlDataClass()
 		{
 			for (el in statisticsEl.children)
 			{
-				val enumVal = Statistic.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val enumVal = Statistic.valueOf(el.name.uppercase(Locale.ENGLISH))
 				statistics[enumVal] = el.float()
 			}
 		}
@@ -70,7 +70,7 @@ class Buff : XmlDataClass()
 		{
 			for (el in eventHandlersEl.children)
 			{
-				val enumVal = EventType.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val enumVal = EventType.valueOf(el.name.uppercase(Locale.ENGLISH))
 				val objeventHandlers: Array<EventAndCondition> = Array()
 				val objeventHandlersEl = el
 				if (objeventHandlersEl != null)

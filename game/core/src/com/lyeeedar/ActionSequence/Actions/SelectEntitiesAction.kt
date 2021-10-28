@@ -155,7 +155,7 @@ class SelectEntitiesAction : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		mode = Mode.valueOf(xmlData.get("Mode").toUpperCase(Locale.ENGLISH))
+		mode = Mode.valueOf(xmlData.get("Mode").uppercase(Locale.ENGLISH))
 		count = CompiledExpression(xmlData.get("Count", "count")!!)
 		condition = CompiledExpression(xmlData.get("Condition", "random")!!)
 		radius = xmlData.getInt("Radius", 5)

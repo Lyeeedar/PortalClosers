@@ -46,7 +46,7 @@ class MoveSourceAction() : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		type = MovementType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		type = MovementType.valueOf(xmlData.get("Type").uppercase(Locale.ENGLISH))
 	}
 	override val classID: String = "MoveSource"
 	//endregion
@@ -81,7 +81,7 @@ class PullAction() : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		type = MovementType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		type = MovementType.valueOf(xmlData.get("Type").uppercase(Locale.ENGLISH))
 	}
 	override val classID: String = "Pull"
 	//endregion
@@ -125,7 +125,7 @@ class KnockbackAction() : AbstractOneShotActionSequenceAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		type = MovementType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		type = MovementType.valueOf(xmlData.get("Type").uppercase(Locale.ENGLISH))
 		dist = xmlData.getInt("Dist", 1)
 	}
 	override val classID: String = "Knockback"

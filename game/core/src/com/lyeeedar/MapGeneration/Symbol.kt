@@ -136,7 +136,7 @@ class Symbol: XmlDataClass(), IMapGeneratorSymbol
 		{
 			for (el in contentsEl.children)
 			{
-				val enumVal = SpaceSlot.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val enumVal = SpaceSlot.valueOf(el.name.uppercase(Locale.ENGLISH))
 				val objcontents: EntityData
 				val objcontentsEl = el
 				objcontents = EntityData()

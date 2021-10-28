@@ -79,7 +79,7 @@ class GetAllVisibleBehaviourAction : AbstractBehaviourAction()
 	override fun load(xmlData: XmlData)
 	{
 		super.load(xmlData)
-		type = Type.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
+		type = Type.valueOf(xmlData.get("Type").uppercase(Locale.ENGLISH))
 		key = xmlData.get("Key")
 	}
 	override val classID: String = "GetAllVisible"

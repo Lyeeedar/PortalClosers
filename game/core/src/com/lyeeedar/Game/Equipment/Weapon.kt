@@ -108,7 +108,7 @@ class Weapon : XmlDataClass()
 		{
 			for (el in handlersEl.children)
 			{
-				val enumVal = EventType.valueOf(el.name.toUpperCase(Locale.ENGLISH))
+				val enumVal = EventType.valueOf(el.name.uppercase(Locale.ENGLISH))
 				val objhandlers: Array<EventAndCondition> = Array()
 				val objhandlersEl = el
 				if (objhandlersEl != null)
