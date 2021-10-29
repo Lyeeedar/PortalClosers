@@ -24,29 +24,29 @@ class Portal
 		player.statistics()!!.calculateStatistics(1)
 	}
 
-	fun generate(length: Int)
+	fun generate(length: Int, biome: Biome)
 	{
-		encounters.add(generateEncounters(1))
-		encounters.add(generateEncounters(2))
+		encounters.add(generateEncounters(1, biome))
+		encounters.add(generateEncounters(2, biome))
 
 		var is3 = true
 		for (i in 0 until length-4)
 		{
 			if (is3)
 			{
-				encounters.add(generateEncounters(3))
+				encounters.add(generateEncounters(3, biome))
 			}
 			else
 			{
-				encounters.add(generateEncounters(4))
+				encounters.add(generateEncounters(4, biome))
 			}
 
 			is3 = !is3
 		}
 
-		encounters.add(generateEncounters(3))
-		encounters.add(generateEncounters(2))
-		encounters.add(generateEncounters(1))
+		encounters.add(generateEncounters(3, biome))
+		encounters.add(generateEncounters(2, biome))
+		encounters.add(generateEncounters(1, biome))
 
 		current = encounters[0][0]
 		current.state = EncounterState.CURRENT
@@ -73,12 +73,12 @@ class Portal
 		}
 	}
 
-	private fun generateEncounters(count: Int): Array<AbstractEncounter>
+	private fun generateEncounters(count: Int, biome: Biome): Array<AbstractEncounter>
 	{
 		val output = Array<AbstractEncounter>()
 		for (i in 0 until count)
 		{
-			output.add(CombatEncounter())
+			output.add(CombatEncounter(biome, biome.normalPacks.random()))
 		}
 		for (AbstractEncounter in output)
 		{

@@ -64,10 +64,7 @@ class WorldScreen : AbstractScreen()
 
 	fun createWorld(player: Entity, encounter: CombatEncounter)
 	{
-		val biome = Biome()
-		biome.load(getXml("Biomes/metalBiome"))
-
-		world = MapCreator.generateWorld(biome, biome.normalPacks.random(), player, 1, 4)
+		world = MapCreator.generateWorld(encounter.biome, encounter.pack, player, 1, 4)
 		world.addSystems()
 
 		world.tileSize = 50f

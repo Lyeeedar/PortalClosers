@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.lyeeedar.Components.EntityLoader
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.Portal.AbstractEncounter
+import com.lyeeedar.Game.Portal.Biome
 import com.lyeeedar.Game.Portal.EncounterState
 import com.lyeeedar.Game.Portal.Portal
 import com.lyeeedar.Renderables.SkeletonRenderable
@@ -23,7 +24,7 @@ import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData.Companion.getXml
+import com.lyeeedar.Util.getXml
 import ktx.actors.alpha
 import ktx.actors.centerPosition
 import ktx.scene2d.*
@@ -32,20 +33,18 @@ import kotlin.random.Random
 class PortalScreen : AbstractScreen()
 {
 	val portal = Portal()
-	val clouds1 = CloudEffect(3f, 2f)
 	lateinit var scroll: ScrollPane
 	val pathTable = Table()
 
 	override fun create()
 	{
-		portal.generate(20)
+		val biome = Biome()
+		biome.load(getXml("Biomes/metalBiome"))
+
+		portal.generate(20, biome)
 		update()
 
-		clouds1.alpha = 0.6f
-		//stage.addActor(clouds1)
-		clouds1.toBack()
-
-		backgroundColor.set(15f / 255f, 23f / 255f, 25f / 255f, 1f)
+		backgroundColor.set(35f / 255f, 43f / 255f, 45f / 255f, 1f)
 
 		scroll = ScrollPane(pathTable, Statics.skin, "noBar")
 		scroll.setFlingTime(0.2f)
@@ -231,7 +230,7 @@ class PortalScreen : AbstractScreen()
 		lightningTimer += delta
 		if (lightningTimer > 0f)
 		{
-			lightningTimer -= 2f + Random.nextFloat() * 10f
+			lightningTimer -= 2f + Random.nextFloat() * 5f
 
 			val particle = AssetManager.loadParticleEffect("darkest/cloud_lightning")
 			particle.timeMultiplier = 0.9f + Random.nextFloat() * 0.2f
@@ -252,6 +251,5 @@ class PortalScreen : AbstractScreen()
 		}
 
 		activeLightning?.setPosition(activeLightning!!.x, lightningY+(scroll.scrollY - lightningScrollY) * 0.5f)
-		clouds1.setPosition(0f, scroll.scrollY * -0.5f)
 	}
 }
