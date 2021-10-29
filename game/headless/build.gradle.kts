@@ -35,6 +35,9 @@ dependencies {
 	implementation("org.languagetool:language-en:4.8")
 
 	implementation("junit:junit:$junitVersion")
+
+	implementation("net.java.dev.jna:jna:5.9.0")
+	implementation("net.java.dev.jna:jna-platform:5.9.0")
 }
 
 java {
@@ -109,4 +112,8 @@ tasks.register<Jar>("compilerDist") {
 	manifest {
 		attributes["Main-Class"] = "com.lyeeedar.headless.CompilerRunner"
 	}
+}
+
+tasks.compileKotlin {
+	kotlinOptions.freeCompilerArgs += "-Xmulti-platform"
 }

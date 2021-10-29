@@ -1,5 +1,6 @@
 package com.lyeeedar.Systems
 
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.IntSet
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Ability.AbilityData
@@ -8,7 +9,6 @@ import com.lyeeedar.Renderables.ShadowCastCache
 import com.lyeeedar.SpaceSlot
 import com.lyeeedar.UI.DebugConsole
 import com.lyeeedar.Util.*
-import com.sun.javafx.Utils.clamp
 
 fun World<*>.tileSystem() = systems.filterIsInstance<TileSystem>().firstOrNull()
 class TileSystem(world: World<*>) : AbstractSystem(world)
@@ -84,7 +84,7 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 
 						val fadeTime = tile.levelCompleteTimer - levelCompleteFadeLeadIn
 
-						val alpha = clamp(fadeTime / levelCompleteFadeTime, 0f, 1f)
+						val alpha = MathUtils.clamp(fadeTime / levelCompleteFadeTime, 0f, 1f)
 						tile.tileCol.set(Colour.WHITE).lerp(levelCompleteEndCol, alpha)
 						tile.isTileDirty = true
 
@@ -154,7 +154,7 @@ class TileSystem(world: World<*>) : AbstractSystem(world)
 			tile.tileCol.set(Colour.WHITE)
 			tile.isTileDirty = true
 
-			val distAlpha = 1f - clamp(tile.dist(playerPos) / maxDist, 0f, 1f)
+			val distAlpha = 1f - MathUtils.clamp(tile.dist(playerPos) / maxDist, 0f, 1f)
 			tile.levelCompleteDelay = distAlpha * 3f + Random.random(Random.sharedRandom, -0.5f, 0.5f)
 
 			for (er in tile.contents.values)

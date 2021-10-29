@@ -32,7 +32,7 @@ import kotlin.random.Random
 class PortalScreen : AbstractScreen()
 {
 	val portal = Portal()
-	val clouds1 = CloudEffect(10f, 3f, 2f)
+	val clouds1 = CloudEffect(3f, 2f)
 	lateinit var scroll: ScrollPane
 	val pathTable = Table()
 
@@ -42,7 +42,7 @@ class PortalScreen : AbstractScreen()
 		update()
 
 		clouds1.alpha = 0.6f
-		stage.addActor(clouds1)
+		//stage.addActor(clouds1)
 		clouds1.toBack()
 
 		backgroundColor.set(15f / 255f, 23f / 255f, 25f / 255f, 1f)
