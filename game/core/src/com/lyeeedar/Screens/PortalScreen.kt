@@ -42,7 +42,7 @@ class PortalScreen : AbstractScreen()
 		val biome = Biome()
 		biome.load(getXml("Biomes/metalBiome"))
 
-		portal.generate(20, biome)
+		portal.generate(14, biome, com.lyeeedar.Util.Random.sharedRandom)
 		update()
 
 		backgroundColor.set(35f / 255f, 43f / 255f, 45f / 255f, 1f)

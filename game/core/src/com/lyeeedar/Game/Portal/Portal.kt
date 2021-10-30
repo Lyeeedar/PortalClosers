@@ -3,6 +3,8 @@ package com.lyeeedar.Game.Portal
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Components.EntityLoader
 import com.lyeeedar.Components.statistics
+import ktx.collections.gdxArrayOf
+import squidpony.squidmath.LightRNG
 
 class Portal
 {
@@ -24,29 +26,48 @@ class Portal
 		player.statistics()!!.calculateStatistics(1)
 	}
 
-	fun generate(length: Int, biome: Biome)
+	fun generate(length: Int, biome: Biome, rng: LightRNG)
 	{
-		encounters.add(generateEncounters(1, biome))
-		encounters.add(generateEncounters(2, biome))
+		encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+			gdxArrayOf(EncounterType.SAFE_ZONE))))
+		encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+			gdxArrayOf(EncounterType.NORMAL),
+			gdxArrayOf(EncounterType.NORMAL))))
 
 		var is3 = true
 		for (i in 0 until length-4)
 		{
 			if (is3)
 			{
-				encounters.add(generateEncounters(3, biome))
+				encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+					gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.ELITE, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN),
+					gdxArrayOf(EncounterType.ELITE),
+					gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.ELITE, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN)
+				                                                        )))
 			}
 			else
 			{
-				encounters.add(generateEncounters(4, biome))
+				encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+					gdxArrayOf(EncounterType.SAFE_ZONE, EncounterType.SAFE_ZONE, EncounterType.SIGIL_SHRINE, EncounterType.SIGIL_SHRINE, EncounterType.ELITE, EncounterType.UNKNOWN),
+					gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.ELITE, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN),
+					gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.ELITE, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN),
+					gdxArrayOf(EncounterType.SAFE_ZONE, EncounterType.SAFE_ZONE, EncounterType.SIGIL_SHRINE, EncounterType.SIGIL_SHRINE, EncounterType.ELITE, EncounterType.UNKNOWN)
+				                                                        )))
 			}
 
 			is3 = !is3
 		}
 
-		encounters.add(generateEncounters(3, biome))
-		encounters.add(generateEncounters(2, biome))
-		encounters.add(generateEncounters(1, biome))
+		encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+			gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN),
+			gdxArrayOf(EncounterType.ELITE),
+			gdxArrayOf(EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.NORMAL, EncounterType.EVENT, EncounterType.EVENT, EncounterType.UNKNOWN)
+		                                                        )))
+		encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+			gdxArrayOf(EncounterType.SAFE_ZONE),
+			gdxArrayOf(EncounterType.SIGIL_SHRINE))))
+		encounters.add(generateEncounters(biome, rng, gdxArrayOf(
+			gdxArrayOf(EncounterType.BOSS))))
 
 		current = encounters[0][0]
 		current.state = EncounterState.CURRENT
@@ -73,12 +94,15 @@ class Portal
 		}
 	}
 
-	private fun generateEncounters(count: Int, biome: Biome): Array<AbstractEncounter>
+	private fun generateEncounters(biome: Biome, rng: LightRNG, encounterTypes: Array<Array<EncounterType>>): Array<AbstractEncounter>
 	{
 		val output = Array<AbstractEncounter>()
-		for (i in 0 until count)
+		for (i in 0 until encounterTypes.size)
 		{
-			output.add(CombatEncounter(biome, biome.normalPacks.random()))
+			val types = encounterTypes[i]
+			val encounter = createEncounter(types, biome, rng)
+
+			output.add(encounter)
 		}
 		for (AbstractEncounter in output)
 		{
